@@ -1,0 +1,1 @@
+angular.module('openDeskApp.administration', [ 'ngMaterial', 'pascalprecht.translate']);

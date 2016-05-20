@@ -1,0 +1,1 @@
+angular.module('openDeskApp.users', [ 'ngMaterial', 'pascalprecht.translate']);
