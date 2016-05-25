@@ -11,14 +11,10 @@ angular
         'swfobject',
         'isteven-multi-select',
         'angularStubApp.init',
-        //'angularStubApp.projects',
         'angularStubApp.translations.init',
-        'angularStubApp.header',
         'angularStubApp.dashboard',
-        //'angularStubApp.files',
         'angularStubApp.documents',
         'angularStubApp.administration',
-        //'angularStubApp.groups',
         'angularStubApp.users',
         'angularStubApp.systemsettings',
         'angularStubApp.search',
@@ -31,7 +27,6 @@ angular
     .run(function ($rootScope, $state, $mdDialog, authService, sessionService, APP_CONFIG) {
         angular.element(window.document)[0].title = APP_CONFIG.appName;
         $rootScope.appName = APP_CONFIG.appName;
-        $rootScope.logoSrc = APP_CONFIG.logoSrc;
 
         $rootScope.$on('$stateChangeStart', function (event, next, params) {
             $rootScope.toState = next;
@@ -65,8 +60,16 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
     $stateProvider.state('site', {
         abstract: true,
         resolve: {
-            authorize: ['authService', function (authService) {
-            }]
+            authorize: ['authService', function (authService) {}]
+        },
+        views: {
+            'footer@': {
+                templateUrl: 'app/src/footer/view/footer.html',
+                controller: 'FooterController'
+            },
+            'header@': {
+                templateUrl: 'app/src/header/view/header.html'
+            }
         }
     }).state('dashboard', {
         parent: 'site',
@@ -89,7 +92,9 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
                 templateUrl: 'app/src/authentication/view/login.html',
                 controller: 'AuthController',
                 controllerAs: 'vm'
-            }
+            },
+            'header@': {},
+            'footer@': {}
         },
         data: {
             authorizedRoles: []

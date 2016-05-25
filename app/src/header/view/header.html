@@ -1,7 +1,7 @@
 <md-toolbar id="global-toolbar" class="global-tools">
 
     <div class="global-tools__links">
-        <img class="md-toolbar-tools__logo" src="{{$root.logoSrc}}" alt="logo">
+        <img class="md-toolbar-tools__logo" src="./app/assets/images/logo.gif" alt="logo">
         <a class="md-button global-tools__link" ng-class="{active: toState == 'dashboard'}" ui-sref="dashboard"><i class="material-icons">dashboard</i> <span hide show-gt-md>{{ 'COMMON.HOME' | translate }}</span></a>
         <span ng-controller="ModulesMenuController as menu">
             <span ng-repeat="item in menu.items | orderBy: 'order'">

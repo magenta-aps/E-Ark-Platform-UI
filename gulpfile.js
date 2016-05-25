@@ -61,9 +61,6 @@ function includeAppConfigParams(content) {
     if (argv.title) {
         content = content.replace("appName: 'angular-stub'", "appName: '" + argv.title + "'");
     }
-    if (argv.logo) {
-        content = content.replace("logoSrc: './app/assets/images/logo.gif'", "logoSrc: '" + argv.logo + "'");
-    }
     return content;
 }
 
