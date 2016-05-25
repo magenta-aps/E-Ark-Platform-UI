@@ -1,7 +1,7 @@
 <md-toolbar>
     <div class="md-toolbar-tools">
         
-        <md-button class="md-icon-button" aria-label="menu">
+        <md-button class="md-icon-button" aria-label="menu" ng-click="vm.openMenu()">
             <i class="material-icons">menu</i>
         </md-button>
       
@@ -39,16 +39,13 @@
     </div>
 </md-toolbar>
 
+<md-sidenav md-component-id="left" class="md-sidenav-left">
 
+    <md-list>
+        <md-list-item>
+            <md-button ui-sref="dashboard" ng-class="{active: toState == 'dashboard'}">{{ 'COMMON.HOME' | translate }}</md-button>
+        </md-list-item>
+        <md-divier></md-divier>
+    </md-list>
 
-
-
-    <div class="global-tools__links">
-        <a class="md-button global-tools__link" ng-class="{active: toState == 'dashboard'}" ui-sref="dashboard"><i class="material-icons">dashboard</i> <span hide show-gt-md>{{ 'COMMON.HOME' | translate }}</span></a>
-        <span ng-controller="ModulesMenuController as menu">
-            <span ng-repeat="item in menu.items | orderBy: 'order'">
-                <ng-include src="item.templateUrl"></ng-include>
-            </span>
-        </span>
-    </div>
-    
+</md-sidenav>

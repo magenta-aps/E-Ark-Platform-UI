@@ -69,7 +69,9 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
                 controller: 'FooterController'
             },
             'header@': {
-                templateUrl: 'app/src/header/view/header.html'
+                templateUrl: 'app/src/header/view/header.html',
+                controller: 'HeaderController',
+                controllerAs: 'vm'
             }
         }
     }).state('dashboard', {
