@@ -12,6 +12,7 @@ angular
         'isteven-multi-select',
         'angularStubApp.init',
         'angularStubApp.translations.init',
+        'angularStubApp.header',
         'angularStubApp.dashboard',
         'angularStubApp.documents',
         'angularStubApp.administration',
@@ -100,6 +101,7 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
             authorizedRoles: []
         }
     }).state('search', {
+        parent: 'site',
         url: '/search/:searchTerm',
         views: {
             'content@': {

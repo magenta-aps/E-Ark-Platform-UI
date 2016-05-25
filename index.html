@@ -43,15 +43,15 @@
 
   </head>
 
-  <body ng-app="angularStubApp" layout="column" class="body">
+  <body ng-app="angularStubApp" layout="column">
+    
+    <header ui-view="header"></header>
+    <md-content ui-view="content" layout-padding></md-content>
+    <footer ui-view="footer"></footer>
     
     <div id="loader" layout="column" layout-align="center center">
         <md-progress-circular md-diameter="200" flex="initial"></md-progress-circular>
     </div>
-    
-    <header ui-view="header"></header>
-    <md-content ui-view="content"></md-content>
-    <footer ui-view="footer"></footer>
     
   </body>
 
