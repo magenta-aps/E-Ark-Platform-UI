@@ -1,6 +1,6 @@
     
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .filter('caseType', caseTypeFilterFactory);
     
     function caseTypeFilterFactory($translate){

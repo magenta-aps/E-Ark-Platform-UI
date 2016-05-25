@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .factory('countriesService', countriesService);
 
     function countriesService() {

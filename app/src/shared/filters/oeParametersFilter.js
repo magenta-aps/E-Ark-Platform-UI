@@ -1,5 +1,5 @@
 angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .filter('oeParam', oeParametersFilterFactory);
 
 function oeParametersFilterFactory(oeParametersService) {

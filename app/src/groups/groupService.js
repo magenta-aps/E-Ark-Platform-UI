@@ -1,4 +1,4 @@
-//angular.module('openDeskApp.projects.groups').factory('groupService', GroupService);
+//angular.module('angularStubApp.projects.groups').factory('groupService', GroupService);
 
 function GroupService(ALFRESCO_URI, $http, $q) {
     var GROUP_PROXY_URI = ALFRESCO_URI.serviceApiProxy + 'groups/';

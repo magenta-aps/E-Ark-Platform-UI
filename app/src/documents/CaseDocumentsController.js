@@ -1,6 +1,6 @@
 
 angular
-        .module('openDeskApp.documents')
+        .module('angularStubApp.documents')
         .controller('CaseDocumentsController', CaseDocumentsController);
 
 function CaseDocumentsController($controller, $stateParams, caseDocumentsService) {

@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .controller('GenericWizardController', GenericWizardController);
 
     function GenericWizardController($mdDialog) {

@@ -1,5 +1,5 @@
 angular
-    .module('openDeskApp', [
+    .module('angularStubApp', [
         'ngSanitize',
         'ngMaterial',
         'ngMessages',
@@ -10,24 +10,24 @@ angular
         'pdf',
         'swfobject',
         'isteven-multi-select',
-        'openDeskApp.init',
-        //'openDeskApp.projects',
-        'openDeskApp.translations.init',
-        'openDeskApp.header',
-        'openDeskApp.dashboard',
-        //'openDeskApp.files',
-        'openDeskApp.documents',
-        'openDeskApp.administration',
-        //'openDeskApp.groups',
-        'openDeskApp.users',
-        'openDeskApp.systemsettings',
-        'openDeskApp.search',
-        'openDeskApp.common.directives',
-        'openDeskApp.common.directives.filter',
+        'angularStubApp.init',
+        //'angularStubApp.projects',
+        'angularStubApp.translations.init',
+        'angularStubApp.header',
+        'angularStubApp.dashboard',
+        //'angularStubApp.files',
+        'angularStubApp.documents',
+        'angularStubApp.administration',
+        //'angularStubApp.groups',
+        'angularStubApp.users',
+        'angularStubApp.systemsettings',
+        'angularStubApp.search',
+        'angularStubApp.common.directives',
+        'angularStubApp.common.directives.filter',
         'm43nu.auto-height',
         'dcbImgFallback',
         /*DO NOT REMOVE MODULES PLACEHOLDER!!!*/ //openDesk-modules
-        /*LAST*/ 'openDeskApp.translations'])// TRANSLATIONS IS ALWAYS LAST!
+        /*LAST*/ 'angularStubApp.translations'])// TRANSLATIONS IS ALWAYS LAST!
     .config(config)
     .run(function ($rootScope, $state, $mdDialog, authService, sessionService, APP_CONFIG) {
         angular.element(window.document)[0].title = APP_CONFIG.appName;

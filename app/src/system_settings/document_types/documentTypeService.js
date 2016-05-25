@@ -1,6 +1,6 @@
 
     angular
-            .module('openDeskApp.systemsettings')
+            .module('angularStubApp.systemsettings')
             .factory('documentTypeService', documentTypeService);
 
     function documentTypeService($http) {

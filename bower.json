@@ -1,8 +1,8 @@
 {
-  "name": "OpenESDH UI",
-  "description": "OpenESDH with Angular Material UI implementation",
+  "name": "angular-stub",
+  "description": "This repo's code serves as a starting point for new projects combining Alfresco backend and AngularJS frontends.",
   "version": "0.0.1",
-  "homepage": "https://github.com/OpenESDH/OpenESDH-UI",
+  "homepage": "https://github.com/magenta-aps/angular-stub",
   "license": "MIT",
   "private": true,
   "dependencies": {

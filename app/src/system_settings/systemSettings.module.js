@@ -1,5 +1,5 @@
 angular
-        .module('openDeskApp.systemsettings', [ 'ngMaterial', 'pascalprecht.translate'])
+        .module('angularStubApp.systemsettings', [ 'ngMaterial', 'pascalprecht.translate'])
         .config(config);
 
 function config(systemSettingsPagesServiceProvider){

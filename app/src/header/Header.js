@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .directive('appHeader', HeaderDirective);
 
     function HeaderDirective() {

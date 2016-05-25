@@ -1,1 +1,1 @@
-angular.module('openDeskApp.users', [ 'ngMaterial', 'pascalprecht.translate']);
+angular.module('angularStubApp.users', [ 'ngMaterial', 'pascalprecht.translate']);

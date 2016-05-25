@@ -1,6 +1,6 @@
 
 angular
-        .module('openDeskApp.documents')
+        .module('angularStubApp.documents')
         .controller('DocumentAttachmentsController', DocumentAttachmentsController);
 
 function DocumentAttachmentsController($scope, $injector, $state, $stateParams, caseDocumentDetailsService,

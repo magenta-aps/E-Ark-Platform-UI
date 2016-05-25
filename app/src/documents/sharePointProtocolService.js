@@ -1,6 +1,6 @@
 
 angular
-        .module('openDeskApp.documents')
+        .module('angularStubApp.documents')
         .factory('sharePointProtocolService', SharePointProtocolService);
 
 function SharePointProtocolService(fileUtilsService) {

@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .controller('FooterController', FooterController);
 
     function FooterController($scope, authService, serverVersionService) {

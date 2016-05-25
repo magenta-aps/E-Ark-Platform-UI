@@ -1,6 +1,6 @@
 
 angular
-    .module('openDeskApp')
+    .module('angularStubApp')
     .directive('appFooter', function() {
         return {
             restrict: 'E',

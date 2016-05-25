@@ -1,4 +1,4 @@
-//angular.module('openDeskApp.groups').controller('GroupController', GroupController);
+//angular.module('angularStubApp.groups').controller('GroupController', GroupController);
 
 /*
  * Main Controller for the Groups module

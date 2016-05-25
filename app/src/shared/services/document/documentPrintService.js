@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .factory('documentPrintService', documentPrintService);
 
     function documentPrintService() {

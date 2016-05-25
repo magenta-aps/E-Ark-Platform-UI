@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp.administration')
+        .module('angularStubApp.administration')
         .controller('AdminController', AdminController);
 
     /**

@@ -1,4 +1,4 @@
-angular.module('openDeskApp.common.directives.filter')
+angular.module('angularStubApp.common.directives.filter')
     .directive('openeListFilter', ListFilterDirective)
     .directive('openeColumnFilter', ColumnFilterDirective);
 

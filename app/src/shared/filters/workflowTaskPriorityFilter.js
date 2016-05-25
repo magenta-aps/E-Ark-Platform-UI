@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .filter('workflowTaskPriority', workflowTaskPriorityFilterFactory);
     
     function workflowTaskPriorityFilterFactory($translate){

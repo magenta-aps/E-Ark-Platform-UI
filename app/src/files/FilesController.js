@@ -1,6 +1,6 @@
 
 angular
-        .module('openDeskApp.files')
+        .module('angularStubApp.files')
         .controller('FilesController', FilesController);
 
 function FilesController($scope, $injector, filesService, $translate, $mdDialog, notificationUtilsService,
