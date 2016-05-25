@@ -24,7 +24,6 @@ angular
         'angularStubApp.search',
         'angularStubApp.common.directives',
         'angularStubApp.common.directives.filter',
-        'm43nu.auto-height',
         'dcbImgFallback',
         /*DO NOT REMOVE MODULES PLACEHOLDER!!!*/ //openDesk-modules
         /*LAST*/ 'angularStubApp.translations'])// TRANSLATIONS IS ALWAYS LAST!
@@ -54,21 +53,13 @@ angular
         });
     });
 
-function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROLES, $mdIconProvider) {
+function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROLES) {
     $mdThemingProvider.theme('default')
-        .primaryPalette('blue', {
-            'default': '600',
-            'hue-1': '400',
-            'hue-2': '800',
-            'hue-3': '900'
-        })
-        .accentPalette('amber')
+        .primaryPalette('blue')
+        .accentPalette('yellow')
         .warnPalette('deep-orange');
 
-    $mdIconProvider.icon('md-calendar', 'app/assets/img/icons/today.svg');
-
     $urlRouterProvider
-        .when('/admin/system-settings', '/admin/system-settings/general-configuration')
         .otherwise('/');
 
     $stateProvider.state('site', {
@@ -90,19 +81,6 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
         data: {
             authorizedRoles: [USER_ROLES.user]
         }
-    }).state('docDetails', {
-        parent: 'site',
-        url: '/cases/case/:caseId/doc/:storeType/:storeId/:id',
-        views: {
-            'content@': {
-                controller: 'CaseDocumentDetailsController',
-                templateUrl: 'app/src/documents/view/document.html',
-                controllerAs: 'docCtrl'
-            }
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.user]
-        }
     }).state('login', {
         parent: 'site',
         url: '/login?error&nosso',
@@ -116,108 +94,11 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
         data: {
             authorizedRoles: []
         }
-    }).state('administration', {
-        parent: 'site',
-        url: '/admin',
-        views: {
-            'content@': {
-                templateUrl: 'app/src/admin/view/admin.html',
-                controller: 'AdminController',
-                controllerAs: 'vm'
-            }
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.admin],
-            selectedTab: 0
-        }
-    }).state('administration.users', {
-        url: '/users',
-        data: {
-            authorizedRoles: [USER_ROLES.admin],
-            selectedTab: 0
-        },
-        views: {
-            'users': {
-                templateUrl: 'app/src/users/view/users.html'
-            }
-        }
-    }).state('administration.groups', {
-        url: '/groups',
-        data: {
-            authorizedRoles: [USER_ROLES.admin],
-            selectedTab: 1
-        },
-        views: {
-            'groups': {
-                templateUrl: 'app/src/groups/view/groups.html'
-            }
-        }
-    }).state('administration.group', {
-        url: '/group/:shortName',
-        data: {
-            authorizedRoles: [USER_ROLES.admin],
-            searchContext: 'GROUPS',
-            selectedTab: 1
-        },
-        views: {
-            'groups': {
-                templateUrl: 'app/src/groups/view/group.html'
-            }
-        }
-    }).state('administration.systemsettings', {
-        url: '/system-settings',
-        data: {
-            authorizedRoles: [USER_ROLES.admin],
-            selectedTab: 4
-        },
-        views: {
-            'systemsettings': {
-                templateUrl: 'app/src/system_settings/menu/system_settings.html',
-                controller: 'SystemSettingsController',
-                controllerAs: 'vm'
-            }
-        }
-    }).state('administration.systemsettings.general', {
-        url: '/general-configuration',
-        data: {
-            authorizedRoles: [USER_ROLES.admin]
-        },
-        views: {
-            'systemsetting-view': {
-                templateUrl: 'app/src/system_settings/general_configuration/view/generalConfiguration.html',
-                controller: 'GeneralConfigurationController',
-                controllerAs: 'vm'
-            }
-        }
-    }).state('administration.systemsettings.doctypes', {
-        url: '/document-types',
-        data: {
-            authorizedRoles: [USER_ROLES.admin]
-        },
-        views: {
-            'systemsetting-view': {
-                templateUrl: 'app/src/system_settings/document_types/view/documentTypes.html',
-                controller: 'DocumentTypesController',
-                controllerAs: 'vm'
-            }
-        }
     }).state('search', {
         url: '/search/:searchTerm',
         views: {
             'content@': {
                 templateUrl: 'app/src/search/view/search.html'
-            }
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.user]
-        }
-    }).state('files', {
-        url: '/files',
-        views: {
-            'content@': {
-                templateUrl: 'app/src/files/view/files.html',
-                controller: 'FilesController',
-                controllerAs: 'filesVm'
             }
         },
         data: {

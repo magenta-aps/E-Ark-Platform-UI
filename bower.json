@@ -24,7 +24,6 @@
     "angular-swfobject": "",
     "material-wizard": "",
     "angular-file-saver": "",
-    "angular-auto-height": "https://github.com/m43nu/angular-auto-height.git",
     "angular-img-fallback": "~0.1.3"
   },
   "devDependencies": {
