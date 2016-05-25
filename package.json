@@ -1,7 +1,7 @@
 {
   "name": "IP-Viewer",
   "private": true,
-  "version": "0.1",
+  "version": "0.0.1",
   "description": "IP-Viewer using Angular.js and Angular Material as a foundation.",
   "repository": "",
   "license": "MIT",
