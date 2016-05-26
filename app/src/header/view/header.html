@@ -17,14 +17,14 @@
             </md-button>
             <md-menu-content width="4">
                 <md-menu-item>
-                    <md-button ng-disabled="true">
+                    <md-button class="md-text-icon-button" ng-disabled="true">
                         <i class="material-icons" md-menu-align-target>person</i>
                         {{ vm.getUserInfo().user.firstName }} {{ vm.getUserInfo().user.lastName }}
                     </md-button>
                 </md-menu-item>
                 <md-menu-divider></md-menu-divider>
                 <md-menu-item>
-                    <md-button id="logout" ng-click="vm.logout()">
+                    <md-button class="md-text-icon-button" id="logout" ng-click="vm.logout()">
                         <i class="material-icons">exit_to_app</i>
                         {{ 'MENU.LOGOUT' | translate }}
                     </md-button>
@@ -43,11 +43,17 @@
 
     <md-list>
         <md-list-item>
-            <a ui-sref="dashboard" ng-click="vm.toggleMenu()">{{ 'COMMON.HOME' | translate }}</a>
+            <a class="md-button md-text-icon-button" ui-sref="dashboard" ng-click="vm.toggleMenu()">
+                <i class="material-icons">home</i>
+                {{ 'COMMON.HOME' | translate }}
+            </a>
             <md-divider></md-divider>
         </md-list-item>
         <md-list-item>
-            <a ui-sref="search" ng-click="vm.toggleMenu()">{{ 'COMMON.SEARCH' | translate }}</a>
+            <a  class="md-button md-text-icon-button" ui-sref="search" ng-click="vm.toggleMenu()">
+                <i class="material-icons">search</i>
+                {{ 'COMMON.SEARCH' | translate }}
+            </a>
             <md-divider></md-divider>
         </md-list-item>
     </md-list>
