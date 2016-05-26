@@ -13,6 +13,8 @@ Included features are
 
 + Clone the project
 
++ Setup a server
+
 + Run
 ´´´
 npm update
@@ -20,4 +22,4 @@ npm install
 gulp build
 ´´´
 
-+ Setup a server
++ [Read the documentation](/documentation/README.md)
