@@ -10,7 +10,7 @@ angular
 function BasketDirective($scope, $q) {
     return {
         restrict:'E',
-        replace: true,
+        //replace: true,
         templateUrl : 'app/src/common/directives/basket/view/basket.html',
         scope: {},//variables to pass into the directive's scope
         link: link
