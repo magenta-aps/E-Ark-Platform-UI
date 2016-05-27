@@ -6,4 +6,5 @@
 
 ## Working with modules
 
+* [Working with modules](/documentation/working-with-modules.md)
 * [Displaying modules in header menu](/app/src/header/modules-menu.md)
