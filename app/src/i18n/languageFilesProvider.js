@@ -1,5 +1,5 @@
 angular
-        .module('openDeskApp.translations.init')
+        .module('angularStubApp.translations.init')
         .provider('languageFiles', LanguageFilesProvider);
 
 function LanguageFilesProvider() {

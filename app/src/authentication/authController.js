@@ -1,6 +1,6 @@
 
 angular
-    .module('openDeskApp')
+    .module('angularStubApp')
     .controller('AuthController', AuthController);
 
 function AuthController($state, $stateParams, authService, userService, $mdDialog, sessionService, $window) {

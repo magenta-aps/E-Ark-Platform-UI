@@ -1,6 +1,6 @@
 
 angular
-        .module('openDeskApp.documents')
+        .module('angularStubApp.documents')
         .factory('documentEditInSharePointService', DocumentEditInSharePointService);
 
 function DocumentEditInSharePointService($http, sharePointProtocolService) {

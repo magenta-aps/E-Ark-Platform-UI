@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .filter('openeDate', openeDateFilterFactory);
     
     function openeDateFilterFactory(dateFilter){

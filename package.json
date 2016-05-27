@@ -1,9 +1,9 @@
 {
-  "name": "IP-Viewer",
+  "name": "angular-stub",
   "private": true,
-  "version": "0.1",
-  "description": "IP-Viewer using Angular.js and Angular Material as a foundation.",
-  "repository": "",
+  "version": "0.0.1",
+  "description": "This repo's code serves as a starting point for new projects combining Alfresco backend and AngularJS frontends.",
+  "repository": "https://github.com/magenta-aps/angular-stub",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.3.1",

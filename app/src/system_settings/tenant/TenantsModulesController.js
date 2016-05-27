@@ -1,5 +1,5 @@
     angular
-        .module('openDeskApp.systemsettings')
+        .module('angularStubApp.systemsettings')
         .controller('TenantsModulesController', TenantsModulesController);
     
     function TenantsModulesController(tenantsService, $mdDialog, $translate, notificationUtilsService){

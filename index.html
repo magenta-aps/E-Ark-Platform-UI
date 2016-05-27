@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" >
   <head>
-    <title></title>
+    <title>Angular Stub UI</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic">
     <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css">
-    <link rel="stylesheet" href="./bower_components/isteven-angular-multiselect/isteven-multi-select.css">
-    <link rel="stylesheet" href="./dist/eArk-platform.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="./dist/angular-stub.min.css">
       
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
 
@@ -38,19 +37,25 @@
     <script src="./bower_components/angular-pdf/dist/angular-pdf.js"></script>
     <script src="./bower_components/angular-swfobject/angular-swfobject.js"></script>
     <script src="./bower_components/angular-file-saver/dist/angular-file-saver.bundle.js"></script>
-    <script src="./bower_components/angular-auto-height/dist/auto-height.js"></script>
     <script src="./bower_components/angular-img-fallback/angular.dcb-img-fallback.min.js"></script>
 
     <!-- Opene-E App -->
-    <script src="./dist/eArk-platform.js"></script>
+    <script src="./dist/angular-stub.js"></script>
 
   </head>
 
-  <body ng-app="openDeskApp" layout="column" class="body">
+  <body ng-app="angularStubApp" layout="column">
+    
+    <header ui-view="header"></header>
+    
+    <md-content ui-view="content" layout-padding></md-content>
+    
+    <footer ui-view="footer"></footer>
+    
     <div id="loader" layout="column" layout-align="center center">
         <md-progress-circular md-diameter="200" flex="initial"></md-progress-circular>
     </div>
-    <md-content class="body__content" ui-view="content"></md-content>
+    
   </body>
 
 </html>

@@ -1,6 +1,6 @@
 
 angular
-        .module('openDeskApp.systemsettings')
+        .module('angularStubApp.systemsettings')
         .controller('GeneralConfigurationController', GeneralConfigurationController);
 
 function GeneralConfigurationController($mdDialog, $translate, $state, notificationUtilsService,

@@ -1,21 +1,6 @@
 var gulp = require('gulp'),
         $ = require('gulp-load-plugins')(),
-        fs = require('fs'),
-        proxy = require('http-proxy-middleware');
-
-// Config vars
-// If, after a while, there are a lot of config vars, we can move these to a separate file
-var environment = {
-    test: {
-        proxy: 'http://test.openesdh.dk'
-    },
-    demo: {
-        proxy: 'http://demo.openesdh.dk'
-    },
-    local: {
-        proxy: 'http://localhost:8080'
-    }
-};
+        fs = require('fs');
 
 var paths = {
     scripts: ['app/src/**/*.module.js', 'app/src/**/*.js', '!app/src/**/*Spec.js', '!app/src/modules/test/**/*.js', '!app/src/modules/**/tests/**/*.js'],
@@ -25,23 +10,10 @@ var paths = {
 };
 
 var dist = {
-    name: 'eArk-platform',
+    name: 'angular-stub',
     folder: './dist/'
 };
 
-// Setting up a local webserver
-function createWebserver(config) {
-    return gulp.src('./')
-            .pipe($.webserver({
-                open: false, // Open up a browser automatically
-                host: '0.0.0.0', // hostname needed if you want to access the server from anywhere on your local network
-                middleware: [],
-                proxies: [{
-                    source: '/alfresco',
-                    target: config.proxy + '/alfresco'
-                }]
-            }));
-}
 
 // Script tasks
 gulp.task('scripts', function() {
@@ -87,10 +59,7 @@ gulp.task('e2e-tests', function() {
 function includeAppConfigParams(content) {
     var argv = require('yargs').argv;
     if (argv.title) {
-        content = content.replace("appName: 'E-ARK'", "appName: '" + argv.title + "'");
-    }
-    if (argv.logo) {
-        content = content.replace("logoSrc: './app/assets/images/logo.gif'", "logoSrc: '" + argv.logo + "'");
+        content = content.replace("appName: 'angular-stub'", "appName: '" + argv.title + "'");
     }
     return content;
 }
@@ -112,24 +81,11 @@ gulp.task('watch', function() {
  */
 gulp.task('build', ['scripts', 'css']);
 
-gulp.task('test', ['build', 'watch'], function() {
-    createWebserver(environment.testv);
-});
-
-gulp.task('demo', ['build', 'watch'], function() {
-    createWebserver(environment.demo);
-});
-
-gulp.task('local', ['build', 'watch'], function() {
-    createWebserver(environment.local);
-});
-
 /* Tests */
 gulp.task('ui-test', ['e2e-tests']);
 
 /*
- Running '$ gulp'
- is equal to running '$ gulp dev'
- In other words, the default task is the 'dev' task
+ Running '$ gulp' is equal to running '$ gulp build watch'
+ In other words, the default task is the 'build' and 'watch' task
  */
-gulp.task('default', ['dev']);
+gulp.task('default', ['build', 'watch']);

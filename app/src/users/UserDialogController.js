@@ -1,6 +1,6 @@
 
 angular
-        .module('openDeskApp.users')
+        .module('angularStubApp.users')
         .controller('UserDialogController', UserDialogController);
 
 function UserDialogController($scope, $mdDialog, $mdToast, $translate, $injector, $timeout, notificationUtilsService, userService, user) {

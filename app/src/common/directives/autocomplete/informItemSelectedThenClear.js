@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp.common.directives')
+        .module('angularStubApp.common.directives')
         .directive('informItemSelectedThenClear', informItemSelectedThenClear);
     
     function informItemSelectedThenClear(){

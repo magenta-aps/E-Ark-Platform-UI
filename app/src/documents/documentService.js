@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp.documents')
+        .module('angularStubApp.documents')
         .factory('documentService', documentService);
 
     function documentService($http) {

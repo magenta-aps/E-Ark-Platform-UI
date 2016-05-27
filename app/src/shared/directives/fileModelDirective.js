@@ -1,6 +1,6 @@
 
 angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .directive('fileModel', FileModelDirective);
 
 function FileModelDirective($parse) {

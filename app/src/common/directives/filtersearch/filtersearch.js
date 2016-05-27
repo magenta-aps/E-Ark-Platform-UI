@@ -1,5 +1,5 @@
 
-    angular.module('openDeskApp.common.directives.filter')
+    angular.module('angularStubApp.common.directives.filter')
         .directive('openeFilterSearch', FilterSearchDirective);
 
     /**

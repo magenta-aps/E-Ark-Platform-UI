@@ -1,5 +1,5 @@
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .filter('orderObjectBy', orderObjectBy);
 
     function orderObjectBy() {

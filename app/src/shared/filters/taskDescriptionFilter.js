@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .filter('taskDescription', taskDescriptionFactory);
     
     function taskDescriptionFactory(){

@@ -1,8 +1,8 @@
 angular
-        .module('openDeskApp.translations.init', []);
+        .module('angularStubApp.translations.init', []);
 
 angular
-        .module('openDeskApp.translations', ['pascalprecht.translate'])
+        .module('angularStubApp.translations', ['pascalprecht.translate'])
         .factory('availableLanguages', AvailableLanguages)
         .config(config);
 

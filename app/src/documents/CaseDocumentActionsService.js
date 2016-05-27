@@ -1,5 +1,5 @@
 angular
-        .module('openDeskApp.documents')
+        .module('angularStubApp.documents')
         .provider('caseDocumentActionsService', CaseDocumentActionsServiceProvider);
 
 function CaseDocumentActionsServiceProvider() {

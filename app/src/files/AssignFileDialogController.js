@@ -1,6 +1,6 @@
 
 angular
-        .module('openDeskApp.files')
+        .module('angularStubApp.files')
         .controller('AssignFileDialogController', AssignFileDialogController);
 
 function AssignFileDialogController($mdDialog, $translate, filesService, notificationUtilsService, file) {

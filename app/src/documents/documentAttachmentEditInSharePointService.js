@@ -1,5 +1,5 @@
 angular
-        .module('openDeskApp.documents')
+        .module('angularStubApp.documents')
         .factory('documentAttachmentEditInSharePointService', DocumentAttachmentEditInSharePointService);
 
 function DocumentAttachmentEditInSharePointService($http, caseDocumentDetailsService, sharePointProtocolService) {

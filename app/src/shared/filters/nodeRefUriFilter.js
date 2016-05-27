@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .filter('nodeRefUri', nodeRefUriFilterFactory);
     
     function nodeRefUriFilterFactory(alfrescoNodeUtils){

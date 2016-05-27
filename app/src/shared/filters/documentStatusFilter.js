@@ -1,6 +1,6 @@
     
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .filter('docStatus', docStatusFilterFactory);
     
     function docStatusFilterFactory($translate){

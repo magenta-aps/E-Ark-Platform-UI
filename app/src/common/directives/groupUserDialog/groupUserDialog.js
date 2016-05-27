@@ -1,5 +1,5 @@
 
-    angular.module('openDeskApp.common.directives')
+    angular.module('angularStubApp.common.directives')
         .directive('openeGroupUserDialog', openeGroupUserDialog);
 
     function openeGroupUserDialog($mdDialog, userService, groupService) {

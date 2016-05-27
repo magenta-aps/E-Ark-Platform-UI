@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .factory('workflowService', WorkflowService);
 
     function WorkflowService($http) {

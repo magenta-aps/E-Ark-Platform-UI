@@ -1,5 +1,5 @@
 angular
-        .module('openDeskApp.files')
+        .module('angularStubApp.files')
         .provider('fileListItemActionService', FileListItemActionServiceProvider);
 
 function FileListItemActionServiceProvider() {

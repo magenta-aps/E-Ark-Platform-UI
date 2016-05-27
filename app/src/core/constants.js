@@ -1,5 +1,5 @@
 angular
-    .module('openDeskApp.core')
+    .module('angularStubApp.core')
     .constant('USER_ROLES', {
         admin: 'admin',
         user: 'user',

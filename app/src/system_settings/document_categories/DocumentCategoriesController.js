@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp.systemsettings')
+        .module('angularStubApp.systemsettings')
         .controller('DocumentCategoriesController', DocumentCategoriesController);
 
     function DocumentCategoriesController($scope, $mdDialog, $translate,

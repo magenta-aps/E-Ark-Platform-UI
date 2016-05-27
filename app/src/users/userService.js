@@ -1,6 +1,6 @@
 
 angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .factory('userService', userService);
 
 function userService($http) {
