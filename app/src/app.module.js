@@ -102,6 +102,19 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
         data: {
             authorizedRoles: []
         }
+    }).state('files', {
+        parent: 'site',
+        url: '/files',
+        views: {
+            'content@': {
+                templateUrl: 'app/src/files/view/files.html',
+                controller: 'FilesController',
+                controllerAs: 'vm'
+            }
+        },
+        data: {
+            authorizedRoles: [USER_ROLES.user]
+        }
     }).state('search', {
         parent: 'site',
         url: '/search/:searchTerm',
