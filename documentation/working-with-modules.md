@@ -3,7 +3,7 @@
 To make life a little easier on developers, we use a module approach to adding new features in the project.
 Here is a step by step approach to creating a module:
 
-## Register module
+## Register a module
 
 Create a folder in [/app/src](/app/src) to contain your module's files and add a file `[modulename].module.js` in this folder.
 Here is an example of the [files.module.js](/app/src/files/files.module.js)
@@ -104,7 +104,7 @@ And here is an example view, [files.html](/app/src/files/view/files.html)
 
 ## Access modules
 
-To show the UI part (view) of a module, you'll need to additional steps:
+To show the UI part (view) of a module, you'll need two additional steps:
 
 1. Add a routing state to associate the view with a URL.
 2. Possibly add a navigation menu item so users can access your module.
