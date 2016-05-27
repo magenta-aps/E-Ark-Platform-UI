@@ -66,7 +66,7 @@
     </md-list>
     
     <md-list ng-controller="ModulesMenuController as menu">
-        <md-list-item ng-repeat="item in menu.items | orderBy: 'order'" ng-click="vm.toggleMenu()">
+        <md-list-item ng-repeat="item in menu.items | orderBy: 'order'">
             <ng-include src="item.templateUrl"></ng-include>
             <md-divider></md-divider>
         </md-list-item>

@@ -13,6 +13,7 @@ angular
         'angularStubApp.init',
         'angularStubApp.translations.init',
         'angularStubApp.header',
+        'angularStubApp.files',
         'angularStubApp.dashboard',
         'angularStubApp.documents',
         'angularStubApp.administration',

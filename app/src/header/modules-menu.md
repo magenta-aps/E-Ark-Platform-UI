@@ -15,16 +15,27 @@ The config object specifies the templateUrl and the order for where to insert it
 Here is an example:
 
 ```
-angular.module('angularStubApp.files', ['ngMaterial'])
-        .config(config); // call the config function
+angular
+    .module('angularStubApp.files', ['ngMaterial'])
+    .config(config);
 
-function config(modulesMenuServiceProvider) { 
+function config(modulesMenuServiceProvider) {
     modulesMenuServiceProvider.addItem({
         templateUrl: 'app/src/files/view/menuItem.html',
-        order: 3
+        order: 1
     });
 }
 ```
 
 Above, we call a `config()` function for the module.
 The function takes `ModulesMenuServiceProvider` as an input parameter and uses its 'addItem()' method to define a menu item template and its display order.
+
+**Note** The above example points to the template file [app/src/files/view/menuItem.html.](/app/src/files/view/menuItem.html)
+Because of the way the `md-sidebar` works in the header, you'll need to add a function call to each link in order to close the menu after clicking a link.
+Here, we use the `toggleMenu()` from the [HeaderController.js](/app/src/header/HeaderController.js):
+```
+<a  class="md-button md-text-icon-button" ui-sref="files" ng-click="vm.toggleMenu()">
+    <i class="material-icons">folder</i>
+    {{ 'DOCUMENT.DOCUMENTS' | translate }}
+</a>
+```
