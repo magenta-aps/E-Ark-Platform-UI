@@ -15,11 +15,12 @@ angular
         'angularStubApp.header',
         'angularStubApp.files',
         'angularStubApp.dashboard',
+        'angularStubApp.search',
+        
         'angularStubApp.documents',
         'angularStubApp.administration',
         'angularStubApp.users',
         'angularStubApp.systemsettings',
-        'angularStubApp.search',
         'angularStubApp.common.directives',
         'angularStubApp.common.directives.filter',
         'dcbImgFallback',

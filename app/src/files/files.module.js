@@ -5,6 +5,6 @@ angular
 function config(modulesMenuServiceProvider) {
     modulesMenuServiceProvider.addItem({
         templateUrl: 'app/src/files/view/menuItem.html',
-        order: 1
+        order: 2
     });
 }

@@ -41,30 +41,6 @@
 
 <md-sidenav md-component-id="left" class="md-sidenav-left">
 
-    <md-list>
-        <md-list-item>
-            <a class="md-button md-text-icon-button" ui-sref="dashboard" ng-click="vm.toggleMenu()">
-                <i class="material-icons">home</i>
-                {{ 'COMMON.HOME' | translate }}
-            </a>
-            <md-divider></md-divider>
-        </md-list-item>
-        <md-list-item>
-            <a class="md-button md-text-icon-button" ui-sref="repository" ng-click="vm.toggleMenu()">
-                <i class="material-icons">folder</i>
-                {{ 'DOCUMENT.DOCUMENTS' | translate }}
-            </a>
-            <md-divider></md-divider>
-        </md-list-item>
-        <md-list-item>
-            <a class="md-button md-text-icon-button" ui-sref="search" ng-click="vm.toggleMenu()">
-                <i class="material-icons">search</i>
-                {{ 'SEARCH.SEARCH' | translate }}
-            </a>
-            <md-divider></md-divider>
-        </md-list-item>
-    </md-list>
-    
     <md-list ng-controller="ModulesMenuController as menu">
         <md-list-item ng-repeat="item in menu.items | orderBy: 'order'">
             <ng-include src="item.templateUrl"></ng-include>
