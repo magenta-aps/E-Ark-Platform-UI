@@ -8,13 +8,13 @@
      * @param $scope
      * @constructor
      */
-    function SearchController($scope, $stateParams, searchService) {
+    function SearchController($scope, $stateParams, searchService, fileUtilsService) {
         var sctrl = this;
         sctrl.searchTerm = $stateParams.searchTerm;
         sctrl.selectedFilters = {}; //Keep track of the selected filters
         sctrl.filtersQueryString=""; // the selected filters as query string
-        sctrl.definedFacets = searchService.getConfiguredFacets();
-        sctrl.layout = 'grid';
+        //sctrl.definedFacets = searchService.getConfiguredFacets();
+        sctrl.layout = 'list';
 
         function initFacets(){
             searchService.getConfiguredFacets().then(function(data){
@@ -22,32 +22,53 @@
                 executeSearch();
             });
         }
-        initFacets();
+        executeAipSearch();
+
 
         /**
          * Executes the main search function to search for cases and case documents in the repository
          * @param term
          */
-        function executeSearch() {
+        function executeAipSearch() {
 
             var queryObj = {
-                facetFields: parseFacetsForQueryFilter(),
-                filters: sctrl.filtersQueryString, //"{http://www.alfresco.org/model/content/1.0}creator|abeecher"
-                maxResults: 0,
-                noCache: new Date().getTime(),
-                pageSize: 25,
-                query: "",
-                repo: true,
-                rootNode: "opendesk://cases/home",
-                site: "",
-                sort: "",
-                spellcheck: true,
-                startIndex: 0,
-                tag: "",
-                term: sctrl.searchTerm+'*'
+                q: 'content:'+sctrl.searchTerm,
+                rows: 25,
+                start: 0,
+                wt: "json"
             };
             var objQuerified = objectToQueryString(queryObj);
-            getSearchQuery(objQuerified);
+            getAipSearchQuery(objQuerified);
+        }
+        function formatBytes(bytes,decimals) {
+            if(bytes == 0) return '0 Byte';
+            var k = 1000;
+            var dm = decimals + 1 || 3;
+            var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+            var i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        }
+
+        function getAipSearchQuery(query){
+
+            searchService.aipSearch(query).then(function(response){
+                sctrl.queryResult = response.docs;
+                //debugger;
+                if (response.numFound > 0) {
+                    sctrl.fullSearchResults = {
+                        results: sctrl.queryResult, //An array of objects
+                        numberFound: response.numFound
+                    };
+
+                    //Let's clean up some of the properties. Temporary solution
+                    sctrl.fullSearchResults.results.forEach(function(item){
+                        item.title = item.path.substring(item.path.lastIndexOf('/')+1, item.path.lastIndexOf('.'));
+                        item.packageId = item.package.substring(item.package.indexOf('_')+1);
+                        item.thumbnail = fileUtilsService.getFileIconByMimetype(item.contentType, 24)
+                        item.displaySize = formatBytes(item.size);
+                    });
+                }
+            });
         }
 
         function getSearchQuery(query){

@@ -1,6 +1,6 @@
 ﻿{
     "COMMON": {
-        "CASE_ID": "Case Id",
+        "PACKAGE_ID": "Package Id",
         "CONFIRM": "Confirm",
         "WARNING": "Warning!",
         "OK": "OK",

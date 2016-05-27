@@ -1,6 +1,6 @@
 ﻿{
     "COMMON": {
-        "CASE_ID": "Sag Id",
+        "PACKAGE_ID": "Pakke Id",
         "CONFIRM": "Bekræft",
         "WARNING": "Advarsel!",
         "OK": "OK",

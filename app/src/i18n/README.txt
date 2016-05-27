@@ -1,7 +1,7 @@
 
-* HOW TO DO TRANSLATIONS IN OPENESDH UI *
+* HOW TO DO TRANSLATIONS *
 
-Translations in OpenESDH UI make use of Angular Translate module (https://angular-translate.github.io/).
+Translations make use of Angular Translate module (https://angular-translate.github.io/).
 
 
 ** How to add translatable text
@@ -23,7 +23,9 @@ You would make the button text translatable like this:
 
 ]
 
-You'll notice that this example puts the translatable string in the 'COMMON' namespace. OpenESDH UI has all its translatable strings in namespaces. 'COMMON' being the one used for common strings like 'OK', 'Cancel', etc. Other namespaces include 'CASE', 'DOCUMENT', and so on. You will typically have a namespace that relates to the app.module you are working with.
+You'll notice that this example puts the translatable string in the 'COMMON' namespace. All translatable strings are put
+into namespaces. 'COMMON' being the one used for common strings like 'OK', 'Cancel', etc. Other namespaces include
+'DOCUMENT', and so on. You will typically have a namespace that relates to the app.module you are working with.
 
 Translatable strings can also be added programmatically. See the Angular translate docs for details.
 
@@ -38,7 +40,8 @@ These are the translation files.
 
 The translating process would be something like this (for English translation):
 
-1. Add new translation properties in ALL the translation files. If you added "CASE.TYPE.SOMETHING" in a view or controller file. You'll need to add
+1. Add new translation properties in ALL the translation files. If you added "CASE.TYPE.SOMETHING" in a view or
+controller file. You'll need to add
 [
 
   "CASE": {

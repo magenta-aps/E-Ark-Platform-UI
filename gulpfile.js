@@ -1,21 +1,8 @@
 var gulp = require('gulp'),
         $ = require('gulp-load-plugins')(),
         fs = require('fs'),
-        proxy = require('http-proxy-middleware');
-
-// Config vars
-// If, after a while, there are a lot of config vars, we can move these to a separate file
-var environment = {
-    test: {
-        proxy: 'http://test.openesdh.dk'
-    },
-    demo: {
-        proxy: 'http://demo.openesdh.dk'
-    },
-    local: {
-        proxy: 'http://localhost:8080'
-    }
-};
+        proxy = require('http-proxy-middleware'),
+        env = require('../environment.json');
 
 var paths = {
     scripts: ['app/src/**/*.module.js', 'app/src/**/*.js', '!app/src/**/*Spec.js', '!app/src/modules/test/**/*.js', '!app/src/modules/**/tests/**/*.js'],
@@ -36,10 +23,16 @@ function createWebserver(config) {
                 open: false, // Open up a browser automatically
                 host: '0.0.0.0', // hostname needed if you want to access the server from anywhere on your local network
                 middleware: [],
-                proxies: [{
-                    source: '/alfresco',
-                    target: config.proxy + '/alfresco'
-                }]
+                proxies: [
+                    {
+                        source: '/alfresco',
+                        target: config.proxy + '/alfresco'
+                    },
+                    {
+                        source:'/aip/repo/search',
+                        target: env.search.repository.uri + '/solr/eark1'
+                    }
+                ]
             }));
 }
 
@@ -113,15 +106,15 @@ gulp.task('watch', function() {
 gulp.task('build', ['scripts', 'css']);
 
 gulp.task('test', ['build', 'watch'], function() {
-    createWebserver(environment.testv);
+    createWebserver(env.environment.test);
 });
 
 gulp.task('demo', ['build', 'watch'], function() {
-    createWebserver(environment.demo);
+    createWebserver(env.environment.demo);
 });
 
 gulp.task('local', ['build', 'watch'], function() {
-    createWebserver(environment.local);
+    createWebserver(env.environment.local);
 });
 
 /* Tests */

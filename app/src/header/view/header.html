@@ -49,10 +49,7 @@
         <form ng-submit="asctrl.gotoSearchPage()" ng-if="!asctrl.isExtUser">
             <md-input-container md-no-float>
                 <i class="material-icons global-tools__search__icon">search</i>
-                <input type="text" ng-model="asctrl.searchTerm"
-                       ng-change="asctrl.getLiveSearchResults(asctrl.searchTerm)"
-                       ng-keydown="asctrl.keydown($event)" ng-model-options="{ debounce: 250 }"
-                       placeholder="{{ 'SEARCH.SEARCH' | translate }}">
+                <input type="text" ng-model="asctrl.searchTerm" placeholder="{{ 'SEARCH.SEARCH' | translate }}">
             </md-input-container>
 
             <!-- Autocomplete dropdown -->

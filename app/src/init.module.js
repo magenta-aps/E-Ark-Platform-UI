@@ -11,6 +11,9 @@ angular
             serviceSlingshotProxy: '/slingshot/',
             webClientServiceProxy: '/alfresco/service'
         })
+        .constant('AIP_REPOSITORY_URI',{
+            serviceProxy:'/aip/repo/search'
+        })
         .constant('PATTERNS', {
             fileName: /^[a-zA-Z0-9_\-,!@#$%^&()=+ ]+$/,
             phone: /^[+]?[0-9\- ]+$/
