@@ -1,5 +1,5 @@
 angular
-        .module('openDeskApp.documents')
+        .module('angularStubApp.documents')
         .controller('DocumentsController', DocumentsController);
 
 function DocumentsController($state, $mdDialog, fileUtilsService, caseDocumentFileDialogService, documentPreviewService) {

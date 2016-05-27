@@ -1,5 +1,5 @@
 
-    angular.module('openDeskApp.common.directives')
+    angular.module('angularStubApp.common.directives')
         .directive('openeError', OpeneErrorDirective);
 
     /**

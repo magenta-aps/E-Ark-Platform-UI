@@ -1,1 +1,1 @@
-angular.module('openDeskApp.search', [ 'ngMaterial', 'pascalprecht.translate']);
+angular.module('angularStubApp.search', [ 'ngMaterial', 'pascalprecht.translate']);

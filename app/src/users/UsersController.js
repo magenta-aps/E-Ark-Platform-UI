@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp.users')
+        .module('angularStubApp.users')
         .controller('UsersController', UsersController);
 
     /**

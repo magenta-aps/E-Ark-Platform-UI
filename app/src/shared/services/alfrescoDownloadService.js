@@ -1,5 +1,5 @@
 angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .factory('alfrescoDownloadService', AlfrescoDownloadService);
 
 function AlfrescoDownloadService(alfrescoNodeUtils, ALFRESCO_URI) {

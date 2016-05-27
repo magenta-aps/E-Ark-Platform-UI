@@ -1,6 +1,6 @@
 
 angular
-        .module('openDeskApp.documents')
+        .module('angularStubApp.documents')
         .factory('emailDocumentsService', EmailDocumentsService);
 
 function EmailDocumentsService($mdDialog, caseDocumentsService, caseService,

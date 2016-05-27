@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .filter('workflowTaskStatus', workflowTaskStatusFilterFactory);
     
     function workflowTaskStatusFilterFactory($translate){

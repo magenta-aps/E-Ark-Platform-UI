@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp.search')
+        .module('angularStubApp.search')
         .controller('SearchController', SearchController);
 
     /**

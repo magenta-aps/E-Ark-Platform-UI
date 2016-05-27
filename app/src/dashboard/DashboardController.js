@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp.dashboard')
+        .module('angularStubApp.dashboard')
         .controller('DashboardController', DashboardController);
 
     function DashboardController($scope, authService, dashboardService) {

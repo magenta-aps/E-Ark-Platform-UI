@@ -1,1 +1,1 @@
-angular.module('openDeskApp.core', []);
+angular.module('angularStubApp.core', []);

@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .controller('ApplicationController', ApplicationController);
 
     function ApplicationController() {

@@ -1,5 +1,5 @@
     angular
-        .module('openDeskApp.header')
+        .module('angularStubApp.header')
         .provider('modulesMenuService', modulesMenuServiceProvider);
     
     function modulesMenuServiceProvider(){

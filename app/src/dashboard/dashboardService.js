@@ -1,5 +1,5 @@
     angular
-        .module('openDeskApp.dashboard')
+        .module('angularStubApp.dashboard')
         .provider('dashboardService', dashboardServiceProvider);
     
     function dashboardServiceProvider(){

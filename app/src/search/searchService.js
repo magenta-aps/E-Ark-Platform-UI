@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .factory('searchService', searchService);
 
     function searchService($http, AIP_REPOSITORY_URI) {

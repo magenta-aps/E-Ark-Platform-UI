@@ -1,6 +1,6 @@
 
 angular
-        .module('openDeskApp.files')
+        .module('angularStubApp.files')
         .factory('filesService', FilesService);
 
 function FilesService($http, fileUtilsService, alfrescoNodeUtils) {

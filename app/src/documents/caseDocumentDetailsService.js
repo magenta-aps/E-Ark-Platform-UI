@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp.documents')
+        .module('angularStubApp.documents')
         .factory('caseDocumentDetailsService', CaseDocumentDetailsService);
 
     function CaseDocumentDetailsService($http, httpUtils, alfrescoUploadService, alfrescoDownloadService, alfrescoNodeUtils, fileUtilsService) {

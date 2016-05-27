@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .factory('notificationUtilsService', notificationUtilsService);
 
     function notificationUtilsService($mdToast, $translate) {

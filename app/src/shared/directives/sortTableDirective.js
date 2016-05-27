@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .directive('sortTable', sortTable);
 
     function sortTable($compile){

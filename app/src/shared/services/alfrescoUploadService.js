@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .factory('alfrescoUploadService', AlfrescoUploadService);
 
     function AlfrescoUploadService($http, notificationUtilsService) {

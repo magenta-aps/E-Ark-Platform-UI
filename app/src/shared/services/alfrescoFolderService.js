@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .factory('alfrescoFolderService', alfrescoFolderService);
 
     function alfrescoFolderService($http, alfrescoNodeUtils) {

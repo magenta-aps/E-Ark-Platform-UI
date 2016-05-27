@@ -1,5 +1,5 @@
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .factory('formProcessorService', formProcessorService);
 
     function formProcessorService($http, alfrescoNodeUtils) {

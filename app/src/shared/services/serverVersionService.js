@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .factory('serverVersionService', ServerVersionService);
 
     function ServerVersionService($http) {

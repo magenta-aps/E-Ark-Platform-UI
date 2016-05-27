@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .filter('taskTitle', taskTitleFactory);
     
     function taskTitleFactory($injector){

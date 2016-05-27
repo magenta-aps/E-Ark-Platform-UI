@@ -1,5 +1,5 @@
 angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .config(config)
         .factory('httpTicketInterceptor', httpTicketInterceptor)
         .factory('authService', authService);

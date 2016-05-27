@@ -1,6 +1,6 @@
     
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .filter('countryCodeToName', countryCodeToNameFilter);
     
     function countryCodeToNameFilter($translate){

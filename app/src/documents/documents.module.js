@@ -1,5 +1,5 @@
 angular
-        .module('openDeskApp.documents', ['ngMaterial', 'pascalprecht.translate'])
+        .module('angularStubApp.documents', ['ngMaterial', 'pascalprecht.translate'])
         .config(config);
 
 function config(caseDocumentActionsServiceProvider, dashboardServiceProvider, documentEditActionsServiceProvider,

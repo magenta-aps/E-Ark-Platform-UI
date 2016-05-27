@@ -1,4 +1,4 @@
-angular.module('openDeskApp.files', ['ngMaterial'])
+angular.module('angularStubApp.files', ['ngMaterial'])
         .config(config);
 
 function config(modulesMenuServiceProvider) {

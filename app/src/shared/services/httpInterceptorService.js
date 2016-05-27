@@ -1,6 +1,6 @@
 
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .config(config)
         .factory('httpInterceptor', httpInterceptor);
 

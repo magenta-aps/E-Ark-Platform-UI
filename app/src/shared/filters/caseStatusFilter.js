@@ -1,6 +1,6 @@
     
     angular
-        .module('openDeskApp')
+        .module('angularStubApp')
         .filter('caseStatus', caseStatusFilterFactory);
     
     function caseStatusFilterFactory($translate){
