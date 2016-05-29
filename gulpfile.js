@@ -12,7 +12,7 @@ var paths = {
 };
 
 var dist = {
-    name: 'eArk-platform',
+    name: 'eArk-Platform',
     folder: './dist/'
 };
 

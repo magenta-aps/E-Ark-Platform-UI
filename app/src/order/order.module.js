@@ -1,0 +1,1 @@
+angular.module('angularStubApp.order', [ 'ngMaterial', 'pascalprecht.translate']);

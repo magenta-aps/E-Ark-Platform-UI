@@ -1,4 +1,9 @@
 ﻿{
+    "APP":{
+        "LABEL":{
+            "ORDER":"Order"
+        }
+    },
     "COMMON": {
         "PACKAGE_ID": "Package Id",
         "CONFIRM": "Confirm",
@@ -67,76 +72,6 @@
         "DOWNLOAD_TEMPLATE_CSV": "Download template CSV",
         "LOCKED_BY": "Locked by {{locked_by}}",
         "CONGRATULATIONS": "Congratulations!"
-    },
-    "SIMPLE_CASE": {
-        "TYPE": "Standard case"
-    },
-    "CASE": {
-        "CONFIRM_CLOSE_CASE": "Do you want to close this case?",
-        "STATUS_CHANGED_SUCCESS": "Status has been changed successfully",
-        "CASETYPE_STANDARD": "Standard case",
-        "STATUS": {
-            "active": "Active",
-            "passive": "Passive",
-            "closed": "Closed",
-            "archived": "Archived",
-            "in-progress": "In progress"
-        },
-        "FILTER": {
-            "MY_CASES": "My cases",
-            "ALL_CASES": "All cases",
-            "ACTIVE_CASES": "Active cases",
-            "PASSIVE_CASES": "Passive cases",
-            "CLOSED_CASES": "Closed cases"
-        },
-        "CASES": "Cases",
-        "CHANGE_STATUS": "Change case status",
-        "CASE": "Case",
-        "CASE_OWNER": "Case owner",
-        "JOURNAL_KEY": "Journal key",
-        "JOURNAL_FACET": "Journal facet",
-        "EDIT_INFORMATION": "Edit information",
-        "PRINT_CASE": "Print case",
-        "START_WORKFLOW": "Start workflow",
-        "CASE_HISTORY": "Case history",
-        "CREATE_CASE": "Create case",
-        "EDIT_PROPERTIES": "Edit properties",
-        "TITLE": "Title",
-        "OWNER": "Owner",
-        "START_DATE": "Start date",
-        "EXPECTED_END_DATE": "Expected end date",
-        "DESCRIPTION": "Description",
-        "CREATE_NEW_CASE": "Create new case",
-        "CASETYPE_OTHER": "Other type case",
-        "STARTDATE": "Start date",
-        "ENDDATE": "End date",
-        "MY_CASES": "My cases",
-        "GROUP_CASES": "Group cases",
-        "ARE_YOU_SURE_YOU_WANT_TO_DELETE_THE_CASE": "Are you sure you want to delete the case '{{case_title}}'?",
-        "DELETE_CASE_SUCCESS": "Case successfully deleted",
-        "DELETE_CASE_FAILURE": "Case could not be deleted",
-        "VIEW_CASE_DETAILS": "View case",
-        "STAFF": {
-            "EMPLOYEE": "Employee",
-            "HIRE_DATE": "Hire date",
-            "RESIGNATION_DATE": "Resignation date",
-            "SALARY": "Salary"
-        },
-        "CASE_CREATED": "Case '{{case_title}}' created",
-        "CASE_UPDATED": "Case '{{case_title}}' updated",
-        "ERROR_CREATING_CASE": "Error creating case: {{case_title}}",
-        "CASE_DETAILS": "Case details",
-        "CASE_HISTORY_LOG": "Case history log",
-        "COMMENTS": "Journal notes",
-        "CREATED_BY": "Created {{at}} by {{by}}",
-        "MODIFIED_BY": "Last modified {{at}} by {{by}}",
-        "CASE_NOT_FOUND": "Case not found",
-        "SEARCH_CASE": "Search case",
-        "CREATE_FROM": "Create from",
-        "SELECT_CASE_TYPE": "Select case type",
-        "SEARCH_EXISTING_CASE": "search existing case",
-        "ASSIGN_TO": "Assign to",
-        "CASE_ADDED_TO_FAVORITE": "You have now added this case to your favorite cases and will be notified whenever the case is updated"
     },
     "DOCUMENT": {
         "STATUS_CHANGED_SUCCESS": "Status has been changed successfully",
@@ -583,7 +518,10 @@
         "ARE_YOU_SURE_YOU_WANT_TO_DELETE_USER": "Are you sure you want to delete '{{user}}'?",
         "CAN_NOT_DELETE_ADMIN_USER": "Deletion of the admin user is not permitted.",
         "SAVE_USER_FAILURE": "User could not be saved",
-        "EMAIL_FEED_ENABLED": "Email feed enabled"
+        "EMAIL_FEED_ENABLED": "Email feed enabled",
+        "MENU":{
+            "MY_ORDERS": "My Orders"
+        }
     },
     "GROUP": {
         "GROUPS": "Groups",
@@ -628,6 +566,11 @@
         "ARE_YOU_SURE_YOU_WANT_TO_DELETE_ORG": "Are you sure you want to delete \"{{organizationName}}\" organization?",
         "ORG_SAVED_SUCCESSFULLY": "Organization \"{{organizationName}}\" saved successfully",
         "ORG_DELETED_SUCCESSFULLY": "Organization \"{{organizationName}}\" deleted successfully"
+    },
+    "ORDER":{
+      "TITLE":{
+        "BASKET":"Basket"
+      }
     },
     "CONTACT": {
         "CONTACTS": "Contacts",
@@ -847,22 +790,5 @@
             "dk.openesdh.case.workflow.task-approve": "Workflow",
             "dk.openesdh.case.workflow.task-reject": "Workflow"
         }
-    },
-    "faceted-search.date.one-week.label": "Last week",
-    "faceted-search.date.one-month.label": "Last month",
-    "faceted-search.date.six-months.label": "Last six months",
-    "faceted-search.date.one-year.label": "Last year",
-    "faceted-search.size.100KB-1MB.label": "100kb - 1Mb",
-    "faceted-search.size.10-100KB.label": "10kb - 100kb",
-    "faceted-search.date.one-day.label": "Last 24 hours",
-    "@{http://www.alfresco.org/model/content/1.0}content.size": "Size",
-    "@{http://www.alfresco.org/model/content/1.0}modifier": "Modifier",
-    "@{http://www.alfresco.org/model/content/1.0}modified": "Modified",
-    "@{http://www.alfresco.org/model/content/1.0}creator": "Creator",
-    "@{http://www.alfresco.org/model/content/1.0}created": "Created",
-    "@{http://www.alfresco.org/model/content/1.0}content.mimetype": "File Type",
-    "@{http://openesdh.dk/model/case/base/1.0}startDate": "Start Date",
-    "@{http://openesdh.dk/model/case/base/1.0}endDate": "End Date",
-    "@{http://openesdh.dk/model/openesdh/1.0}journalKeyIndexed": "Journal key",
-    "@{http://openesdh.dk/model/openesdh/1.0}journalFacetIndexed": "Journal facet"
+    }
 }

@@ -19,8 +19,11 @@ angular
         'angularStubApp.users',
         'angularStubApp.systemsettings',
         'angularStubApp.search',
+        'angularStubApp.basket',
+        'angularStubApp.order',
         'angularStubApp.common.directives',
         'angularStubApp.common.directives.filter',
+        'angularStubApp.common.directives.keypress',
         'dcbImgFallback',
         /*DO NOT REMOVE MODULES PLACEHOLDER!!!*/ //openDesk-modules
         /*LAST*/ 'angularStubApp.translations'])// TRANSLATIONS IS ALWAYS LAST!
@@ -108,6 +111,19 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
         views: {
             'content@': {
                 templateUrl: 'app/src/search/view/search.html'
+            }
+        },
+        data: {
+            authorizedRoles: [USER_ROLES.user]
+        }
+    }).state('orders', {
+        parent: 'site',
+        url: '/orders',
+        views: {
+            'content@': {
+                templateUrl: 'app/src/order/view/order.html',
+                controller: 'OrderController',
+                controllerAs: 'ordCtrl'
             }
         },
         data: {
