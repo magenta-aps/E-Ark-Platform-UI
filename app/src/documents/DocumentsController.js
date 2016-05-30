@@ -1,6 +1,6 @@
 angular
-        .module('angularStubApp.documents')
-        .controller('DocumentsController', DocumentsController);
+    .module('eArkPlatform.documents')
+    .controller('DocumentsController', DocumentsController);
 
 function DocumentsController($state, $mdDialog, fileUtilsService, caseDocumentFileDialogService, documentPreviewService) {
     var vm = this;
@@ -18,14 +18,14 @@ function DocumentsController($state, $mdDialog, fileUtilsService, caseDocumentFi
         var vm = this;
         // Mimetype has different paths on caseDocs vs MyDocuments
         var mimeTypeProperty = $state.is('dashboard') ? 'mimetype' : 'fileMimeType';
-        vm.documents.forEach(function(document) {
+        vm.documents.forEach(function (document) {
             document.thumbNailURL = fileUtilsService.getFileIconByMimetype(document[mimeTypeProperty], 24);
         });
     }
 
     function uploadDocument() {
         var vm = this;
-        caseDocumentFileDialogService.uploadCaseDocument(vm.docsFolderNodeRef).then(function(result) {
+        caseDocumentFileDialogService.uploadCaseDocument(vm.docsFolderNodeRef).then(function (result) {
             vm.reloadDocuments();
         });
     }

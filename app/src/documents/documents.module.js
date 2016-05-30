@@ -1,17 +1,17 @@
 angular
-        .module('angularStubApp.documents', ['ngMaterial', 'pascalprecht.translate'])
-        .config(config);
+    .module('eArkPlatform.documents', ['ngMaterial', 'pascalprecht.translate'])
+    .config(config);
 
 function config(caseDocumentActionsServiceProvider, dashboardServiceProvider, documentEditActionsServiceProvider,
-        documentAttachmentEditActionsServiceProvider) {
+                documentAttachmentEditActionsServiceProvider) {
     //documents list
     caseDocumentActionsServiceProvider.addMenuItem('DOCUMENT.EMAIL_DOCUMENTS', 'emailDocumentsService');
     //document edit
     documentEditActionsServiceProvider
-            .addItem('DOCUMENT.EDIT_DOCUMENT_SHAREPOINT', 'description', 'documentEditInSharePointService', isVisible_doc, isDisabled_doc);
+        .addItem('DOCUMENT.EDIT_DOCUMENT_SHAREPOINT', 'description', 'documentEditInSharePointService', isVisible_doc, isDisabled_doc);
     //attachment edit
     documentAttachmentEditActionsServiceProvider
-            .addItem('DOCUMENT.EDIT_DOCUMENT_SHAREPOINT', 'description', 'documentAttachmentEditInSharePointService', isVisible_EditOnlineAttachment, isDisabled_EditOnlineAttachment);
+        .addItem('DOCUMENT.EDIT_DOCUMENT_SHAREPOINT', 'description', 'documentAttachmentEditInSharePointService', isVisible_EditOnlineAttachment, isDisabled_EditOnlineAttachment);
 
     //dashboard
     dashboardServiceProvider.addDashlet({

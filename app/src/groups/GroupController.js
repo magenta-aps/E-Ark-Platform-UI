@@ -1,4 +1,4 @@
-//angular.module('angularStubApp.groups').controller('GroupController', GroupController);
+//angular.module('eArkPlatform.groups').controller('GroupController', GroupController);
 
 /*
  * Main Controller for the Groups module

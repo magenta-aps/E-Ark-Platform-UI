@@ -1,12 +1,11 @@
-
 angular
-        .module('angularStubApp.documents')
-        .controller('DocumentDetailsController', DocumentDetailsController);
+    .module('eArkPlatform.documents')
+    .controller('DocumentDetailsController', DocumentDetailsController);
 
 function DocumentDetailsController($stateParams, $translate, $mdDialog, $location, caseDocumentDetailsService,
-        documentPreviewService, caseDocumentFileDialogService, notificationUtilsService,
-        alfrescoDownloadService, alfrescoFolderService, sessionService, sharePointProtocolService,
-        documentEditActionsService, $injector) {
+                                   documentPreviewService, caseDocumentFileDialogService, notificationUtilsService,
+                                   alfrescoDownloadService, alfrescoFolderService, sessionService, sharePointProtocolService,
+                                   documentEditActionsService, $injector) {
 
     var vm = this;
     vm.documentNodeRef = $stateParams.storeType + "://" + $stateParams.storeId + "/" + $stateParams.id;
@@ -42,8 +41,8 @@ function DocumentDetailsController($stateParams, $translate, $mdDialog, $locatio
 
     function loadCaseDocumentInfo() {
         var vm = this;
-        return vm.loadCaseDocument().then(function(document) {
-            vm.loadVersionDetails().then(function() {
+        return vm.loadCaseDocument().then(function (document) {
+            vm.loadVersionDetails().then(function () {
                 vm.refreshDocumentView();
             });
         });
@@ -51,7 +50,7 @@ function DocumentDetailsController($stateParams, $translate, $mdDialog, $locatio
 
     function loadCaseDocument() {
         var vm = this;
-        return caseDocumentDetailsService.getCaseDocument(vm.documentNodeRef).then(function(document) {
+        return caseDocumentDetailsService.getCaseDocument(vm.documentNodeRef).then(function (document) {
             vm.caseDocument = document;
             vm.doc = document;
             vm.doc.canEditOnlineDocument = (vm.doc.canEditOnlineDocument || false);
@@ -62,7 +61,7 @@ function DocumentDetailsController($stateParams, $translate, $mdDialog, $locatio
 
     function loadVersionDetails() {
         var vm = this;
-        return caseDocumentDetailsService.getDocumentVersionInfo(vm.caseDocument.mainDocNodeRef).then(function(versions) {
+        return caseDocumentDetailsService.getDocumentVersionInfo(vm.caseDocument.mainDocNodeRef).then(function (versions) {
             vm.documentVersions = versions;
             vm.docVersion = versions[0];
             vm.doc.canEditOnlineDocument = sharePointProtocolService.canEditOnline(versions[0].name);
@@ -81,13 +80,13 @@ function DocumentDetailsController($stateParams, $translate, $mdDialog, $locatio
 
         function DocPreviewController($scope) {
             vm.docPreviewControllerObj = this;
-            this.setPreviewPlugin = function(plugin) {
+            this.setPreviewPlugin = function (plugin) {
 
                 $scope.config = plugin;
 
                 $scope.viewerTemplateUrl = documentPreviewService.templatesUrl + plugin.templateUrl;
 
-                $scope.download = function() {
+                $scope.download = function () {
                     alfrescoDownloadService.downloadFile($scope.config.nodeRef, $scope.config.fileName);
                 };
 
@@ -104,7 +103,7 @@ function DocumentDetailsController($stateParams, $translate, $mdDialog, $locatio
         if (vm.documentVersions[0].nodeRef != vm.docVersion.nodeRef) {
             nodeRef = vm.docVersion.nodeRef;
         }
-        documentPreviewService.previewDocumentPlugin(nodeRef).then(function(plugin) {
+        documentPreviewService.previewDocumentPlugin(nodeRef).then(function (plugin) {
             vm.docPreviewControllerObj.setPreviewPlugin(plugin);
         });
     }
@@ -121,10 +120,10 @@ function DocumentDetailsController($stateParams, $translate, $mdDialog, $locatio
 
     function showDocumentEditActions() {
         var vm = this;
-        if (vm.doc == undefined){
+        if (vm.doc == undefined) {
             return null;
         }
-        var visibleActions = vm.documentEditActions.filter(function(action){
+        var visibleActions = vm.documentEditActions.filter(function (action) {
             return action.isVisible(vm.doc);
         });
         return visibleActions.length > 0;
@@ -132,11 +131,11 @@ function DocumentDetailsController($stateParams, $translate, $mdDialog, $locatio
 
     function uploadDocNewVersion() {
         var vm = this;
-        vm.loadCaseDocument().then(function() {
+        vm.loadCaseDocument().then(function () {
             if (vm.doc.editLockState.isLocked) {
                 return;
             }
-            caseDocumentFileDialogService.uploadCaseDocumentNewVersion(vm.documentNodeRef).then(function(result) {
+            caseDocumentFileDialogService.uploadCaseDocumentNewVersion(vm.documentNodeRef).then(function (result) {
                 vm.loadCaseDocumentInfo();
                 setTimeout(loadDocumentPreview, 500);
             });
@@ -145,7 +144,7 @@ function DocumentDetailsController($stateParams, $translate, $mdDialog, $locatio
 
     function editDocumentProperties() {
         var vm = this;
-        caseDocumentFileDialogService.editDocumentProperties(vm.documentNodeRef).then(function(result) {
+        caseDocumentFileDialogService.editDocumentProperties(vm.documentNodeRef).then(function (result) {
             vm.loadCaseDocumentInfo();
         });
     }
@@ -160,10 +159,10 @@ function DocumentDetailsController($stateParams, $translate, $mdDialog, $locatio
 
     function changeDocumentStatus(status) {
         var vm = this;
-        caseDocumentDetailsService.changeDocumentStatus(vm.documentNodeRef, status).then(function(json) {
+        caseDocumentDetailsService.changeDocumentStatus(vm.documentNodeRef, status).then(function (json) {
             vm.loadCaseDocumentInfo();
             notificationUtilsService.notify($translate.instant("DOCUMENT.STATUS_CHANGED_SUCCESS"));
-        }, function(response) {
+        }, function (response) {
             notificationUtilsService.alert(response.data.message);
         });
     }
@@ -171,17 +170,17 @@ function DocumentDetailsController($stateParams, $translate, $mdDialog, $locatio
     function deleteDocument() {
         var vm = this;
         var confirm = $mdDialog.confirm()
-                .title($translate.instant('COMMON.CONFIRM'))
-                .textContent($translate.instant('DOCUMENT.ARE_YOU_SURE_YOU_WANT_TO_DELETE_THE_DOCUMENT', {document_title: vm.doc["title"]}))
-                .ariaLabel('')
-                .targetEvent(null)
-                .ok($translate.instant('COMMON.YES'))
-                .cancel($translate.instant('COMMON.CANCEL'));
-        $mdDialog.show(confirm).then(function() {
-            alfrescoFolderService.deleteFolder(vm.documentNodeRef).then(function(result) {
+            .title($translate.instant('COMMON.CONFIRM'))
+            .textContent($translate.instant('DOCUMENT.ARE_YOU_SURE_YOU_WANT_TO_DELETE_THE_DOCUMENT', {document_title: vm.doc["title"]}))
+            .ariaLabel('')
+            .targetEvent(null)
+            .ok($translate.instant('COMMON.YES'))
+            .cancel($translate.instant('COMMON.CANCEL'));
+        $mdDialog.show(confirm).then(function () {
+            alfrescoFolderService.deleteFolder(vm.documentNodeRef).then(function (result) {
                 notificationUtilsService.notify($translate.instant('DOCUMENT.DELETE_DOC_SUCCESS'));
                 vm.afterDocumentDelete();
-            }, function(result) {
+            }, function (result) {
                 console.log(result);
                 notificationUtilsService.alert($translate.instant('DOCUMENT.DELETE_DOC_FAILURE'));
             });
@@ -195,7 +194,7 @@ function DocumentDetailsController($stateParams, $translate, $mdDialog, $locatio
     function executeEditAction(menuItem) {
         var vm = this;
         var service = $injector.get(menuItem.serviceName);
-        service.executeCaseDocAction(vm.doc, function() {
+        service.executeCaseDocAction(vm.doc, function () {
             vm.loadCaseDocumentInfo();
             vm.refreshDocumentView();
         }, showError, vm._scope);

@@ -1,10 +1,9 @@
-
 angular
-        .module('angularStubApp.files')
-        .controller('AddFileToCaseDialogController', AddFileToCaseDialogController);
+    .module('eArkPlatform.files')
+    .controller('AddFileToCaseDialogController', AddFileToCaseDialogController);
 
 function AddFileToCaseDialogController($mdDialog, $scope, $translate,
-        caseService, caseDocumentsService, filesService, notificationUtilsService, file) {
+                                       caseService, caseDocumentsService, filesService, notificationUtilsService, file) {
     var addToCaseVm = this;
     addToCaseVm.selectedCase;
 
@@ -20,22 +19,22 @@ function AddFileToCaseDialogController($mdDialog, $scope, $translate,
         description: null
     };
 
-    caseDocumentsService.getCaseDocumentConstraints().then(function(documentConstraints) {
+    caseDocumentsService.getCaseDocumentConstraints().then(function (documentConstraints) {
         $scope.documentConstraints = documentConstraints;
     });
 
     function execute() {
         filesService.addFileToCase(
-                addToCaseVm.selectedCase['oe:id'],
-                file.nodeRef,
-                $scope.documentProperties)
-                .then(function() {
-                    notificationUtilsService.notify($translate.instant("FILE.FILE_ADDED_TO_CASE_SUCCESSFULLY",
-                            {title: $scope.documentProperties.title, caseId: addToCaseVm.selectedCase['oe:id']}));
-                    $mdDialog.hide();
-                }, function(response) {
-                    notificationUtilsService.alert(response.data.message || 'Unexpected exception');
-                });
+            addToCaseVm.selectedCase['oe:id'],
+            file.nodeRef,
+            $scope.documentProperties)
+            .then(function () {
+                notificationUtilsService.notify($translate.instant("FILE.FILE_ADDED_TO_CASE_SUCCESSFULLY",
+                    {title: $scope.documentProperties.title, caseId: addToCaseVm.selectedCase['oe:id']}));
+                $mdDialog.hide();
+            }, function (response) {
+                notificationUtilsService.alert(response.data.message || 'Unexpected exception');
+            });
     }
 
     function cancel() {

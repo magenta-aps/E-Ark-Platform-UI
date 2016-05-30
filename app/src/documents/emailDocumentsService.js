@@ -1,10 +1,9 @@
-
 angular
-        .module('angularStubApp.documents')
-        .factory('emailDocumentsService', EmailDocumentsService);
+    .module('eArkPlatform.documents')
+    .factory('emailDocumentsService', EmailDocumentsService);
 
 function EmailDocumentsService($mdDialog, caseDocumentsService, caseService,
-        notificationUtilsService, personDialogService, $q) {
+                               notificationUtilsService, personDialogService, $q) {
     var service = {
         showDialog: showDialog
     };
@@ -15,7 +14,7 @@ function EmailDocumentsService($mdDialog, caseDocumentsService, caseService,
         if (model) {
             p = $q.when({documents: model.documents});
         } else {
-            p = caseDocumentsService.getDocumentsByCaseId(caseId, 1, 100).then(function(response) {
+            p = caseDocumentsService.getDocumentsByCaseId(caseId, 1, 100).then(function (response) {
                 model = {
                     documents: response.documents,
                     caseId: caseId,
@@ -26,7 +25,7 @@ function EmailDocumentsService($mdDialog, caseDocumentsService, caseService,
             });
         }
 
-        p.then(function(response) {
+        p.then(function (response) {
             $mdDialog.show({
                 templateUrl: 'app/src/documents/view/emailDialog.html',
                 controller: EmailDocumentsDialogController,
@@ -53,14 +52,14 @@ function EmailDocumentsService($mdDialog, caseDocumentsService, caseService,
             if (!query) {
                 return [];
             }
-            return contactsService.getPersons(query).then(function(response) {
+            return contactsService.getPersons(query).then(function (response) {
                 return response.items;
             });
         }
 
         function emailDocuments() {
             // Send the email
-            var toList = vm.model.to.map(function(contact) {
+            var toList = vm.model.to.map(function (contact) {
                 return {
                     nodeRef: contact.nodeRefId,
                     email: contact.email
@@ -70,12 +69,12 @@ function EmailDocumentsService($mdDialog, caseDocumentsService, caseService,
                 'to': toList,
                 'subject': vm.model.subject,
                 'message': vm.model.message || "",
-                'documents': vm.model.documents.filter(function(document) {
+                'documents': vm.model.documents.filter(function (document) {
                     return document.selected;
                 })
-            }).then(function() {
+            }).then(function () {
                 $mdDialog.hide();
-            }, function(response) {
+            }, function (response) {
                 notificationUtilsService.alert(response.data.message);
             });
         }
@@ -86,13 +85,13 @@ function EmailDocumentsService($mdDialog, caseDocumentsService, caseService,
 
         function newContact(ev) {
             personDialogService
-                    .showPersonEdit(ev, null, null, false)
-                    .then(function(response) {
-                        vm.model.to.push(response);
-                        showDialog(ev, vm.model);
-                    }, function() {
-                        showDialog(ev, vm.model);
-                    });
+                .showPersonEdit(ev, null, null, false)
+                .then(function (response) {
+                    vm.model.to.push(response);
+                    showDialog(ev, vm.model);
+                }, function () {
+                    showDialog(ev, vm.model);
+                });
         }
     }
 }

@@ -1,10 +1,12 @@
 <md-dialog class="dialog-small" aria-label="">
     <form name="newDocForm">
-        
+
         <md-toolbar layout>
             <div class="md-toolbar-tools">
                 <h2 ng-hide="isAttachment || isEditProperties">{{ 'COMMON.UPLOAD' | translate }}</h2>
+
                 <h2 ng-show="isAttachment">{{ 'DOCUMENT.UPLOAD_ATTACHMENT' | translate }}</h2>
+
                 <h2 ng-show="isEditProperties">{{ 'DOCUMENT.EDIT_PROPERTIES' | translate }}</h2>
             </div>
         </md-toolbar>
@@ -28,8 +30,8 @@
                 </md-input-container>
             </div>
 
-            <div layout layout-wrap 
-                 ng-if="!isAttachment" 
+            <div layout layout-wrap
+                 ng-if="!isAttachment"
                  ng-include="'app/src/documents/view/caseDocumentCreateProperties.html'">
             </div>
 

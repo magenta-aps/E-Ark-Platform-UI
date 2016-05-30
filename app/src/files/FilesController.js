@@ -1,10 +1,9 @@
-
 angular
-        .module('angularStubApp.files')
-        .controller('FilesController', FilesController);
+    .module('eArkPlatform.files')
+    .controller('FilesController', FilesController);
 
 function FilesController($scope, $injector, filesService, $translate, $mdDialog, notificationUtilsService,
-        alfrescoDownloadService, documentPreviewService, fileListItemActionService) {
+                         alfrescoDownloadService, documentPreviewService, fileListItemActionService) {
     var vm = this;
     vm.tab = 'my_files';
     vm.files = [];
@@ -27,9 +26,9 @@ function FilesController($scope, $injector, filesService, $translate, $mdDialog,
     function loadList() {
         vm.files = [];
         var listF = vm.tab === 'my_files'
-                ? filesService.getUserFiles
-                : filesService.getGroupFiles;
-        listF().then(function(files) {
+            ? filesService.getUserFiles
+            : filesService.getGroupFiles;
+        listF().then(function (files) {
             vm.files = files;
         }, showError);
     }
@@ -44,21 +43,21 @@ function FilesController($scope, $injector, filesService, $translate, $mdDialog,
 
     function deleteFile(file) {
         var confirm = $mdDialog.confirm()
-                .title($translate.instant('COMMON.CONFIRM'))
-                .textContent($translate.instant('FILE.ARE_YOU_SURE_YOU_WANT_TO_DELETE_FILE', {title: file.cm.title}))
-                .ariaLabel('File delete confirmation')
-                .targetEvent(null)
-                .ok($translate.instant('COMMON.YES'))
-                .cancel($translate.instant('COMMON.CANCEL'));
-        $mdDialog.show(confirm).then(function() {
+            .title($translate.instant('COMMON.CONFIRM'))
+            .textContent($translate.instant('FILE.ARE_YOU_SURE_YOU_WANT_TO_DELETE_FILE', {title: file.cm.title}))
+            .ariaLabel('File delete confirmation')
+            .targetEvent(null)
+            .ok($translate.instant('COMMON.YES'))
+            .cancel($translate.instant('COMMON.CANCEL'));
+        $mdDialog.show(confirm).then(function () {
             filesService.deleteFile(file.nodeRef)
-                    .then(function() {
-                        loadList();
-                        notificationUtilsService.notify($translate.instant('FILE.DELETE_FILE_SUCCESS'));
-                    }, function(response) {
-                        console.log(response);
-                        notificationUtilsService.alert($translate.instant('FILE.DELETE_FILE_FAILURE'));
-                    });
+                .then(function () {
+                    loadList();
+                    notificationUtilsService.notify($translate.instant('FILE.DELETE_FILE_SUCCESS'));
+                }, function (response) {
+                    console.log(response);
+                    notificationUtilsService.alert($translate.instant('FILE.DELETE_FILE_FAILURE'));
+                });
         });
     }
 
@@ -112,7 +111,7 @@ function FilesController($scope, $injector, filesService, $translate, $mdDialog,
             locals: {
                 file: file
             }
-        }).then(function() {
+        }).then(function () {
         });
     }
 

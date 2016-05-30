@@ -10,10 +10,9 @@ var paths = {
 };
 
 var dist = {
-    name: 'angular-stub',
+    name: 'eArk-platform',
     folder: './dist/'
 };
-
 
 // Script tasks
 gulp.task('scripts', function() {
@@ -59,7 +58,7 @@ gulp.task('e2e-tests', function() {
 function includeAppConfigParams(content) {
     var argv = require('yargs').argv;
     if (argv.title) {
-        content = content.replace("appName: 'angular-stub'", "appName: '" + argv.title + "'");
+        content = content.replace("appName: 'eArk-platform'", "appName: '" + argv.title + "'");
     }
     return content;
 }

@@ -1,7 +1,6 @@
-
 angular
-        .module('angularStubApp.files')
-        .controller('AssignFileDialogController', AssignFileDialogController);
+    .module('eArkPlatform.files')
+    .controller('AssignFileDialogController', AssignFileDialogController);
 
 function AssignFileDialogController($mdDialog, $translate, filesService, notificationUtilsService, file) {
     var assignFileVm = this;
@@ -13,13 +12,13 @@ function AssignFileDialogController($mdDialog, $translate, filesService, notific
 
     function assignFile() {
         filesService.moveFile(file.nodeRef, assignFileVm.owner, assignFileVm.comment)
-                .then(function() {
-                    notificationUtilsService.notify($translate.instant("FILE.FILE_ASSIGNED_SUCCESSFULLY",
-                            {title: file.cm.title, authorityName: assignFileVm.owner.name}));
-                    $mdDialog.hide();
-                }, function(response) {
-                    notificationUtilsService.alert(response.data.message || 'Unexpected exception');
-                });
+            .then(function () {
+                notificationUtilsService.notify($translate.instant("FILE.FILE_ASSIGNED_SUCCESSFULLY",
+                    {title: file.cm.title, authorityName: assignFileVm.owner.name}));
+                $mdDialog.hide();
+            }, function (response) {
+                notificationUtilsService.alert(response.data.message || 'Unexpected exception');
+            });
     }
 
     function cancel() {

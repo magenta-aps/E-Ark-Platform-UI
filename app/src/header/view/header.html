@@ -1,18 +1,19 @@
 <md-toolbar>
     <div class="md-toolbar-tools">
-        
+
         <md-button class="md-icon-button" aria-label="menu" ng-click="vm.toggleMenu()">
             <i class="material-icons">menu</i>
         </md-button>
-      
+
         <h1>
             <span>Some application toolbar</span>
         </h1>
-      
+
         <span flex></span>
-        
+
         <md-menu ng-controller="AuthController as vm" md-position-mode="target-right target">
-            <md-button class="md-icon-button" aria-label="{{ 'MENU.OPEN_MENU' | translate }}" ng-click="$mdOpenMenu($event)">
+            <md-button class="md-icon-button" aria-label="{{ 'MENU.OPEN_MENU' | translate }}"
+                       ng-click="$mdOpenMenu($event)">
                 <i class="material-icons">person</i>
             </md-button>
             <md-menu-content width="4">
@@ -31,11 +32,11 @@
                 </md-menu-item>
             </md-menu-content>
         </md-menu>
-        
+
         <a class="md-icon-button" href="#/search/">
             <i class="material-icons">search</i>
         </a>
-        
+
     </div>
 </md-toolbar>
 

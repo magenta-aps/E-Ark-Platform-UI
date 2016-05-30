@@ -1,6 +1,6 @@
 angular
-        .module('angularStubApp.files')
-        .provider('fileListItemActionService', FileListItemActionServiceProvider);
+    .module('eArkPlatform.files')
+    .provider('fileListItemActionService', FileListItemActionServiceProvider);
 
 function FileListItemActionServiceProvider() {
     var availableItems = [];
@@ -8,7 +8,7 @@ function FileListItemActionServiceProvider() {
     this.$get = FileListItemActionService;
 
     /**
-     * 
+     *
      * @param labelKey - key for translation
      * @param icon - icon key
      * @param serviceName - for injector

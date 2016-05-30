@@ -1,5 +1,5 @@
 angular
-    .module('angularStubApp.search', [ 'ngMaterial', 'pascalprecht.translate'])
+    .module('eArkPlatform.search', ['ngMaterial', 'pascalprecht.translate'])
     .config(config);
 
 function config(modulesMenuServiceProvider) {

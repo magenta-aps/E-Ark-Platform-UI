@@ -7,12 +7,12 @@
             </div>
         </md-toolbar>
 
-        <md-dialog-content >
+        <md-dialog-content>
             <div layout='row'>
                 <md-chips flex ng-model="vm.model.to" md-require-match="true" layout="column">
-                    <md-autocomplete md-selected-item="vm.selectedItem" 
-                                     md-search-text="vm.searchText" 
-                                     md-items="item in vm.querySearch(vm.searchText)" 
+                    <md-autocomplete md-selected-item="vm.selectedItem"
+                                     md-search-text="vm.searchText"
+                                     md-items="item in vm.querySearch(vm.searchText)"
                                      placeholder="{{ 'COMMON.TO' | translate }}">
                         <span md-highlight-text="vm.searchText">{{item.firstName + ' ' + item.lastName}} ({{item.cprNumber}}, {{item.email}})</span>
                     </md-autocomplete>
@@ -23,11 +23,12 @@
                         </span>
                     </md-chip-template>
                 </md-chips>
-                <md-button 
-                    ng-show="('can_create_contacts'|oeParam)"
-                    ng-click="vm.newContact($event)" 
-                    title="{{ 'CONTACT.CREATE_NEW_CONTACT'| translate }}" 
-                    style='min-width: 15px; max-height: 36px;'>+ {{ 'COMMON.NEW' | translate }}</md-button>
+                <md-button
+                        ng-show="('can_create_contacts'|oeParam)"
+                        ng-click="vm.newContact($event)"
+                        title="{{ 'CONTACT.CREATE_NEW_CONTACT'| translate }}"
+                        style='min-width: 15px; max-height: 36px;'>+ {{ 'COMMON.NEW' | translate }}
+                </md-button>
             </div>
             <md-input-container layout="column">
                 <label>{{ 'COMMON.SUBJECT' | translate }}</label>
