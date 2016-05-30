@@ -5,6 +5,7 @@ angular
 function basketService($q) {
     var bService = this;
     bService.addToBasket = addToBasket;
+    bService.findItemInBasket = findItemInBasket;
     bService.removeFromBasket = removeFromBasket;
 
 

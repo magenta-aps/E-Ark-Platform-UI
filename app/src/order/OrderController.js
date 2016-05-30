@@ -17,6 +17,7 @@ function OrderController(searchService, fileUtilsService, basketService) {
 
     ordCtrl.executeSearch = executeSearch;
     ordCtrl.addToBasket = basketCheck;
+    ordCtrl.submitOrder = submitOrder;
 
     function executeSearch(){
         var queryObj = {
@@ -54,6 +55,10 @@ function OrderController(searchService, fileUtilsService, basketService) {
             basketService.removeFromBasket(item, ordCtrl.basket).then(function(result){
                 console.log('Removal status: '+ result);
             });
+    }
+
+    function submitOrder(){
+        console.log("Submitting order with ["+ ordCtrl.basket.length +"] items");
     }
 
     function formatBytes(bytes, decimals) {
