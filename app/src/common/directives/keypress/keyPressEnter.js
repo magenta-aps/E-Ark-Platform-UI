@@ -1,4 +1,4 @@
-angular.module("angularStubApp.common.directives.keypress").directive('dlEnterKey', function() {
+angular.module("eArkPlatform.common.directives.keypress").directive('dlEnterKey', function() {
     return function(scope, element, attrs) {
 
         element.bind("keydown keypress", function(event) {

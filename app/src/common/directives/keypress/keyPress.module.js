@@ -1,1 +1,1 @@
-angular.module('angularStubApp.common.directives.keypress', [ 'ngMaterial', 'pascalprecht.translate']);
+angular.module('eArkPlatform.common.directives.keypress', [ 'ngMaterial', 'pascalprecht.translate']);

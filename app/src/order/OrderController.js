@@ -1,4 +1,4 @@
-angular.module('angularStubApp.order').controller('OrderController', OrderController);
+angular.module('eArkPlatform.order').controller('OrderController', OrderController);
 
 /**
  * Main controller for the order module

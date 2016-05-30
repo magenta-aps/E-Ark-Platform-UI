@@ -3,7 +3,7 @@ angular
     .factory('searchService', searchService);
 
     angular
-        .module('angularStubApp')
+        .module('eArkPlatform')
         .factory('searchService', searchService);
 
     function searchService($http, AIP_REPOSITORY_URI) {
