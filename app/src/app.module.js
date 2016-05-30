@@ -13,12 +13,14 @@ angular
         'angularStubApp.init',
         'angularStubApp.translations.init',
         'angularStubApp.header',
+        'angularStubApp.files',
         'angularStubApp.dashboard',
+        'angularStubApp.search',
+        
         'angularStubApp.documents',
         'angularStubApp.administration',
         'angularStubApp.users',
         'angularStubApp.systemsettings',
-        'angularStubApp.search',
         'angularStubApp.common.directives',
         'angularStubApp.common.directives.filter',
         'dcbImgFallback',
@@ -101,6 +103,19 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
         },
         data: {
             authorizedRoles: []
+        }
+    }).state('files', {
+        parent: 'site',
+        url: '/files',
+        views: {
+            'content@': {
+                templateUrl: 'app/src/files/view/files.html',
+                controller: 'FilesController',
+                controllerAs: 'vm'
+            }
+        },
+        data: {
+            authorizedRoles: [USER_ROLES.user]
         }
     }).state('search', {
         parent: 'site',
