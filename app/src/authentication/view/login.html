@@ -2,7 +2,8 @@
     <md-card class="login-form__card" flex="initial">
         <md-toolbar>
             <h1 layout="row" layout-align="center center">
-                <img src="{{$root.logoSrc}}" class="login-form__logo" alt="{{$root.appName}} {{'LOGIN.LOGIN' | translate}}">
+                <img src="{{$root.logoSrc}}" class="login-form__logo"
+                     alt="{{$root.appName}} {{'LOGIN.LOGIN' | translate}}">
             </h1>
         </md-toolbar>
         <md-card-content>
@@ -11,12 +12,14 @@
 
                 <md-input-container flex="grow">
                     <label>{{ 'LOGIN.USER_NAME' | translate }}</label>
-                    <input type="text" ng-model="vm.credentials.username" name="username" required autofocus ng-change="vm.updateValidator()">
+                    <input type="text" ng-model="vm.credentials.username" name="username" required autofocus
+                           ng-change="vm.updateValidator()">
                     <opene-error form="vm.form" field="vm.form.username"></opene-error>
                 </md-input-container>
 
                 <md-input-container flex="grow">
-                    <input type="password" ng-model="vm.credentials.password" name="password" required ng-change="vm.updateValidator()">
+                    <input type="password" ng-model="vm.credentials.password" name="password" required
+                           ng-change="vm.updateValidator()">
                     <label>{{ 'LOGIN.PASSWORD' | translate }}</label>
                     <opene-error form="vm.form" field="vm.form.password"></opene-error>
                 </md-input-container>

@@ -1,5 +1,5 @@
 angular
-    .module('angularStubApp.search')
+    .module('eArkPlatform.search')
     .controller('SearchController', SearchController);
 
 /**

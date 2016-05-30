@@ -1,3 +1,6 @@
+angular
+    .module('eArkPlatform')
+    .factory('searchService', searchService);
 
     angular
         .module('angularStubApp')

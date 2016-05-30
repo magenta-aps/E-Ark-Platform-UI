@@ -1,18 +1,19 @@
 <md-toolbar>
     <div class="md-toolbar-tools">
-        
+
         <md-button class="md-icon-button" aria-label="menu" ng-click="vm.toggleMenu()">
             <i class="material-icons">menu</i>
         </md-button>
-      
+
         <h1>
             <span>Some application toolbar</span>
         </h1>
-      
+
         <span flex></span>
-        
+
         <md-menu ng-controller="AuthController as vm" md-position-mode="target-right target">
-            <md-button class="md-icon-button" aria-label="{{ 'MENU.OPEN_MENU' | translate }}" ng-click="$mdOpenMenu($event)">
+            <md-button class="md-icon-button" aria-label="{{ 'MENU.OPEN_MENU' | translate }}"
+                       ng-click="$mdOpenMenu($event)">
                 <i class="material-icons">person</i>
             </md-button>
             <md-menu-content width="4">
@@ -31,29 +32,19 @@
                 </md-menu-item>
             </md-menu-content>
         </md-menu>
-        
+
         <a class="md-icon-button" href="#/search/">
             <i class="material-icons">search</i>
         </a>
-        
+
     </div>
 </md-toolbar>
 
 <md-sidenav md-component-id="left" class="md-sidenav-left">
 
-    <md-list>
-        <md-list-item>
-            <a class="md-button md-text-icon-button" ui-sref="dashboard" ng-click="vm.toggleMenu()">
-                <i class="material-icons">home</i>
-                {{ 'COMMON.HOME' | translate }}
-            </a>
-            <md-divider></md-divider>
-        </md-list-item>
-        <md-list-item>
-            <a  class="md-button md-text-icon-button" ui-sref="orders" ng-click="vm.toggleMenu()">
-                <i class="material-icons">shopping_cart</i>
-                {{ 'APP.LABEL.ORDER' | translate }}
-            </a>
+    <md-list ng-controller="ModulesMenuController as menu">
+        <md-list-item ng-repeat="item in menu.items | orderBy: 'order'">
+            <ng-include src="item.templateUrl"></ng-include>
             <md-divider></md-divider>
         </md-list-item>
     </md-list>

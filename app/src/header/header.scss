@@ -1,4 +1,8 @@
+.md-sidenav-left ng-include {
+  flex: 1;
+}
+
 .md-sidenav-left .md-text-icon-button {
-    flex: 1;
-    text-align: left;
+  display: block;
+  text-align: left;
 }

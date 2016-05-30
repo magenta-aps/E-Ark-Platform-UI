@@ -1,5 +1,5 @@
 angular
-    .module('angularStubApp', [
+    .module('eArkPlatform', [
         'ngSanitize',
         'ngMaterial',
         'ngMessages',
@@ -10,23 +10,23 @@ angular
         'pdf',
         'swfobject',
         'isteven-multi-select',
-        'angularStubApp.init',
-        'angularStubApp.translations.init',
-        'angularStubApp.header',
-        'angularStubApp.dashboard',
-        'angularStubApp.documents',
-        'angularStubApp.administration',
-        'angularStubApp.users',
-        'angularStubApp.systemsettings',
-        'angularStubApp.search',
-        'angularStubApp.basket',
-        'angularStubApp.order',
-        'angularStubApp.common.directives',
-        'angularStubApp.common.directives.filter',
-        'angularStubApp.common.directives.keypress',
+        'eArkPlatform.init',
+        'eArkPlatform.translations.init',
+        'eArkPlatform.header',
+        'eArkPlatform.dashboard',
+        'eArkPlatform.documents',
+        'eArkPlatform.administration',
+        'eArkPlatform.users',
+        'eArkPlatform.systemsettings',
+        'eArkPlatform.search',
+        'eArkPlatform.basket',
+        'eArkPlatform.order',
+        'eArkPlatform.common.directives',
+        'eArkPlatform.common.directives.filter',
+        'eArkPlatform.common.directives.keypress',
         'dcbImgFallback',
         /*DO NOT REMOVE MODULES PLACEHOLDER!!!*/ //openDesk-modules
-        /*LAST*/ 'angularStubApp.translations'])// TRANSLATIONS IS ALWAYS LAST!
+        /*LAST*/ 'eArkPlatform.translations'])// TRANSLATIONS IS ALWAYS LAST!
     .config(config)
     .run(function ($rootScope, $state, $mdDialog, authService, sessionService, APP_CONFIG) {
         angular.element(window.document)[0].title = APP_CONFIG.appName;

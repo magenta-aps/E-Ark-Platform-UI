@@ -1,5 +1,5 @@
 angular
-    .module('angularStubApp.core')
+    .module('eArkPlatform.core')
     .constant('USER_ROLES', {
         admin: 'admin',
         user: 'user',

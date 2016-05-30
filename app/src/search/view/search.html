@@ -1,6 +1,5 @@
-
 <md-content layout="column" ng-controller="SearchController as sctrl">
-  
+
     <div id="global-search"
          ng-controller="AutosuggestController as asctrl"
          class="global-tools__search">
@@ -43,6 +42,7 @@
 
                         <div class="md-list-item-text" layout="column">
                             <h3 ng-bind-template="{{item.caseTitle}} ({{item.caseId}})"></h3>
+
                             <p ng-bind="item.caseDescription" class="single-line"></p>
                         </div>
                     </md-list-item>
@@ -62,20 +62,20 @@
         </form>
     </div>
 
-  
+
     <div class="sub-toolbar" layout-padding>
         <h1 class="md-headline search__header">
             <span class="muted">{{ 'SEARCH.SEARCHING_FOR' | translate }}:</span>
             {{ sctrl.searchTerm }}
         </h1>
         <div flex class="opene-toggleview">
-            <md-button class="md-icon-button md-accent" ng-class="{active: sctrl.layout == 'list'}" ng-click="sctrl.layout = 'list'" title="{{ 'COMMON.LIST_VIEW' | translate }}"><i class="material-icons">view_list</i></md-button>
             <md-button class="md-icon-button md-accent" ng-class="{active: sctrl.layout == 'grid'}" ng-click="sctrl.layout = 'grid'" title="{{ 'COMMON.GRID_VIEW' | translate }}"><i class="material-icons">view_stream</i></md-button>
+            <md-button class="md-icon-button md-accent" ng-class="{active: sctrl.layout == 'list'}" ng-click="sctrl.layout = 'list'" title="{{ 'COMMON.LIST_VIEW' | translate }}"><i class="material-icons">view_list</i></md-button>
         </div>
     </div>
 
     <div layout="row">
-        
+
         <div flex="25" class="menu">
             <!--<form name="facets" class="filters">
                 <span class="filter-title muted">{{ "SEARCH.FILTER_SEARCH" | translate }}</span>
@@ -93,7 +93,7 @@
                 </fieldset>
             </form>-->
         </div>
-        
+
         <div flex="75" class="search__list">
             <table ng-show="sctrl.layout == 'list'" class="list-search">
                 <thead>
@@ -136,8 +136,22 @@
             </table>
 
             <div ng-repeat="item in sctrl.fullSearchResults.results" ng-show="sctrl.layout == 'grid'">
+                
+                <div ng-if="item.type == 'case'" class="search__item-case">
+                    <div class="search__item__icon">
+                        <span class="material-icons">folder_open</span>
+                    </div>
+                    <div class="search__item__info">
+                        <h2 class="md-title search__item__title">
+                            <span class="muted">{{ item.case.caseId }}</span>
+                            <a title="{{ 'CASE.VIEW_CASE_DETAILS' | translate }}" class="search__item__link md-hue-1" href="#/cases/case/{{ item.case.caseId }}">{{ item.displayName }}</a>
+                        </h2>
+                        <p class="search__item__desc">{{ item.description }}</p>
+                        <div class="search__item__changed muted">{{ "COMMON.MODIFIED_BY" | translate }} {{ item.modifiedBy }} {{ item.modifiedOn | date }}</div>
+                    </div>
+                </div>
             
-                <div class="search__item-document">
+                <div ng-if="item.type == 'document'" class="search__item-document">
                     <div class="search__item__icon">
                         <span class="material_icons">
                             <img class="md-avatar" ng-src="app/assets/images/filetypes/{{item.thumbnail}}"/>
