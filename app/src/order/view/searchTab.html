@@ -11,10 +11,9 @@
                 </md-input-container>
             </div>
             <div flex>
-                <md-button class="md-icon-button" ng-click="ordCtrl.openBasket()"
-                           title="{{ 'ORDER.TITLE.BASKET' | translate }}">
-                    <i class="material-icons">shopping_basket</i>
-                </md-button>
+                <order-basket basket="ordCtrl.basket"
+                              items-list="ordCtrl.searchResults.documents"
+                              submit-method="ordCtrl.submitOrder"></order-basket>
             </div>
         </div>
 

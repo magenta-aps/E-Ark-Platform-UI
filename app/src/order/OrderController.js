@@ -20,6 +20,7 @@ function OrderController(searchService, fileUtilsService, basketService) {
     ordCtrl.submitOrder = submitOrder;
 
     function executeSearch(){
+        ordCtrl.searchResults = {};
         var queryObj = {
             q: ordCtrl.searchContext + ':' + ordCtrl.searchTerm,
             rows: 25,
@@ -29,7 +30,6 @@ function OrderController(searchService, fileUtilsService, basketService) {
         var encTerm = searchService.objectToQueryString(queryObj);
 
         searchService.aipSearch(encTerm).then(function(response){
-            //debugger;
             if (response.numFound > 0) {
                 ordCtrl.searchResults = {
                     documents: response.docs, //An array of objects
@@ -48,7 +48,6 @@ function OrderController(searchService, fileUtilsService, basketService) {
     }
 
     function basketCheck(item){
-        debugger;
         if(item.baskOp == 'add')
             basketService.addToBasket(item, ordCtrl.basket);
         if(item.baskOp == 'delete')

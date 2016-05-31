@@ -1,7 +1,8 @@
-﻿﻿{
+﻿{
     "APP":{
         "LABEL":{
-            "ORDER":"Bestilling"
+            "ORDER":"Bestilling",
+            "BASKET": "Kurv"
         }
     },
     "COMMON": {
@@ -712,51 +713,6 @@
         "FIND_GROUPS": "Find grupper",
         "FIND_PERSON": "Find personer",
         "FIND_ORGANISATION": "Find organisationer"
-    },
-    "ACTIVITIES": {
-        "NOTIFICATIONS": "Notifikationer",
-        "RECENT_ACTIVITIES": "Seneste Notifikationer",
-        "PERFORMER": "Udføres af",
-        "DATE": "Dato",
-        "dk.openesdh.case-update": "{{user}} opdaterede sag \"{{case}} ({{caseId}})\"",
-        "dk.openesdh.case.member-add": "{{user}} tilføjede medlem {{member}} med rollen {{role}} til sagen \"{{case}} ({{caseId}})\"",
-        "dk.openesdh.case.member-remove": "{{user}} fjernede medlem {{member}} med rollen {{role}} fra sagen \"{{case}} ({{caseId}})\"",
-        "dk.openesdh.case.document-upload": "{{user}} uploadede et nyt dokument \"{{document}}\" til sagen \"{{case}} ({{caseId}})\"",
-        "dk.openesdh.case.document.new.version-upload": "{{user}} uploadede en ny version af dokumentet \"{{document}}\" til sagen \"{{case}} ({{caseId}})\"",
-        "dk.openesdh.case.document.attachment-upload": "{{user}} uploadede en vedhæftningen \"{{attachment}}\" til dokumentet \"{{document}}\" til sagen \"{{case}} ({{caseId}})\"",
-        "dk.openesdh.case.document.attachment.new.version-upload": "{{user}} uploadede en ny version af vedhæftningen \"{{attachment}}\" til dokumentet \"{{document}}\" til sagen \"{{case}} ({{caseId}})\"",
-        "dk.openesdh.case.workflow-start": "{{user}} igangsatte en opgave \"{{workflowDescription}}\" på sagen \"{{case}} ({{caseId}})\"",
-        "dk.openesdh.case.workflow-cancel": "{{user}} annullerede opgaven \"{{workflowDescription}}\" på sagen \"{{case}} ({{caseId}})\"",
-        "dk.openesdh.case.workflow.task-end": "{{user}} afsluttede opgaven \"{{workflowDescription}}\" på sagen \"{{case}} ({{caseId}})\"",
-        "dk.openesdh.case.workflow.task-approve": "{{user}} godkendte opgaven \"{{workflowDescription}}\" på sagen \"{{case}} ({{caseId}})\"",
-        "dk.openesdh.case.workflow.task-reject": "{{user}} afviste opgaven \"{{workflowDescription}}\" på sagen \"{{case}} ({{caseId}})\"",
-        "LIST": {
-            "dk.openesdh.case-update": "Redigerede sagens informationer",
-            "dk.openesdh.case.member-add": "Tilføjede medlem {{member}} med rollen {{role}}",
-            "dk.openesdh.case.member-remove": "Fjernede medlem {{member}} med rollen {{role}}",
-            "dk.openesdh.case.document-upload": "Uploadede et nyt dokument \"{{document}}\"",
-            "dk.openesdh.case.document.new.version-upload": "Uploadede en ny version af dokumentet \"{{document}}\"",
-            "dk.openesdh.case.document.attachment-upload": "Uploadede en vedhæftning \"{{attachment}}\" til dokumentet \"{{document}}\"",
-            "dk.openesdh.case.document.attachment.new.version-upload": "Uploadede en ny version af vedhæftningen \"{{attachment}}\" til dokumentet \"{{document}}\"",
-            "dk.openesdh.case.workflow-start": "Igangsatte opgave \"{{workflowDescription}}\"",
-            "dk.openesdh.case.workflow-cancel": "Annulerede opgave \"{{workflowDescription}}\"",
-            "dk.openesdh.case.workflow.task-end": "Afsluttede opgaven \"{{workflowDescription}}\"",
-            "dk.openesdh.case.workflow.task-approve": "Godkendte opgaven \"{{workflowDescription}}\"",
-            "dk.openesdh.case.workflow.task-reject": "Afviste opgaven \"{{workflowDescription}}\""
-        },
-        "TYPE": {
-            "dk.openesdh.case-update": "Sag",
-            "dk.openesdh.case.member-add": "Sag medlem",
-            "dk.openesdh.case.member-remove": "Sag medlem",
-            "dk.openesdh.case.document-upload": "Dokument",
-            "dk.openesdh.case.document.new.version-upload": "Dokument",
-            "dk.openesdh.case.document.attachment-upload": "Dokument",
-            "dk.openesdh.case.document.attachment.new.version-upload": "Dokument",
-            "dk.openesdh.case.workflow-start": "Opgave",
-            "dk.openesdh.case.workflow-cancel": "Opgave",
-            "dk.openesdh.case.workflow.task-end": "Opgave",
-            "dk.openesdh.case.workflow.task-approve": "Opgave",
-            "dk.openesdh.case.workflow.task-reject": "Opgave"
-        }
+    }
     }
 }

@@ -1,13 +1,13 @@
 angular
     .module('eArkPlatform.common.directives.basket')
-    .directive('basketDirective', basketDirective);
+    .directive('orderBasket', basketDirective);
 
 /**
  * Main Controller for the Basket module
  * @param $scope
  * @constructor
  */
-function basketDirective(basketService) {
+function basketDirective(basketService, $mdDialog) {
     return {
         restrict:'E',
         templateUrl : 'app/src/common/directives/basket/view/basketDialogBtn.html',
@@ -20,38 +20,47 @@ function basketDirective(basketService) {
     };
 
     function link(scope){
-
         scope.openBasketDialog = function(){
-
+            _showBasketDialog();
         };
 
-        scope.removeItem = function(item){
-            basketService.remove(removeFromBasket(item, basket).then(function(response){
-                if(response){
-                    idx = basketService.findItemInBasket(item, scope.itemsList);
-                    scope.itemsList[idx].baskOps = 'delete';
-                }
-            }) )
-        };
-
-        scope.submitOrder = scope.submitMethod;
-
-
-        function _showBasketDialog(ev, userInfo) {
+        function _showBasketDialog(ev ) {
+            //debugger;
             $mdDialog.show({
-                controller: 'UserDialogController',
-                controllerAs: 'ucd',
+                controller: BasketDialogController,
+                controllerAs: 'bcd',
                 locals: {
-                    user: userInfo
+                    basket: scope.basket,
+                    itemsList: scope.itemsList,
+                    submitMethod: scope.submitMethod
                 },
-                templateUrl: 'app/src/users/view/userCrudDialog.html',
+                templateUrl: 'app/src/common/directives/basket/view/basketDialog.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true
-            }).then(function onUpdateOrCreate(user) {
-                vm.allSystemUsers = [];
-                getAllSystemUsers();
+            }).then(function formPostProcessing(response) {
+                //postprocessing
+                console.log(response);
             });
+        }
+
+        function BasketDialogController($scope, $translate, $mdDialog, basket, itemsList, submitMethod){
+            debugger;
+            $scope.basket = basket;
+            $scope.itemsList = itemsList;
+            $scope.submitMethod = submitMethod;
+
+            $scope.cancel = function () {
+                $mdDialog.cancel();
+            };
+            $scope.removeItem = function(item){
+                basketService.remove(removeFromBasket(item, basket).then(function(response){
+                    if(response){
+                        idx = basketService.findItemInBasket(item, scope.itemsList);
+                        scope.itemsList[idx].baskOps = 'delete';
+                    }
+                }) )
+            };
         }
 
     }
