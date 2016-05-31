@@ -1,5 +1,5 @@
 angular
-    .module('angularStubApp.basket')
+    .module('eArkPlatform.basket')
     .service('basketService', basketService);
 
 function basketService($q) {

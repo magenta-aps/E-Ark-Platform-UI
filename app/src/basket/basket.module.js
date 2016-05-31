@@ -1,1 +1,1 @@
-angular.module('angularStubApp.basket', [ 'ngMaterial', 'pascalprecht.translate']);
+angular.module('eArkPlatform.basket', [ 'ngMaterial', 'pascalprecht.translate']);

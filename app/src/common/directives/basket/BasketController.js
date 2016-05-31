@@ -1,13 +1,13 @@
 angular
-    .module('angularStubApp.common.directives.basket')
-    .directive('BasketDirective', BasketDirective);
+    .module('eArkPlatform.common.directives.basket')
+    .directive('basketDirective', basketDirective);
 
 /**
  * Main Controller for the Basket module
  * @param $scope
  * @constructor
  */
-function BasketDirective(basketService) {
+function basketDirective(basketService) {
     return {
         restrict:'E',
         templateUrl : 'app/src/common/directives/basket/view/basketDialogBtn.html',
