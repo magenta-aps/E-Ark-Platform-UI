@@ -2,7 +2,7 @@
     <md-card-content layout="column">
 
         <div layout="row" layout-align="space-between start">
-            <div flex>
+            <div>
                 <md-input-container md-no-float>
                     <i class="material-icons"
                        style="position:absolute;top:0.5rem;left:0.5rem;color:rgba(0, 0, 0, 0.25)">search</i>
@@ -10,7 +10,7 @@
                            dl-enter-key="ordCtrl.executeSearch();" style="padding:0.5rem 0.5rem 0.5rem 2rem"/>
                 </md-input-container>
             </div>
-            <div flex>
+            <div>
                 <order-basket basket="ordCtrl.basket"
                               pre-process="true"
                               pre-process-function="ordCtrl.compileOrder(orderData)"
@@ -19,8 +19,8 @@
         </div>
 
         <div layout="row">
-            <div flex="75" class="search__list">
-                <table class="list-search">
+            <div flex class="search__list">
+                <table class="list-search" style="width: 100%">
                     <thead>
                     <tr>
                         <th></th>

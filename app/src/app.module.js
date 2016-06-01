@@ -55,7 +55,7 @@ angular
 function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROLES) {
     $mdThemingProvider.theme('default')
         .primaryPalette('blue')
-        .accentPalette('yellow')
+        .accentPalette('deep-orange')
         .warnPalette('deep-orange');
 
     $urlRouterProvider

@@ -8,13 +8,13 @@
         <md-dialog-content>
             <div layout="column" id="basket-dialog-content">
                 <div layout>
-                    <div layout="row">
-                        <md-input-container flex="70">
+                    <div layout="row" layout-align="space-between">
+                        <md-input-container>
                             <label>{{ 'COMMON.TITLE' | translate }}</label>
                             <input type="text" name="orderTitle" ng-model="bdc.orderForm.order.title" required md-autofocus>
                         </md-input-container>
 
-                        <md-datepicker flex ng-model="bdc.orderForm.order.plannedDate"
+                        <md-datepicker ng-model="bdc.orderForm.order.plannedDate"
                                        md-placeholder="{{ 'ORDER.LABEL.PLANNED_DATE' | translate }}"></md-datepicker>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                         <textarea ng-model="bdc.orderForm.order.endUserOrderNotes" rows="5" columns="3"></textarea>
                     </md-input-container>
                 </div>
-                <md-divider></md-divider>
+                <br>
                 <div class="tlist">
                     <div class="tlist__header" layout="row">
                         <div class="tlist__cell tlist__cardview__hide icon" flex="none"></div>
@@ -35,7 +35,7 @@
                             </span>
                             </div>
                         </div>
-                        <div class="tlist__cell" flex="10"><h4>{{ 'COMMON.REMOVE' | translate }}</h4></div>
+                        <div class="tlist__cell"><h4>{{ 'COMMON.REMOVE' | translate }}</h4></div>
                     </div>
                     <md-virtual-repeat-container class="tlist__body" flex-height>
                         <div md-virtual-repeat="document in basket" class="tlist__item" layout="column" flex>
