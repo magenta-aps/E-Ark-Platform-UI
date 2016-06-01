@@ -1,12 +1,13 @@
 angular
-    .module('eArkPlatform.basket')
+    .module('eArkPlatform.common.directives.basket')
     .service('basketService', basketService);
 
-function basketService($q) {
+function basketService($q, $http) {
     var bService = this;
     bService.addToBasket = addToBasket;
     bService.findItemInBasket = findItemInBasket;
     bService.removeFromBasket = removeFromBasket;
+    bService.submitOrder = submitOrder;
 
 
     /**
@@ -22,7 +23,6 @@ function basketService($q) {
             var defer = $q.defer();
             try {
                 var bIndex = findItemInBasket(item, basket);
-                //debugger;
                 basket.splice(bIndex, 1);
                 defer.resolve(true);
             }
@@ -37,5 +37,18 @@ function basketService($q) {
             if (item.path == bItem.path)
                 return true;
         });
+    }
+
+    function submitOrder(order, url){
+        var defer = $q.defer();
+        console.log("Order received: " + order);
+        //$http.post(url,{order: order});var defer = $q.defer();
+        try {
+            defer.resolve(true);
+        }
+        catch(err){
+            defer.reject('Something went wrong with making the order: ' + err.message);
+        }
+        return defer.promise;
     }
 }

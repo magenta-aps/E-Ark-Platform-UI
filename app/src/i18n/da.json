@@ -525,6 +525,15 @@
         "UPLOAD_GROUPS_NOTE": "Upload grupper. Kun CSV-filer",
         "UPLOAD_GROUPS_SUCCESS": "Grupper CSV uploadet"
     },
+    "ORDER":{
+        "TITLE":{
+            "BASKET":"Kurv"
+        },
+        "LABEL":{
+            "PLANNED_DATE":"Forventet dato",
+            "USER_NOTES":"Ekstra bemærkning"
+        }
+    },
     "ORG": {
         "ORGANIZATIONS": "Organisationer",
         "BACK_TO_ORGS": "Tilbage til organisationer",
@@ -714,5 +723,5 @@
         "FIND_PERSON": "Find personer",
         "FIND_ORGANISATION": "Find organisationer"
     }
-    }
+
 }

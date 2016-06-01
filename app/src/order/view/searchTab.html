@@ -12,8 +12,9 @@
             </div>
             <div flex>
                 <order-basket basket="ordCtrl.basket"
-                              items-list="ordCtrl.searchResults.documents"
-                              submit-method="ordCtrl.submitOrder"></order-basket>
+                              pre-process="true"
+                              pre-process-function="ordCtrl.compileOrder(orderData)"
+                              items-list="ordCtrl.searchResults.documents"></order-basket>
             </div>
         </div>
 

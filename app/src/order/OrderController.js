@@ -17,9 +17,9 @@ function OrderController(searchService, fileUtilsService, basketService) {
 
     ordCtrl.executeSearch = executeSearch;
     ordCtrl.addToBasket = basketCheck;
-    ordCtrl.submitOrder = submitOrder;
+    ordCtrl.compileOrder = compileOrder;
 
-    function executeSearch(){
+    function executeSearch() {
         ordCtrl.searchResults = {};
         var queryObj = {
             q: ordCtrl.searchContext + ':' + ordCtrl.searchTerm,
@@ -29,7 +29,7 @@ function OrderController(searchService, fileUtilsService, basketService) {
         };
         var encTerm = searchService.objectToQueryString(queryObj);
 
-        searchService.aipSearch(encTerm).then(function(response){
+        searchService.aipSearch(encTerm).then(function (response) {
             if (response.numFound > 0) {
                 ordCtrl.searchResults = {
                     documents: response.docs, //An array of objects
@@ -47,17 +47,28 @@ function OrderController(searchService, fileUtilsService, basketService) {
         });
     }
 
-    function basketCheck(item){
-        if(item.baskOp == 'add')
+    function basketCheck(item) {
+        if (item.baskOp == 'add')
             basketService.addToBasket(item, ordCtrl.basket);
-        if(item.baskOp == 'delete')
-            basketService.removeFromBasket(item, ordCtrl.basket).then(function(result){
-                console.log('Removal status: '+ result);
+        if (item.baskOp == 'delete')
+            basketService.removeFromBasket(item, ordCtrl.basket).then(function (result) {
+                console.log('Removal status: ' + result);
             });
     }
 
-    function submitOrder(){
-        console.log("Submitting order with ["+ ordCtrl.basket.length +"] items");
+    function compileOrder(orderData) {
+        orderData.origin = "WEB";
+        orderData.orderDate = new Date();
+        orderData.orderStatus = "New";
+        orderData.items = ordCtrl.basket;
+        orderData.items = ordCtrl.basket;
+        orderData.user = {
+            uid: "UUID1",
+            firstname: "Clint",
+            lastname: "Eastwood",
+            email: "clint@hollywood.biz"
+        };
+        orderData.items = ordCtrl.basket;
     }
 
     function formatBytes(bytes, decimals) {

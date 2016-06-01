@@ -571,6 +571,10 @@
     "ORDER":{
       "TITLE":{
         "BASKET":"Basket"
+      },
+      "LABEL":{
+          "PLANNED_DATE":"Expected date",
+          "USER_NOTES":"Additional note"
       }
     },
     "CONTACT": {

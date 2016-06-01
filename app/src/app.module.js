@@ -19,7 +19,6 @@ angular
         'eArkPlatform.users',
         'eArkPlatform.systemsettings',
         'eArkPlatform.search',
-        'eArkPlatform.basket',
         'eArkPlatform.order',
         'eArkPlatform.common.directives',
         'eArkPlatform.common.directives.basket',

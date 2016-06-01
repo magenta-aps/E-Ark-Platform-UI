@@ -7,15 +7,17 @@ angular
  * @param $scope
  * @constructor
  */
-function basketDirective(basketService, $mdDialog) {
+function basketDirective($mdDialog, basketService) {
     return {
         restrict:'E',
         templateUrl : 'app/src/common/directives/basket/view/basketDialogBtn.html',
         scope: {
-            basket: '=',
-            itemsList: '=',
-            submitMethod: '&'
-        },//variables to pass into the directive's scope,//variables to pass into the directive's scope
+            basket: '=', //The basket containing the items ordered
+            itemsList: '=', //The actual list of items that is chosen from. (we pass this so that we may deselect from
+            // the list if the otem is removed from the basket()
+            preProcess: '@', //boolean that says whether or not we want to preprocess before submitting
+            preProcessFunction: '&' //Function to call for preprocessing
+        },
         link: link
     };
 
@@ -25,10 +27,9 @@ function basketDirective(basketService, $mdDialog) {
         };
 
         function _showBasketDialog(ev ) {
-            //debugger;
             $mdDialog.show({
                 controller: BasketDialogController,
-                controllerAs: 'bcd',
+                controllerAs: 'bdc',
                 locals: {
                     basket: scope.basket,
                     itemsList: scope.itemsList,
@@ -38,28 +39,39 @@ function basketDirective(basketService, $mdDialog) {
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true
-            }).then(function formPostProcessing(response) {
-                //postprocessing
-                console.log(response);
             });
         }
 
-        function BasketDialogController($scope, $translate, $mdDialog, basket, itemsList, submitMethod){
-            debugger;
-            $scope.basket = basket;
-            $scope.itemsList = itemsList;
-            $scope.submitMethod = submitMethod;
+        function BasketDialogController($scope, $mdDialog, basket, itemsList, basketService){
+            var bdc = this;
+            var order;
 
+            $scope.basket = basket;
+            $scope.submitMethod = function(form){
+                order = angular.copy(form);
+                if (scope.preProcess)
+                    scope.preProcessFunction({orderData:order});
+                $mdDialog.hide().then(function(){
+                    basketService.submitOrder(order).then(function(response) {
+                        if(response){
+                            //clean everything if successful
+                            scope.itemsList = [];
+                            scope.basket =[];
+                        }
+                    });
+                });
+
+            };
             $scope.cancel = function () {
                 $mdDialog.cancel();
             };
             $scope.removeItem = function(item){
-                basketService.remove(removeFromBasket(item, basket).then(function(response){
+                basketService.removeFromBasket(item, basket).then(function(response){
                     if(response){
-                        idx = basketService.findItemInBasket(item, scope.itemsList);
-                        scope.itemsList[idx].baskOps = 'delete';
+                        var idx = basketService.findItemInBasket(item, itemsList);
+                        scope.itemsList[idx].baskOp = 'delete';
                     }
-                }) )
+                });
             };
         }
 
