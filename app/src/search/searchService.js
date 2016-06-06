@@ -2,66 +2,69 @@ angular
     .module('eArkPlatform')
     .factory('searchService', searchService);
 
-function searchService($http) {
+    angular
+        .module('eArkPlatform')
+        .factory('searchService', searchService);
 
-    var service = {};
+    function searchService($http, AIP_REPOSITORY_URI) {
 
-    var Alfresco = {
-        apiProxyUrl: '/api/',
-        slingshotProxyUrl: '/slingshot/'
-    };
+        var service = {};
 
-    //<editor-fold desc="liveSearch results">
-    service.liveSearchCaseDocs = function (term) {
-        return $http.get('/opendesk/live-search-caseDocs?t=' + term);
-    };
+        service.aipSearch = function(term){
+            return $http.get(AIP_REPOSITORY_URI.serviceProxy +'/select?'+ term).then(function(response){
+                //debugger;
+                return response.data.response;
+            })
+        };
 
-    service.liveSearchCases = function (term) {
-        return $http.get('/opendesk/live-search-cases?t=' + term);
-    };
-    //</editor-fold>
+        service.findPersons = function (searchTerm) {
+            var url = ALFRESCO_URI + '/people';
+            if(searchTerm && searchTerm.length > 0){
+                url += searchTerm;
+            }
+            url +="?sortBy=lastName&dir=asc&filter=*&maxResults=250";
 
-    /**
-     * Could we just use the live search results and return a concatenation of the results??
-     * Thoughts: What about faceting?
-     *
-     * @param term
-     * @returns {*}
-     */
-    service.search = function (term) {
-        return $http.get(Alfresco.slingshotProxyUrl + 'search?' + term).then(function (response) {
-            return response.data;
-        });
-    };
-
-    /**
-     * This returns the list of facets configured in the repository for use with the returned results
-     */
-    service.getConfiguredFacets = function () {
-        return $http.get(Alfresco.apiProxyUrl + "facet/facet-config").then(function (response) {
-            var rawFacets = response.data.facets;
-            var facets = [];
-            rawFacets.forEach(function (facet) {
-                if (facet.isEnabled) {
-                    facets.push(facet)
-                }
+            return $http.get(url).then(function(result){
+                return result.data.people;
             });
+        };
 
-            return rawFacets;
-        });
-    };
+        /**
+         * summary:
+         *        takes a name/value mapping object and returns a string representing
+         *        a URL-encoded version of that object.
+         * example:
+         *        this object:
+         *    {
+         *		blah: "blah",
+         *		multi: [
+         *			"thud",
+         *			"thonk"
+         *	    ]
+         *	};
+         *
+         *    yields the following query string: "blah=blah&multi=thud&multi=thonk"
+         *
+         * credit to alfresco Aikau developers.
+         * @param map
+         * @returns {string}
+         */
+        service.objectToQueryString = function(map) {
+            // FIXME: need to implement encodeAscii!!
+            var enc = encodeURIComponent, pairs = [];
+            for (var name in map) {
+                var value = map[name];
+                var assign = enc(name) + "=";
+                if (Array.isArray(value)) {
+                    for (var i = 0, l = value.length; i < l; ++i) {
+                        pairs.push(assign + enc(value[i]));
+                    }
+                } else {
+                    pairs.push(assign + enc(value));
+                }
+            }
+            return pairs.join("&"); // String
+        };
 
-    service.findPersons = function (searchTerm) {
-        var url = ALFRESCO_URI + '/people';
-        if (searchTerm && searchTerm.length > 0) {
-            url += searchTerm;
-        }
-        url += "?sortBy=lastName&dir=asc&filter=*&maxResults=250";
-
-        return $http.get(url).then(function (result) {
-            return result.data.people;
-        });
-    };
-
-    return service;
-}
+        return service;
+    }

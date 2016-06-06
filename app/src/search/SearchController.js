@@ -7,47 +7,62 @@ angular
  * @param $scope
  * @constructor
  */
-function SearchController($scope, $stateParams, searchService) {
+function SearchController($scope, $stateParams, searchService, fileUtilsService) {
     var sctrl = this;
     sctrl.searchTerm = $stateParams.searchTerm;
     sctrl.selectedFilters = {}; //Keep track of the selected filters
     sctrl.filtersQueryString = ""; // the selected filters as query string
-    sctrl.definedFacets = searchService.getConfiguredFacets();
-    sctrl.layout = 'grid';
+    //sctrl.definedFacets = searchService.getConfiguredFacets();
+    sctrl.layout = 'list';
 
-    function initFacets() {
-        searchService.getConfiguredFacets().then(function (data) {
-            sctrl.definedFacets = data;
-            executeSearch();
-        });
-    }
+    executeAipSearch('content', sctrl.searchTerm);
 
-    initFacets();
 
     /**
      * Executes the main search function to search for cases and case documents in the repository
-     * @param term
+     * @param context - The context with which to search
+     * @param term - The query term
      */
-    function executeSearch() {
-
+    function executeAipSearch(context, term) {
         var queryObj = {
-            facetFields: parseFacetsForQueryFilter(),
-            filters: sctrl.filtersQueryString, //"{http://www.alfresco.org/model/content/1.0}creator|abeecher"
-            maxResults: 0,
-            noCache: new Date().getTime(),
-            pageSize: 25,
-            query: "",
-            repo: true,
-            rootNode: "opendesk://cases/home",
-            site: "",
-            sort: "",
-            spellcheck: true,
-            startIndex: 0,
-            tag: "",
-            term: sctrl.searchTerm + '*'
+            q: context + ':' + term,
+            rows: 25,
+            start: 0,
+            wt: "json"
         };
-        var objQuerified = objectToQueryString(queryObj);
-        getSearchQuery(objQuerified);
+        var objQuerified = searchService.objectToQueryString(queryObj);
+        getAipSearchQuery(objQuerified);
+    }
+
+    function formatBytes(bytes, decimals) {
+        if (bytes == 0) return '0 Byte';
+        var k = 1000;
+        var dm = decimals + 1 || 3;
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        var i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    }
+
+    function getAipSearchQuery(query) {
+
+        searchService.aipSearch(query).then(function (response) {
+            sctrl.queryResult = response.docs;
+            //debugger;
+            if (response.numFound > 0) {
+                sctrl.fullSearchResults = {
+                    results: sctrl.queryResult, //An array of objects
+                    numberFound: response.numFound
+                };
+
+                //Let's clean up some of the properties. Temporary solution
+                sctrl.fullSearchResults.results.forEach(function (item) {
+                    item.title = item.path.substring(item.path.lastIndexOf('/') + 1, item.path.lastIndexOf('.'));
+                    item.packageId = item.package.substring(item.package.indexOf('_') + 1);
+                    item.thumbnail = fileUtilsService.getFileIconByMimetype(item.contentType, 24)
+                    item.displaySize = formatBytes(item.size);
+                });
+            }
+        });
     }
 
     function getSearchQuery(query) {
@@ -80,42 +95,6 @@ function SearchController($scope, $stateParams, searchService) {
         })
     }
 
-    /**
-     * summary:
-     *        takes a name/value mapping object and returns a string representing
-     *        a URL-encoded version of that object.
-     * example:
-     *        this object:
-     *    {
-         *		blah: "blah",
-         *		multi: [
-         *			"thud",
-         *			"thonk"
-         *	    ]
-         *	};
-     *
-     *    yields the following query string: "blah=blah&multi=thud&multi=thonk"
-     *
-     * credit to alfresco Aikau developers.
-     * @param map
-     * @returns {string}
-     */
-    function objectToQueryString(map) {
-        // FIXME: need to implement encodeAscii!!
-        var enc = encodeURIComponent, pairs = [];
-        for (var name in map) {
-            var value = map[name];
-            var assign = enc(name) + "=";
-            if (Array.isArray(value)) {
-                for (var i = 0, l = value.length; i < l; ++i) {
-                    pairs.push(assign + enc(value[i]));
-                }
-            } else {
-                pairs.push(assign + enc(value));
-            }
-        }
-        return pairs.join("&"); // String
-    }
 
     /**
      * Extracts the QName from each defined facet and 'stringifies' them for the query object

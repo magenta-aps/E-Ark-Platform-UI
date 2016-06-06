@@ -13,15 +13,17 @@ angular
         'eArkPlatform.init',
         'eArkPlatform.translations.init',
         'eArkPlatform.header',
-        'eArkPlatform.files',
         'eArkPlatform.dashboard',
-        'eArkPlatform.search',
-        'eArkPlatform.documents',
+        //'eArkPlatform.documents',
         'eArkPlatform.administration',
         'eArkPlatform.users',
         'eArkPlatform.systemsettings',
+        'eArkPlatform.search',
+        'eArkPlatform.order',
         'eArkPlatform.common.directives',
+        'eArkPlatform.common.directives.basket',
         'eArkPlatform.common.directives.filter',
+        'eArkPlatform.common.directives.keypress',
         'dcbImgFallback',
         /*DO NOT REMOVE MODULES PLACEHOLDER!!!*/ //openDesk-modules
         /*LAST*/ 'eArkPlatform.translations'])// TRANSLATIONS IS ALWAYS LAST!
@@ -53,7 +55,7 @@ angular
 function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROLES) {
     $mdThemingProvider.theme('default')
         .primaryPalette('blue')
-        .accentPalette('yellow')
+        .accentPalette('deep-orange')
         .warnPalette('deep-orange');
 
     $urlRouterProvider
@@ -62,8 +64,7 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
     $stateProvider.state('site', {
         abstract: true,
         resolve: {
-            authorize: ['authService', function (authService) {
-            }]
+            authorize: ['authService', function (authService) {}]
         },
         views: {
             'footer@': {
@@ -104,25 +105,25 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
         data: {
             authorizedRoles: []
         }
-    }).state('files', {
-        parent: 'site',
-        url: '/files',
-        views: {
-            'content@': {
-                templateUrl: 'app/src/files/view/files.html',
-                controller: 'FilesController',
-                controllerAs: 'vm'
-            }
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.user]
-        }
     }).state('search', {
         parent: 'site',
         url: '/search/:searchTerm',
         views: {
             'content@': {
                 templateUrl: 'app/src/search/view/search.html'
+            }
+        },
+        data: {
+            authorizedRoles: [USER_ROLES.user]
+        }
+    }).state('orders', {
+        parent: 'site',
+        url: '/orders',
+        views: {
+            'content@': {
+                templateUrl: 'app/src/order/view/order.html',
+                controller: 'OrderController',
+                controllerAs: 'ordCtrl'
             }
         },
         data: {
