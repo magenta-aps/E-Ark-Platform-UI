@@ -1,7 +1,7 @@
 /*
  * Global values
  */
-
+$muted-color: rgba(0,0,0,0.53);
 $u: 16px;
 
 /*
@@ -24,4 +24,32 @@ $u: 16px;
 .md-text-icon-button .material-icons {
   vertical-align: middle;
   margin-top: -($u*0.25);
+}
+
+/* Md-dialog sizes */
+md-dialog {
+  &[class*="dialog-"] {
+    max-width:800px;
+    md-dialog-content {
+      max-height:810px;
+    }
+  }
+  &.dialog-large {
+    min-width: 550px;
+  }
+  &.dialog-large-fixed {
+    width: 550px;
+  }
+  &.dialog-small {
+    width: 400px;
+  }
+  md-dialog-content {
+    padding: 16px; // Corresponds to ng-material heading padding
+  }
+}
+
+@media screen and (max-width: 45em) {
+  md-dialog.dialog-huge, md-dialog.dialog-large, md-dialog.dialog-small {
+    width: 80%;
+  }
 }
