@@ -1,0 +1,50 @@
+<section>
+    
+    <header class="section-header">
+        <h1>Orders</h1>
+    </header>
+    
+    <div>
+        
+        <table class="order-list">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Order ID</th>
+                    <th>Origin</th>
+                    <th>Order date</th>
+                    <th>Planned date</th>
+                    <th>From user</th>
+                    <th>User order note</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="order in olCtrl.data">
+                    <td>
+                        <a ui-sref="orderDetail({ orderid: order.orderId })">{{ order.title }}</a>
+                    </td>
+                    <td>
+                        {{ order.orderId }}
+                    </td>
+                    <td>
+                        {{ order.orgin }}
+                    </td>
+                    <td>
+                        {{ order.orderDate }}
+                    </td>
+                    <td>
+                        {{ order.plannedDate }}
+                    </td>
+                    <td>
+                        {{ order.user.firstname }} {{ order.user.lastname }}
+                    </td>
+                    <td>
+                        {{ order.endUserOrderNote }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+    
+</section>

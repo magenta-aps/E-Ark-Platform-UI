@@ -3,6 +3,6 @@ angular.module('eArkPlatform.order', [ 'ngMaterial', 'pascalprecht.translate']).
 function config(modulesMenuServiceProvider) {
     modulesMenuServiceProvider.addItem({
         templateUrl: 'app/src/order/view/menuItem.html',
-        order: 3
+        order: 1
     });
 }

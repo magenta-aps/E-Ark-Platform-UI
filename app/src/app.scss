@@ -1,8 +1,28 @@
 /*
  * Global values
  */
+
 $muted-color: rgba(0,0,0,0.53);
 $u: 16px;
+
+
+/*
+ * Element level (atom) styles
+ */
+
+dt {
+    display: block;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    color: $muted-color;
+}
+
+dd {
+    display: block;
+    padding: 0 0 $u;
+    margin: 0;
+}
+
 
 /*
  * Global styles

@@ -13,13 +13,13 @@ angular
         'eArkPlatform.init',
         'eArkPlatform.translations.init',
         'eArkPlatform.header',
-        'eArkPlatform.dashboard',
         //'eArkPlatform.documents',
         'eArkPlatform.administration',
         'eArkPlatform.users',
         'eArkPlatform.systemsettings',
         'eArkPlatform.search',
         'eArkPlatform.order',
+        'eArkPlatform.ordermanagement',
         'eArkPlatform.common.directives',
         'eArkPlatform.common.directives.basket',
         'eArkPlatform.common.directives.filter',
@@ -59,7 +59,7 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
         .warnPalette('deep-orange');
 
     $urlRouterProvider
-        .otherwise('/');
+        .otherwise('/orders');
 
     $stateProvider.state('site', {
         abstract: true,
@@ -76,19 +76,6 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
                 controller: 'HeaderController',
                 controllerAs: 'vm'
             }
-        }
-    }).state('dashboard', {
-        parent: 'site',
-        url: '/',
-        views: {
-            'content@': {
-                templateUrl: 'app/src/dashboard/view/dashboard.html',
-                controller: 'DashboardController',
-                controllerAs: 'vm'
-            }
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.user]
         }
     }).state('login', {
         parent: 'site',

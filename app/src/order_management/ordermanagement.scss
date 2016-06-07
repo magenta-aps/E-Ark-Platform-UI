@@ -1,0 +1,48 @@
+.section-header {
+    background-color: #eee;
+    padding: $u*0.5 $u;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    
+    h1 {
+        font-size: 1.5em;
+        font-weight: normal;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.extra-padding {
+    padding: $u;
+}
+
+.order-list,
+.order-details--list {
+    border-collapse: collapse;
+    width: 100%;
+    
+    th {
+        padding: $u*0.5 $u;
+        text-align: left;
+    }
+    td {
+        border-top: solid 1px #eee;
+        padding: $u*0.5 $u;
+    }
+}
+
+.order-details {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.order-details--data {
+    flex: 1;
+    border-left: solid 1px #eee;
+    padding: $u $u*2;
+}
+
+.order-details--items {
+    flex: 2;
+}
