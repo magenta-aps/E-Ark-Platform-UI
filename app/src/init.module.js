@@ -14,6 +14,9 @@ angular
     .constant('AIP_REPOSITORY_URI',{
         serviceProxy:'/aip/repo/search'
     })
+    .constant('OMS_URI',{
+        serviceProxy:'/oms'
+    })
     .constant('PATTERNS', {
         fileName: /^[a-zA-Z0-9_\-,!@#$%^&()=+ ]+$/,
         phone: /^[+]?[0-9\- ]+$/

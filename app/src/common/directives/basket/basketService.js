@@ -2,7 +2,7 @@ angular
     .module('eArkPlatform.common.directives.basket')
     .service('basketService', basketService);
 
-function basketService($q, $http) {
+function basketService($q, $http, OMS_URI) {
     var bService = this;
     bService.addToBasket = addToBasket;
     bService.findItemInBasket = findItemInBasket;
@@ -40,15 +40,12 @@ function basketService($q, $http) {
     }
 
     function submitOrder(order, url){
-        var defer = $q.defer();
         console.log("Order received: " + order);
-        //$http.post(url,{order: order});var defer = $q.defer();
-        try {
-            defer.resolve(true);
-        }
-        catch(err){
-            defer.reject('Something went wrong with making the order: ' + err.message);
-        }
-        return defer.promise;
+        debugger;
+        $http.post(OMS_URI.serviceProxy +'/newOrder',{order:order}).then(function(response){
+            debugger;
+            console.log("The response from posting a new order:", response);
+        });
+
     }
 }
