@@ -1,7 +1,6 @@
-
 angular
-        .module('angularStubApp.files')
-        .controller('FileCommentsDialogController', FileCommentsDialogController);
+    .module('eArkPlatform.files')
+    .controller('FileCommentsDialogController', FileCommentsDialogController);
 
 function FileCommentsDialogController($mdDialog, file) {
     var vm = this;

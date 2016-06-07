@@ -1,6 +1,6 @@
 angular
-        .module('angularStubApp.translations.init')
-        .provider('languageFiles', LanguageFilesProvider);
+    .module('eArkPlatform.translations.init')
+    .provider('languageFiles', LanguageFilesProvider);
 
 function LanguageFilesProvider() {
     var availableFiles = {files: []};

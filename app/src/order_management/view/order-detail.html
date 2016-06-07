@@ -1,0 +1,64 @@
+<section>
+    
+    <header class="section-header">
+        <a ui-sref="orderList" class="md-button md-icon-button"><i class="material-icons">arrow_back</i></a>
+        <h1>{{ odCtrl.data.title }}</h1>
+    </header>
+    
+    <div class="order-details">
+        
+        <div class="order-details--items">
+            <h3 class="extra-padding">Order items:</h3>
+            <table class="order-details--list">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>AIP URI</th>
+                        <th>AIP title</th>
+                        <th>Lvl of description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in odCtrl.data.items">
+                        <td>
+                            {{ item.title }}
+                        </td>
+                        <td>
+                            {{ item.aipURI }}
+                        </td>
+                        <td>
+                            {{ item.aipTitle }}
+                        </td>
+                        <td>
+                            {{ item.levelOfDescription }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="order-details--data extra-padding">
+            <dl>
+                <dt>Order</dt>
+                <dd>{{ odCtrl.data.title }}</dd>
+                <dt>Origin</dt>
+                <dd>{{ odCtrl.data.origin }}</dd>
+                <dt>End user note</dt>
+                <dd>{{ odCtrl.data.endUserOrderNote }}</dd>
+                <dt>Order date</dt>
+                <dd>{{ odCtrl.data.orderDate }}</dd>
+                <dt>Planned date</dt>
+                <dd>{{ odCtrl.data.plannedDate }}</dd>
+                <dt>User</dt>
+                <dd>
+                    {{ odCtrl.data.user.uid }}<br>
+                    {{ odCtrl.data.user.firstname }}
+                    {{ odCtrl.data.user.lastname }}<br>
+                    {{ odCtrl.data.user.email }}
+                </dd>
+            </dl>
+        </div>
+        
+    </div>
+    
+</section>

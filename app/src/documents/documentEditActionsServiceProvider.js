@@ -1,6 +1,6 @@
 angular
-        .module('angularStubApp.documents')
-        .provider('documentEditActionsService', DocumentEditActionsServiceProvider);
+    .module('eArkPlatform.documents')
+    .provider('documentEditActionsService', DocumentEditActionsServiceProvider);
 
 function DocumentEditActionsServiceProvider() {
     var availableItems = [];
@@ -8,7 +8,7 @@ function DocumentEditActionsServiceProvider() {
     this.$get = DocumentEditActionsService;
 
     /**
-     * 
+     *
      * @param labelKey - key for translation
      * @param icon - icon key
      * @param serviceName - for injector

@@ -1,4 +1,4 @@
-//angular.module('angularStubApp.groups').controller('GroupController', GroupController);
+//angular.module('eArkPlatform.groups').controller('GroupController', GroupController);
 
 /*
  * Main Controller for the Groups module
@@ -236,7 +236,6 @@ function GroupController($scope, $mdDialog, groupService, $stateParams, $transla
             gdc.groupData = angular.copy(u);
             var createSuccess = (gdc.groupExists) ? groupService.updateGroup(gdc.groupData.shortName, gdc.groupData.displayName) : groupService.createGroup(gdc.groupData.shortName, gdc.groupData.displayName);
             console.log("Group created and returned:" + createSuccess);
-            debugger;
             $mdDialog.cancel();
             notifyUserSaved(createSuccess);
             loadList();

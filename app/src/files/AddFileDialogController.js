@@ -1,7 +1,6 @@
-
 angular
-        .module('angularStubApp.files')
-        .controller('AddFileDialogController', AddFileDialogController);
+    .module('eArkPlatform.files')
+    .controller('AddFileDialogController', AddFileDialogController);
 
 
 function AddFileDialogController($mdDialog, $translate, filesService, notificationUtilsService) {
@@ -14,16 +13,16 @@ function AddFileDialogController($mdDialog, $translate, filesService, notificati
 
     function addFiles() {
         filesService.uploadFiles(addFileVm.owner, addFileVm.files, addFileVm.comment)
-                .then(function() {
-                    if (addFileVm.files.length > 1) {
-                        notificationUtilsService.notify($translate.instant("FILE.N_FILES_UPLOADED_SUCCESSFULLY", {'n': addFileVm.files.length}));
-                    } else {
-                        notificationUtilsService.notify($translate.instant("FILE.FILE_UPLOADED_SUCCESSFULLY", {'title': addFileVm.files[0].name}));
-                    }
-                    $mdDialog.hide();
-                }, function(response) {
-                    notificationUtilsService.alert(response.data.message || 'Unexpected exception');
-                });
+            .then(function () {
+                if (addFileVm.files.length > 1) {
+                    notificationUtilsService.notify($translate.instant("FILE.N_FILES_UPLOADED_SUCCESSFULLY", {'n': addFileVm.files.length}));
+                } else {
+                    notificationUtilsService.notify($translate.instant("FILE.FILE_UPLOADED_SUCCESSFULLY", {'title': addFileVm.files[0].name}));
+                }
+                $mdDialog.hide();
+            }, function (response) {
+                notificationUtilsService.alert(response.data.message || 'Unexpected exception');
+            });
     }
 
     function cancel() {

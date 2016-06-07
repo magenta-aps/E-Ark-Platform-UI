@@ -1,1 +1,1 @@
-angular.module('angularStubApp.users', [ 'ngMaterial', 'pascalprecht.translate']);
+angular.module('eArkPlatform.users', ['ngMaterial', 'pascalprecht.translate']);

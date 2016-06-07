@@ -1,1 +1,1 @@
-//angular.module('angularStubApp.groups', [ 'ngMaterial', 'pascalprecht.translate']);
+//angular.module('eArkPlatform.groups', [ 'ngMaterial', 'pascalprecht.translate']);

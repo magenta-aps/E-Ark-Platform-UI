@@ -1,5 +1,5 @@
 angular
-    .module('angularStubApp.files', ['ngMaterial'])
+    .module('eArkPlatform.files', ['ngMaterial'])
     .config(config);
 
 function config(modulesMenuServiceProvider) {
