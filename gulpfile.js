@@ -31,6 +31,10 @@ function createWebserver(config) {
                     {
                         source:'/aip/repo/search',
                         target: env.search.repository.uri + '/solr/eark1'
+                    },
+                    {
+                        source:'/oms',
+                        target: env.oms_service.uri
                     }
                 ]
             }));

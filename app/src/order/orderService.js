@@ -2,6 +2,6 @@ angular
     .module('eArkPlatform.order')
     .factory('orderService', orderService);
 
-function orderService($http, AIP_REPOSITORY_URI) {
+function orderService($http, AIP_REPOSITORY_URI, OMS_URI) {
 
 }

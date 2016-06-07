@@ -7,7 +7,7 @@ angular.module('eArkPlatform.order').controller('OrderController', OrderControll
  * @param basketService
  * @constructor
  */
-function OrderController(searchService, fileUtilsService, basketService) {
+function OrderController(searchService, fileUtilsService, basketService, sessionService) {
     var ordCtrl = this;
     ordCtrl.searchTerm = '';
     ordCtrl.searchContext = 'content';
@@ -57,16 +57,16 @@ function OrderController(searchService, fileUtilsService, basketService) {
     }
 
     function compileOrder(orderData) {
+        var userInfo = sessionService.getUserInfo();
         orderData.origin = "WEB";
-        orderData.orderDate = new Date();
         orderData.orderStatus = "New";
-        orderData.items = ordCtrl.basket;
-        orderData.items = ordCtrl.basket;
+        orderData.orderDate = new Date().toISOString();
+        orderData.plannedDate = orderData.plannedDate.toISOString();
         orderData.user = {
-            uid: "UUID1",
-            firstname: "Clint",
-            lastname: "Eastwood",
-            email: "clint@hollywood.biz"
+            uid: userInfo.user.userName,
+            firstname: userInfo.user.firstName,
+            lastname: userInfo.user.lastName,
+            email: userInfo.user.email
         };
         orderData.items = ordCtrl.basket;
     }
