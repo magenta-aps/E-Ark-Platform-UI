@@ -3,12 +3,16 @@ angular.module('eArkPlatform.ordermanagement').controller('OrderDetailController
 /**
  * Main controller for the order management module
  */
-function OrderDetailController($stateParams) {
+function OrderDetailController($stateParams, ordermanagementService) {
     var odCtrl = this;
-    
-    // Get the order ID (to call ajax for data: 'GET /getOrderData?orderId=' + $stateParams.orderid )
     odCtrl.orderId = $stateParams.orderid;
+    odCtrl.data = [];
+
+    ordermanagementService.getOrder(odCtrl.orderId).then(function(response) {
+        odCtrl.data = response;
+    });
     
+    /*
     odCtrl.data = {
 		"title": "Example order title",
 		"origin": null,
@@ -36,5 +40,6 @@ function OrderDetailController($stateParams) {
             }
 		]
     }
+    */
       
 };
