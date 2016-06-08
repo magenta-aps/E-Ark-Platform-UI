@@ -1,7 +1,7 @@
 <section>
     
     <header class="section-header">
-        <h1>Orders</h1>
+        <h1>Order management</h1>
     </header>
     
     <div>
@@ -16,6 +16,7 @@
                     <th>Planned date</th>
                     <th>From user</th>
                     <th>User order note</th>
+                    <th>Assignee</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,10 +37,13 @@
                         {{ order.plannedDate }}
                     </td>
                     <td>
-                        {{ order.user.firstname }} {{ order.user.lastname }}
+                        {{ order.endUserId }}
                     </td>
                     <td>
-                        {{ order.endUserOrderNote }}
+                        {{ order.orderStatus }}
+                    </td>
+                    <td>
+                        {{ order.assignee }}
                     </td>
                 </tr>
             </tbody>
