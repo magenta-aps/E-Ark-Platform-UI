@@ -34,7 +34,13 @@
                 <dt>Origin</dt>
                 <dd>{{ odCtrl.data.origin }}</dd>
                 <dt>Assignee</dt>
-                <dd>{{ odCtrl.data.assignee }}</dd>
+                <dd>
+                    <select>
+                        <option ng-repeat="archivist in odCtrl.archivists" val="{{ archivist }}">
+                            {{ archivist }}
+                        </option>
+                    </select>
+                </dd>
                 <dt>Order date</dt>
                 <dd>{{ odCtrl.data.orderDate }}</dd>
                 <dt>Planned date</dt>
