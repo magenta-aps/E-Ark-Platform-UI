@@ -1,8 +1,30 @@
-.md-sidenav-left ng-include {
-  flex: 1;
+.nav-tabs {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-end;
+    padding: 0 $u;
 }
 
-.md-sidenav-left .md-text-icon-button {
-  display: block;
-  text-align: left;
+.nav-tabs--tab {
+    
+    
+    ng-include {
+        display: block;
+    }
+    a {
+        display: block;
+        padding: $u*0.5 $u;
+        margin: 0;
+        text-transform: uppercase;
+        font-size: 0.75em;
+        border-radius: $u*0.25;
+        
+        &:hover,
+        &:active {
+            background-color: rgba(255,255,255,0.33);
+        }
+        .material-icons {
+            vertical-align: bottom;
+        }
+    }
 }
