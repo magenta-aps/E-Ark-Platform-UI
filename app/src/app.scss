@@ -25,6 +25,26 @@ dd {
 
 
 /*
+ * Style helpers
+ */
+
+.extra-padding { // Add a little extra padding
+    padding: $u;
+}
+
+.clickable-row { // Make a table row seem clickable
+    cursor: pointer;
+    &:hover {
+        background-color: #eee;
+    }
+}
+
+.text-muted { // Dim the color of text
+    color: $muted-color;
+}
+
+
+/*
  * Global styles
  */
 

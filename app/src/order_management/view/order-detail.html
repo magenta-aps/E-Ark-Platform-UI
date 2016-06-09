@@ -30,24 +30,37 @@
                 <dt>Order</dt>
                 <dd>{{ odCtrl.data.title }}</dd>
                 <dt>Order status</dt>
-                <dd>{{ odCtrl.data.orderStatus }}</dd>
+                <dd>
+                    
+                    <select ng-model="odCtrl.data.orderStatus" ng-change="odCtrl.updateOrder(['orderStatus'])">
+                        <option val="{{ odCtrl.data.orderStatus }}">{{ odCtrl.data.orderStatus }}</option>
+                        <option disabled>──────────</option>
+                        <option val="none">new</option>
+                        <option val="none">open</option>
+                        <option val="none">closed</option>
+                    </select>
+                </dd>
+                <dt>Order ID</dt>
+                <dd>{{ odCtrl.data.orderId }}</dd>
                 <dt>Origin</dt>
                 <dd>{{ odCtrl.data.origin }}</dd>
                 <dt>Assignee</dt>
                 <dd>
-                    <select>
-                        <option ng-repeat="archivist in odCtrl.archivists" val="{{ archivist }}">
-                            {{ archivist }}
-                        </option>
+                    <select ng-model="odCtrl.data.assignee" ng-change="odCtrl.updateOrder(['assignee'])">
+                        <option val="{{ odCtrl.data.assignee }}">{{ odCtrl.data.assignee }}</option>
+                        <option disabled>──────────</option>
+                        <option val="none">none</option>
+                        <option ng-repeat="archivist in odCtrl.archivists" val="{{ archivist.firstname }} {{ archivist.lastname }}">{{ archivist.firstname }} {{ archivist.lastname }}</option>
                     </select>
                 </dd>
                 <dt>Order date</dt>
                 <dd>{{ odCtrl.data.orderDate }}</dd>
                 <dt>Planned date</dt>
                 <dd>{{ odCtrl.data.plannedDate }}</dd>
-                <dt>User ID</dt>
+                <dt>User to issue order</dt>
                 <dd>
-                    {{ odCtrl.data.endUserId }}
+                    {{ odCtrl.data.endUser.firstname }} {{ odCtrl.data.endUser.lastname }}<br>
+                    <a href="mailto:{{ odCtrl.data.endUser.email }}">{{ odCtrl.data.endUser.email }}</a>
                 </dd>
             </dl>
         </div>

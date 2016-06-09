@@ -1,19 +1,25 @@
 angular.module('eArkPlatform.ordermanagement').controller('OrdersListController', OrdersListController);
 
+
 /**
  * Main controller for the order management module
  */
-function OrdersListController(ordermanagementService) {
+
+function OrdersListController($state, ordermanagementService) {
     var olCtrl = this;
     olCtrl.data = [];
-    olCtrl.orderBy = 'title';
+    olCtrl.orderBy = '-orderStatus';
     
     ordermanagementService.getOrders().then(function(response) {
         olCtrl.data = response.orders;
     });
     
-    olCtrl.orderThis = function(orderParameter) {
-        olCtrl.orderBy = orderParameter;
+    olCtrl.sortThis = function(sortParameter) {
+        olCtrl.orderBy = sortParameter;
+    };
+    
+    olCtrl.orderDetailGo = function(orderId) {
+        $state.go('orderDetail', {orderid: orderId});
     };
     
 }

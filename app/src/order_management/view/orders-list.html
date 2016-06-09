@@ -9,23 +9,24 @@
         <table class="order-list">
             <thead>
                 <tr>
-                    <th ng-click="olCtrl.orderThis('title')">Title</th>
-                    <th ng-click="olCtrl.orderThis('orderId')">Order ID</th>
-                    <th ng-click="olCtrl.orderThis('origin')">Origin</th>
-                    <th ng-click="olCtrl.orderThis('orderDate')">Order date</th>
-                    <th ng-click="olCtrl.orderThis('plannedDate')">Planned date</th>
-                    <th ng-click="olCtrl.orderThis('endUserId')">From user</th>
-                    <th ng-click="olCtrl.orderThis('oderStatus')">Order status</th>
-                    <th ng-click="olCtrl.orderThis('assignee')">Assignee</th>
+                    <th ng-click="olCtrl.sortThis('title')">Title</th>
+                    <th ng-click="olCtrl.sortThis('orderStatus')">Order status</th>
+                    <th ng-click="olCtrl.sortThis('origin')">Origin</th>
+                    <th ng-click="olCtrl.sortThis('orderDate')">Order date</th>
+                    <th ng-click="olCtrl.sortThis('plannedDate')">Planned date</th>
+                    <th ng-click="olCtrl.sortThis('endUser.firstname')">From user</th>
+                    <th ng-click="olCtrl.sortThis('assignee')">Assignee</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="order in olCtrl.data | orderBy: olCtrl.orderBy">
+                <tr ng-repeat="order in olCtrl.data | orderBy: olCtrl.orderBy" class="clickable-row" ng-click="olCtrl.orderDetailGo(order.orderId)">
                     <td>
-                        <a ui-sref="orderDetail({ orderid: order.orderId })">{{ order.title }}</a>
+                        <strong>{{ order.title }}</strong>
                     </td>
                     <td>
-                        {{ order.orderId }}
+                        <span class="status-{{ order.orderStatus }}">
+                            {{ order.orderStatus }}
+                        </span>
                     </td>
                     <td>
                         {{ order.orgin }}
@@ -37,10 +38,7 @@
                         {{ order.plannedDate }}
                     </td>
                     <td>
-                        {{ order.endUserId }}
-                    </td>
-                    <td>
-                        {{ order.orderStatus }}
+                        {{ order.endUser.firstname }} {{ order.endUser.lastname }}
                     </td>
                     <td>
                         {{ order.assignee }}
