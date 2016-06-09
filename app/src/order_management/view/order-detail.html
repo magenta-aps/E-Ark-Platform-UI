@@ -2,7 +2,7 @@
     
     <header class="section-header">
         <a ui-sref="orderList" class="md-button md-icon-button md-raised"><i class="material-icons">arrow_back</i></a>
-        <h1>{{ odCtrl.data.title }}</h1>
+        <h1>{{ odCtrl.data.title }} <span class="text-muted">order details</span></h1>
     </header>
     
     <div class="order-details">
@@ -43,7 +43,10 @@
                 <dt>Order ID</dt>
                 <dd>{{ odCtrl.data.orderId }}</dd>
                 <dt>Origin</dt>
-                <dd>{{ odCtrl.data.origin }}</dd>
+                <dd>
+                    <span ng-show="!odCtrl.data.origin">none</span>
+                    {{ odCtrl.data.origin }}
+                </dd>
                 <dt>Assignee</dt>
                 <dd>
                     <select ng-model="odCtrl.data.assignee" ng-change="odCtrl.updateOrder(['assignee'])">
@@ -62,6 +65,14 @@
                     {{ odCtrl.data.endUser.firstname }} {{ odCtrl.data.endUser.lastname }}<br>
                     <a href="mailto:{{ odCtrl.data.endUser.email }}">{{ odCtrl.data.endUser.email }}</a>
                 </dd>
+                <dt>Access date</dt>
+                <dd>{{ odCtrl.data.accessDate }}</dd>
+                <dt>Access end date</dt>
+                <dd>{{ odCtrl.data.accessEndDate }}</dd>
+                <dt>Access date comments</dt>
+                <dd>{{ odCtrl.data.accessDateComments }}</dd>
+                <dt>Validation date</dt>
+                <dd>{{ odCtrl.data.validationDate }}</dd>
             </dl>
         </div>
         

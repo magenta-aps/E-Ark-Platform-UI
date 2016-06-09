@@ -34,6 +34,7 @@ dd {
 
 .clickable-row { // Make a table row seem clickable
     cursor: pointer;
+    
     &:hover {
         background-color: #eee;
     }
@@ -41,6 +42,24 @@ dd {
 
 .text-muted { // Dim the color of text
     color: $muted-color;
+}
+
+
+/*
+ * Molecule level styles
+ */
+
+.sortable-th {
+
+    &:hover {
+        background: url(/app/assets/images/tableicons/ic_keyboard_arrow_down_black_24px.svg) no-repeat left center transparent;
+        cursor: pointer;
+        background-size: auto $u;
+    }
+    &:focus {
+        outline: none;
+    }
+    
 }
 
 
