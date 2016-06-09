@@ -1,7 +1,7 @@
 <section>
     
     <header class="section-header">
-        <h1>Orders</h1>
+        <h1>Order management</h1>
     </header>
     
     <div>
@@ -9,17 +9,18 @@
         <table class="order-list">
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Order ID</th>
-                    <th>Origin</th>
-                    <th>Order date</th>
-                    <th>Planned date</th>
-                    <th>From user</th>
-                    <th>User order note</th>
+                    <th ng-click="olCtrl.orderThis('title')">Title</th>
+                    <th ng-click="olCtrl.orderThis('orderId')">Order ID</th>
+                    <th ng-click="olCtrl.orderThis('origin')">Origin</th>
+                    <th ng-click="olCtrl.orderThis('orderDate')">Order date</th>
+                    <th ng-click="olCtrl.orderThis('plannedDate')">Planned date</th>
+                    <th ng-click="olCtrl.orderThis('endUserId')">From user</th>
+                    <th ng-click="olCtrl.orderThis('oderStatus')">Order status</th>
+                    <th ng-click="olCtrl.orderThis('assignee')">Assignee</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="order in olCtrl.data">
+                <tr ng-repeat="order in olCtrl.data | orderBy: olCtrl.orderBy">
                     <td>
                         <a ui-sref="orderDetail({ orderid: order.orderId })">{{ order.title }}</a>
                     </td>
@@ -36,10 +37,13 @@
                         {{ order.plannedDate }}
                     </td>
                     <td>
-                        {{ order.user.firstname }} {{ order.user.lastname }}
+                        {{ order.endUserId }}
                     </td>
                     <td>
-                        {{ order.endUserOrderNote }}
+                        {{ order.orderStatus }}
+                    </td>
+                    <td>
+                        {{ order.assignee }}
                     </td>
                 </tr>
             </tbody>
