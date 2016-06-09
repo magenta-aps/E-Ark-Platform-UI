@@ -1,6 +1,6 @@
 .section-header {
     background-color: #eee;
-    padding: $u*0.5 $u;
+    padding: $u;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -11,10 +11,6 @@
         padding: 0;
         margin: 0;
     }
-}
-
-.extra-padding {
-    padding: $u;
 }
 
 .order-list,
@@ -32,6 +28,10 @@
     }
 }
 
+.order-list {
+    margin: $u 0;
+}
+
 .order-details {
     display: flex;
     flex-flow: row nowrap;
@@ -45,4 +45,23 @@
 
 .order-details--items {
     flex: 2;
+}
+
+.status-new,
+.status-open,
+.status-closed {
+    padding: $u*0.25;
+    color: #fff;
+    border-radius: $u*0.1;
+    font-size: 0.9em;
+}
+.status-new {
+    background-color: #3c3;
+}
+.status-open {
+    background-color: #690;
+}
+.status-closed {
+    color: $muted-color;
+    background-color: #eee;
 }
