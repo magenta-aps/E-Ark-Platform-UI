@@ -14,8 +14,14 @@ function OrdersListController($state, ordermanagementService) {
         olCtrl.data = response.orders;
     });
     
-    olCtrl.sortThis = function(sortParameter) {
-        olCtrl.orderBy = sortParameter;
+    olCtrl.sortThis = function($event, sortParameter) {
+        if (olCtrl.orderBy === sortParameter) {
+            olCtrl.orderBy = '-' + sortParameter;
+        } else if (olCtrl.orderBy === '-' + sortParameter) {
+            olCtrl.orderBy = '';
+        } else {
+            olCtrl.orderBy = sortParameter;
+        };
     };
     
     olCtrl.orderDetailGo = function(orderId) {
