@@ -2,6 +2,22 @@
  * Search styles
  */
 
+.search-input--container {
+    text-align: center;
+    
+    md-input-container {
+        width: $u*30;
+        text-align: left;
+    }
+    label {
+        display: none;
+    }
+    .md-input {
+        background-color: #eee;
+        margin: 0 auto $u;
+    }
+}
+
 .search__header {
     margin: 8px 16px;
     padding: 0;
