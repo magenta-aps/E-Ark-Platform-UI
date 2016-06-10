@@ -2,6 +2,7 @@
  * Global values
  */
 
+$main-color: #2196F3;
 $muted-color: rgba(0,0,0,0.53);
 $u: 16px;
 
@@ -49,6 +50,18 @@ dd {
  * Molecule level styles
  */
 
+md-content {
+    a,
+    a:link,
+    a:visited {
+        color: $main-color;
+    }
+    a:hover,
+    a:active {
+        color: lighten($main-color, 20%);
+    }
+}
+
 .sortable-th {
 
     &:hover {
@@ -58,8 +71,7 @@ dd {
     }
     &:focus {
         outline: none;
-    }
-    
+    }    
 }
 
 
@@ -68,15 +80,21 @@ dd {
  */
 
 #loader {
-  visibility: hidden;
+  display: none;
   position: absolute;
+  top: $u*8;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
   height: 100%;
   width: 100%;
   z-index: 99;
-  background: rgba(255, 255, 255, 0.5);
-  opacity: 0.7;
-  filter: alpha(opacity=70);
-  -moz-opacity: 0.7;
+  background: rgba(255, 255, 255, 0.66);
+  
+  md-progress-circular {
+    margin: $u*4 auto;
+  }
 }
 
 // Buttons (adjust .md-button)

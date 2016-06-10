@@ -33,8 +33,9 @@ function ordermanagementService($http, $filter) {
     };
     
     function updateOrder(queryObj) {
-        $filter('json')(queryObj);
-        return $http.put('http://eark.magenta.dk:5000/updateOrder', queryObj).then(
+        
+        console.log($filter('json')(queryObj));
+        return $http.put('http://eark.magenta.dk:5000/updateOrder', $filter('json')(queryObj)).then(
             function (response) {
                 return response.data;
             }, function (response) {

@@ -32,7 +32,7 @@
                 <dt>Order status</dt>
                 <dd>
                     
-                    <select ng-model="odCtrl.data.orderStatus" ng-change="odCtrl.updateOrder(['orderStatus'])">
+                    <select ng-model="odCtrl.data.orderStatus" ng-change="odCtrl.updateOrderStatus()">
                         <option val="{{ odCtrl.data.orderStatus }}">{{ odCtrl.data.orderStatus }}</option>
                         <option disabled>──────────</option>
                         <option val="none">new</option>
@@ -49,11 +49,12 @@
                 </dd>
                 <dt>Assignee</dt>
                 <dd>
-                    <select ng-model="odCtrl.data.assignee" ng-change="odCtrl.updateOrder(['assignee'])">
-                        <option val="{{ odCtrl.data.assignee }}">{{ odCtrl.data.assignee }}</option>
+                    {{ odCtrl.assignee }}
+                    <select ng-model="odCtrl.assigneeSelector" ng-change="odCtrl.updateOrderAssignee()">
+                        <option ng-if="odCtrl.assigneeSelector !== 'none'" value="{{ odCtrl.data.assignee.uid }}">{{ odCtrl.data.assignee.firstname }} {{ odCtrl.data.assignee.lastname }}</option>
                         <option disabled>──────────</option>
-                        <option val="none">none</option>
-                        <option ng-repeat="archivist in odCtrl.archivists" val="{{ archivist.firstname }} {{ archivist.lastname }}">{{ archivist.firstname }} {{ archivist.lastname }}</option>
+                        <option value="none">none</option>
+                        <option ng-repeat="archivist in odCtrl.archivists" value="{{ archivist.uid }}">{{ archivist.firstname }} {{ archivist.lastname }}</option>
                     </select>
                 </dd>
                 <dt>Order date</dt>
