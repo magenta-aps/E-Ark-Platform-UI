@@ -11,6 +11,14 @@ $u: 16px;
  * Element level (atom) styles
  */
 
+body {
+    background-color: #eee;
+}
+
+section {
+    background-color: #fff;
+}
+
 dt {
     display: block;
     text-transform: uppercase;
@@ -33,11 +41,24 @@ dd {
     padding: $u;
 }
 
-.clickable-row { // Make a table row seem clickable
-    cursor: pointer;
+.simple-list {
+    border-collapse: collapse;
+    width: 100%;
     
-    &:hover {
-        background-color: #eee;
+    th {
+        padding: $u*0.5 $u;
+        text-align: left;
+    }
+    td {
+        border-top: solid 1px #eee;
+        padding: $u*0.5 $u;
+    }
+    .clickable-row { // Make a table row seem clickable
+        cursor: pointer;
+        
+        &:hover {
+            background-color: #eee;
+        }
     }
 }
 
@@ -51,6 +72,8 @@ dd {
  */
 
 md-content {
+    background-color: transparent;
+    
     a,
     a:link,
     a:visited {
@@ -62,6 +85,7 @@ md-content {
     }
 }
 
+// Table styling
 .sortable-th {
 
     &:hover {
@@ -74,11 +98,7 @@ md-content {
     }    
 }
 
-
-/*
- * Global styles
- */
-
+// Show progress indicator when data loads
 #loader {
   display: none;
   position: absolute;
@@ -97,10 +117,20 @@ md-content {
   }
 }
 
-// Buttons (adjust .md-button)
-.md-text-icon-button .material-icons {
-  vertical-align: middle;
-  margin-top: -($u*0.25);
+
+/*
+ * Global styles
+ */
+
+// Buttons and labels with icons in them (adjust .md-button)
+.md-text-icon-button,
+.text-icon-label {
+    text-align: left;
+    
+    .material-icons {
+        vertical-align: middle;
+        margin-top: -($u*0.25);
+    }
 }
 
 /* Md-dialog sizes */

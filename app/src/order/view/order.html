@@ -1,27 +1,39 @@
-<app-header></app-header>
+<header class="section-header">
+    <h1>Order and review documents</h1>
+</header>
 
-<md-content layout="column" style="background-color: #eee;">
-
-    <md-tabs md-dynamic-height>
-        <md-tab md-on-select="">
-            <md-tab-label>
-                <span>{{ 'SEARCH.SEARCH' | translate }}</span>
-            </md-tab-label>
-            <md-tab-body>
-                <ng-include src="'app/src/order/view/searchTab.html'"></ng-include>
-            </md-tab-body>
-        </md-tab>
-        <md-tab md-on-select="">
-            <md-tab-label>
-                <span>{{ 'USER.MENU.MY_ORDERS' | translate }}</span>
-            </md-tab-label>
-            <md-tab-body>
-                <ng-include src="'app/src/order/view/userOrders.html'"></ng-include>
-            </md-tab-body>
-        </md-tab>
-    </md-tabs>
-
-</md-content>
-
-<app-footer></app-footer>
-
+<md-tabs md-dynamic-height>
+    <md-tab md-on-select="">
+        <md-tab-label>
+            <span class="text-icon-label">
+                <i class="material-icons">search</i>
+                {{ 'SEARCH.SEARCH' | translate }}
+            </span>
+        </md-tab-label>
+        <md-tab-body>
+            <ng-include src="'app/src/order/view/searchTab.html'"></ng-include>
+        </md-tab-body>
+    </md-tab>
+    <md-tab md-on-select="">
+        <md-tab-label>
+            <span class="text-icon-label">
+                <i class="material-icons">shopping_basket</i>
+                {{ 'ORDER.TITLE.BASKET' | translate }}
+            </span>
+        </md-tab-label>
+        <md-tab-body>
+            <ng-include src="'app/src/order/view/basket.html'"></ng-include>
+        </md-tab-body>
+    </md-tab>
+    <md-tab md-on-select="">
+        <md-tab-label>
+            <span class="text-icon-label">
+                <i class="material-icons">file_download</i>
+                {{ 'USER.MENU.MY_ORDERS' | translate }}
+            </span>
+        </md-tab-label>
+        <md-tab-body>
+            <ng-include src="'app/src/order/view/userOrders.html'"></ng-include>
+        </md-tab-body>
+    </md-tab>
+</md-tabs>

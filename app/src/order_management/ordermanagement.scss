@@ -13,21 +13,6 @@
     }
 }
 
-.order-list,
-.order-details--list {
-    border-collapse: collapse;
-    width: 100%;
-    
-    th {
-        padding: $u*0.5 $u;
-        text-align: left;
-    }
-    td {
-        border-top: solid 1px #eee;
-        padding: $u*0.5 $u;
-    }
-}
-
 .order-list {
     margin: $u 0;
 }
