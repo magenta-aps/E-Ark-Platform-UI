@@ -42,7 +42,7 @@
                     </td>
                     <td>
                         <span ng-if="order.assignee === 'none'">{{ order.assignee }}</span>
-                        <span ng-if="order.assignee !== 'none'">{{ order.assignee.uid }}</span>
+                        <span ng-if="order.assignee !== 'none'">{{ order.assignee.firstname }} {{ order.assignee.lastname }}</span>
                     </td>
                 </tr>
             </tbody>
