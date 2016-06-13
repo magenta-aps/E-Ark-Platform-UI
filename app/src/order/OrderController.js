@@ -7,13 +7,12 @@ angular.module('eArkPlatform.order').controller('OrderController', OrderControll
  * @param basketService
  * @constructor
  */
-function OrderController(searchService, fileUtilsService, basketService, sessionService) {
+function OrderController(searchService, fileUtilsService, basketService, sessionService, $state) {
     var ordCtrl = this;
     ordCtrl.searchTerm = '';
     ordCtrl.searchContext = 'content';
     ordCtrl.searchResults = {};
     ordCtrl.basket = [];
-    ordCtrl.layout = 'list';
 
     ordCtrl.executeSearch = executeSearch;
     ordCtrl.addToBasket = basketCheck;
@@ -45,7 +44,7 @@ function OrderController(searchService, fileUtilsService, basketService, session
                 });
             }
         });
-    }
+    };
 
     function basketCheck(item) {
         if (item.baskOp == 'add')
@@ -54,7 +53,7 @@ function OrderController(searchService, fileUtilsService, basketService, session
             basketService.removeFromBasket(item, ordCtrl.basket).then(function (result) {
                 console.log('Removal status: ' + result);
             });
-    }
+    };
 
     function compileOrder(orderData) {
         var userInfo = sessionService.getUserInfo();
@@ -69,7 +68,7 @@ function OrderController(searchService, fileUtilsService, basketService, session
             email: userInfo.user.email
         };
         orderData.items = ordCtrl.basket;
-    }
+    };
 
     function formatBytes(bytes, decimals) {
         if (bytes == 0) return '0 Byte';
@@ -78,6 +77,6 @@ function OrderController(searchService, fileUtilsService, basketService, session
         var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
         var i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-    }
+    };
 
-}
+};

@@ -59,7 +59,7 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
         .warnPalette('deep-orange');
 
     $urlRouterProvider
-        .otherwise('/orders');
+        .otherwise('/order/search');
 
     $stateProvider.state('site', {
         abstract: true,
@@ -91,30 +91,6 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
         },
         data: {
             authorizedRoles: []
-        }
-    }).state('search', {
-        parent: 'site',
-        url: '/search/:searchTerm',
-        views: {
-            'content@': {
-                templateUrl: 'app/src/search/view/search.html'
-            }
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.user]
-        }
-    }).state('orders', {
-        parent: 'site',
-        url: '/orders',
-        views: {
-            'content@': {
-                templateUrl: 'app/src/order/view/order.html',
-                controller: 'OrderController',
-                controllerAs: 'ordCtrl'
-            }
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.user]
         }
     });
 }

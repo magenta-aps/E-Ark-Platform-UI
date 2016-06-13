@@ -1,10 +1,12 @@
+<ng-include src="'app/src/order/view/header.html'"></ng-include>
+
 <section class="extra-padding">
     
     <order-basket
         basket="ordCtrl.basket"
         pre-process="true"
         pre-process-function="ordCtrl.compileOrder(orderData)"
-        items-list="ordCtrl.searchResults.documents">        
+        items-list="ordCtrl.searchResults.documents">
     </order-basket>
     
 </section>

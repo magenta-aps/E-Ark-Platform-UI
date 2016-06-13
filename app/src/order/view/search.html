@@ -1,3 +1,5 @@
+<ng-include src="'app/src/order/view/header.html'"></ng-include>
+
 <section class="extra-padding" layout="column">
 
     <div class="search-input--container">
@@ -13,14 +15,6 @@
                 style="padding:0.5rem 0.5rem 0.5rem 2rem">
         </md-input-container>
     </div>
-    <!--
-    <div>
-        <order-basket basket="ordCtrl.basket"
-                      pre-process="true"
-                      pre-process-function="ordCtrl.compileOrder(orderData)"
-                      items-list="ordCtrl.searchResults.documents"></order-basket>
-    </div>
-    -->
 
     <div class="search__list">
         <table class="simple-list" ng-show="ordCtrl.searchResults.documents">
