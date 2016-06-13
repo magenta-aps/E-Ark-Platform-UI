@@ -47,12 +47,16 @@ function OrderController(searchService, fileUtilsService, basketService, session
     };
 
     function basketCheck(item) {
-        if (item.baskOp == 'add')
-            basketService.addToBasket(item, ordCtrl.basket);
-        if (item.baskOp == 'delete')
-            basketService.removeFromBasket(item, ordCtrl.basket).then(function (result) {
+        if (item.baskOp === 'add') {
+            basketService.addToBasket(item);
+            console.log('Adding to basket: ' + basketService.basket);
+        };
+        if (item.baskOp === 'delete') {
+            basketService.removeFromBasket(item).then(function (result) {
                 console.log('Removal status: ' + result);
             });
+            console.log('Removing from basket: ' + basketService.basket);
+        };
     };
 
     function compileOrder(orderData) {
@@ -67,7 +71,7 @@ function OrderController(searchService, fileUtilsService, basketService, session
             lastname: userInfo.user.lastName,
             email: userInfo.user.email
         };
-        orderData.items = ordCtrl.basket;
+        orderData.items = basketService.basket;
     };
 
     function formatBytes(bytes, decimals) {

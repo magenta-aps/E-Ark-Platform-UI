@@ -3,7 +3,10 @@ angular
     .service('basketService', basketService);
 
 function basketService($q, $http, OMS_URI) {
+    
     var bService = this;
+    bService.basket = [];
+    
     bService.addToBasket = addToBasket;
     bService.findItemInBasket = findItemInBasket;
     bService.removeFromBasket = removeFromBasket;
@@ -14,30 +17,31 @@ function basketService($q, $http, OMS_URI) {
      * Adds the item. Unless it exists then removes it instead
      * @param item
      */
-    function addToBasket(item, basket) {
-        if (findItemInBasket(item, basket) == -1)
-            basket.push(item);
-    }
+    function addToBasket(item) {
+        if (findItemInBasket(item) == -1) {
+            bService.basket.push(item);
+        };
+    };
 
-    function removeFromBasket(item, basket) {
+    function removeFromBasket(item) {
             var defer = $q.defer();
             try {
-                var bIndex = findItemInBasket(item, basket);
-                basket.splice(bIndex, 1);
+                var bIndex = findItemInBasket(item);
+                bService.basket.splice(bIndex, 1);
                 defer.resolve(true);
             }
             catch (err) {
                 defer.reject('unable to remove ' + item.title + ' from basket because: ' + err.message);
             }
             return defer.promise;
-    }
+    };
 
-    function findItemInBasket(item, basket) {
-        return basket.findIndex(function (bItem) {
+    function findItemInBasket(item) {
+        return bService.basket.findIndex(function (bItem) {
             if (item.path == bItem.path)
                 return true;
         });
-    }
+    };
 
     function submitOrder(order, url){
         console.log("Order received: " + order);
@@ -47,5 +51,6 @@ function basketService($q, $http, OMS_URI) {
             console.log("The response from posting a new order:", response);
         });
 
-    }
-}
+    };
+    
+};
