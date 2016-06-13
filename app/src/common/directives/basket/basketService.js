@@ -6,6 +6,7 @@ function basketService($q, $http, OMS_URI) {
     
     var bService = this;
     bService.basket = [];
+    bService.currentSearch = {};
     
     bService.addToBasket = addToBasket;
     bService.findItemInBasket = findItemInBasket;
@@ -18,28 +19,29 @@ function basketService($q, $http, OMS_URI) {
      * @param item
      */
     function addToBasket(item) {
-        if (findItemInBasket(item) == -1) {
+        if (bService.findItemInBasket(item) == -1) {
             bService.basket.push(item);
         };
     };
 
     function removeFromBasket(item) {
-            var defer = $q.defer();
-            try {
-                var bIndex = findItemInBasket(item);
-                bService.basket.splice(bIndex, 1);
-                defer.resolve(true);
-            }
-            catch (err) {
-                defer.reject('unable to remove ' + item.title + ' from basket because: ' + err.message);
-            }
-            return defer.promise;
+        var defer = $q.defer();
+        try {
+            var bIndex = bService.findItemInBasket(item);
+            bService.basket.splice(bIndex, 1);
+            defer.resolve(true);
+        }
+        catch (err) {
+            defer.reject('unable to remove ' + item.title + ' from basket because: ' + err.message);
+        }
+        return defer.promise;
     };
 
     function findItemInBasket(item) {
         return bService.basket.findIndex(function (bItem) {
-            if (item.path == bItem.path)
+            if (item.path === bItem.path) {
                 return true;
+            };
         });
     };
 

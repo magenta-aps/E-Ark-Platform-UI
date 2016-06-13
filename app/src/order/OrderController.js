@@ -8,10 +8,11 @@ angular.module('eArkPlatform.order').controller('OrderController', OrderControll
  * @constructor
  */
 function OrderController(searchService, fileUtilsService, basketService, sessionService, $state) {
+    
     var ordCtrl = this;
     ordCtrl.searchTerm = '';
     ordCtrl.searchContext = 'content';
-    ordCtrl.searchResults = {};
+    ordCtrl.searchResults = basketService.currentSearch;
     ordCtrl.basket = [];
 
     ordCtrl.executeSearch = executeSearch;
@@ -30,32 +31,31 @@ function OrderController(searchService, fileUtilsService, basketService, session
 
         searchService.aipSearch(encTerm).then(function (response) {
             if (response.numFound > 0) {
-                ordCtrl.searchResults = {
+                basketService.currentSearch = {
                     documents: response.docs, //An array of objects
                     numberFound: response.numFound
                 };
-
+                
                 //Let's clean up some of the properties. Temporary solution
-                ordCtrl.searchResults.documents.forEach(function (item) {
+                basketService.currentSearch.documents.forEach(function (item) {
                     item.title = item.path.substring(item.path.lastIndexOf('/') + 1, item.path.lastIndexOf('.'));
                     item.packageId = item.package.substring(item.package.indexOf('_') + 1);
                     item.thumbnail = fileUtilsService.getFileIconByMimetype(item.contentType, 24)
                     item.displaySize = formatBytes(item.size);
                 });
-            }
+                ordCtrl.searchResults = basketService.currentSearch;
+            };
         });
     };
 
     function basketCheck(item) {
         if (item.baskOp === 'add') {
             basketService.addToBasket(item);
-            console.log('Adding to basket: ' + basketService.basket);
         };
         if (item.baskOp === 'delete') {
             basketService.removeFromBasket(item).then(function (result) {
                 console.log('Removal status: ' + result);
             });
-            console.log('Removing from basket: ' + basketService.basket);
         };
     };
 
