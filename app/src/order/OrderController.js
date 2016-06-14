@@ -17,7 +17,6 @@ function OrderController(searchService, fileUtilsService, basketService, session
 
     ordCtrl.executeSearch = executeSearch;
     ordCtrl.addToBasket = basketCheck;
-    ordCtrl.compileOrder = compileOrder;
 
     function executeSearch() {
         ordCtrl.searchResults = {};
@@ -57,21 +56,6 @@ function OrderController(searchService, fileUtilsService, basketService, session
                 console.log('Removal status: ' + result);
             });
         };
-    };
-
-    function compileOrder(orderData) {
-        var userInfo = sessionService.getUserInfo();
-        orderData.origin = "WEB";
-        orderData.orderStatus = "New";
-        orderData.orderDate = new Date().toISOString();
-        orderData.plannedDate = orderData.plannedDate.toISOString();
-        orderData.user = {
-            uid: userInfo.user.userName,
-            firstname: userInfo.user.firstName,
-            lastname: userInfo.user.lastName,
-            email: userInfo.user.email
-        };
-        orderData.items = basketService.basket;
     };
 
     function formatBytes(bytes, decimals) {

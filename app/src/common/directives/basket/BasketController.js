@@ -10,9 +10,11 @@ angular
  * @constructor
  */
 
-function BasketController($scope, basketService, $mdDialog){
+function BasketController($scope, basketService, sessionService){
+
     var bdc = this;
     var order;
+
     bdc.basket = basketService.basket;
     
     $scope.removeItem = function(item) {
@@ -27,32 +29,45 @@ function BasketController($scope, basketService, $mdDialog){
         });
     };
     
-    $scope.submitMethod = function(form){
-        
-        order = angular.copy(form);
-        /* Preprocess can't be picked up within a different scope. Either process it beforehand or create a service for it.
-        if (scope.preProcess) {
-            scope.preProcessFunction({orderData:order});
+    $scope.compileOrder = function(orderData) {
+        var userInfo = sessionService.getUserInfo();
+        orderData.origin = "WEB";
+        orderData.orderStatus = "New";
+        orderData.orderDate = new Date().toISOString();
+        orderData.plannedDate = orderData.plannedDate.toISOString();
+        orderData.user = {
+            uid: userInfo.user.userName,
+            firstname: userInfo.user.firstName,
+            lastname: userInfo.user.lastName,
+            email: userInfo.user.email
         };
-        */
+        orderData.items = [];
+        for (var doc in basketService.basket) {
+            var orderItem = {
+                title: basketService.basket[doc].title
+                /* Missing these properties. They are not available from object.                
+				aipURI: "http://xyz.org/path2",
+				aipTitle: "This is the AIP title 2",
+				levelOfDescription: 1234
+                */
+            };
+            orderData.items.push(orderItem);
+        };
+        return orderData;
+    };
+    
+    $scope.submitMethod = function(formData){
+        // Preprocssing order before POSTing
+        var formDataCopy = angular.copy(formData);
+        var finalOrder = { order: $scope.compileOrder(formDataCopy) };
         
-        $mdDialog.show(
-            $mdDialog.alert()
-                .clickOutsideToClose(true)
-                .title('Sending your order: ' + order.title)
-                .textContent('Comments: ' + order.endUserOrderNote + '; Must be ready by: ' + plannedDate)
-                .ariaLabel('Send order alert')
-                .ok('Okay')
-        );
-        
-        basketService.submitOrder(order).then(function(response) {
+        basketService.submitOrder(finalOrder).then(function(response) {
             if(response){
                 //clean everything if successful
                 basketService.currentSearch = {};
                 basketService.basket = [];
             };
         });
-        
     };
     
 };
@@ -66,9 +81,6 @@ function basketDirective(basketService) {
     return {
         restrict:'E',
         templateUrl : 'app/src/common/directives/basket/view/basket.html',
-        scope: {
-            preProcess: '@', //boolean that says whether or not we want to preprocess before submitting
-            preProcessFunction: '&' //Function to call for preprocessing
-        }
+        scope: {}
     };
 };
