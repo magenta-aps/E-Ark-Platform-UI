@@ -1,0 +1,59 @@
+<div ng-controller="BasketController as bdc">
+
+    <form name="bdc.orderForm" novalidate>
+    
+        <div layout="row" id="basket-content">
+                
+            <div layout="column" flex="66" class="box">
+                <h2>Order items</h2>
+                <table class="simple-list" ng-show="bdc.basket">
+                    <thead>
+                        <tr>
+                            <th>{{ 'COMMON.TITLE' | translate }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="document in bdc.basket">
+                            <td>
+                                <img class="md-avatar" ng-src="app/assets/images/filetypes/{{document.thumbnail}}" alt="">
+                                {{ document.title}}
+                            </td>
+                            <td style="text-align: right;">
+                                <md-button ng-click="removeItem(document)">
+                                    {{ 'COMMON.REMOVE' | translate }}
+                                </md-button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div layout="column" flex="33" class="extra-padding">
+                <h2>Order data</h2>
+                <md-input-container>
+                    <label>{{ 'COMMON.TITLE' | translate }}</label>
+                    <input type="text" name="orderTitle" ng-model="bdc.orderForm.order.title" required md-autofocus>
+                </md-input-container>
+                <md-datepicker
+                    ng-model="bdc.orderForm.order.plannedDate"
+                    md-placeholder="{{ 'ORDER.LABEL.PLANNED_DATE' | translate }}">
+                </md-datepicker>
+                <md-input-container flex>
+                    <label>{{ 'ORDER.LABEL.USER_NOTES' | translate }}</label>
+                    <textarea ng-model="bdc.orderForm.order.endUserOrderNote" rows="5" columns="3"></textarea>
+                </md-input-container>
+            </div>    
+            
+        </div>
+    
+        <div layout="row" layout-align="end">
+            <md-button class="md-primary md-raised md-text-icon-button" type="submit" ng-click="submitMethod(bdc.orderForm.order);">
+                Send order
+                <i class="material-icons ng-scope">send</i>
+            </md-button>
+        </div>
+    
+    </form>
+
+</div>

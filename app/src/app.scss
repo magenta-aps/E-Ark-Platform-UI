@@ -66,6 +66,11 @@ dd {
     color: $muted-color;
 }
 
+.box {
+    background-color: #eee;
+    padding: $u;
+}
+
 
 /*
  * Molecule level styles
@@ -126,6 +131,7 @@ md-content {
 .md-text-icon-button,
 .text-icon-label {
     text-align: left;
+    padding: 0 $u;
     
     .material-icons {
         vertical-align: middle;

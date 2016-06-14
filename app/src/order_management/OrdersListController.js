@@ -25,7 +25,7 @@ function OrdersListController($state, ordermanagementService) {
     };
     
     olCtrl.orderDetailGo = function(orderId) {
-        $state.go('orderDetail', {orderid: orderId});
+        $state.go('orderManageDetail', {orderid: orderId});
     };
     
 }
