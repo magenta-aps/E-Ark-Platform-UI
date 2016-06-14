@@ -12,13 +12,20 @@
             <table class="simple-list order-details--list">
                 <thead>
                     <tr>
-                        <th>Item ref. code</th>
+                        <th>Title</th>
+                        <th>AIP</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in odCtrl.data.itemRefCodes">
                         <td>
-                            {{ item }}
+                            {{ item.title }} <br>
+                            <span class="text-muted" style="font-size: 0.8em;">
+                                {{ item.refCode }}
+                            </span>
+                        </td>
+                        <td>
+                            <a href="{{ item.aipURI }}">{{ item.aipTitle }}</a>
                         </td>
                     </tr>
                 </tbody>
