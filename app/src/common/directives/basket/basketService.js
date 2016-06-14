@@ -42,10 +42,6 @@ function basketService($q, $http, OMS_URI) {
     function submitOrder(order, url){
         console.log("Order received: " + order);
         debugger;
-        $http.post(OMS_URI.serviceProxy +'/newOrder',{order:order}).then(function(response){
-            debugger;
-            console.log("The response from posting a new order:", response);
-        });
-
+        return $http.post(OMS_URI.serviceProxy +'/newOrder',{order:order})
     }
 }
