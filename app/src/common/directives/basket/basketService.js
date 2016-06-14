@@ -48,43 +48,7 @@ function basketService($q, $http, OMS_URI, $filter) {
     function submitOrder(order){
         console.log("Order received. It looks like this:");
         console.log($filter('json')(order));
-        debugger;
-        $http.post( OMS_URI.serviceProxy + '/newOrder', $filter('json')(order) ).then(function(response){
-            debugger;
-            console.log("The response from posting a new order:", response);
-        });
+        return $http.post(OMS_URI.serviceProxy +'/newOrder', $filter('json')(order) )
     };
     
 };
-
-/* POST newOrder JSON must look like this
-{
-	"order": {
-		"title": "Example order title",
-		"origin": null,
-		"endUserOrderNote": "Please provide this order as fast as possible",
-		"orderDate": "2016-05-18 12:00:00",
-		"plannedDate": "2016-05-18 12:00:00",
-		"user": {
-			"uid": "uid1",
-			"firstname": "Clint",
-			"lastname": "Eastwood",
-			"email": "clint@hollywood.com"		
-		},
-		"items": [
-					{
-						"title": "Item1",
-						"aipURI": "http://xyz.org/path",
-						"aipTitle": "This is the AIP title",
-						"levelOfDescription": 123
-					},
-					{
-						"title": "Item2",
-						"aipURI": "http://xyz.org/path2",
-						"aipTitle": "This is the AIP title 2",
-						"levelOfDescription": 1234
-					}
-				]
-	}
-}
-*/

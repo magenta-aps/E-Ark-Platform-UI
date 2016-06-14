@@ -31,8 +31,8 @@ function BasketController($scope, basketService, sessionService){
     
     $scope.compileOrder = function(orderData) {
         var userInfo = sessionService.getUserInfo();
+        var packagedOrder = groupByPackage(basketService.basket);
         orderData.origin = "WEB";
-        orderData.orderStatus = "New";
         orderData.orderDate = new Date().toISOString();
         orderData.plannedDate = orderData.plannedDate.toISOString();
         orderData.user = {
@@ -41,19 +41,50 @@ function BasketController($scope, basketService, sessionService){
             lastname: userInfo.user.lastName,
             email: userInfo.user.email
         };
-        orderData.items = [];
-        for (var doc in basketService.basket) {
-            var orderItem = {
-                title: basketService.basket[doc].title
-                /* Missing these properties. They are not available from object.                
-				aipURI: "http://xyz.org/path2",
-				aipTitle: "This is the AIP title 2",
-				levelOfDescription: 1234
-                */
-            };
-            orderData.items.push(orderItem);
-        };
+        orderData.items = packagedOrder;
         return orderData;
+    };
+
+    function groupByPackage(basket) {
+        var tmp = [];
+        basket.forEach(function (item) {
+            if (tmp.length < 1)
+                tmp.push({
+                    packageId: item.packageId,
+                    items: [cleanItem(item)]
+                });
+            else {
+                var pIndex = tmp.findIndex(function (pack) {
+                    return pack.packageId == item.packageId;
+                });
+                if (pIndex != -1) {
+                    tmp[pIndex].items.push(cleanItem(item));
+                }
+                else {
+                    tmp.push({
+                        packageId: item.packageId,
+                        items: [cleanItem(item)]
+                    });
+                }
+            }
+        });
+        return tmp;
+    };
+
+    /**
+     * That's the content and returns only the necessary data that we need for each ordered item
+     * @param item
+     */
+    function cleanItem(item){
+        var cleanedItem = {};
+
+        cleanedItem.title = item.title;
+        cleanedItem.packageId = item.packageId;
+        cleanedItem.confidential =  item.confidential;
+        cleanedItem.path = item.path;
+        cleanedItem.contentType = item.contentType;
+        cleanedItem.size = item.size;
+        return cleanedItem;
     };
     
     $scope.submitMethod = function(formData){
