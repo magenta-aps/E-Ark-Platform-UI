@@ -101,7 +101,7 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
             }
         },
         data: {
-            authorizedRoles: [USER_ROLES.user]
+            authorizedRoles: [USER_ROLES.archivist]
         }
     }).state('orders', {
         parent: 'site',
@@ -114,7 +114,7 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
             }
         },
         data: {
-            authorizedRoles: [USER_ROLES.user]
+            authorizedRoles: []
         }
     });
 }

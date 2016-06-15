@@ -19,9 +19,6 @@ function modulesMenuServiceProvider() {
         };
 
         function getItems() {
-            if (sessionService.isExternalUser()) {
-                return extUserItems;
-            }
             return items;
         }
     }

@@ -58,17 +58,59 @@ function OrderController(searchService, fileUtilsService, basketService, session
 
     function compileOrder(orderData) {
         var userInfo = sessionService.getUserInfo();
+        var packagedOrder = groupByPackage(ordCtrl.basket);
         orderData.origin = "WEB";
-        orderData.orderStatus = "New";
         orderData.orderDate = new Date().toISOString();
         orderData.plannedDate = orderData.plannedDate.toISOString();
         orderData.user = {
-            uid: userInfo.user.userName,
-            firstname: userInfo.user.firstName,
-            lastname: userInfo.user.lastName,
+            userName: userInfo.user.userName,
+            firstName: userInfo.user.firstname,
+            lastName: userInfo.user.lastname,
             email: userInfo.user.email
         };
-        orderData.items = ordCtrl.basket;
+        orderData.items = packagedOrder;
+    }
+
+    function groupByPackage(basket) {
+        var tmp = [];
+        basket.forEach(function (item) {
+            if (tmp.length < 1)
+                tmp.push({
+                    packageId: item.packageId,
+                    items: [cleanItem(item)]
+                });
+            else {
+                var pIndex = tmp.findIndex(function (pack) {
+                    return pack.packageId == item.packageId;
+                });
+                if (pIndex != -1) {
+                    tmp[pIndex].items.push(cleanItem(item));
+                }
+                else {
+                    tmp.push({
+                        packageId: item.packageId,
+                        items: [cleanItem(item)]
+                    });
+                }
+            }
+        });
+        return tmp;
+    }
+
+    /**
+     * That's the content and returns only the necessary data that we need for each ordered item
+     * @param item
+     */
+    function cleanItem(item){
+        var cleanedItem = {};
+
+        cleanedItem.title = item.title;
+        cleanedItem.packageId = item.packageId;
+        cleanedItem.confidential =  item.confidential;
+        cleanedItem.path = item.path;
+        cleanedItem.contentType = item.contentType;
+        cleanedItem.size = item.size;
+        return cleanedItem;
     }
 
     function formatBytes(bytes, decimals) {
