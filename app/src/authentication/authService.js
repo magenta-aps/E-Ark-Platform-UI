@@ -69,7 +69,7 @@ function httpTicketInterceptor($injector, $translate, $window, $q, sessionServic
     }
 }
 
-function authService($http, $window, $state, sessionService, userService, oeParametersService) {
+function authService($http, $window, $state, sessionService, userService, $q) {
     var service = {
         login: login,
         logout: logout,
@@ -114,13 +114,14 @@ function authService($http, $window, $state, sessionService, userService, oePara
 
 
         if (userInfo) {
-            return $http.post('/api/logout').then(function (response) {
+            //return $http.post('/api/logout').then(function (response) {
                 sessionService.clearUserInfo();
                 sessionService.clearRetainedLocation();
-                return response;
-            });
-        }
+                //return response;
+            //});
 
+        }
+        return $q.resolve(true);
     }
 
     function loggedin() {
@@ -151,7 +152,7 @@ function authService($http, $window, $state, sessionService, userService, oePara
         if (!angular.isArray(authorizedRoles)) {
             authorizedRoles = [authorizedRoles];
         }
-        return userInfo.role == 'archivist';
+        return userInfo.user.role == 'archivist';
     }
 
     function revalidateUser() {
