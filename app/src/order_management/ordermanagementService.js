@@ -23,7 +23,7 @@ function ordermanagementService($http, $filter) {
     };
     
     function getOrder(orderId) {
-        return $http.get('http://eark.magenta.dk:5000/getOrderData?orderId=' + orderId).then(
+        return $http.get('/api/getOrderData?orderId=' + orderId).then(
             function (response) {
                 return response.data;
             }, function (response) {
@@ -35,7 +35,7 @@ function ordermanagementService($http, $filter) {
     function updateOrder(queryObj) {
         
         console.log($filter('json')(queryObj));
-        return $http.put('http://eark.magenta.dk:5000/updateOrder', $filter('json')(queryObj)).then(
+        return $http.put('/api/updateOrder', $filter('json')(queryObj)).then(
             function (response) {
                 return response.data;
             }, function (response) {
@@ -45,7 +45,7 @@ function ordermanagementService($http, $filter) {
     };
     
     function getArchivists() {
-        return $http.get('http://eark.magenta.dk:5000/getArchivists').then(
+        return $http.get('/api/getArchivists').then(
             function (response) {
                 return response.data;
             }, function (response) {
