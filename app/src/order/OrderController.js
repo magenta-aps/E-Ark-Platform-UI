@@ -14,9 +14,16 @@ function OrderController(searchService, fileUtilsService, basketService, session
     ordCtrl.searchContext = 'content';
     ordCtrl.searchResults = basketService.currentSearch;
     ordCtrl.basket = [];
+    ordCtrl.orderHistory = [];
 
     ordCtrl.executeSearch = executeSearch;
     ordCtrl.addToBasket = basketCheck;
+
+    var user = sessionService.getUserInfo().user;
+
+    function getUserOrderHistory(){
+
+    }
 
     function executeSearch() {
         ordCtrl.searchResults = {};
@@ -43,20 +50,82 @@ function OrderController(searchService, fileUtilsService, basketService, session
                     item.displaySize = formatBytes(item.size);
                 });
                 ordCtrl.searchResults = basketService.currentSearch;
-            };
+            }
         });
-    };
+    }
 
     function basketCheck(item) {
         if (item.baskOp === 'add') {
             basketService.addToBasket(item);
-        };
+        }
         if (item.baskOp === 'delete') {
             basketService.removeFromBasket(item).then(function (result) {
                 console.log('Removal status: ' + result);
             });
+        }
+    }
+
+    function compileOrder(orderData) {
+        var userInfo = sessionService.getUserInfo();
+        var packagedOrder = groupByPackage(ordCtrl.basket);
+        orderData.origin = "WEB";
+        orderData.orderDate = new Date().toISOString();
+        orderData.plannedDate = orderData.plannedDate.toISOString();
+        orderData.user = {
+            userName: userInfo.user.userName,
+            firstName: userInfo.user.firstname,
+            lastName: userInfo.user.lastname,
+            email: userInfo.user.email
         };
-    };
+        orderData.items = packagedOrder;
+    }
+
+    /**
+     * Organises each item by the package they belong to
+     * @param basket
+     * @returns {Array}
+     */
+    function groupByPackage(basket) {
+        var tmp = [];
+        basket.forEach(function (item) {
+            if (tmp.length < 1)
+                tmp.push({
+                    packageId: item.packageId,
+                    items: [cleanItem(item)]
+                });
+            else {
+                var pIndex = tmp.findIndex(function (pack) {
+                    return pack.packageId == item.packageId;
+                });
+                if (pIndex != -1) {
+                    tmp[pIndex].items.push(cleanItem(item));
+                }
+                else {
+                    tmp.push({
+                        packageId: item.packageId,
+                        items: [cleanItem(item)]
+                    });
+                }
+            }
+        });
+        return tmp;
+    }
+
+    /**
+     * Takes the content and returns only the necessary data that we need for each ordered item
+     * @param item
+     */
+    function cleanItem(item){
+        var cleanedItem = {};
+
+        cleanedItem.title = item.title;
+        cleanedItem.packageId = item.packageId;
+        cleanedItem.confidential =  item.confidential;
+        cleanedItem.path = item.path;
+        cleanedItem.contentType = item.contentType;
+        cleanedItem.size = item.size;
+        return cleanedItem;
+    }
 
     function formatBytes(bytes, decimals) {
         if (bytes == 0) return '0 Byte';
@@ -65,6 +134,6 @@ function OrderController(searchService, fileUtilsService, basketService, session
         var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
         var i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-    };
+    }
 
-};
+}

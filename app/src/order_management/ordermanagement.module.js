@@ -4,7 +4,8 @@ function config(modulesMenuServiceProvider, $stateProvider, USER_ROLES) {
     
     modulesMenuServiceProvider.addItem({
         templateUrl: 'app/src/order_management/view/menuItem.html',
-        order: 2
+        order: 2,
+        authorizedRole: USER_ROLES.archivist  //For now only one role is considered
     });
     
     $stateProvider.state('orderManageList', {
@@ -18,7 +19,7 @@ function config(modulesMenuServiceProvider, $stateProvider, USER_ROLES) {
             }
         },
         data: {
-            authorizedRoles: [USER_ROLES.user]
+            authorizedRoles: [USER_ROLES.archivist]
         }
     }).state('orderManageDetail', {
         parent: 'site',
@@ -31,7 +32,7 @@ function config(modulesMenuServiceProvider, $stateProvider, USER_ROLES) {
             }
         },
         data: {
-            authorizedRoles: [USER_ROLES.user]
+            authorizedRoles: [USER_ROLES.archivist]
         }
     });
        

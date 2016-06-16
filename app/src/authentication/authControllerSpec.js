@@ -13,4 +13,4 @@ describe('AuthController', function () {
 
     it('should do something', function () {
     });
-})
+});

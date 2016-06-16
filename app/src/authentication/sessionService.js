@@ -3,21 +3,21 @@ angular
     .factory('sessionService', sessionService);
 
 function sessionService($window) {
+    var userInfo = {};
     var service = {
         getUserInfo: getUserInfo,
         setUserInfo: setUserInfo,
-        isAdmin: isAdmin,
+        clearUserInfo: clearUserInfo,
+        isArchivist: isArchivist,
         retainCurrentLocation: retainCurrentLocation,
         getRetainedLocation: getRetainedLocation,
-        clearRetainedLocation: clearRetainedLocation,
-        isExternalUser: isExternalUser
+        clearRetainedLocation: clearRetainedLocation
     };
 
     init();
 
     return service;
 
-    var userInfo;
 
     function init() {
         if ($window.sessionStorage.getItem('userInfo')) {
@@ -34,11 +34,16 @@ function sessionService($window) {
         $window.sessionStorage.setItem('userInfo', angular.toJson(userInfo));
     }
 
-    function isAdmin() {
+    function clearUserInfo(){
+        userInfo = {};
+        $window.sessionStorage.clear('userInfo');
+    }
+
+    function isArchivist() {
         if (userInfo == null || userInfo == undefined) {
             return false;
         }
-        return userInfo.user.capabilities.isAdmin;
+        return userInfo.user.role == 'archivist';
     }
 
     function retainCurrentLocation() {
@@ -58,11 +63,4 @@ function sessionService($window) {
         $window.sessionStorage.setItem('retainedLocation', "");
     }
 
-    function isExternalUser() {
-        if (userInfo == null || userInfo == undefined) {
-            return false;
-        }
-        var externalUserNameRe = /.+_.+(@.+)?$/
-        return externalUserNameRe.test(userInfo.user.userName);
-    }
 }

@@ -19,7 +19,7 @@ function AutosuggestController($state, $q, $mdConstant, searchService, alfrescoN
     asctrl.totalSuggestion = 0;
     asctrl.loading = false;
     asctrl.hidden = false;
-    asctrl.isExtUser = sessionService.isExternalUser();
+    //asctrl.isExtUser = sessionService.isExternalUser();
 
     asctrl.getLiveSearchResults = function (term) {
         if (term.length === 0 || asctrl.loading) return;

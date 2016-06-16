@@ -4,7 +4,8 @@ function config(modulesMenuServiceProvider, $stateProvider, USER_ROLES) {
     
     modulesMenuServiceProvider.addItem({
         templateUrl: 'app/src/order/view/menuItem.html',
-        order: 1
+        order: 1,
+        authorizedRole: USER_ROLES.enduser
     });
 
     $stateProvider.state('orderSearch', {
@@ -18,7 +19,7 @@ function config(modulesMenuServiceProvider, $stateProvider, USER_ROLES) {
             }
         },
         data: {
-            authorizedRoles: [USER_ROLES.user]
+            authorizedRoles: [USER_ROLES.enduser]
         }
     }).state('orderBrowse', {
         parent: 'site',
@@ -31,7 +32,7 @@ function config(modulesMenuServiceProvider, $stateProvider, USER_ROLES) {
             }
         },
         data: {
-            authorizedRoles: [USER_ROLES.user]
+            authorizedRoles: [USER_ROLES.enduser]
         }
     }).state('orderBasket', {
         parent: 'site',
@@ -44,7 +45,7 @@ function config(modulesMenuServiceProvider, $stateProvider, USER_ROLES) {
             }
         },
         data: {
-            authorizedRoles: [USER_ROLES.user]
+            authorizedRoles: [USER_ROLES.enduser]
         }
     });  
     
