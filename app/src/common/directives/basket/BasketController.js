@@ -10,7 +10,7 @@ angular
  * @constructor
  */
 
-function BasketController($scope, basketService, sessionService){
+function BasketController($scope, $state, basketService, sessionService){
 
     var bdc = this;
     var order;
@@ -23,9 +23,9 @@ function BasketController($scope, basketService, sessionService){
                 basketService.currentSearch.documents.findIndex(function (bItem, bIndex) {
                     if (item.path === bItem.path) {
                         basketService.currentSearch.documents[bIndex].baskOp = 'delete';
-                    };
+                    }
                 });
-            };
+            }
         });
     };
     
@@ -36,9 +36,9 @@ function BasketController($scope, basketService, sessionService){
         orderData.orderDate = new Date().toISOString();
         orderData.plannedDate = orderData.plannedDate.toISOString();
         orderData.user = {
-            uid: userInfo.user.userName,
-            firstname: userInfo.user.firstName,
-            lastname: userInfo.user.lastName,
+            userName: userInfo.user.userName,
+            firstname: userInfo.user.firstname,
+            lastname: userInfo.user.lastname,
             email: userInfo.user.email
         };
         orderData.items = packagedOrder;
@@ -69,7 +69,7 @@ function BasketController($scope, basketService, sessionService){
             }
         });
         return tmp;
-    };
+    }
 
     /**
      * That's the content and returns only the necessary data that we need for each ordered item
@@ -96,12 +96,13 @@ function BasketController($scope, basketService, sessionService){
             if(response){
                 //clean everything if successful
                 basketService.currentSearch = {};
-                basketService.basket = [];
-            };
+                basketService.basket =  bdc.basket = [];
+                $state.go('orderBrowse');
+            }
         });
     };
     
-};
+}
 
 
 /*

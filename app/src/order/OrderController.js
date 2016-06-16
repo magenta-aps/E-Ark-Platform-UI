@@ -7,7 +7,7 @@ angular.module('eArkPlatform.order').controller('OrderController', OrderControll
  * @param basketService
  * @constructor
  */
-function OrderController(searchService, fileUtilsService, basketService, sessionService, $state) {
+function OrderController(searchService, fileUtilsService, basketService, sessionService, orderService, $state) {
     
     var ordCtrl = this;
     ordCtrl.searchTerm = '';
@@ -15,14 +15,38 @@ function OrderController(searchService, fileUtilsService, basketService, session
     ordCtrl.searchResults = basketService.currentSearch;
     ordCtrl.basket = [];
     ordCtrl.orderHistory = [];
+    ordCtrl.orderBy = '-orderStatus';
 
     ordCtrl.executeSearch = executeSearch;
     ordCtrl.addToBasket = basketCheck;
+    ordCtrl.goToOrder = goToOrder;
 
     var user = sessionService.getUserInfo().user;
 
     function getUserOrderHistory(){
+        orderService.getUserOrderHistory(user.userName).then(function(response){
+            if(response.orders.length > 0){
 
+                ordCtrl.orderHistory = response.orders;
+            }
+        })
+
+    }
+
+    getUserOrderHistory();
+
+    ordCtrl.sortThis = function($event, sortParameter) {
+        if (ordCtrl.orderBy === sortParameter) {
+            ordCtrl.orderBy = '-' + sortParameter;
+        } else if (ordCtrl.orderBy === '-' + sortParameter) {
+            ordCtrl.orderBy = '';
+        } else {
+            ordCtrl.orderBy = sortParameter;
+        }
+    };
+
+    function goToOrder (orderId) {
+        $state.go('orderDetail', {orderId: orderId});
     }
 
     function executeSearch() {
@@ -73,11 +97,12 @@ function OrderController(searchService, fileUtilsService, basketService, session
         orderData.plannedDate = orderData.plannedDate.toISOString();
         orderData.user = {
             userName: userInfo.user.userName,
-            firstName: userInfo.user.firstname,
-            lastName: userInfo.user.lastname,
+            firstname: userInfo.user.firstname,
+            lastname: userInfo.user.lastname,
             email: userInfo.user.email
         };
         orderData.items = packagedOrder;
+        return orderData;
     }
 
     /**
