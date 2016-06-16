@@ -47,7 +47,20 @@ function config(modulesMenuServiceProvider, $stateProvider, USER_ROLES) {
         data: {
             authorizedRoles: [USER_ROLES.enduser]
         }
-    });  
+    }).state('orderDetail', {
+        parent: 'site',
+        url: '/order/my-orders/order/:orderId',
+        views: {
+            'content@': {
+                templateUrl: 'app/src/order/view/order-detail.html',
+                controller: 'MyOrderDetailController',
+                controllerAs: 'oddCtrl'
+            }
+        },
+        data: {
+            authorizedRoles: [USER_ROLES.enduser]
+        }
+    });
     
 };
 

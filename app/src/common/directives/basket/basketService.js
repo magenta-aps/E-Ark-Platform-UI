@@ -21,7 +21,7 @@ function basketService($q, $http, OMS_URI, $filter) {
     function addToBasket(item) {
         if (bService.findItemInBasket(item) == -1) {
             bService.basket.push(item);
-        };
+        }
     };
 
     function removeFromBasket(item) {
@@ -35,20 +35,22 @@ function basketService($q, $http, OMS_URI, $filter) {
             defer.reject('unable to remove ' + item.title + ' from basket because: ' + err.message);
         }
         return defer.promise;
-    };
+    }
 
     function findItemInBasket(item) {
         return bService.basket.findIndex(function (bItem) {
             if (item.path === bItem.path) {
                 return true;
-            };
+            }
         });
-    };
+    }
 
     function submitOrder(order){
         console.log("Order received. It looks like this:");
         console.log($filter('json')(order));
-        return $http.post(OMS_URI.serviceProxy +'/newOrder', $filter('json')(order) )
-    };
+        return $http.post('/api/newOrder', $filter('json')(order)).then(function(response){
+            return response;
+        })
+    }
     
-};
+}

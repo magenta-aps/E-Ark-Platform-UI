@@ -1,8 +1,42 @@
 <ng-include src="'app/src/order/view/header.html'"></ng-include>
 
 <section class="extra-padding">
-    
-    <p>Here should be a list of your recieved orders and their comments from the archivists.</p>
-    <p>Browse away.</p>
-    
+
+    <div>
+
+        <table class="simple-list order-list">
+            <thead>
+            <tr>
+                <th class="sortable-th" ng-click="ordCtrl.sortThis($event, 'title')">Title</th>
+                <th class="sortable-th" ng-click="ordCtrl.sortThis($event, 'orderStatus')">Order status</th>
+                <th class="sortable-th" ng-click="ordCtrl.sortThis($event, 'orderId')">Order Reference Id</th>
+                <th class="sortable-th" ng-click="ordCtrl.sortThis($event, 'orderDate')">Ordered date</th>
+                <th class="sortable-th" ng-click="ordCtrl.sortThis($event, 'plannedDate')">Planned delivery date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="order in ordCtrl.orderHistory | orderBy: ordCtrl.orderBy" class="clickable-row" ng-click="ordCtrl.goToOrder(order.orderId)">
+                <td>
+                    <strong>{{ order.title }}</strong>
+                </td>
+                <td>
+                        <span class="status-{{ order.orderStatus }}">
+                            {{ order.orderStatus }}
+                        </span>
+                </td>
+                <td>
+                    {{ order.orderId }}
+                </td>
+                <td>
+                    {{ order.orderDate }}
+                </td>
+                <td>
+                    {{ order.plannedDate }}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
 </section>
