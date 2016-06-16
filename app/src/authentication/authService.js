@@ -100,7 +100,7 @@ function authService($http, $window, $state, sessionService, userService, $q) {
 
     function login(username, password) {
         var userInfo = {};
-        return $http.post('/api/login', {userName: username, password: password}).then(function (response) {
+        return $http.post('/api/login', {userName: username, password: password}).then(function () {
                 //sessionService.setUserInfo(response.data);
                 return addUserAndParamsToSession(username);
             }, function (reason) {
@@ -152,7 +152,9 @@ function authService($http, $window, $state, sessionService, userService, $q) {
         if (!angular.isArray(authorizedRoles)) {
             authorizedRoles = [authorizedRoles];
         }
-        return userInfo.user.role == 'archivist';
+        return userInfo.user.role == 'archivist' ||
+            (authorizedRoles.length > 0 && authorizedRoles.indexOf('enduser') > -1);
+        //return userInfo.user.role == 'archivist';
     }
 
     function revalidateUser() {

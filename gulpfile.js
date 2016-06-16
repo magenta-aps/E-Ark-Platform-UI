@@ -35,10 +35,6 @@ function createWebserver(config) {
                     {
                         source:'/oms/api',
                         target: env.oms_service.proxy
-                    },
-                    {
-                        source:'/eark/authService',
-                        target: env.authentication.type.CAS.proxy + '/cas'
                     }
                 ]
             }));

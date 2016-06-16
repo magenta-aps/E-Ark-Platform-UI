@@ -4,4 +4,4 @@ angular
 
 function orderService($http, AIP_REPOSITORY_URI, OMS_URI) {
 
-}
+};

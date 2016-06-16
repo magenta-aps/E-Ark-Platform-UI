@@ -8,9 +8,9 @@ function config(modulesMenuServiceProvider, $stateProvider, USER_ROLES) {
         authorizedRole: USER_ROLES.archivist  //For now only one role is considered
     });
     
-    $stateProvider.state('orderList', {
+    $stateProvider.state('orderManageList', {
         parent: 'site',
-        url: '/orders/list',
+        url: '/order-manage/list',
         views: {
             'content@': {
                 templateUrl: 'app/src/order_management/view/orders-list.html',
@@ -21,9 +21,9 @@ function config(modulesMenuServiceProvider, $stateProvider, USER_ROLES) {
         data: {
             authorizedRoles: [USER_ROLES.archivist]
         }
-    }).state('orderDetail', {
+    }).state('orderManageDetail', {
         parent: 'site',
-        url: '/orders/order/:orderid',
+        url: '/order-manage/order/:orderid',
         views: {
             'content@': {
                 templateUrl: 'app/src/order_management/view/order-detail.html',

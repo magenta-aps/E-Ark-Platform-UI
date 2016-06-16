@@ -7,7 +7,7 @@ function config($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');
     var spinnerFunction = function (data, headersGetter) {
         // start the spinner here
-        document.getElementById('loader').style.visibility = "visible";
+        document.getElementById('loader').style.display = "block";
         return data;
     };
     $httpProvider.defaults.transformRequest.push(spinnerFunction);
@@ -17,12 +17,12 @@ function config($httpProvider) {
 function httpInterceptor($q, $window) {
     return {
         'response': function (response) {
-            document.getElementById('loader').style.visibility = "hidden";
+            document.getElementById('loader').style.display = "none";
             return response;
         },
 
         'responseError': function (rejection) {
-            document.getElementById('loader').style.visibility = "hidden";
+            document.getElementById('loader').style.display = "none";
             return $q.reject(rejection);
         }
     }

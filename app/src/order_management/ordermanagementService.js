@@ -2,10 +2,12 @@ angular
     .module('eArkPlatform.ordermanagement')
     .factory('ordermanagementService', ordermanagementService);
 
-function ordermanagementService($http) {
+function ordermanagementService($http, $filter) {
     var service = {
         getOrders: getOrders,
-        getOrder: getOrder
+        getOrder: getOrder,
+        getArchivists: getArchivists,
+        updateOrder: updateOrder
     };
 
     return service;
@@ -22,6 +24,28 @@ function ordermanagementService($http) {
     
     function getOrder(orderId) {
         return $http.get('http://eark.magenta.dk:5000/getOrderData?orderId=' + orderId).then(
+            function (response) {
+                return response.data;
+            }, function (response) {
+                console.log('nasty error');
+            }
+        );
+    };
+    
+    function updateOrder(queryObj) {
+        
+        console.log($filter('json')(queryObj));
+        return $http.put('http://eark.magenta.dk:5000/updateOrder', $filter('json')(queryObj)).then(
+            function (response) {
+                return response.data;
+            }, function (response) {
+                console.log('nasty error');
+            }
+        );
+    };
+    
+    function getArchivists() {
+        return $http.get('http://eark.magenta.dk:5000/getArchivists').then(
             function (response) {
                 return response.data;
             }, function (response) {

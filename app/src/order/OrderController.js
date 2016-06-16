@@ -7,17 +7,23 @@ angular.module('eArkPlatform.order').controller('OrderController', OrderControll
  * @param basketService
  * @constructor
  */
-function OrderController(searchService, fileUtilsService, basketService, sessionService) {
+function OrderController(searchService, fileUtilsService, basketService, sessionService, $state) {
+    
     var ordCtrl = this;
     ordCtrl.searchTerm = '';
     ordCtrl.searchContext = 'content';
-    ordCtrl.searchResults = {};
+    ordCtrl.searchResults = basketService.currentSearch;
     ordCtrl.basket = [];
-    ordCtrl.layout = 'list';
+    ordCtrl.orderHistory = [];
 
     ordCtrl.executeSearch = executeSearch;
     ordCtrl.addToBasket = basketCheck;
-    ordCtrl.compileOrder = compileOrder;
+
+    var user = sessionService.getUserInfo().user;
+
+    function getUserOrderHistory(){
+
+    }
 
     function executeSearch() {
         ordCtrl.searchResults = {};
@@ -31,29 +37,32 @@ function OrderController(searchService, fileUtilsService, basketService, session
 
         searchService.aipSearch(encTerm).then(function (response) {
             if (response.numFound > 0) {
-                ordCtrl.searchResults = {
+                basketService.currentSearch = {
                     documents: response.docs, //An array of objects
                     numberFound: response.numFound
                 };
-
+                
                 //Let's clean up some of the properties. Temporary solution
-                ordCtrl.searchResults.documents.forEach(function (item) {
+                basketService.currentSearch.documents.forEach(function (item) {
                     item.title = item.path.substring(item.path.lastIndexOf('/') + 1, item.path.lastIndexOf('.'));
                     item.packageId = item.package.substring(item.package.indexOf('_') + 1);
                     item.thumbnail = fileUtilsService.getFileIconByMimetype(item.contentType, 24)
                     item.displaySize = formatBytes(item.size);
                 });
+                ordCtrl.searchResults = basketService.currentSearch;
             }
         });
     }
 
     function basketCheck(item) {
-        if (item.baskOp == 'add')
-            basketService.addToBasket(item, ordCtrl.basket);
-        if (item.baskOp == 'delete')
-            basketService.removeFromBasket(item, ordCtrl.basket).then(function (result) {
+        if (item.baskOp === 'add') {
+            basketService.addToBasket(item);
+        }
+        if (item.baskOp === 'delete') {
+            basketService.removeFromBasket(item).then(function (result) {
                 console.log('Removal status: ' + result);
             });
+        }
     }
 
     function compileOrder(orderData) {
@@ -71,6 +80,11 @@ function OrderController(searchService, fileUtilsService, basketService, session
         orderData.items = packagedOrder;
     }
 
+    /**
+     * Organises each item by the package they belong to
+     * @param basket
+     * @returns {Array}
+     */
     function groupByPackage(basket) {
         var tmp = [];
         basket.forEach(function (item) {
@@ -98,7 +112,7 @@ function OrderController(searchService, fileUtilsService, basketService, session
     }
 
     /**
-     * That's the content and returns only the necessary data that we need for each ordered item
+     * Takes the content and returns only the necessary data that we need for each ordered item
      * @param item
      */
     function cleanItem(item){

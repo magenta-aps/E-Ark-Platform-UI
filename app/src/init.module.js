@@ -2,7 +2,7 @@ angular
     .module('eArkPlatform.init', ['ngMaterial'])
     .constant('USER_ROLES', {
         archivist: 'archivist',
-        endUser: 'endUser'
+        enduser: 'enduser'
         //guest: 'guest' we don't want this type of user as of yet
     })
     .constant('ALFRESCO_URI', {

@@ -2,6 +2,7 @@
  * Global values
  */
 
+$main-color: #2196F3;
 $muted-color: rgba(0,0,0,0.53);
 $u: 16px;
 
@@ -9,6 +10,14 @@ $u: 16px;
 /*
  * Element level (atom) styles
  */
+
+body {
+    background-color: #eee;
+}
+
+section {
+    background-color: #fff;
+}
 
 dt {
     display: block;
@@ -25,25 +34,109 @@ dd {
 
 
 /*
- * Global styles
+ * Style helpers
  */
 
+.extra-padding { // Add a little extra padding
+    padding: $u;
+}
+
+.simple-list {
+    border-collapse: collapse;
+    width: 100%;
+    
+    th {
+        padding: $u*0.5 $u;
+        text-align: left;
+    }
+    td {
+        border-top: solid 1px #eee;
+        padding: $u*0.5 $u;
+    }
+    .clickable-row { // Make a table row seem clickable
+        cursor: pointer;
+        
+        &:hover {
+            background-color: #eee;
+        }
+    }
+}
+
+.text-muted { // Dim the color of text
+    color: $muted-color;
+}
+
+.box {
+    background-color: #eee;
+    padding: $u;
+}
+
+
+/*
+ * Molecule level styles
+ */
+
+md-content {
+    background-color: transparent;
+    
+    a,
+    a:link,
+    a:visited {
+        color: $main-color;
+    }
+    a:hover,
+    a:active {
+        color: lighten($main-color, 20%);
+    }
+}
+
+// Table styling
+.sortable-th {
+
+    &:hover {
+        background: url(/app/assets/images/tableicons/ic_keyboard_arrow_down_black_24px.svg) no-repeat left center transparent;
+        cursor: pointer;
+        background-size: auto $u;
+    }
+    &:focus {
+        outline: none;
+    }    
+}
+
+// Show progress indicator when data loads
 #loader {
-  visibility: hidden;
+  display: none;
   position: absolute;
+  top: $u*8;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
   height: 100%;
   width: 100%;
   z-index: 99;
-  background: rgba(255, 255, 255, 0.5);
-  opacity: 0.7;
-  filter: alpha(opacity=70);
-  -moz-opacity: 0.7;
+  background: rgba(255, 255, 255, 0.66);
+  
+  md-progress-circular {
+    margin: $u*4 auto;
+  }
 }
 
-// Buttons (adjust .md-button)
-.md-text-icon-button .material-icons {
-  vertical-align: middle;
-  margin-top: -($u*0.25);
+
+/*
+ * Global styles
+ */
+
+// Buttons and labels with icons in them (adjust .md-button)
+.md-text-icon-button,
+.text-icon-label {
+    text-align: left;
+    padding: 0 $u;
+    
+    .material-icons {
+        vertical-align: middle;
+        margin-top: -($u*0.25);
+    }
 }
 
 /* Md-dialog sizes */
