@@ -13,19 +13,32 @@
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>AIP</th>
+                        <th>Size</th>
+                        <th>Ref. code</th>
+                        <th>Content type</th>
+                        <th>Confidential</th>
+                        <th>Package ID</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in odCtrl.data.itemRefCodes">
+                    <tr ng-repeat="item in odCtrl.data.items">
                         <td>
-                            {{ item.title }} <br>
-                            <span class="text-muted" style="font-size: 0.8em;">
-                                {{ item.refCode }}
-                            </span>
+                            {{ item.title }}
                         </td>
                         <td>
-                            <a href="{{ item.aipURI }}">{{ item.aipTitle }}</a>
+                            {{ item.size }}
+                        </td>
+                        <td>
+                            {{ item.refCode }}
+                        </td>
+                        <td>
+                            {{ item.contentType }}
+                        </td>
+                        <td>
+                            {{ item.confidential }}
+                        </td>
+                        <td>
+                            {{ item.packageId }}
                         </td>
                     </tr>
                 </tbody>
@@ -38,7 +51,6 @@
                 <dd>{{ odCtrl.data.title }}</dd>
                 <dt>Order status</dt>
                 <dd>
-                    
                     <select ng-model="odCtrl.data.orderStatus" ng-change="odCtrl.updateOrderStatus()">
                         <option val="{{ odCtrl.data.orderStatus }}">{{ odCtrl.data.orderStatus }}</option>
                         <option disabled>──────────</option>
@@ -61,7 +73,7 @@
                         <option ng-if="odCtrl.assigneeSelector !== 'none'" value="{{ odCtrl.data.assignee.uid }}">{{ odCtrl.data.assignee.firstname }} {{ odCtrl.data.assignee.lastname }}</option>
                         <option disabled>──────────</option>
                         <option value="none">none</option>
-                        <option ng-repeat="archivist in odCtrl.archivists" value="{{ archivist.uid }}">{{ archivist.firstname }} {{ archivist.lastname }}</option>
+                        <option ng-repeat="archivist in odCtrl.archivists" value="{{ archivist.userName }}">{{ archivist.firstname }} {{ archivist.lastname }}</option>
                     </select>
                 </dd>
                 <dt>Order date</dt>

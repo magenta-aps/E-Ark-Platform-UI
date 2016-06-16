@@ -13,7 +13,7 @@ function OrderDetailController($stateParams, ordermanagementService) {
     ordermanagementService.getOrder(odCtrl.orderId).then(function(response) {
         odCtrl.data = response;
         if ( odCtrl.data.assignee !== 'none' ) {
-            odCtrl.assigneeSelector = odCtrl.data.assignee.uid;
+            odCtrl.assigneeSelector = odCtrl.data.assignee.userName;
         };
     });
     
