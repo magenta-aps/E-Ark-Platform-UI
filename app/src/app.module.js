@@ -59,7 +59,7 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
         .warnPalette('deep-orange');
 
     $urlRouterProvider
-        .otherwise('/order/search');
+        .otherwise('/login');
 
     $stateProvider.state('site', {
         abstract: true,
