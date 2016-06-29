@@ -1,6 +1,9 @@
-# Angular stub for Alfresco/AngularJS UI projects
+# EARK Platform UI
 
-This repo's code serves as a starting point for new projects combining Alfresco backend and AngularJS frontends.
+The EARK user platform for search repositories. To see the Search Tool, visit 
+[this](http://eark.magenta.dk) server.
+
+## (Comments from upstream project)
 
 Included features are
 
