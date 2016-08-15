@@ -505,7 +505,7 @@
         "CAN_NOT_DELETE_ADMIN_USER": "Sletning af admin brugeren er ikke tilladt",
         "EMAIL_FEED_ENABLED": "E-mail-feed aktiveret",
         "MENU":{
-            "MY_ORDERS": "Min Ordrer"
+            "MY_ORDERS": "Mine ordrer"
         }
     },
     "GROUP": {

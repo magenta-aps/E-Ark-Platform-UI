@@ -33,7 +33,7 @@ function createWebserver(config) {
                         target: env.search.repository.proxy + '/solr/eark1'
                     },
                     {
-                        source:'/oms',
+                        source:'/oms/api',
                         target: env.oms_service.proxy
                     }
                 ]

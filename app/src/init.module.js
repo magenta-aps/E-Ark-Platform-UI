@@ -1,8 +1,8 @@
 angular
     .module('eArkPlatform.init', ['ngMaterial'])
     .constant('USER_ROLES', {
-        admin: 'admin',
-        user: 'user'
+        archivist: 'archivist',
+        enduser: 'enduser'
         //guest: 'guest' we don't want this type of user as of yet
     })
     .constant('ALFRESCO_URI', {
@@ -10,6 +10,9 @@ angular
         serviceApiProxy: '/api/',
         serviceSlingshotProxy: '/slingshot/',
         webClientServiceProxy: '/alfresco/service'
+    })
+    .constant('AUTH_HOST_URI',{
+        serviceProxy:'/eark/authService'
     })
     .constant('AIP_REPOSITORY_URI',{
         serviceProxy:'/aip/repo/search'

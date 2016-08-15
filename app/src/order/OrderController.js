@@ -7,17 +7,47 @@ angular.module('eArkPlatform.order').controller('OrderController', OrderControll
  * @param basketService
  * @constructor
  */
-function OrderController(searchService, fileUtilsService, basketService, sessionService) {
+function OrderController(searchService, fileUtilsService, basketService, sessionService, orderService, $state) {
+    
     var ordCtrl = this;
     ordCtrl.searchTerm = '';
     ordCtrl.searchContext = 'content';
-    ordCtrl.searchResults = {};
+    ordCtrl.searchResults = basketService.currentSearch;
     ordCtrl.basket = [];
-    ordCtrl.layout = 'list';
+    ordCtrl.orderHistory = [];
+    ordCtrl.orderBy = '-orderStatus';
 
     ordCtrl.executeSearch = executeSearch;
     ordCtrl.addToBasket = basketCheck;
-    ordCtrl.compileOrder = compileOrder;
+    ordCtrl.goToOrder = goToOrder;
+
+    var user = sessionService.getUserInfo().user;
+
+    function getUserOrderHistory(){
+        orderService.getUserOrderHistory(user.userName).then(function(response){
+            if(response.orders.length > 0){
+
+                ordCtrl.orderHistory = response.orders;
+            }
+        })
+
+    }
+
+    getUserOrderHistory();
+
+    ordCtrl.sortThis = function($event, sortParameter) {
+        if (ordCtrl.orderBy === sortParameter) {
+            ordCtrl.orderBy = '-' + sortParameter;
+        } else if (ordCtrl.orderBy === '-' + sortParameter) {
+            ordCtrl.orderBy = '';
+        } else {
+            ordCtrl.orderBy = sortParameter;
+        }
+    };
+
+    function goToOrder (orderId) {
+        $state.go('orderDetail', {orderId: orderId});
+    }
 
     function executeSearch() {
         ordCtrl.searchResults = {};
@@ -31,47 +61,55 @@ function OrderController(searchService, fileUtilsService, basketService, session
 
         searchService.aipSearch(encTerm).then(function (response) {
             if (response.numFound > 0) {
-                ordCtrl.searchResults = {
+                basketService.currentSearch = {
                     documents: response.docs, //An array of objects
                     numberFound: response.numFound
                 };
-
+                
                 //Let's clean up some of the properties. Temporary solution
-                ordCtrl.searchResults.documents.forEach(function (item) {
+                basketService.currentSearch.documents.forEach(function (item) {
                     item.title = item.path.substring(item.path.lastIndexOf('/') + 1, item.path.lastIndexOf('.'));
                     item.packageId = item.package.substring(item.package.indexOf('_') + 1);
                     item.thumbnail = fileUtilsService.getFileIconByMimetype(item.contentType, 24)
                     item.displaySize = formatBytes(item.size);
                 });
+                ordCtrl.searchResults = basketService.currentSearch;
             }
         });
     }
 
     function basketCheck(item) {
-        if (item.baskOp == 'add')
-            basketService.addToBasket(item, ordCtrl.basket);
-        if (item.baskOp == 'delete')
-            basketService.removeFromBasket(item, ordCtrl.basket).then(function (result) {
+        if (item.baskOp === 'add') {
+            basketService.addToBasket(item);
+        }
+        if (item.baskOp === 'delete') {
+            basketService.removeFromBasket(item).then(function (result) {
                 console.log('Removal status: ' + result);
             });
+        }
     }
 
     function compileOrder(orderData) {
         var userInfo = sessionService.getUserInfo();
         var packagedOrder = groupByPackage(ordCtrl.basket);
-        debugger;
         orderData.origin = "WEB";
         orderData.orderDate = new Date().toISOString();
         orderData.plannedDate = orderData.plannedDate.toISOString();
         orderData.user = {
-            uid: userInfo.user.userName,
-            firstname: userInfo.user.firstName,
-            lastname: userInfo.user.lastName,
+            userName: userInfo.user.userName,
+            firstname: userInfo.user.firstname,
+            lastname: userInfo.user.lastname,
             email: userInfo.user.email
         };
         orderData.items = packagedOrder;
+        return orderData;
     }
 
+    /**
+     * Organises each item by the package they belong to
+     * @param basket
+     * @returns {Array}
+     */
     function groupByPackage(basket) {
         var tmp = [];
         basket.forEach(function (item) {
@@ -99,7 +137,7 @@ function OrderController(searchService, fileUtilsService, basketService, session
     }
 
     /**
-     * That's the content and returns only the necessary data that we need for each ordered item
+     * Takes the content and returns only the necessary data that we need for each ordered item
      * @param item
      */
     function cleanItem(item){

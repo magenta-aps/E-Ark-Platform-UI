@@ -1,0 +1,101 @@
+<section>
+    
+    <header class="section-header">
+        <a ui-sref="orderManageList" class="md-button md-icon-button md-raised"><i class="material-icons">arrow_back</i></a>
+        <h1>{{ odCtrl.data.title }} <span class="text-muted">order details</span></h1>
+    </header>
+    
+    <div class="order-details">
+        
+        <div class="order-details--items">
+            <h3 class="extra-padding">Order items:</h3>
+            <table class="simple-list order-details--list">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Size</th>
+                        <th>Ref. code</th>
+                        <th>Content type</th>
+                        <th>Confidential</th>
+                        <th>Package ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in odCtrl.data.items">
+                        <td>
+                            {{ item.title }}
+                        </td>
+                        <td>
+                            {{ item.size }}
+                        </td>
+                        <td>
+                            {{ item.refCode }}
+                        </td>
+                        <td>
+                            {{ item.contentType }}
+                        </td>
+                        <td>
+                            {{ item.confidential }}
+                        </td>
+                        <td>
+                            {{ item.packageId }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="order-details--data extra-padding">
+            <dl>
+                <dt>Order</dt>
+                <dd>{{ odCtrl.data.title }}</dd>
+                <dt>Order status</dt>
+                <dd>
+                    <select ng-model="odCtrl.data.orderStatus" ng-change="odCtrl.updateOrderStatus()">
+                        <option val="{{ odCtrl.data.orderStatus }}">{{ odCtrl.data.orderStatus }}</option>
+                        <option disabled>──────────</option>
+                        <option val="none">new</option>
+                        <option val="none">open</option>
+                        <option val="none">closed</option>
+                    </select>
+                </dd>
+                <dt>Order ID</dt>
+                <dd>{{ odCtrl.data.orderId }}</dd>
+                <dt>Origin</dt>
+                <dd>
+                    <span ng-show="!odCtrl.data.origin">none</span>
+                    {{ odCtrl.data.origin }}
+                </dd>
+                <dt>Assignee</dt>
+                <dd>
+                    {{ odCtrl.assignee }}
+                    <select ng-model="odCtrl.assigneeSelector" ng-change="odCtrl.updateOrderAssignee()">
+                        <option ng-if="odCtrl.assigneeSelector !== 'none'" value="{{ odCtrl.data.assignee.uid }}">{{ odCtrl.data.assignee.firstname }} {{ odCtrl.data.assignee.lastname }}</option>
+                        <option disabled>──────────</option>
+                        <option value="none">none</option>
+                        <option ng-repeat="archivist in odCtrl.archivists" value="{{ archivist.userName }}">{{ archivist.firstname }} {{ archivist.lastname }}</option>
+                    </select>
+                </dd>
+                <dt>Order date</dt>
+                <dd>{{ odCtrl.data.orderDate }}</dd>
+                <dt>Planned date</dt>
+                <dd>{{ odCtrl.data.plannedDate }}</dd>
+                <dt>User to issue order</dt>
+                <dd>
+                    {{ odCtrl.data.endUser.firstname }} {{ odCtrl.data.endUser.lastname }}<br>
+                    <a href="mailto:{{ odCtrl.data.endUser.email }}">{{ odCtrl.data.endUser.email }}</a>
+                </dd>
+                <dt>Access date</dt>
+                <dd>{{ odCtrl.data.accessDate }}</dd>
+                <dt>Access end date</dt>
+                <dd>{{ odCtrl.data.accessEndDate }}</dd>
+                <dt>Access date comments</dt>
+                <dd>{{ odCtrl.data.accessDateComments }}</dd>
+                <dt>Validation date</dt>
+                <dd>{{ odCtrl.data.validationDate }}</dd>
+            </dl>
+        </div>
+        
+    </div>
+    
+</section>

@@ -1,0 +1,53 @@
+<section>
+    
+    <header class="section-header">
+        <h1>List of orders</h1>
+    </header>
+    
+    <div>
+        
+        <table class="simple-list order-list">
+            <thead>
+                <tr>
+                    <th class="sortable-th" ng-click="olCtrl.sortThis($event, 'title')">Title</th>
+                    <th class="sortable-th" ng-click="olCtrl.sortThis($event, 'orderStatus')">Order status</th>
+                    <th class="sortable-th" ng-click="olCtrl.sortThis($event, 'origin')">Origin</th>
+                    <th class="sortable-th" ng-click="olCtrl.sortThis($event, 'orderDate')">Order date</th>
+                    <th class="sortable-th" ng-click="olCtrl.sortThis($event, 'plannedDate')">Planned date</th>
+                    <th class="sortable-th" ng-click="olCtrl.sortThis($event, 'endUser.firstname')">From user</th>
+                    <th class="sortable-th" ng-click="olCtrl.sortThis($event, 'assignee')">Assignee</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="order in olCtrl.data | orderBy: olCtrl.orderBy" class="clickable-row" ng-click="olCtrl.orderDetailGo(order.orderId)">
+                    <td>
+                        <strong>{{ order.title }}</strong>
+                    </td>
+                    <td>
+                        <span class="status-{{ order.orderStatus }}">
+                            {{ order.orderStatus }}
+                        </span>
+                    </td>
+                    <td>
+                        {{ order.orgin }}
+                    </td>
+                    <td>
+                        {{ order.orderDate }}
+                    </td>
+                    <td>
+                        {{ order.plannedDate }}
+                    </td>
+                    <td>
+                        {{ order.endUser.firstname }} {{ order.endUser.lastname }}
+                    </td>
+                    <td>
+                        <span ng-if="order.assignee === 'none'">{{ order.assignee }}</span>
+                        <span ng-if="order.assignee !== 'none'">{{ order.assignee.firstname }} {{ order.assignee.lastname }}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+    
+</section>

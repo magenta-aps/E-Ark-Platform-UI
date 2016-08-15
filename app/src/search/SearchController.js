@@ -34,15 +34,6 @@ function SearchController($scope, $stateParams, searchService, fileUtilsService)
         getAipSearchQuery(objQuerified);
     }
 
-    function formatBytes(bytes, decimals) {
-        if (bytes == 0) return '0 Byte';
-        var k = 1000;
-        var dm = decimals + 1 || 3;
-        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        var i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-    }
-
     function getAipSearchQuery(query) {
 
         searchService.aipSearch(query).then(function (response) {
@@ -59,7 +50,7 @@ function SearchController($scope, $stateParams, searchService, fileUtilsService)
                     item.title = item.path.substring(item.path.lastIndexOf('/') + 1, item.path.lastIndexOf('.'));
                     item.packageId = item.package.substring(item.package.indexOf('_') + 1);
                     item.thumbnail = fileUtilsService.getFileIconByMimetype(item.contentType, 24)
-                    item.displaySize = formatBytes(item.size);
+                    item.displaySize = fileUtilsService.getFileSize(item.size);
                 });
             }
         });
