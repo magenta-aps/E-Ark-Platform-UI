@@ -52,12 +52,14 @@ function OrderController(searchService, fileUtilsService, basketService, session
     function executeSearch() {
         ordCtrl.searchResults = {};
         var queryObj = {
-            q: ordCtrl.searchContext + ':' + ordCtrl.searchTerm,
+            query: ordCtrl.searchContext + ':' + ordCtrl.searchTerm+'*',
             rows: 25,
             start: 0,
-            wt: "json"
+            filter: 'package,size,path,confidential,contentType,textCategory', //fields
+            sort :'package asc',
+            wt: 'json'
         };
-        var encTerm = searchService.objectToQueryString(queryObj);
+        var encTerm = JSON.stringify(queryObj);
 
         searchService.aipSearch(encTerm).then(function (response) {
             if (response.numFound > 0) {
@@ -69,8 +71,9 @@ function OrderController(searchService, fileUtilsService, basketService, session
                 //Let's clean up some of the properties. Temporary solution
                 basketService.currentSearch.documents.forEach(function (item) {
                     item.title = item.path.substring(item.path.lastIndexOf('/') + 1, item.path.lastIndexOf('.'));
-                    item.packageId = item.package.substring(item.package.indexOf('_') + 1);
-                    item.thumbnail = fileUtilsService.getFileIconByMimetype(item.contentType, 24)
+                    if(item.package)
+                        item.packageId = item.package.substring(item.package.indexOf('_') + 1);
+                    item.thumbnail = fileUtilsService.getFileIconByMimetype(item.contentType, 24);
                     item.displaySize = formatBytes(item.size);
                 });
                 ordCtrl.searchResults = basketService.currentSearch;

@@ -18,3 +18,4 @@ app/src/modules/*
 web.config
 /bin/
 app/*.log
+/miscellaneous/*
