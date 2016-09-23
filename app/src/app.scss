@@ -37,10 +37,6 @@ dd {
  * Style helpers
  */
 
-.extra-padding { // Add a little extra padding
-    padding: $u;
-}
-
 .simple-list {
     border-collapse: collapse;
     width: 100%;
@@ -64,6 +60,10 @@ dd {
 
 .text-muted { // Dim the color of text
     color: $muted-color;
+}
+
+.muted {
+    opacity: 0.6;
 }
 
 .box {
