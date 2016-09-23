@@ -43,6 +43,10 @@
                     <label>{{ 'ORDER.LABEL.USER_NOTES' | translate }}</label>
                     <textarea ng-model="bdc.orderForm.order.endUserOrderNote" rows="5" columns="3"></textarea>
                 </md-input-container>
+                <md-input-container flex>
+                    <label>{{ 'ORDER.LABEL.PREFERRED_DELIVERY_METHOD' | translate }}</label>
+                    <input name="orderPreferredDeliveryMethod" type="text" ng-model="bdc.orderForm.order.preferredDeliveryMethod">
+                </md-input-container>
             </div>    
             
         </div>
