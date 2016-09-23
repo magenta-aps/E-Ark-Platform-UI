@@ -16,7 +16,12 @@ function OrderController(searchService, fileUtilsService, basketService, session
     ordCtrl.basket = [];
     ordCtrl.orderHistory = [];
     ordCtrl.orderBy = '-orderStatus';
-
+    ordCtrl.filterBy = {
+        title: '',
+        packageId: ''
+    };
+    
+    ordCtrl.sortThis = sortThis;
     ordCtrl.executeSearch = executeSearch;
     ordCtrl.addToBasket = basketCheck;
     ordCtrl.goToOrder = goToOrder;
@@ -34,8 +39,8 @@ function OrderController(searchService, fileUtilsService, basketService, session
     }
 
     getUserOrderHistory();
-
-    ordCtrl.sortThis = function($event, sortParameter) {
+    
+    function sortThis( $event, sortParameter ) {
         if (ordCtrl.orderBy === sortParameter) {
             ordCtrl.orderBy = '-' + sortParameter;
         } else if (ordCtrl.orderBy === '-' + sortParameter) {

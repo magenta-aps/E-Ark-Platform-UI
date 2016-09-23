@@ -1,6 +1,6 @@
 <ng-include src="'app/src/order/view/header.html'"></ng-include>
 
-<section class="extra-padding" layout="column">
+<section layout="column">
 
     <div class="search-input--container">
         <md-input-container md-no-float>
@@ -20,26 +20,58 @@
         <table class="simple-list" ng-show="ordCtrl.searchResults.documents">
             <thead>
                 <tr>
-                    <th>{{ "COMMON.TYPE" | translate }}</th>
-                    <th>{{ "COMMON.TITLE" | translate }}</th>
-                    <th>{{ "COMMON.DESCRIPTION" | translate }}</th>
-                    <th>{{ "COMMON.PACKAGE_ID" | translate }}</th>
-                    <th style="text-align: center;">Add to basket</th>
+                    <th style="text-align: center; vertical-align: top;">
+                        <md-button
+                            class="md-text-icon-button md-primary"
+                            ng-click="ordCtrl.sortThis($event, 'thumbnail')">
+                            {{ "COMMON.TYPE" | translate }}
+                            <i ng-show="ordCtrl.orderBy === '-thumbnail'" class="material-icons">arrow_drop_up</i>
+                            <i ng-show="ordCtrl.orderBy === 'thumbnail'" class="material-icons">arrow_drop_down</i>
+                        </md-button>
+                    </th>
+                    <th style="vertical-align: top;">
+                        <md-button
+                            class="md-text-icon-button md-primary"
+                            ng-click="ordCtrl.sortThis($event, 'title')">
+                            {{ "COMMON.TITLE" | translate }}
+                            <i ng-show="ordCtrl.orderBy === '-title'" class="material-icons">arrow_drop_up</i>
+                            <i ng-show="ordCtrl.orderBy === 'title'" class="material-icons">arrow_drop_down</i>
+                        </md-button>
+                        <form>
+                            <input
+                                ng-model="ordCtrl.filterBy.title"
+                                type="text"
+                                placeholder="Filter by title">
+                        </form>
+                    </th>
+                    <th style="vertical-align: top;">
+                        <md-button
+                            class="md-text-icon-button md-primary"
+                            ng-click="ordCtrl.sortThis($event, 'packageId')">
+                            {{ "COMMON.PACKAGE_ID" | translate }}
+                            <i ng-show="ordCtrl.orderBy === '-packageId'" class="material-icons">arrow_drop_up</i>
+                            <i ng-show="ordCtrl.orderBy === 'packageId'" class="material-icons">arrow_drop_down</i>
+                        </md-button>
+                        <form>
+                            <input
+                                ng-model="ordCtrl.filterBy.packageId"
+                                type="text"
+                                placeholder="Filter by package ID">
+                        </form>
+                    </th>
+                    <th class="muted" style="text-align: center; vertical-align: bottom;">Add to basket</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in ordCtrl.searchResults.documents">
-                    <td>
+                <tr ng-repeat="item in ordCtrl.searchResults.documents | filter: ordCtrl.filterBy | orderBy: ordCtrl.orderBy">
+                    <td style="text-align: center">
                         <img class="md-avatar" ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="">
                     </td>
                     <td>
-                        <span class="text-muted">{{ item.title }} ({{item.displaySize}})</span>
+                        {{ item.title }} <small class="muted">{{item.displaySize}}</small>
                     </td>
                     <td>
-                        {{ item.description }}
-                    </td>
-                    <td>
-                        <span class="text-muted">{{ item.packageId }}</span>
+                        {{ item.packageId }}
                     </td>
                     <td style="text-align: center;">
                         <md-checkbox
