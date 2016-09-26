@@ -3,19 +3,18 @@
  * Search styles
  */
 
-.search-input--container {
-    text-align: center;
+.search-input-1 {
     
-    md-input-container {
-        width: $u*30;
-        text-align: left;
+    input {
+        width: 40em;
+        max-width: 80%;
+        margin: 0 8px;
+        padding: 8px;
     }
-    label {
-        display: none;
-    }
-    .md-input {
-        background-color: #eee;
-        margin: 0 auto $u;
+    .material-icons {
+        margin: 0 8px;
+        font-size: 36px;
+        text-align: right;
     }
 }
 
@@ -79,37 +78,19 @@ a.search__item__link:visited {
     font-size: 0.8em;
 }
 
+
 /*
- * View search results as table list
+ * Order details page
  */
- 
-.list-search {
-    table {
-        max-width: 100%;
-    }
-    th {
-        border-top: solid 1px #ddd;
-    }
-    td {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    td:first-child {
-        padding-left: 24px;
-    }
-    td:last-child {
-        padding-right: 24px;
-    }
+
+.order-details__data {
+    background-color: #fff;
 }
 
 
 /*
  * Search filter menu styles
  */
-
-.menu {
-    background-color: #eee;
-}
 
 .filters {
     
