@@ -1,12 +1,16 @@
-<md-toolbar class="md-hue-2">
+<md-toolbar class="md-hue-2 order-header">
     <div class="md-toolbar-tools">
         
-        <a ui-sref="orderSearch" class="md-button md-text-icon-button">
+        <a ui-sref="orderSearch"
+            class="md-button md-text-icon-button"
+            ng-class="{ active: ordCtrl.state.is('orderSearch') }">
             <i class="material-icons">search</i>
             Search & order
         </a>
         
-        <a ui-sref="orderBrowse" class="md-button md-text-icon-button">
+        <a ui-sref="orderBrowse"
+            class="md-button md-text-icon-button"
+            ng-class="{ active: ordCtrl.state.is('orderBrowse') }">
             <i class="material-icons">file_download</i>
             {{ 'USER.MENU.MY_ORDERS' | translate }}
         </a>

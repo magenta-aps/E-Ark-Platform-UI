@@ -1,4 +1,6 @@
-<a ui-sref="orderManageList" class="md-button md-text-icon-button" ng-click="vm.toggleMenu()">
+<a ui-sref="orderManageList"
+    class="md-button md-text-icon-button"
+    ng-class="{ active: menu.state.is('orderManageList') || menu.state.is('orderManageDetail') }">
     <i class="material-icons">local_shipping</i>
     Order management
 </a>
