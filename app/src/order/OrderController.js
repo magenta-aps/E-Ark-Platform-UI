@@ -28,7 +28,7 @@ function OrderController(searchService, fileUtilsService, basketService, session
     ordCtrl.goToOrder = goToOrder;
 
     var user = sessionService.getUserInfo().user;
-
+    
     function getUserOrderHistory(){
         orderService.getUserOrderHistory(user.userName).then(function(response){
             if(response.orders.length > 0){
