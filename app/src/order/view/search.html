@@ -3,17 +3,49 @@
 <section layout="column">
 
     <div class="search-input--container">
-        <md-input-container md-no-float>
-            <label>{{ 'SEARCH.SEARCH' | translate }}</label>
-            <i class="material-icons"
-               style="position:absolute;top:0.25rem;left:0.5rem;color:rgba(0, 0, 0, 0.25)">search</i>
-            <input
-                type="text"
+        <form>
+            <md-input-container md-no-float>
+                <label>{{ 'SEARCH.SEARCH' | translate }}</label>
+                <i class="material-icons"
+                   style="position:absolute;top:0.25rem;left:0.5rem;color:rgba(0, 0, 0, 0.25)">search</i>
+                <input
+                    type="text"
+                    ng-model="ordCtrl.searchTerm"
+                    placeholder="Search keyword"
+                    dl-enter-key="ordCtrl.executeSearch();"
+                    style="padding:0.5rem 0.5rem 0.5rem 2rem">
+            </md-input-container>        
+        </form>
+        <p>
+            Search files and documents for order.
+        </p>
+        <md-button ng-hide="ordCtrl.advSearchIsVisible"
+            ng-click="ordCtrl.advSearchIsVisible = !ordCtrl.advSearchIsVisible">
+            More search options
+        </md-button>
+        <div id="adv-search" ng-show="ordCtrl.advSearchIsVisible">
+            And, or, not, *
+        </div>
+    </div>
+    
+    <div ng-show="ordCtrl.searchResults.documents"
+        class="search-input-2"
+        layout="row"
+        layout-align="space-between center"
+        layout-padding>
+        <form>
+            <i class="material-icons">search</i>
+            <input type="text"
                 ng-model="ordCtrl.searchTerm"
-                placeholder="{{ 'SEARCH.SEARCH' | translate }}"
-                dl-enter-key="ordCtrl.executeSearch();"
-                style="padding:0.5rem 0.5rem 0.5rem 2rem">
-        </md-input-container>
+                placeholder="Search keyword"
+                dl-enter-key="ordCtrl.executeSearch();">
+        </form>
+        <span flex></span>
+        <a ui-sref="orderBasket"
+            class="md-button md-text-icon-button md-raised md-primary">
+            <i class="material-icons">shopping_basket</i>
+            {{ 'ORDER.TITLE.BASKET' | translate }}
+        </a>
     </div>
 
     <div class="search__list">
