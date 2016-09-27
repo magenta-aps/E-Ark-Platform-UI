@@ -20,6 +20,7 @@ angular
         'eArkPlatform.search',
         'eArkPlatform.order',
         'eArkPlatform.ordermanagement',
+        'eArkPlatform.errors',
         'eArkPlatform.common.directives',
         'eArkPlatform.common.directives.basket',
         'eArkPlatform.common.directives.filter',

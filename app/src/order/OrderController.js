@@ -21,6 +21,7 @@ function OrderController(searchService, fileUtilsService, basketService, session
         title: '',
         packageId: ''
     };
+    ordCtrl.state = $state;
     
     ordCtrl.sortThis = sortThis;
     ordCtrl.executeSearch = executeSearch;
@@ -28,7 +29,7 @@ function OrderController(searchService, fileUtilsService, basketService, session
     ordCtrl.goToOrder = goToOrder;
 
     var user = sessionService.getUserInfo().user;
-
+    
     function getUserOrderHistory(){
         orderService.getUserOrderHistory(user.userName).then(function(response){
             if(response.orders.length > 0){
