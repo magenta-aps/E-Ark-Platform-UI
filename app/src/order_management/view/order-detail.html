@@ -1,103 +1,132 @@
-<section>
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+        
+        <a ui-sref="orderManageList" class="md-button md-icon-button md-raised">
+            <i class="material-icons">arrow_back</i>
+        </a>
+        
+        <span>
+            <span class="muted">Order details:</span>
+            {{ odCtrl.data.title }}
+        </span>
+        
+        <span flex></span>
+
+    </div>
+</md-toolbar>
+
+<section class="order-details" layout="row" flex>
+        
+    <div layout="column" layout-padding class="order-details--items" flex="66">
+        
+        <h3 class="md-subhead">Order items:</h3>
+        
+        <md-card>
+            <md-card-content style="overflow: auto;">
+                <div class="simple-list">
+                    <div class="simple-list__header">
+                        <div layout="row">
+                            <div flex="20" class="muted" layout-padding>
+                                Title
+                            </div>
+                            <div flex="20" class="muted" layout-padding>
+                                Size
+                            </div>
+                            <div flex="20" class="muted" layout-padding>
+                                Ref. code
+                            </div>
+                            <div flex="20" class="muted" layout-padding>
+                                Content type
+                            </div>
+                            <div flex="10" class="muted" layout-padding>
+                                Confidential
+                            </div>
+                            <div flex="20" class="muted" layout-padding>
+                                Package ID
+                            </div>
+                        </div>
+                    </div>
+                    <md-list class="simple-list__body md-dense">
+                        <md-list-item ng-repeat="item in odCtrl.data.items"
+                            layout="row"
+                            class="simple-list__body__item">
+                                <div flex="20" class="simple-list__cell">
+                                    {{ item.title }}
+                                </div>
+                                <div flex="20" class="simple-list__cell muted">
+                                    {{ item.size }}
+                                </div>
+                                <div flex="20" class="simple-list__cell">
+                                    {{ item.refCode }}
+                                </div>
+                                <div flex="20" class="simple-list__cell muted">
+                                    {{ item.contentType }}
+                                </div>
+                                <div flex="10" class="simple-list__cell muted">
+                                    {{ item.confidential }}
+                                </div>
+                                <div flex="20" class="simple-list__cell muted">
+                                    {{ item.packageId }}
+                                </div>
+                        </md-list-item>
+                    </md-list>
+                </div>
+            </md-card-content>
+        </md-card>
+                    
+    </div>
     
-    <header class="section-header">
-        <a ui-sref="orderManageList" class="md-button md-icon-button md-raised"><i class="material-icons">arrow_back</i></a>
-        <h1>{{ odCtrl.data.title }} <span class="text-muted">order details</span></h1>
-    </header>
-    
-    <div class="order-details">
-        
-        <div class="order-details--items">
-            <h3 class="extra-padding">Order items:</h3>
-            <table class="simple-list order-details--list">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Size</th>
-                        <th>Ref. code</th>
-                        <th>Content type</th>
-                        <th>Confidential</th>
-                        <th>Package ID</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="item in odCtrl.data.items">
-                        <td>
-                            {{ item.title }}
-                        </td>
-                        <td>
-                            {{ item.size }}
-                        </td>
-                        <td>
-                            {{ item.refCode }}
-                        </td>
-                        <td>
-                            {{ item.contentType }}
-                        </td>
-                        <td>
-                            {{ item.confidential }}
-                        </td>
-                        <td>
-                            {{ item.packageId }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="order-details--data extra-padding">
-            <dl>
-                <dt>Order</dt>
-                <dd>{{ odCtrl.data.title }}</dd>
-                <dt>Order status</dt>
-                <dd>
-                    <select ng-model="odCtrl.data.orderStatus" ng-change="odCtrl.updateOrderStatus()">
-                        <option val="{{ odCtrl.data.orderStatus }}">{{ odCtrl.data.orderStatus }}</option>
-                        <option disabled>──────────</option>
-                        <option val="none">new</option>
-                        <option val="none">open</option>
-                        <option val="none">closed</option>
-                    </select>
-                </dd>
-                <dt>Order ID</dt>
-                <dd>{{ odCtrl.data.orderId }}</dd>
-                <dt>Origin</dt>
-                <dd>
-                    <span ng-show="!odCtrl.data.origin">none</span>
-                    {{ odCtrl.data.origin }}
-                </dd>
-                <dt>Assignee</dt>
-                <dd>
-                    {{ odCtrl.assignee }}
-                    <select ng-model="odCtrl.assigneeSelector" ng-change="odCtrl.updateOrderAssignee()">
-                        <option ng-if="odCtrl.assigneeSelector !== 'none'" value="{{ odCtrl.data.assignee.uid }}">{{ odCtrl.data.assignee.firstname }} {{ odCtrl.data.assignee.lastname }}</option>
-                        <option disabled>──────────</option>
-                        <option value="none">none</option>
-                        <option ng-repeat="archivist in odCtrl.archivists" value="{{ archivist.userName }}">{{ archivist.firstname }} {{ archivist.lastname }}</option>
-                    </select>
-                </dd>
-                <dt>Order date</dt>
-                <dd>{{ odCtrl.data.orderDate }}</dd>
-                <dt>Planned date</dt>
-                <dd>{{ odCtrl.data.plannedDate }}</dd>
-                <dt>User to issue order</dt>
-                <dd>
-                    {{ odCtrl.data.endUser.firstname }} {{ odCtrl.data.endUser.lastname }}<br>
-                    <a href="mailto:{{ odCtrl.data.endUser.email }}">{{ odCtrl.data.endUser.email }}</a>
-                </dd>
-                <dt>Preferred delivery method</dt>
-                <dd>{{ odCtrl.data.preferredDeliveryMethod }}</dd>
-                <dt>Access date</dt>
-                <dd>{{ odCtrl.data.accessDate }}</dd>
-                <dt>Access end date</dt>
-                <dd>{{ odCtrl.data.accessEndDate }}</dd>
-                <dt>Access date comments</dt>
-                <dd>{{ odCtrl.data.accessDateComments }}</dd>
-                <dt>Validation date</dt>
-                <dd>{{ odCtrl.data.validationDate }}</dd>
-            </dl>
-        </div>
-        
+    <div layout-padding class="order-details__data" flex="33" style="overflow: auto;">
+        <dl>
+            <dt>Order</dt>
+            <dd>{{ odCtrl.data.title }}</dd>
+            <dt>Order status</dt>
+            <dd>
+                <select ng-model="odCtrl.data.orderStatus" ng-change="odCtrl.updateOrderStatus()">
+                    <option val="{{ odCtrl.data.orderStatus }}">{{ odCtrl.data.orderStatus }}</option>
+                    <option disabled>──────────</option>
+                    <option val="none">new</option>
+                    <option val="none">open</option>
+                    <option val="none">closed</option>
+                </select>
+            </dd>
+            <dt>Order ID</dt>
+            <dd>{{ odCtrl.data.orderId }}</dd>
+            <dt>Origin</dt>
+            <dd>
+                <span ng-show="!odCtrl.data.origin">none</span>
+                {{ odCtrl.data.origin }}
+            </dd>
+            <dt>Assignee</dt>
+            <dd>
+                {{ odCtrl.assignee }}
+                <select ng-model="odCtrl.assigneeSelector" ng-change="odCtrl.updateOrderAssignee()">
+                    <option ng-if="odCtrl.assigneeSelector !== 'none'" value="{{ odCtrl.data.assignee.uid }}">{{ odCtrl.data.assignee.firstname }} {{ odCtrl.data.assignee.lastname }}</option>
+                    <option disabled>──────────</option>
+                    <option value="none">none</option>
+                    <option ng-repeat="archivist in odCtrl.archivists" value="{{ archivist.userName }}">{{ archivist.firstname }} {{ archivist.lastname }}</option>
+                </select>
+            </dd>
+            <dt>Order date</dt>
+            <dd>{{ odCtrl.data.orderDate }}</dd>
+            <dt>Planned date</dt>
+            <dd>{{ odCtrl.data.plannedDate }}</dd>
+            <dt>User to issue order</dt>
+            <dd>
+                {{ odCtrl.data.endUser.firstname }} {{ odCtrl.data.endUser.lastname }}<br>
+                <a href="mailto:{{ odCtrl.data.endUser.email }}">{{ odCtrl.data.endUser.email }}</a>
+            </dd>
+            <dt>Preferred delivery method</dt>
+            <dd>{{ odCtrl.data.preferredDeliveryMethod }}</dd>
+            <dt>Access date</dt>
+            <dd>{{ odCtrl.data.accessDate }}</dd>
+            <dt>Access end date</dt>
+            <dd>{{ odCtrl.data.accessEndDate }}</dd>
+            <dt>Access date comments</dt>
+            <dd>{{ odCtrl.data.accessDateComments }}</dd>
+            <dt>Validation date</dt>
+            <dd>{{ odCtrl.data.validationDate }}</dd>
+        </dl>
     </div>
     
 </section>

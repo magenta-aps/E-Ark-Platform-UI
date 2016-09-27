@@ -1,42 +1,83 @@
 <ng-include src="'app/src/order/view/header.html'"></ng-include>
 
-<section class="extra-padding">
+<section layout="column" flex>
 
-    <div>
-
-        <table class="simple-list order-list">
-            <thead>
-            <tr>
-                <th class="sortable-th" ng-click="ordCtrl.sortThis($event, 'title')">Title</th>
-                <th class="sortable-th" ng-click="ordCtrl.sortThis($event, 'orderStatus')">Order status</th>
-                <th class="sortable-th" ng-click="ordCtrl.sortThis($event, 'orderId')">Order Reference Id</th>
-                <th class="sortable-th" ng-click="ordCtrl.sortThis($event, 'orderDate')">Ordered date</th>
-                <th class="sortable-th" ng-click="ordCtrl.sortThis($event, 'plannedDate')">Planned delivery date</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="order in ordCtrl.orderHistory | orderBy: ordCtrl.orderBy" class="clickable-row" ng-click="ordCtrl.goToOrder(order.orderId)">
-                <td>
-                    <strong>{{ order.title }}</strong>
-                </td>
-                <td>
-                        <span class="status-{{ order.orderStatus }}">
-                            {{ order.orderStatus }}
-                        </span>
-                </td>
-                <td>
+    <div class="simple-list"
+        layout="column">
+        <div class="simple-list__header">
+            <div layout="row">
+                <div flex="20">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="ordCtrl.sortThis($event, 'title')">
+                        Title
+                        <i ng-show="ordCtrl.orderBy === '-title'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="ordCtrl.orderBy === 'title'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+                <div flex="20">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="ordCtrl.sortThis($event, 'orderStatus')">
+                        Order status
+                        <i ng-show="ordCtrl.orderBy === '-orderStatus'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="ordCtrl.orderBy === 'orderStatus'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+                <div flex="20">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="ordCtrl.sortThis($event, 'orderId')">
+                        Order Reference Id
+                        <i ng-show="ordCtrl.orderBy === '-orderId'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="ordCtrl.orderBy === 'orderId'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+                <div flex="20">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="ordCtrl.sortThis($event, 'orderDate')">
+                        Ordered date
+                        <i ng-show="ordCtrl.orderBy === '-orderDate'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="ordCtrl.orderBy === 'orderDate'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+                <div flex="20">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="ordCtrl.sortThis($event, 'plannedDate')">
+                        Planned delivery date
+                        <i ng-show="ordCtrl.orderBy === '-plannedDate'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="ordCtrl.orderBy === 'plannedDate'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+            </div>
+        </div>
+        <md-list class="simple-list__body md-dense">
+            <md-list-item ng-repeat="order in ordCtrl.orderHistory | orderBy: ordCtrl.orderBy"
+                layout="row"
+                class="simple-list__body__item"
+                ng-click="ordCtrl.goToOrder(order.orderId)">
+                <div flex="20" class="simple-list__cell">
+                    {{ order.title }}
+                </div>
+                <div flex="20" class="simple-list__cell">
+                    <span class="status-{{ order.orderStatus }}">
+                        {{ order.orderStatus }}
+                    </span>
+                </div>
+                <div flex="20" class="simple-list__cell muted">
                     {{ order.orderId }}
-                </td>
-                <td>
+                </div>
+                <div flex="20"  class="simple-list__cell muted">
                     {{ order.orderDate }}
-                </td>
-                <td>
+                </div>
+                <div flex="20"  class="simple-list__cell muted">
                     {{ order.plannedDate }}
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
+                </div>
+                    
+            </md-list-item>
+        </md-list>
     </div>
 
 </section>

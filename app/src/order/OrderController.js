@@ -20,6 +20,7 @@ function OrderController(searchService, fileUtilsService, basketService, session
         title: '',
         packageId: ''
     };
+    ordCtrl.state = $state;
     
     ordCtrl.sortThis = sortThis;
     ordCtrl.executeSearch = executeSearch;

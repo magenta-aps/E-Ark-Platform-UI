@@ -15,10 +15,6 @@ body {
     background-color: #eee;
 }
 
-section {
-    background-color: #fff;
-}
-
 dt {
     display: block;
     text-transform: uppercase;
@@ -37,38 +33,8 @@ dd {
  * Style helpers
  */
 
-.simple-list {
-    border-collapse: collapse;
-    width: 100%;
-    
-    th {
-        padding: $u*0.5 $u;
-        text-align: left;
-    }
-    td {
-        border-top: solid 1px #eee;
-        padding: $u*0.5 $u;
-    }
-    .clickable-row { // Make a table row seem clickable
-        cursor: pointer;
-        
-        &:hover {
-            background-color: #eee;
-        }
-    }
-}
-
-.text-muted { // Dim the color of text
-    color: $muted-color;
-}
-
 .muted {
     opacity: 0.6;
-}
-
-.box {
-    background-color: #eee;
-    padding: $u;
 }
 
 
@@ -90,18 +56,30 @@ md-content {
     }
 }
 
-// Table styling
-.sortable-th {
-
-    &:hover {
-        background: url(/app/assets/images/tableicons/ic_keyboard_arrow_down_black_24px.svg) no-repeat left center transparent;
-        cursor: pointer;
-        background-size: auto $u;
-    }
-    &:focus {
-        outline: none;
-    }    
+// Table-like list styling
+    
+.simple-list__header {
+    padding: 0 16px;
+    border-bottom: solid 1px #eee;
+    background-color: #fff;
 }
+
+.simple-list__body {
+    overflow: auto;
+    background-color: #fff;
+}
+
+.simple-list__body__item:nth-child(even) {
+    background-color: #eee;
+}
+
+.simple-list__cell {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0 8px;
+}
+
 
 // Show progress indicator when data loads
 #loader {

@@ -51,12 +51,12 @@
     
     <header ui-view="header"></header>
     
-    <md-content ui-view="content" layout="column"></md-content>
+    <md-content ui-view="content" layout="column" flex></md-content>
     
     <footer ui-view="footer"></footer>
     
     <div id="loader" layout="column" layout-align="center center">
-        <md-progress-circular md-diameter="200" flex="initial"></md-progress-circular>
+        <md-progress-circular md-diameter="200" md-mode='indeterminate' flex="initial"></md-progress-circular>
     </div>
     
   </body>

@@ -1,26 +1,55 @@
 <ng-include src="'app/src/order/view/header.html'"></ng-include>
 
-<section layout="column">
-
-    <div class="search-input--container">
-        <md-input-container md-no-float>
-            <label>{{ 'SEARCH.SEARCH' | translate }}</label>
-            <i class="material-icons"
-               style="position:absolute;top:0.25rem;left:0.5rem;color:rgba(0, 0, 0, 0.25)">search</i>
+<section layout="column" flex>
+    
+    <div ng-hide="ordCtrl.searchResults.documents"
+        class="search-input-1"
+        layout="column"
+        layout-align="center center"
+        flex>
+        <form layout="row">
+            <i class="material-icons" flex="10">search</i>
             <input
+                flex
                 type="text"
                 ng-model="ordCtrl.searchTerm"
                 placeholder="{{ 'SEARCH.SEARCH' | translate }}"
-                dl-enter-key="ordCtrl.executeSearch();"
-                style="padding:0.5rem 0.5rem 0.5rem 2rem">
-        </md-input-container>
+                dl-enter-key="ordCtrl.executeSearch();">
+        </form>
+        <p>Search files and documents for order</p>
+    </div>
+    
+    <div ng-show="ordCtrl.searchResults.documents"
+        class="search-input-2"
+        layout="row"
+        layout-align="space-between center"
+        layout-padding>
+        
+        <i class="material-icons">search</i>
+        <input type="text"
+            ng-model="ordCtrl.searchTerm"
+            placeholder="{{ 'SEARCH.SEARCH' | translate }}"
+            dl-enter-key="ordCtrl.executeSearch();">
+        
+        <span flex></span>
+        
+        <a ui-sref="orderBasket"
+            class="md-button md-text-icon-button md-raised md-primary">
+            <i class="material-icons">shopping_basket</i>
+            {{ 'ORDER.TITLE.BASKET' | translate }}
+        </a>
+        
     </div>
 
-    <div class="search__list">
-        <table class="simple-list" ng-show="ordCtrl.searchResults.documents">
-            <thead>
-                <tr>
-                    <th style="text-align: center; vertical-align: top;">
+    <div class="search__list"
+        ng-show="ordCtrl.searchResults.documents"
+        layout="column"
+        flex>
+        <div class="simple-list"
+            layout="column">
+            <div class="simple-list__header">
+                <div layout="row">
+                    <div flex="10" style="text-align: center; vertical-align: top;">
                         <md-button
                             class="md-text-icon-button md-primary"
                             ng-click="ordCtrl.sortThis($event, 'thumbnail')">
@@ -28,8 +57,8 @@
                             <i ng-show="ordCtrl.orderBy === '-thumbnail'" class="material-icons">arrow_drop_up</i>
                             <i ng-show="ordCtrl.orderBy === 'thumbnail'" class="material-icons">arrow_drop_down</i>
                         </md-button>
-                    </th>
-                    <th style="vertical-align: top;">
+                    </div>
+                    <div flex style="vertical-align: top;">
                         <md-button
                             class="md-text-icon-button md-primary"
                             ng-click="ordCtrl.sortThis($event, 'title')">
@@ -41,10 +70,11 @@
                             <input
                                 ng-model="ordCtrl.filterBy.title"
                                 type="text"
-                                placeholder="Filter by title">
+                                placeholder="Filter by title"
+                                style="margin-bottom: 8px;">
                         </form>
-                    </th>
-                    <th style="vertical-align: top;">
+                    </div>
+                    <div flex style="vertical-align: top;">
                         <md-button
                             class="md-text-icon-button md-primary"
                             ng-click="ordCtrl.sortThis($event, 'packageId')">
@@ -56,34 +86,46 @@
                             <input
                                 ng-model="ordCtrl.filterBy.packageId"
                                 type="text"
-                                placeholder="Filter by package ID">
+                                placeholder="Filter by package ID"
+                                style="margin-bottom: 8px;">
                         </form>
-                    </th>
-                    <th class="muted" style="text-align: center; vertical-align: bottom;">Add to basket</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="item in ordCtrl.searchResults.documents | filter: ordCtrl.filterBy | orderBy: ordCtrl.orderBy">
-                    <td style="text-align: center">
-                        <img class="md-avatar" ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="">
-                    </td>
-                    <td>
+                    </div>
+                    <div flex="10"
+                        class="muted"
+                        layout="column"
+                        layout-align="end center"
+                        layout-padding>
+                        <span>Add to basket</span>
+                    </div>
+                </div>
+            </div>
+            <md-list class="simple-list__body md-dense">
+                <md-list-item ng-repeat="item in ordCtrl.searchResults.documents | filter: ordCtrl.filterBy | orderBy: ordCtrl.orderBy"
+                    layout="row"
+                    class="simple-list__body__item">
+                    <div flex="10" style="text-align: center" class="simple-list__cell">
+                        <img ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="">
+                    </div>
+                    <div flex class="simple-list__cell">
                         {{ item.title }} <small class="muted">{{item.displaySize}}</small>
-                    </td>
-                    <td>
+                    </div>
+                    <div flex class="simple-list__cell">
                         {{ item.packageId }}
-                    </td>
-                    <td style="text-align: center;">
+                    </div>
+                    <div flex="10"
+                        layout="column"
+                        layout-align="center center"
+                         class="simple-list__cell">
                         <md-checkbox
                             ng-change="ordCtrl.addToBasket(item)"
                             ng-true-value="'add'"
                             ng-false-value="'delete'"
                             ng-model="item.baskOp"
                             aria-label="Add {{ item.title }} to basket">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </div>
     </div>
 
 </section>
