@@ -13,7 +13,6 @@ function OrderController(searchService, fileUtilsService, basketService, session
     ordCtrl.searchTerm = '';
     ordCtrl.searchContext = 'content';
     ordCtrl.searchResults = basketService.currentSearch;
-    ordCtrl.advSearchIsVisible = false;
     ordCtrl.basket = [];
     ordCtrl.orderHistory = [];
     ordCtrl.orderBy = '-orderStatus';

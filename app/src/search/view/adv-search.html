@@ -1,54 +1,34 @@
 <ng-include src="'app/src/order/view/header.html'"></ng-include>
 
-<section layout="column" flex>
+<section layout="column"
+    layout-align="start center">
     
-    <div ng-hide="ordCtrl.searchResults.documents"
-        class="search-input-1"
-        layout="column"
-        layout-align="center center"
-        flex>
-        <form layout="row">
-            <i class="material-icons" flex="10">search</i>
-            <input
-                flex
-                type="text"
-                ng-model="ordCtrl.searchTerm"
-                placeholder="Search keyword"
-                dl-enter-key="ordCtrl.executeSearch();">
-        </form>
-        <p>Search files and documents for order</p>
-        <md-button ng-click="ordCtrl.state.go('advSearch');">
-            <span>More search options</span>
-        </md-button>
-    </div>
+    <h1 class="md-headline">
+        <i class="material-icons">search</i>
+        Advanced search
+    </h1>
     
-    <div ng-show="ordCtrl.searchResults.documents"
-        class="search-input-2"
-        layout="row"
-        layout-align="space-between center"
-        layout-padding>
-        <form>
-            <i class="material-icons">search</i>
-            <input type="text"
-                ng-model="ordCtrl.searchTerm"
-                placeholder="Search keyword"
-                dl-enter-key="ordCtrl.executeSearch();">
-            <md-button ng-click="ordCtrl.state.go('advSearch');">
-                <span>More search options</span>
+    <form ng-submit="sctrl.executeSearch()">
+        
+        <div ng-repeat="input in sctrl.searchInputs">
+            <select ng-model="input.operator" ng-hide="$index === 0">
+                <option>OR</option>
+                <option>AND</option>
+                <option>NOT</option>
+            </select>
+            <input type="text" ng-model="input.term">
+            <md-button ng-click="sctrl.addInput()">
+                <i class="material-icons">add</i>
             </md-button>
-        </form>
-        <span flex></span>
-        <a ui-sref="orderBasket"
-            class="md-button md-text-icon-button md-raised md-primary">
-            <i class="material-icons">shopping_basket</i>
-            {{ 'ORDER.TITLE.BASKET' | translate }}
-        </a>
-    </div>
-
+        </div>
+        
+        <input type="submit" class="md-button md-primary md-raised" value="Search">
+        
+    </form>
+    
     <div class="search__list"
-        ng-show="ordCtrl.searchResults.documents"
-        layout="column"
-        flex>
+        ng-show="sctrl.searchResults.documents"
+        layout="column">
         <div class="simple-list"
             layout="column">
             <div class="simple-list__header">
@@ -56,23 +36,23 @@
                     <div flex="10" style="text-align: center; vertical-align: top;">
                         <md-button
                             class="md-text-icon-button md-primary"
-                            ng-click="ordCtrl.sortThis($event, 'thumbnail')">
+                            ng-click="sctrl.sortThis($event, 'thumbnail')">
                             {{ "COMMON.TYPE" | translate }}
-                            <i ng-show="ordCtrl.orderBy === '-thumbnail'" class="material-icons">arrow_drop_up</i>
-                            <i ng-show="ordCtrl.orderBy === 'thumbnail'" class="material-icons">arrow_drop_down</i>
+                            <i ng-show="sctrl.orderBy === '-thumbnail'" class="material-icons">arrow_drop_up</i>
+                            <i ng-show="sctrl.orderBy === 'thumbnail'" class="material-icons">arrow_drop_down</i>
                         </md-button>
                     </div>
                     <div flex style="vertical-align: top;">
                         <md-button
                             class="md-text-icon-button md-primary"
-                            ng-click="ordCtrl.sortThis($event, 'title')">
+                            ng-click="sctrl.sortThis($event, 'title')">
                             {{ "COMMON.TITLE" | translate }}
-                            <i ng-show="ordCtrl.orderBy === '-title'" class="material-icons">arrow_drop_up</i>
-                            <i ng-show="ordCtrl.orderBy === 'title'" class="material-icons">arrow_drop_down</i>
+                            <i ng-show="sctrl.orderBy === '-title'" class="material-icons">arrow_drop_up</i>
+                            <i ng-show="sctrl.orderBy === 'title'" class="material-icons">arrow_drop_down</i>
                         </md-button>
                         <form>
                             <input
-                                ng-model="ordCtrl.filterBy.title"
+                                ng-model="sctrl.filterBy.title"
                                 type="text"
                                 placeholder="Filter by title"
                                 style="margin-bottom: 8px;">
@@ -81,14 +61,14 @@
                     <div flex style="vertical-align: top;">
                         <md-button
                             class="md-text-icon-button md-primary"
-                            ng-click="ordCtrl.sortThis($event, 'packageId')">
+                            ng-click="sctrl.sortThis($event, 'packageId')">
                             {{ "COMMON.PACKAGE_ID" | translate }}
-                            <i ng-show="ordCtrl.orderBy === '-packageId'" class="material-icons">arrow_drop_up</i>
-                            <i ng-show="ordCtrl.orderBy === 'packageId'" class="material-icons">arrow_drop_down</i>
+                            <i ng-show="sctrl.orderBy === '-packageId'" class="material-icons">arrow_drop_up</i>
+                            <i ng-show="sctrl.orderBy === 'packageId'" class="material-icons">arrow_drop_down</i>
                         </md-button>
                         <form>
                             <input
-                                ng-model="ordCtrl.filterBy.packageId"
+                                ng-model="sctrl.filterBy.packageId"
                                 type="text"
                                 placeholder="Filter by package ID"
                                 style="margin-bottom: 8px;">
@@ -104,7 +84,7 @@
                 </div>
             </div>
             <md-list class="simple-list__body md-dense">
-                <md-list-item ng-repeat="item in ordCtrl.searchResults.documents | filter: ordCtrl.filterBy | orderBy: ordCtrl.orderBy"
+                <md-list-item ng-repeat="item in sctrl.searchResults.documents | filter: sctrl.filterBy | orderBy: sctrl.orderBy"
                     layout="row"
                     class="simple-list__body__item">
                     <div flex="10" style="text-align: center" class="simple-list__cell">
