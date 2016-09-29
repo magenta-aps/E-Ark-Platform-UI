@@ -34,7 +34,9 @@ function BasketController($scope, $state, basketService, sessionService){
         var packagedOrder = groupByPackage(basketService.basket);
         orderData.origin = "WEB";
         orderData.orderDate = new Date().toISOString();
-        orderData.plannedDate = orderData.plannedDate.toISOString();
+        if (orderData.plannedDate) {
+            orderData.plannedDate = orderData.plannedDate.toISOString();
+        };
         orderData.user = {
             userName: userInfo.user.userName,
             firstname: userInfo.user.firstname,

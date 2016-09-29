@@ -531,7 +531,8 @@
         },
         "LABEL":{
             "PLANNED_DATE":"Forventet dato",
-            "USER_NOTES":"Ekstra bemærkning"
+            "USER_NOTES":"Ekstra bemærkning",
+            "PREFERRED_DELIVERY_METHOD": "Foretrukket format til modtagelse"
         }
     },
     "ORG": {

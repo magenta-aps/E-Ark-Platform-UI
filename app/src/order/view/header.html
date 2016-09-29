@@ -1,18 +1,19 @@
-<header class="section-header" layout="row" layout-align="space-between">
-    <h1>Order and review documents</h1>
-    <a ui-sref="orderBasket" class="md-button md-text-icon-button md-raised">
-        <i class="material-icons">shopping_basket</i>
-        {{ 'ORDER.TITLE.BASKET' | translate }}
-    </a>
-</header>
+<md-toolbar class="md-hue-2 order-header">
+    <div class="md-toolbar-tools">
+        
+        <a ui-sref="orderSearch"
+            class="md-button md-text-icon-button"
+            ng-class="{ active: ordCtrl.state.is('orderSearch') }">
+            <i class="material-icons">search</i>
+            Search & order
+        </a>
+        
+        <a ui-sref="orderBrowse"
+            class="md-button md-text-icon-button"
+            ng-class="{ active: ordCtrl.state.is('orderBrowse') }">
+            <i class="material-icons">file_download</i>
+            {{ 'USER.MENU.MY_ORDERS' | translate }}
+        </a>
 
-<nav>
-    <a ui-sref="orderSearch" class="md-button md-text-icon-button md-raised">
-        <i class="material-icons">search</i>
-        {{ 'SEARCH.SEARCH' | translate }}
-    </a>
-    <a ui-sref="orderBrowse" class="md-button md-text-icon-button md-raised">
-        <i class="material-icons">file_download</i>
-        {{ 'USER.MENU.MY_ORDERS' | translate }}
-    </a>
-</nav>
+    </div>
+</md-toolbar>

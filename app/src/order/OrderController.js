@@ -16,13 +16,19 @@ function OrderController(searchService, fileUtilsService, basketService, session
     ordCtrl.basket = [];
     ordCtrl.orderHistory = [];
     ordCtrl.orderBy = '-orderStatus';
-
+    ordCtrl.filterBy = {
+        title: '',
+        packageId: ''
+    };
+    ordCtrl.state = $state;
+    
+    ordCtrl.sortThis = sortThis;
     ordCtrl.executeSearch = executeSearch;
     ordCtrl.addToBasket = basketCheck;
     ordCtrl.goToOrder = goToOrder;
 
     var user = sessionService.getUserInfo().user;
-
+    
     function getUserOrderHistory(){
         orderService.getUserOrderHistory(user.userName).then(function(response){
             if(response.orders.length > 0){
@@ -34,8 +40,8 @@ function OrderController(searchService, fileUtilsService, basketService, session
     }
 
     getUserOrderHistory();
-
-    ordCtrl.sortThis = function($event, sortParameter) {
+    
+    function sortThis( $event, sortParameter ) {
         if (ordCtrl.orderBy === sortParameter) {
             ordCtrl.orderBy = '-' + sortParameter;
         } else if (ordCtrl.orderBy === '-' + sortParameter) {

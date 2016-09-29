@@ -1,53 +1,119 @@
-<section>
-    
-    <header class="section-header">
-        <h1>List of orders</h1>
-    </header>
-    
-    <div>
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
         
-        <table class="simple-list order-list">
-            <thead>
-                <tr>
-                    <th class="sortable-th" ng-click="olCtrl.sortThis($event, 'title')">Title</th>
-                    <th class="sortable-th" ng-click="olCtrl.sortThis($event, 'orderStatus')">Order status</th>
-                    <th class="sortable-th" ng-click="olCtrl.sortThis($event, 'origin')">Origin</th>
-                    <th class="sortable-th" ng-click="olCtrl.sortThis($event, 'orderDate')">Order date</th>
-                    <th class="sortable-th" ng-click="olCtrl.sortThis($event, 'plannedDate')">Planned date</th>
-                    <th class="sortable-th" ng-click="olCtrl.sortThis($event, 'endUser.firstname')">From user</th>
-                    <th class="sortable-th" ng-click="olCtrl.sortThis($event, 'assignee')">Assignee</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="order in olCtrl.data | orderBy: olCtrl.orderBy" class="clickable-row" ng-click="olCtrl.orderDetailGo(order.orderId)">
-                    <td>
-                        <strong>{{ order.title }}</strong>
-                    </td>
-                    <td>
-                        <span class="status-{{ order.orderStatus }}">
-                            {{ order.orderStatus }}
-                        </span>
-                    </td>
-                    <td>
-                        {{ order.orgin }}
-                    </td>
-                    <td>
-                        {{ order.orderDate }}
-                    </td>
-                    <td>
-                        {{ order.plannedDate }}
-                    </td>
-                    <td>
-                        {{ order.endUser.firstname }} {{ order.endUser.lastname }}
-                    </td>
-                    <td>
-                        <span ng-if="order.assignee === 'none'">{{ order.assignee }}</span>
-                        <span ng-if="order.assignee !== 'none'">{{ order.assignee.firstname }} {{ order.assignee.lastname }}</span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <span>
+            List of orders
+        </span>
         
+        <span flex></span>
+
     </div>
-    
+</md-toolbar>
+
+
+<section layout="column" flex>
+
+    <div class="simple-list"
+        layout="column"
+        flex>
+        <div class="simple-list__header">
+            <div layout="row">
+                <div flex="20">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="olCtrl.sortThis($event, 'title')">
+                        Title
+                        <i ng-show="olCtrl.orderBy === '-title'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="olCtrl.orderBy === 'title'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+                <div flex="10">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="olCtrl.sortThis($event, 'orderStatus')">
+                        Order status
+                        <i ng-show="olCtrl.orderBy === '-orderStatus'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="olCtrl.orderBy === 'orderStatus'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+                <div flex="10">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="olCtrl.sortThis($event, 'origin')">
+                        Origin
+                        <i ng-show="olCtrl.orderBy === '-origin'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="olCtrl.orderBy === 'origin'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+                <div flex="20">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="olCtrl.sortThis($event, 'orderDate')">
+                        Order date
+                        <i ng-show="olCtrl.orderBy === '-orderDate'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="olCtrl.orderBy === 'orderDate'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+                <div flex="20">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="olCtrl.sortThis($event, 'plannedDate')">
+                        Planned date
+                        <i ng-show="olCtrl.orderBy === '-plannedDate'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="olCtrl.orderBy === 'plannedDate'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+                <div flex="10">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="olCtrl.sortThis($event, 'endUser.firstname')">
+                        From user
+                        <i ng-show="olCtrl.orderBy === '-endUser.firstname'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="olCtrl.orderBy === 'endUser.firstname'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+                <div flex="10">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="olCtrl.sortThis($event, 'assignee')">
+                        Assignee
+                        <i ng-show="olCtrl.orderBy === '-assignee'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="olCtrl.orderBy === 'assignee'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+            </div>
+        </div>
+        <md-list class="simple-list__body md-dense" style="overflow: auto;">
+            <md-list-item ng-repeat="order in olCtrl.data | orderBy: olCtrl.orderBy"
+                layout="row"
+                class="simple-list__body__item"
+                ng-click="olCtrl.orderDetailGo(order.orderId)">
+                <div flex="20" class="simple-list__cell">
+                    {{ order.title }}
+                </div>
+                <div flex="10" class="simple-list__cell">
+                    <span class="status-{{ order.orderStatus }}">
+                        {{ order.orderStatus }}
+                    </span>
+                </div>
+                <div flex="10" class="simple-list__cell muted">
+                    {{ order.orgin }}
+                </div>
+                <div flex="20" class="simple-list__cell muted">
+                    {{ order.orderDate }}
+                </div>
+                <div flex="20" class="simple-list__cell muted">
+                    {{ order.plannedDate }}
+                </div>
+                <div flex="10" class="simple-list__cell muted">
+                    {{ order.endUser.firstname }} {{ order.endUser.lastname }}
+                </div>
+                <div flex="10" class="simple-list__cell muted">
+                    <span ng-if="order.assignee === 'none'">{{ order.assignee }}</span>
+                    <span ng-if="order.assignee !== 'none'">{{ order.assignee.firstname }} {{ order.assignee.lastname }}</span>
+                </div>
+            </md-list-item>
+        </md-list>
+    </div>
+
 </section>

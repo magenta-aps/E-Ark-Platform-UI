@@ -574,7 +574,8 @@
       },
       "LABEL":{
           "PLANNED_DATE":"Expected date",
-          "USER_NOTES":"Additional note"
+          "USER_NOTES":"Additional note",
+          "PREFERRED_DELIVERY_METHOD": "Preferred delivery method"
       }
     },
     "CONTACT": {

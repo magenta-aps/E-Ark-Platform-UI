@@ -1,69 +1,98 @@
-<section>
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+        
+        <a ui-sref="orderBrowse" class="md-button md-icon-button md-raised">
+            <i class="material-icons">arrow_back</i>
+        </a>
+        
+        <span>
+            <span class="muted">Order details:</span>
+            {{ oddCtrl.data.title }}
+        </span>
+        
+        <span flex></span>
+
+    </div>
+</md-toolbar>
+
+<section class="order-details" layout="row" flex>
+        
+    <div layout="column" layout-padding class="order-details--items" flex="66">
+        
+        <h3 class="md-subhead">Order items:</h3>
+        
+        <md-card>
+            <md-card-content style="overflow: auto;">
+                <div class="simple-list">
+                    <div class="simple-list__header">
+                        <div layout="row">
+                            <div flex="20" class="muted" layout-padding>
+                                Package ID
+                            </div>
+                            <div flex="20" class="muted" layout-padding>
+                                Title
+                            </div>
+                            <div flex="20" class="muted" layout-padding>
+                                Ref. code
+                            </div>
+                            <div flex="20" class="muted" layout-padding>
+                                Content type
+                            </div>
+                            <div flex="20" class="muted" layout-padding>
+                                Size
+                            </div>
+                        </div>
+                    </div>
+                    <md-list class="simple-list__body md-dense">
+                        <md-list-item ng-repeat="item in oddCtrl.data.items"
+                            layout="row"
+                            class="simple-list__body__item">
+                                <div flex="20" class="simple-list__cell muted">
+                                    {{ item.packageId }}
+                                </div>
+                                <div flex="20" class="simple-list__cell">
+                                    {{ item.title }}
+                                </div>
+                                <div flex="20" class="simple-list__cell muted">
+                                    {{ item.refCode }}
+                                </div>
+                                <div flex="20" class="simple-list__cell muted">
+                                    {{ item.contentType }}
+                                    <img ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="">
+                                </div>
+                                <div flex="20" class="simple-list__cell muted">
+                                    {{ item.displaySize }}
+                                </div>
+                        </md-list-item>
+                    </md-list>
+                </div>
+            </md-card-content>
+        </md-card>
+        
+    </div>
     
-    <header class="section-header">
-        <a ui-sref="orderBrowse" class="md-button md-icon-button md-raised"><i class="material-icons">arrow_back</i></a>
-        <h1>{{ oddCtrl.data.title }}</h1>
-    </header>
-    
-    <div class="order-details">
-        
-        <div class="order-details--items">
-            <h3 class="extra-padding">Order items:</h3>
-            <table class="simple-list order-details--list">
-                <thead>
-                    <tr>
-                        <th>Package ID</th>
-                        <th>Title</th>
-                        <th>Ref. code</th>
-                        <th>Content type</th>
-                        <th>Size</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="item in oddCtrl.data.items">
-                        <td>
-                            {{ item.packageId }}
-                        </td>
-                        <td>
-                            {{ item.title }}
-                        </td>
-                        <td>
-                            {{ item.refCode }}
-                        </td>
-                        <td>
-                            {{ item.contentType }}
-                            <img class="md-avatar" ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="">
-                        </td>
-                        <td>
-                            {{ item.displaySize }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="order-details--data extra-padding">
-            <dl>
-                <dt>Order</dt>
-                <dd>{{ oddCtrl.data.title }}</dd>
-                <dt>Order status</dt>
-                <dd>{{oddCtrl.data.orderStatus}}</dd>
-                <dt>Order ID</dt>
-                <dd>{{ oddCtrl.data.orderId }}</dd>
-                <dt>Assignee Archivist</dt>
-                <dd>{{ oddCtrl.assignee }}</dd>
-                <dt>Ordered date</dt>
-                <dd>{{ oddCtrl.data.orderDate }}</dd>
-                <dt>Planned delivery date</dt>
-                <dd>{{ oddCtrl.data.plannedDate }}</dd>
-                <dt>User to issue order</dt>
-                <dd>
-                    {{ oddCtrl.data.endUser.firstname }} {{ oddCtrl.data.endUser.lastname }}<br>
-                    <a href="mailto:{{ oddCtrl.data.endUser.email }}">{{ oddCtrl.data.endUser.email }}</a>
-                </dd>
-            </dl>
-        </div>
-        
+    <div layout-padding class="order-details__data" flex="33">
+        <dl>
+            <dt>Order</dt>
+            <dd>{{ oddCtrl.data.title }}</dd>
+            <dt>Order status</dt>
+            <dd>{{oddCtrl.data.orderStatus}}</dd>
+            <dt>Order ID</dt>
+            <dd>{{ oddCtrl.data.orderId }}</dd>
+            <dt>Assignee Archivist</dt>
+            <dd>{{ oddCtrl.assignee }}</dd>
+            <dt>Ordered date</dt>
+            <dd>{{ oddCtrl.data.orderDate }}</dd>
+            <dt>Planned delivery date</dt>
+            <dd>{{ oddCtrl.data.plannedDate }}</dd>
+            <dt>Preferred delivery method</dt>
+            <dd>{{ oddCtrl.data.preferredDeliveryMethod }}</dd>
+            <dt>User to issue order</dt>
+            <dd>
+                {{ oddCtrl.data.endUser.firstname }} {{ oddCtrl.data.endUser.lastname }}<br>
+                <a href="mailto:{{ oddCtrl.data.endUser.email }}">{{ oddCtrl.data.endUser.email }}</a>
+            </dd>
+        </dl>
     </div>
     
 </section>
