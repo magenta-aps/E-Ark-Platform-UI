@@ -52,14 +52,15 @@ function OrderController(searchService, fileUtilsService, basketService, session
     function executeSearch() {
         ordCtrl.searchResults = {};
         var queryObj = {
-            query: ordCtrl.searchContext + ':' + ordCtrl.searchTerm+'*',
+            q: ordCtrl.searchContext + ':' + ordCtrl.searchTerm+' AND path:*/representations/*/data/* AND NOT path:*_mig-*',
             rows: 25,
             start: 0,
             filter: 'package,size,path,confidential,contentType,textCategory', //fields
             sort :'package asc',
             wt: 'json'
         };
-        var encTerm = JSON.stringify(queryObj);
+        //var encTerm = JSON.stringify(queryObj);
+        var encTerm = searchService.objectToQueryString(queryObj);
 
         searchService.aipSearch(encTerm).then(function (response) {
             if (response.numFound > 0) {
@@ -72,9 +73,9 @@ function OrderController(searchService, fileUtilsService, basketService, session
                 basketService.currentSearch.documents.forEach(function (item) {
                     item.title = item.path.substring(item.path.lastIndexOf('/') + 1, item.path.lastIndexOf('.'));
                     if(item.package)
-                        item.packageId = item.package.substring(item.package.indexOf('_') + 1);
+                        item.packageId = item.package.substring(item.package.lastIndexOf(':') + 1);
                     item.thumbnail = fileUtilsService.getFileIconByMimetype(item.contentType, 24);
-                    item.displaySize = formatBytes(item.size);
+                    item.displaySize = formatBytes(item.stream_size);
                 });
                 ordCtrl.searchResults = basketService.currentSearch;
             }
