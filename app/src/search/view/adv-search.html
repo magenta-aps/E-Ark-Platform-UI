@@ -1,7 +1,9 @@
 <ng-include src="'app/src/order/view/header.html'"></ng-include>
 
 <section layout="column"
-    layout-align="start center">
+    layout-align="start center"
+    style="overflow: auto;"
+    flex>
     
     <h1 class="md-headline">
         <i class="material-icons">search</i>
@@ -11,19 +13,29 @@
     <form ng-submit="sctrl.executeSearch()">
         
         <div ng-repeat="input in sctrl.searchInputs">
-            <select ng-model="input.operator" ng-hide="$index === 0">
+            <select ng-model="input.operator"
+                ng-hide="$index === 0">
                 <option>OR</option>
                 <option>AND</option>
                 <option>NOT</option>
             </select>
-            <input type="text" ng-model="input.term">
-            <md-button ng-click="sctrl.addInput()">
-                <i class="material-icons">add</i>
+            <input type="text"
+                ng-model="input.term"
+                placeholder="Keyword">
+            <md-button ng-click="sctrl.removeInput(input)"
+                ng-hide="$index === 0">
+                <i class="material-icons">remove</i>
             </md-button>
         </div>
         
+        <md-button class="md-text-icon-button"
+            ng-click="sctrl.addInput()">
+            <i class="material-icons">add</i>
+            Add keyword
+        </md-button>
+        <br>
         <input type="submit" class="md-button md-primary md-raised" value="Search">
-        
+        {{ sctrl.searchStr }}
     </form>
     
     <div class="search__list"
@@ -83,7 +95,7 @@
                     </div>
                 </div>
             </div>
-            <md-list class="simple-list__body md-dense">
+            <md-list class="simple-list__body md-dense" style="overflow: initial;">
                 <md-list-item ng-repeat="item in sctrl.searchResults.documents | filter: sctrl.filterBy | orderBy: sctrl.orderBy"
                     layout="row"
                     class="simple-list__body__item">

@@ -20,19 +20,16 @@ function AdvSearchController($scope, searchService, basketService, fileUtilsServ
     sctrl.executeSearch = executeSearch;
     sctrl.sortThis = sortThis;
     sctrl.addInput = addInput;
+    sctrl.removeInput = removeInput;
     
     sctrl.addInput();
     
     function executeSearch() {
-        console.log('searching inputs: ' + sctrl.searchInputs.length);
-        console.log(sctrl.searchInputs);
         
         sctrl.searchStr = '';
         for (var i in sctrl.searchInputs) {
-            sctrl.searchStr = sctrl.searchStr + ' ' + sctrl.searchInputs[i].operator + ' content:"' + sctrl.searchInputs[i].term + '"';
+            sctrl.searchStr = sctrl.searchStr + ' ' + sctrl.searchInputs[i].operator + ' content: ' + sctrl.searchInputs[i].term + '';
         };
-        
-        console.log(sctrl.searchStr);
         
         sctrl.searchResults = {};
         var queryObj = {
@@ -42,7 +39,6 @@ function AdvSearchController($scope, searchService, basketService, fileUtilsServ
             wt: "json"
         };
         var encTerm = searchService.objectToQueryString(queryObj);
-        console.log(encTerm);
 
         searchService.aipSearch(encTerm).then(function (response) {
             if (response.numFound > 0) {
@@ -68,6 +64,11 @@ function AdvSearchController($scope, searchService, basketService, fileUtilsServ
         var inputObj = { term: '', operator: 'OR' };
         sctrl.searchInputs.push( inputObj );
         sctrl.searchInputs[0].operator = '';
+    }
+    
+    function removeInput(inputObj) {
+        var i = sctrl.searchInputs.indexOf(inputObj);
+        sctrl.searchInputs.splice(i, 1);
     }
     
     function sortThis( $event, sortParameter ) {
