@@ -21,7 +21,8 @@
             </select>
             <input type="text"
                 ng-model="input.term"
-                placeholder="Keyword">
+                placeholder="Keyword"
+                required>
             <md-button ng-click="sctrl.removeInput(input)"
                 ng-hide="$index === 0">
                 <i class="material-icons">remove</i>
@@ -35,7 +36,9 @@
         </md-button>
         <br>
         <input type="submit" class="md-button md-primary md-raised" value="Search">
-        {{ sctrl.searchStr }}
+        <div class="muted" style="padding: 8px;">
+            {{ sctrl.searchStr }}
+        </div>
     </form>
     
     <div class="search__list"

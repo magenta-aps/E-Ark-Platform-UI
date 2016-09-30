@@ -27,8 +27,11 @@ function AdvSearchController($scope, searchService, basketService, fileUtilsServ
     function executeSearch() {
         
         sctrl.searchStr = '';
+        
         for (var i in sctrl.searchInputs) {
-            sctrl.searchStr = sctrl.searchStr + ' ' + sctrl.searchInputs[i].operator + ' content: ' + sctrl.searchInputs[i].term + '';
+            if (sctrl.searchInputs[i].term !== '') {
+                sctrl.searchStr = sctrl.searchStr + ' ' + sctrl.searchInputs[i].operator + ' content: ' + sctrl.searchInputs[i].term + '';
+            };
         };
         
         sctrl.searchResults = {};
@@ -36,7 +39,8 @@ function AdvSearchController($scope, searchService, basketService, fileUtilsServ
             q: sctrl.searchStr,
             rows: 25,
             start: 0,
-            wt: "json"
+            wt: "json",
+            fl: "path,contentType,size,confidential,package,textCategory,_version_"
         };
         var encTerm = searchService.objectToQueryString(queryObj);
 
