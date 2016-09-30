@@ -30,7 +30,7 @@ function createWebserver(config) {
                     },
                     {
                         source:'/aip/repo/search',
-                        target: env.search.repository.proxy + '/solr/eark1'
+                        target: env.search.repository.proxy + '/solr/earkstorage'
                     },
                     {
                         source:'/oms/api',

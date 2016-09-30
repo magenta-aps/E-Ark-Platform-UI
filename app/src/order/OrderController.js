@@ -58,10 +58,12 @@ function OrderController(searchService, fileUtilsService, basketService, session
     function executeSearch() {
         ordCtrl.searchResults = {};
         var queryObj = {
-            q: ordCtrl.searchContext + ':' + ordCtrl.searchTerm,
+            q: ordCtrl.searchContext + ':' + ordCtrl.searchTerm+' AND path:*/representations/*/data/* AND NOT path:*_mig-*',
             rows: 25,
             start: 0,
-            wt: "json"
+            filter: 'package,size,path,confidential,contentType,textCategory', //fields
+            sort :'package asc',
+            wt: 'json'
         };
         var encTerm = searchService.objectToQueryString(queryObj);
 
@@ -75,9 +77,10 @@ function OrderController(searchService, fileUtilsService, basketService, session
                 //Let's clean up some of the properties. Temporary solution
                 basketService.currentSearch.documents.forEach(function (item) {
                     item.title = item.path.substring(item.path.lastIndexOf('/') + 1, item.path.lastIndexOf('.'));
-                    item.packageId = item.package.substring(item.package.indexOf('_') + 1);
-                    item.thumbnail = fileUtilsService.getFileIconByMimetype(item.contentType, 24)
-                    item.displaySize = formatBytes(item.size);
+                    if(item.package)
+                        item.packageId = item.package.substring(item.package.lastIndexOf(':') + 1);
+                    item.thumbnail = fileUtilsService.getFileIconByMimetype(item.contentType, 24);
+                    item.displaySize = formatBytes(item.stream_size);
                 });
                 ordCtrl.searchResults = basketService.currentSearch;
             }
