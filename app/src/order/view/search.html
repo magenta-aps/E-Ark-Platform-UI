@@ -12,28 +12,36 @@
 
 <section id="adv-search"
     layout="column"
+    layout-gt-sm="row"
     layout-align="start"
-    style="overflow: auto;"
     flex>
     
     <div class="adv-search__form"
         layout="column"
-        layout-align="start center">
-        <md-button id="adv-search-help"
-            ng-click="ordCtrl.helpfulSearchHints($event)">
-            Search help
-        </md-button>
+        layout-align="start center"
+        ng-class="{minimize: ordCtrl.searchResults.documents}">
     
         <form ng-submit="ordCtrl.executeSearch()"
             layout="column"
             layout="center center">
             
-            <div layout="row">
+            <p class="muted"
+                style="text-align: center;">
+                Search documents
+            </p>
+            
+            <div layout="row" layout-align="center center">
                 <i class="material-icons">search</i>
                 <input type="text"
+                    class="adv-search__primary-input"
                     ng-model="ordCtrl.initialTerm"
                     placeholder="Search keyword"
                     required>
+                <md-button id="adv-search-help"
+                    class="md-icon-button"
+                    ng-click="ordCtrl.helpfulSearchHints($event)">
+                    <i class="material-icons">help</i> 
+                </md-button>
             </div>
             
             <div ng-repeat="input in ordCtrl.searchInputs"
@@ -46,6 +54,7 @@
                 <input type="text"
                     ng-model="input.term"
                     placeholder="Keyword"
+                    class="adv-search__secondary-input"
                     required>
                 <md-button ng-click="ordCtrl.removeInput(input)"
                     class="md-icon-button">
@@ -78,7 +87,9 @@
             layout="column">
             <div class="simple-list__header">
                 <div layout="row">
-                    <div flex="10" style="text-align: center; vertical-align: top;">
+                    <div flex="20"
+                        flex-gt-sm="10"
+                         style="text-align: center; vertical-align: top;">
                         <md-button
                             class="md-text-icon-button md-primary"
                             ng-click="ordCtrl.sortThis($event, 'thumbnail')">
@@ -95,15 +106,19 @@
                             <i ng-show="ordCtrl.orderBy === '-title'" class="material-icons">arrow_drop_up</i>
                             <i ng-show="ordCtrl.orderBy === 'title'" class="material-icons">arrow_drop_down</i>
                         </md-button>
-                        <form>
+                        <form class="adv-search__filter-form">
                             <input
                                 ng-model="ordCtrl.filterBy.title"
                                 type="text"
                                 placeholder="Filter by title"
-                                style="margin-bottom: 8px;">
+                                class="adv-search__filter-form__filter">
                         </form>
                     </div>
-                    <div flex style="vertical-align: top;">
+                    <div flex
+                        flex-gt-sm="30"
+                        style="vertical-align: top;"
+                        hide
+                        show-gt-sm>
                         <md-button
                             class="md-text-icon-button md-primary"
                             ng-click="ordCtrl.sortThis($event, 'packageId')">
@@ -111,19 +126,21 @@
                             <i ng-show="ordCtrl.orderBy === '-packageId'" class="material-icons">arrow_drop_up</i>
                             <i ng-show="ordCtrl.orderBy === 'packageId'" class="material-icons">arrow_drop_down</i>
                         </md-button>
-                        <form>
+                        <form class="adv-search__filter-form">
                             <input
                                 ng-model="ordCtrl.filterBy.packageId"
                                 type="text"
                                 placeholder="Filter by package ID"
-                                style="margin-bottom: 8px;">
+                                class="adv-search__filter-form__filter">
                         </form>
                     </div>
-                    <div flex="10"
+                    <div flex="20"
+                        flex-gt-sm="10"
                         class="muted"
                         layout="column"
                         layout-align="end center"
-                        layout-padding>
+                        layout-padding
+                        style="text-align: center;">
                         <span>Add to basket</span>
                     </div>
                 </div>
@@ -133,7 +150,8 @@
                     layout="row"
                     class="simple-list__body__item"
                     ng-click="ordCtrl.fileInfoDiag($event, item)">
-                    <div flex="10"
+                    <div flex="20"
+                        flex-gt-sm="10"
                         style="text-align: center"
                         class="simple-list__cell">
                         <img ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="">
@@ -141,10 +159,15 @@
                     <div flex class="simple-list__cell">
                         {{ item.title }} <small class="muted">{{item.displaySize}}</small>
                     </div>
-                    <div flex class="simple-list__cell">
+                    <div flex
+                        flex-gt-sm="30"
+                        class="simple-list__cell"
+                        hide
+                        show-gt-sm>
                         {{ item.packageId }}
                     </div>
-                    <div flex="10"
+                    <div flex="20"
+                        flex-gt-sm="10"
                         layout="column"
                         layout-align="center center"
                         class="simple-list__cell">
