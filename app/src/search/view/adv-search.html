@@ -1,49 +1,79 @@
 <ng-include src="'app/src/order/view/header.html'"></ng-include>
 
-<section layout="column"
-    layout-align="start center"
+<div layout="row" layout-align="end center">
+    <a ui-sref="orderBasket"
+        class="md-button md-text-icon-button md-raised md-primary">
+        <i class="material-icons">shopping_basket</i>
+        {{ 'ORDER.TITLE.BASKET' | translate }}
+    </a>
+</div>
+
+<section id="adv-search"
+    layout="column"
+    layout-align="start"
     style="overflow: auto;"
     flex>
     
-    <h1 class="md-headline">
-        <i class="material-icons">search</i>
-        Advanced search
-    </h1>
-    
-    <form ng-submit="sctrl.executeSearch()">
-        
-        <div ng-repeat="input in sctrl.searchInputs">
-            <select ng-model="input.operator"
-                ng-hide="$index === 0">
-                <option>OR</option>
-                <option>AND</option>
-                <option>NOT</option>
-            </select>
-            <input type="text"
-                ng-model="input.term"
-                placeholder="Keyword"
-                required>
-            <md-button ng-click="sctrl.removeInput(input)"
-                ng-hide="$index === 0">
-                <i class="material-icons">remove</i>
-            </md-button>
-        </div>
-        
-        <md-button class="md-text-icon-button"
-            ng-click="sctrl.addInput()">
-            <i class="material-icons">add</i>
-            Add keyword
+    <div class="adv-search__form"
+        layout="column"
+        layout-align="start center">
+        <md-button id="adv-search-help"
+            class="md-icon-button"
+            ng-click="sctrl.helpfulSearchHints($event)">
+            <i class="material-icons">help</i>
         </md-button>
-        <br>
-        <input type="submit" class="md-button md-primary md-raised" value="Search">
-        <div class="muted" style="padding: 8px;">
-            {{ sctrl.searchStr }}
-        </div>
-    </form>
     
-    <div class="search__list"
+        <form ng-submit="sctrl.executeSearch()"
+            layout="column"
+            layout="center center">
+            
+            <div layout="row">
+                <i class="material-icons">search</i>
+                <input type="text"
+                    ng-model="sctrl.initialTerm"
+                    placeholder="Search keyword"
+                    required>
+            </div>
+            
+            <div ng-repeat="input in sctrl.searchInputs"
+                style="text-align: center;">
+                <select ng-model="input.operator"
+                    ng-hide="$index === 0">
+                    <option>OR</option>
+                    <option>AND</option>
+                    <option>NOT</option>
+                </select>
+                <input type="text"
+                    ng-model="input.term"
+                    placeholder="Keyword"
+                    required>
+                <md-button ng-click="sctrl.removeInput(input)"
+                    class="md-icon-button">
+                    <i class="material-icons">remove_circle_outline</i>
+                </md-button>
+            </div>
+            <div style="text-align: center;">
+                <md-button class="md-text-icon-button"
+                    ng-click="sctrl.addInput()">
+                    <i class="material-icons">add</i>
+                    Add keyword
+                </md-button>
+            </div>
+            <div style="text-align: center;">
+                <input type="submit" class="md-button md-primary md-raised" value="Search">
+            </div>
+        </form>
+        <div ng-hide="sctrl.searchStr === ''"
+            class="muted"
+            style="padding: 8px;">
+            Searching for: {{ sctrl.searchStr }}
+        </div>
+    </div>
+    
+    <div class="search__list adv-search__list"
         ng-show="sctrl.searchResults.documents"
-        layout="column">
+        layout="column"
+        flex>
         <div class="simple-list"
             layout="column">
             <div class="simple-list__header">
@@ -101,8 +131,11 @@
             <md-list class="simple-list__body md-dense" style="overflow: initial;">
                 <md-list-item ng-repeat="item in sctrl.searchResults.documents | filter: sctrl.filterBy | orderBy: sctrl.orderBy"
                     layout="row"
-                    class="simple-list__body__item">
-                    <div flex="10" style="text-align: center" class="simple-list__cell">
+                    class="simple-list__body__item"
+                    ng-click="sctrl.fileInfoDiag($event, item)">
+                    <div flex="10"
+                        style="text-align: center"
+                        class="simple-list__cell">
                         <img ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="">
                     </div>
                     <div flex class="simple-list__cell">
@@ -114,9 +147,10 @@
                     <div flex="10"
                         layout="column"
                         layout-align="center center"
-                         class="simple-list__cell">
+                        class="simple-list__cell">
                         <md-checkbox
-                            ng-change="ordCtrl.addToBasket(item)"
+                            ng-click="$event.stopPropagation(); $event.preventDefault();"
+                            ng-change="sctrl.addToBasket(item);"
                             ng-true-value="'add'"
                             ng-false-value="'delete'"
                             ng-model="item.baskOp"

@@ -7,40 +7,44 @@ angular
  * @param $scope
  * @constructor
  */
-function AdvSearchController($scope, searchService, basketService, fileUtilsService) {
+function AdvSearchController($scope, $state, searchService, basketService, fileUtilsService, $mdDialog) {
     
     var sctrl = this;
     
     sctrl.searchStr = '';
+    sctrl.initialTerm = '';
     sctrl.searchInputs = [];
     sctrl.searchResults = {};
     sctrl.orderBy = '';
     sctrl.filterBy = { title: '', packageId: '' };
+    sctrl.state = $state;
     
     sctrl.executeSearch = executeSearch;
     sctrl.sortThis = sortThis;
     sctrl.addInput = addInput;
     sctrl.removeInput = removeInput;
-    
-    sctrl.addInput();
+    sctrl.helpfulSearchHints = helpfulSearchHints;
+    sctrl.fileInfoDiag = fileInfoDiag;
+    sctrl.addToBasket = basketCheck;
     
     function executeSearch() {
         
-        sctrl.searchStr = '';
+        sctrl.searchStr = 'content: ' + sctrl.initialTerm;
         
         for (var i in sctrl.searchInputs) {
             if (sctrl.searchInputs[i].term !== '') {
                 sctrl.searchStr = sctrl.searchStr + ' ' + sctrl.searchInputs[i].operator + ' content: ' + sctrl.searchInputs[i].term + '';
             };
         };
-        
+    
         sctrl.searchResults = {};
         var queryObj = {
-            q: sctrl.searchStr,
+            q: sctrl.searchStr + ' AND path:*/representations/*/data/* AND NOT path:*_mig-*',
             rows: 25,
             start: 0,
             wt: "json",
-            fl: "path,contentType,size,confidential,package,textCategory,_version_"
+            filter: 'package, size, path, confidential, contentType, textCategory',
+            sort :'package asc'
         };
         var encTerm = searchService.objectToQueryString(queryObj);
 
@@ -54,9 +58,11 @@ function AdvSearchController($scope, searchService, basketService, fileUtilsServ
                 //Let's clean up some of the properties. Temporary solution
                 basketService.currentSearch.documents.forEach(function (item) {
                     item.title = item.path.substring(item.path.lastIndexOf('/') + 1, item.path.lastIndexOf('.'));
-                    item.packageId = item.package.substring(item.package.indexOf('_') + 1);
-                    item.thumbnail = fileUtilsService.getFileIconByMimetype(item.contentType, 24)
-                    item.displaySize = formatBytes(item.size);
+                    if(item.package) {
+                        item.packageId = item.package.substring(item.package.lastIndexOf(':') + 1);
+                    };
+                    item.thumbnail = fileUtilsService.getFileIconByMimetype(item.contentType, 24);
+                    item.displaySize = formatBytes(item.stream_size);
                 });
                 sctrl.searchResults = basketService.currentSearch;
             }
@@ -93,5 +99,60 @@ function AdvSearchController($scope, searchService, basketService, fileUtilsServ
         var i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
+    
+    function helpfulSearchHints(ev) {
+        $mdDialog.show(
+          $mdDialog.alert()
+            //.parent(angular.element(document.querySelector('#adv-search-help')))
+            .clickOutsideToClose(true)
+            .title('Advanced search help')
+            .textContent('You can use * and "" to enhance your search. Try "Albert Einstein" or Einst*')
+            .ariaLabel('Advanced search help')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );
+    }
+    
+    function basketCheck(item) {
+        if (item.baskOp === 'add') {
+            basketService.addToBasket(item);
+        };
+        if (item.baskOp === 'delete') {
+            basketService.removeFromBasket(item).then(function (result) {
+                console.log('Removal status: ' + result);
+            });
+        };
+    }
+    
+    
+    /**
+     * Dialog to show info on individual files
+     */
+    
+    function fileInfoDiag(ev, doc) {
+        $mdDialog.show({
+          controller: fileInfoDialogController,
+          templateUrl: 'app/src/order/view/fileInfoDiag.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          locals: { document: doc },
+          clickOutsideToClose: true,
+          fullscreen: true
+        });
+    };
+    
+    function fileInfoDialogController($scope, $mdDialog, document) {
+        var fidc = this;
+        
+        $scope.doc = document;
+        
+        $scope.hide = function() {
+          $mdDialog.hide();
+        };
+    
+        $scope.cancel = function() {
+          $mdDialog.cancel();
+        };
+    };
 
 }
