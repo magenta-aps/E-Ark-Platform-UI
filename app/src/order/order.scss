@@ -137,3 +137,33 @@ a.search__item__link:visited {
         display: block;
     }
 }
+
+
+/*
+ * Media queries for bigger screens
+ */ 
+
+@media screen and (min-width: 860px) {
+    
+    #adv-search {
+        flex-flow: row nowrap;
+        align-items: stretch;
+        overflow: initial;
+    }
+    
+    .adv-search__form {
+        justify-content: flex-start;
+        align-items: center;
+        padding: 8px;
+        flex: 1 0 320px;
+    }
+    
+    .adv-search__list {
+        justify-content: flex-start;
+        
+        .simple-list__body {
+            overflow: auto !important;
+        }
+    }
+    
+}
