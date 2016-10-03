@@ -7,25 +7,28 @@ angular.module('eArkPlatform.order').controller('OrderController', OrderControll
  * @param basketService
  * @constructor
  */
-function OrderController(searchService, fileUtilsService, basketService, sessionService, orderService, $state) {
+function OrderController($scope, searchService, fileUtilsService, basketService, sessionService, orderService, $state, $mdDialog) {
     
     var ordCtrl = this;
-    ordCtrl.searchTerm = '';
-    ordCtrl.searchContext = 'content';
+    ordCtrl.searchStr = '';
+    ordCtrl.initialTerm = '';
+    ordCtrl.searchInputs = [];
     ordCtrl.searchResults = basketService.currentSearch;
     ordCtrl.basket = [];
     ordCtrl.orderHistory = [];
     ordCtrl.orderBy = '-orderStatus';
-    ordCtrl.filterBy = {
-        title: '',
-        packageId: ''
-    };
+    ordCtrl.filterBy = { title: '', packageId: '' };
     ordCtrl.state = $state;
     
     ordCtrl.sortThis = sortThis;
     ordCtrl.executeSearch = executeSearch;
     ordCtrl.addToBasket = basketCheck;
     ordCtrl.goToOrder = goToOrder;
+    ordCtrl.addInput = addInput;
+    ordCtrl.removeInput = removeInput;
+    ordCtrl.helpfulSearchHints = helpfulSearchHints;
+    ordCtrl.fileInfoDiag = fileInfoDiag;
+    ordCtrl.addToBasket = basketCheck;
 
     var user = sessionService.getUserInfo().user;
     
@@ -56,12 +59,21 @@ function OrderController(searchService, fileUtilsService, basketService, session
     }
 
     function executeSearch() {
+        ordCtrl.searchStr = 'content: ' + ordCtrl.initialTerm;
+        
+        for (var i in ordCtrl.searchInputs) {
+            if (ordCtrl.searchInputs[i].term !== '') {
+                ordCtrl.searchStr = ordCtrl.searchStr + ' ' + ordCtrl.searchInputs[i].operator + ' content: ' + ordCtrl.searchInputs[i].term + '';
+            };
+        };
+    
         ordCtrl.searchResults = {};
         var queryObj = {
-            q: ordCtrl.searchContext + ':' + ordCtrl.searchTerm+' AND path:*/representations/*/data/* AND NOT path:*_mig-*',
+            q: ordCtrl.searchStr + ' AND path:*/representations/*/data/* AND NOT path:*_mig-*',
             rows: 25,
             start: 0,
-            filter: 'package,size,path,confidential,content_type,textCategory', //fields
+            fl: 'package,size,path,confidential,contentType,textCategory,_version_,title,packageId,displaySize', //fields
+            filter: 'package,size,path,confidential,contentType,textCategory', //fields
             sort :'package asc',
             wt: 'json'
         };
@@ -169,5 +181,54 @@ function OrderController(searchService, fileUtilsService, basketService, session
         var i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
+    
+    function addInput() {
+        var inputObj = { term: '', operator: 'OR' };
+        ordCtrl.searchInputs.push( inputObj );
+    }
+    
+    function removeInput(inputObj) {
+        var i = ordCtrl.searchInputs.indexOf(inputObj);
+        ordCtrl.searchInputs.splice(i, 1);
+    }
+    
+    function helpfulSearchHints(ev) {
+        $mdDialog.show(
+          $mdDialog.alert()
+            //.parent(angular.element(document.querySelector('#adv-search-help')))
+            .clickOutsideToClose(true)
+            .title('Advanced search help')
+            .textContent('You can use * and "" to enhance your search. Try "Albert Einstein" or Einst*')
+            .ariaLabel('Advanced search help')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );
+    }
+    
+    function fileInfoDiag(ev, doc) {
+        $mdDialog.show({
+          controller: fileInfoDialogController,
+          templateUrl: 'app/src/order/view/fileInfoDiag.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          locals: { document: doc },
+          clickOutsideToClose: true,
+          fullscreen: true
+        });
+    };
+    
+    function fileInfoDialogController($scope, $mdDialog, document) {
+        var fidc = this;
+        
+        $scope.doc = document;
+        
+        $scope.hide = function() {
+          $mdDialog.hide();
+        };
+    
+        $scope.cancel = function() {
+          $mdDialog.cancel();
+        };
+    };
 
 }

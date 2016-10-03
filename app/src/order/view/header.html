@@ -3,7 +3,7 @@
         
         <a ui-sref="orderSearch"
             class="md-button md-text-icon-button"
-            ng-class="{ active: ordCtrl.state.is('orderSearch') }">
+            ng-class="{ active: ordCtrl.state.is('orderSearch') || sctrl.state.is('advSearch') }">
             <i class="material-icons">search</i>
             Search & order
         </a>
