@@ -61,7 +61,7 @@ function OrderController(searchService, fileUtilsService, basketService, session
             q: ordCtrl.searchContext + ':' + ordCtrl.searchTerm+' AND path:*/representations/*/data/* AND NOT path:*_mig-*',
             rows: 25,
             start: 0,
-            filter: 'package,size,path,confidential,contentType,textCategory', //fields
+            filter: 'package,size,path,confidential,content_type,textCategory', //fields
             sort :'package asc',
             wt: 'json'
         };
