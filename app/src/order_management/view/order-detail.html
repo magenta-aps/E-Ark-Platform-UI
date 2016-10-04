@@ -6,7 +6,7 @@
         </a>
         
         <span>
-            <span class="muted">Order details:</span>
+            <span class="muted">{{ 'ORDER.ORDERS.DETAILS' | translate }}:</span>
             {{ odCtrl.data.title }}
         </span>
         
@@ -19,7 +19,7 @@
         
     <div layout="column" layout-padding class="order-details--items" flex="66">
         
-        <h3 class="md-subhead">Order items:</h3>
+        <h3 class="md-subhead">{{ 'ORDER.ORDERS.ITEMS' | translate }}:</h3>
         
         <md-card>
             <md-card-content style="overflow: auto;">
@@ -27,22 +27,22 @@
                     <div class="simple-list__header">
                         <div layout="row">
                             <div flex="20" class="muted" layout-padding>
-                                Title
+                                {{ 'COMMON.TITLE' | translate }}
                             </div>
                             <div flex="20" class="muted" layout-padding>
-                                Size
+                                {{ 'COMMON.SIZE' | translate }}
                             </div>
                             <div flex="20" class="muted" layout-padding>
-                                Ref. code
+                                {{ 'ORDER.ORDERS.REF_CODE' | translate }}
                             </div>
                             <div flex="20" class="muted" layout-padding>
-                                Content type
+                                {{ 'ORDER.ORDERS.CONTENT_TYPE' | translate }}
                             </div>
                             <div flex="10" class="muted" layout-padding>
-                                Confidential
+                                {{ 'ORDERMAN.CONFIDENTIAL' | translate }}
                             </div>
                             <div flex="20" class="muted" layout-padding>
-                                Package ID
+                                {{ 'ORDER.ORDERS.PACK_ID' | translate }}
                             </div>
                         </div>
                     </div>
@@ -78,53 +78,53 @@
     
     <div layout-padding class="order-details__data" flex="33" style="overflow: auto;">
         <dl>
-            <dt>Order</dt>
+            <dt>{{ 'ORDER.TITLE.ORDER' | translate }}</dt>
             <dd>{{ odCtrl.data.title }}</dd>
-            <dt>Order status</dt>
+            <dt>{{ 'ORDER.ORDERS.STATUS' | translate }}</dt>
             <dd>
                 <select ng-model="odCtrl.data.orderStatus" ng-change="odCtrl.updateOrderStatus()">
                     <option val="{{ odCtrl.data.orderStatus }}">{{ odCtrl.data.orderStatus }}</option>
                     <option disabled>──────────</option>
-                    <option val="none">new</option>
-                    <option val="none">open</option>
-                    <option val="none">closed</option>
+                    <option val="none">{{ 'ORDER.ORDERS.STATUS-new' | translate }}</option>
+                    <option val="open">{{ 'ORDER.ORDERS.STATUS-open' | translate }}</option>
+                    <option val="closed">{{ 'ORDER.ORDERS.STATUS-closed' | translate }}</option>
                 </select>
             </dd>
-            <dt>Order ID</dt>
+            <dt>{{ 'ORDER.ORDERS.ORDER_ID' | translate }}</dt>
             <dd>{{ odCtrl.data.orderId }}</dd>
-            <dt>Origin</dt>
+            <dt>{{ 'ORDERMAN.ORIGIN' | translate }}</dt>
             <dd>
                 <span ng-show="!odCtrl.data.origin">none</span>
                 {{ odCtrl.data.origin }}
             </dd>
-            <dt>Assignee</dt>
+            <dt>{{ 'ORDERMAN.ASSIGNEE' | translate }}</dt>
             <dd>
                 {{ odCtrl.assignee }}
                 <select ng-model="odCtrl.assigneeSelector" ng-change="odCtrl.updateOrderAssignee()">
                     <option ng-if="odCtrl.assigneeSelector !== 'none'" value="{{ odCtrl.data.assignee.uid }}">{{ odCtrl.data.assignee.firstname }} {{ odCtrl.data.assignee.lastname }}</option>
                     <option disabled>──────────</option>
-                    <option value="none">none</option>
+                    <option value="none">{{ 'COMMON.NONE' | translate }}</option>
                     <option ng-repeat="archivist in odCtrl.archivists" value="{{ archivist.userName }}">{{ archivist.firstname }} {{ archivist.lastname }}</option>
                 </select>
             </dd>
-            <dt>Order date</dt>
+            <dt>{{ 'ORDER.ORDERS.ORDER_DATE' | translate }}</dt>
             <dd>{{ odCtrl.data.orderDate }}</dd>
-            <dt>Planned date</dt>
+            <dt>{{ 'ORDERMAN.PLANNED_DATE' | translate }}</dt>
             <dd>{{ odCtrl.data.plannedDate }}</dd>
-            <dt>User to issue order</dt>
+            <dt>{{ 'ORDER.ORDERS.ISSUED_BY_USER' | translate }}</dt>
             <dd>
                 {{ odCtrl.data.endUser.firstname }} {{ odCtrl.data.endUser.lastname }}<br>
                 <a href="mailto:{{ odCtrl.data.endUser.email }}">{{ odCtrl.data.endUser.email }}</a>
             </dd>
-            <dt>Preferred delivery method</dt>
+            <dt>{{ 'ORDER.LABEL.PREFERRED_DELIVERY_METHOD' | translate }}</dt>
             <dd>{{ odCtrl.data.preferredDeliveryMethod }}</dd>
-            <dt>Access date</dt>
+            <dt>{{ 'ORDERMAN.ACCESS_DATE' | translate }}</dt>
             <dd>{{ odCtrl.data.accessDate }}</dd>
-            <dt>Access end date</dt>
+            <dt>{{ 'ORDERMAN.ACCESS_END_DATE' | translate }}</dt>
             <dd>{{ odCtrl.data.accessEndDate }}</dd>
-            <dt>Access date comments</dt>
+            <dt>{{ 'ORDERMAN.ACCESS_DATE_COMMENTS' | translate }}</dt>
             <dd>{{ odCtrl.data.accessDateComments }}</dd>
-            <dt>Validation date</dt>
+            <dt>{{ 'ORDERMAN.VALIDATION_DATE' | translate }}</dt>
             <dd>{{ odCtrl.data.validationDate }}</dd>
         </dl>
     </div>

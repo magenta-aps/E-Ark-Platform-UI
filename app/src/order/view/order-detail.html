@@ -6,7 +6,7 @@
         </a>
         
         <span>
-            <span class="muted">Order details:</span>
+            <span class="muted">{{ 'ORDER.ORDERS.DETAILS' | translate }}:</span>
             {{ oddCtrl.data.title }}
         </span>
         
@@ -19,7 +19,7 @@
         
     <div layout="column" layout-padding class="order-details--items" flex="66">
         
-        <h3 class="md-subhead">Order items:</h3>
+        <h3 class="md-subhead">{{ 'ORDER.ORDERS.ITEMS' | translate }}:</h3>
         
         <md-card>
             <md-card-content style="overflow: auto;">
@@ -27,19 +27,19 @@
                     <div class="simple-list__header">
                         <div layout="row">
                             <div flex="20" class="muted" layout-padding>
-                                Package ID
+                                {{ 'ORDER.ORDERS.PACK_ID' | translate }}
                             </div>
                             <div flex="20" class="muted" layout-padding>
-                                Title
+                                {{ 'COMMON.TITLE' | translate }}
                             </div>
                             <div flex="20" class="muted" layout-padding>
-                                Ref. code
+                                {{ 'ORDER.ORDERS.REF_CODE' | translate }}
                             </div>
                             <div flex="20" class="muted" layout-padding>
-                                Content type
+                                {{ 'ORDER.ORDERS.CONTENT_TYPE' | translate }}
                             </div>
                             <div flex="20" class="muted" layout-padding>
-                                Size
+                                {{ 'COMMON.SIZE' | translate }}
                             </div>
                         </div>
                     </div>
@@ -73,21 +73,21 @@
     
     <div layout-padding class="order-details__data" flex="33">
         <dl>
-            <dt>Order</dt>
+            <dt>{{ 'ORDER.TITLE.ORDER' | translate }}</dt>
             <dd>{{ oddCtrl.data.title }}</dd>
-            <dt>Order status</dt>
+            <dt>{{ 'ORDER.ORDERS.STATUS' | translate }}</dt>
             <dd>{{oddCtrl.data.orderStatus}}</dd>
-            <dt>Order ID</dt>
+            <dt>{{ 'ORDER.ORDERS.ORDER_ID' | translate }}</dt>
             <dd>{{ oddCtrl.data.orderId }}</dd>
-            <dt>Assignee Archivist</dt>
+            <dt>{{ 'ORDER.ORDERS.ARCH_ASSIGNED' | translate }}</dt>
             <dd>{{ oddCtrl.assignee }}</dd>
-            <dt>Ordered date</dt>
+            <dt>{{ 'ORDER.ORDERS.ORDER_DATE' | translate }}</dt>
             <dd>{{ oddCtrl.data.orderDate }}</dd>
-            <dt>Planned delivery date</dt>
+            <dt>{{ 'ORDER.ORDERS.PLAN_DELIVER_DATE' | translate }}</dt>
             <dd>{{ oddCtrl.data.plannedDate }}</dd>
-            <dt>Preferred delivery method</dt>
+            <dt>{{ 'ORDER.LABEL.PREFERRED_DELIVERY_METHOD' | translate }}</dt>
             <dd>{{ oddCtrl.data.preferredDeliveryMethod }}</dd>
-            <dt>User to issue order</dt>
+            <dt>{{ 'ORDER.ORDERS.ISSUED_BY_USER' | translate }}</dt>
             <dd>
                 {{ oddCtrl.data.endUser.firstname }} {{ oddCtrl.data.endUser.lastname }}<br>
                 <a href="mailto:{{ oddCtrl.data.endUser.email }}">{{ oddCtrl.data.endUser.email }}</a>

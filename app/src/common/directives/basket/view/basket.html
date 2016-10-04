@@ -11,7 +11,7 @@
         <div layout="column"
             flex="50"
             layout-padding>
-            <h2 class="md-title">Order items:</h2>
+            <h2 class="md-title">{{ 'BASKET.ITEMS' | translate }}:</h2>
             <md-card>
                 <md-card-content style="overflow: auto;">
                     <div class="simple-list" ng-show="bdc.basket">
@@ -37,7 +37,7 @@
             flex="50"
             layout-padding
             style="background-color: #fff; overflow: auto;">
-            <h2 class="md-title">Order data</h2>
+            <h2 class="md-title">{{ 'BASKET.DATA' | translate }}</h2>
             <md-input-container>
                 <label>{{ 'COMMON.TITLE' | translate }}</label>
                 <input type="text" name="orderTitle" ng-model="bdc.orderForm.order.title" required md-autofocus>
@@ -63,7 +63,7 @@
         layout-padding
         style="border-top: solid 1px #ddd;">
         <md-button class="md-primary md-raised md-text-icon-button" type="submit" ng-click="submitMethod(bdc.orderForm.order);">
-            Send order
+            {{ 'BASKET.SEND' | translate }}
             <i class="material-icons ng-scope">send</i>
         </md-button>
     </div>

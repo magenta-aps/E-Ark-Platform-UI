@@ -1,0 +1,13 @@
+{
+    "ORDERMAN": {
+        "LABEL": "Ordrehåndtering",
+        "CONFIDENTIAL": "Fortrolig",
+        "ORIGIN": "Oprindelse",
+        "ASSIGNEE": "Tildelt til",
+        "PLANNED_DATE": "Planlagt dato",
+        "ACCESS_DATE": "Tilgængelig fra dato",
+        "ACCESS_END_DATE": "Tilgængelig til dato",
+        "ACCESS_DATE_COMMENTS": "Kommentar til tilgængelig dato",
+        "VALIDATION_DATE": "Valideringsdato"
+    }
+}
