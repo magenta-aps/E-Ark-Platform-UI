@@ -18,7 +18,9 @@
         flex>
         <div class="simple-list__header">
             <div layout="row">
-                <div flex="20">
+                <div flex="60"
+                    flex-sm="40"
+                    flex-gt-sm="20">
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="olCtrl.sortThis($event, 'title')">
@@ -27,7 +29,11 @@
                         <i ng-show="olCtrl.orderBy === 'title'" class="material-icons">arrow_drop_down</i>
                     </md-button>
                 </div>
-                <div flex="10">
+                <div flex="40"
+                    flex-sm="30"
+                    flex-md="20"
+                    flex-gt-md="10"
+                    style="text-align: center;">
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="olCtrl.sortThis($event, 'orderStatus')">
@@ -36,7 +42,9 @@
                         <i ng-show="olCtrl.orderBy === 'orderStatus'" class="material-icons">arrow_drop_down</i>
                     </md-button>
                 </div>
-                <div flex="10">
+                <div hide
+                    show-gt-md
+                    flex="10">
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="olCtrl.sortThis($event, 'origin')">
@@ -45,7 +53,9 @@
                         <i ng-show="olCtrl.orderBy === 'origin'" class="material-icons">arrow_drop_down</i>
                     </md-button>
                 </div>
-                <div flex="20">
+                <div hide
+                    show-gt-sm
+                    flex="20">
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="olCtrl.sortThis($event, 'orderDate')">
@@ -54,7 +64,9 @@
                         <i ng-show="olCtrl.orderBy === 'orderDate'" class="material-icons">arrow_drop_down</i>
                     </md-button>
                 </div>
-                <div flex="20">
+                <div hide
+                    show-gt-sm
+                    flex="20">
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="olCtrl.sortThis($event, 'plannedDate')">
@@ -63,7 +75,9 @@
                         <i ng-show="olCtrl.orderBy === 'plannedDate'" class="material-icons">arrow_drop_down</i>
                     </md-button>
                 </div>
-                <div flex="10">
+                <div hide
+                    show-gt-md
+                    flex="10">
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="olCtrl.sortThis($event, 'endUser.firstname')">
@@ -72,7 +86,10 @@
                         <i ng-show="olCtrl.orderBy === 'endUser.firstname'" class="material-icons">arrow_drop_down</i>
                     </md-button>
                 </div>
-                <div flex="10">
+                <div hide-xs
+                    flex-sm="30"
+                    flex-md="20"
+                    flex-gt-md="10">
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="olCtrl.sortThis($event, 'assignee')">
@@ -88,27 +105,51 @@
                 layout="row"
                 class="simple-list__body__item"
                 ng-click="olCtrl.orderDetailGo(order.orderId)">
-                <div flex="20" class="simple-list__cell">
+                <div flex="60"
+                    flex-sm="40"
+                    flex-gt-sm="20"
+                    class="simple-list__cell">
                     {{ order.title }}
                 </div>
-                <div flex="10" class="simple-list__cell">
+                <div flex="40"
+                    flex-sm="30"
+                    flex-md="20"
+                    flex-gt-md="10"
+                    class="simple-list__cell"
+                    style="text-align: center;">
                     <span class="status-{{ order.orderStatus }}">
                         {{ 'ORDER.ORDERS.STATUS-' + order.orderStatus | translate }}
                     </span>
                 </div>
-                <div flex="10" class="simple-list__cell muted">
+                <div hide
+                    show-gt-md
+                    flex="10"
+                    class="simple-list__cell muted">
                     {{ order.orgin }}
                 </div>
-                <div flex="20" class="simple-list__cell muted">
+                <div hide
+                    show-gt-sm
+                    flex-gt-sm="20"
+                    class="simple-list__cell muted">
                     {{ order.orderDate }}
                 </div>
-                <div flex="20" class="simple-list__cell muted">
+                <div hide
+                    show-gt-sm
+                    flex-gt-sm="20"
+                    class="simple-list__cell muted">
                     {{ order.plannedDate }}
                 </div>
-                <div flex="10" class="simple-list__cell muted">
+                <div hide
+                    show-gt-md
+                    flex="10"
+                    class="simple-list__cell muted">
                     {{ order.endUser.firstname }} {{ order.endUser.lastname }}
                 </div>
-                <div flex="10" class="simple-list__cell muted">
+                <div hide-xs
+                    flex-sm="30"
+                    flex-md="20"
+                    flex-gt-md="10"
+                    class="simple-list__cell muted">
                     <span ng-if="order.assignee === 'none'">{{ order.assignee }}</span>
                     <span ng-if="order.assignee !== 'none'">{{ order.assignee.firstname }} {{ order.assignee.lastname }}</span>
                 </div>

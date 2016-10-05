@@ -1,8 +1,29 @@
+#basket-content {
+    overflow: auto;
+}
+
 #basket-dialog-content{
     overflow-y: auto;
     overflow-x: hidden;
+    
+    md-divider {
+        padding: 8px;
+    }
 }
 
-#basket-dialog-content md-divider{
-    padding: 8px;
+.basket__info__content {
+    background-color: #fff;
+}
+
+
+@media screen and (min-width: 960px) {
+
+    .basket__items__content md-card-content {
+        overflow: auto;
+    }
+    
+    .basket__info__content {
+        overflow: auto;
+    }
+
 }

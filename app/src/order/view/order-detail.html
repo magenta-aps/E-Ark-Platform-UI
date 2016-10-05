@@ -15,52 +15,96 @@
     </div>
 </md-toolbar>
 
-<section class="order-details" layout="row" flex>
+<section class="order-details"
+    layout-gt-sm="row"
+    flex>
         
-    <div layout="column" layout-padding class="order-details--items" flex="66">
+    <div class="order-details__items"
+        layout="column"
+        layout-padding
+        flex
+        flex-gt-sm="70">
         
         <h3 class="md-subhead">{{ 'ORDER.ORDERS.ITEMS' | translate }}:</h3>
         
         <md-card>
-            <md-card-content style="overflow: auto;">
+            <md-card-content>
                 <div class="simple-list">
                     <div class="simple-list__header">
                         <div layout="row">
-                            <div flex="20" class="muted" layout-padding>
+                            <div hide
+                                show-gt-md
+                                flex="20"
+                                class="muted"
+                                layout-padding>
                                 {{ 'ORDER.ORDERS.PACK_ID' | translate }}
                             </div>
-                            <div flex="20" class="muted" layout-padding>
+                            <div flex="60"
+                                flex-gt-xs="40"
+                                class="muted"
+                                layout-padding>
                                 {{ 'COMMON.TITLE' | translate }}
                             </div>
-                            <div flex="20" class="muted" layout-padding>
+                            <div hide
+                                show-gt-xs
+                                flex="30"
+                                flex-gt-md="20"
+                                class="muted"
+                                layout-padding>
                                 {{ 'ORDER.ORDERS.REF_CODE' | translate }}
                             </div>
-                            <div flex="20" class="muted" layout-padding>
+                            <div flex="40"
+                                flex-gt-xs="30"
+                                flex-lg="20"
+                                flex-gt-lg="10"
+                                class="muted"
+                                layout-padding>
                                 {{ 'ORDER.ORDERS.CONTENT_TYPE' | translate }}
                             </div>
-                            <div flex="20" class="muted" layout-padding>
+                            <div hide
+                                show-gt-lg
+                                flex="10"
+                                class="muted"
+                                layout-padding>
                                 {{ 'COMMON.SIZE' | translate }}
                             </div>
                         </div>
                     </div>
                     <md-list class="simple-list__body md-dense">
                         <md-list-item ng-repeat="item in oddCtrl.data.items"
+                            ng-click="oddCtrl.fileInfoDiag($event, item)"
                             layout="row"
                             class="simple-list__body__item">
-                                <div flex="20" class="simple-list__cell muted">
+                                <div hide
+                                    show-gt-md
+                                    flex="20"
+                                    class="simple-list__cell muted">
                                     {{ item.packageId }}
                                 </div>
-                                <div flex="20" class="simple-list__cell">
+                                <div flex="60"
+                                    flex-gt-xs="40"
+                                    class="simple-list__cell">
                                     {{ item.title }}
                                 </div>
-                                <div flex="20" class="simple-list__cell muted">
+                                <div hide
+                                    show-gt-xs
+                                    flex="30"
+                                    flex-gt-md="20"
+                                    class="simple-list__cell muted">
                                     {{ item.refCode }}
                                 </div>
-                                <div flex="20" class="simple-list__cell muted">
+                                <div flex="40"
+                                    flex-gt-xs="30"
+                                    flex-lg="20"
+                                    flex-gt-lg="10"
+                                    class="simple-list__cell muted">
                                     {{ item.contentType }}
                                     <img ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="">
                                 </div>
-                                <div flex="20" class="simple-list__cell muted">
+                                <div hide
+                                    show-gt-lg
+                                    flex="10"
+                                    class="simple-list__cell muted">
                                     {{ item.displaySize }}
                                 </div>
                         </md-list-item>
@@ -71,7 +115,9 @@
         
     </div>
     
-    <div layout-padding class="order-details__data" flex="33">
+    <div class="order-details__data"
+        layout-padding
+        flex-gt-sm="30">
         <dl>
             <dt>{{ 'ORDER.TITLE.ORDER' | translate }}</dt>
             <dd>{{ oddCtrl.data.title }}</dd>
