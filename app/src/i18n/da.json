@@ -6,6 +6,8 @@
         }
     },
     "COMMON": {
+        "NONE": "ingen",
+        "SIZE": "Størrelse",
         "PACKAGE_ID": "Pakke Id",
         "CONFIRM": "Bekræft",
         "WARNING": "Advarsel!",
@@ -22,6 +24,7 @@
         "NEW": "Ny",
         "ADD_NEW": "Tilføj ny",
         "ADD": "Tilføj",
+        "ADD_TO": "Tilføj til",
         "SEND": "Send",
         "NAME": "Navn",
         "INFORMATION": "Information",
@@ -524,16 +527,6 @@
         "UPLOAD_GROUPS": "Upload grupper (csv)",
         "UPLOAD_GROUPS_NOTE": "Upload grupper. Kun CSV-filer",
         "UPLOAD_GROUPS_SUCCESS": "Grupper CSV uploadet"
-    },
-    "ORDER":{
-        "TITLE":{
-            "BASKET":"Kurv"
-        },
-        "LABEL":{
-            "PLANNED_DATE":"Forventet dato",
-            "USER_NOTES":"Ekstra bemærkning",
-            "PREFERRED_DELIVERY_METHOD": "Foretrukket format til modtagelse"
-        }
     },
     "ORG": {
         "ORGANIZATIONS": "Organisationer",

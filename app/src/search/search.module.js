@@ -1,1 +1,2 @@
-angular.module('eArkPlatform.search', ['ngMaterial', 'pascalprecht.translate']);
+angular
+    .module('eArkPlatform.search', ['ngMaterial', 'pascalprecht.translate']);

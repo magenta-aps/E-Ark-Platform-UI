@@ -2,8 +2,16 @@
  * Header styles
  */
 
-.order-header .active {
-    background-color: rgba(255,255,255,0.2);
+.order-header {
+    
+    a.md-button,
+    a.md-button:link,
+    a.md-button:visited {
+        color: #fff;
+    }
+    .active {
+        background-color: rgba(255,255,255,0.2);
+    }
 }
 
 
@@ -11,20 +19,6 @@
  * Search styles
  */
 
-.search-input-1 {
-    
-    input {
-        width: 40em;
-        max-width: 80%;
-        margin: 0 8px;
-        padding: 8px;
-    }
-    .material-icons {
-        margin: 0 8px;
-        font-size: 36px;
-        text-align: right;
-    }
-}
 
 .search__header {
     margin: 8px 16px;
@@ -136,4 +130,55 @@ a.search__item__link:visited {
     md-checkbox {
         display: block;
     }
+}
+
+#adv-search {
+    overflow: auto;
+}
+
+.adv-search__primary-input {
+    padding: 8px; margin: 0 0 0 8px;
+}
+
+.adv-search__filter-form {
+    margin: 0 8px 8px;
+}
+
+.adv-search__filter-form__filter {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/*
+ * Media queries for bigger screens
+ */ 
+
+@media screen and (min-width: 960px) {
+    
+    #adv-search {
+        overflow: initial;
+    }
+    
+    .adv-search__form {
+        flex: 1 0 auto;
+        padding: 0 8px;
+        
+        &.minimize {
+            flex: 0 1 auto;
+        }
+    }
+    
+    .adv-search__list {
+        justify-content: flex-start;
+        
+        .simple-list__body {
+            overflow: auto !important;
+        }
+    }
+    
+    .adv-search__secondary-input {
+        width: 9em;
+    }
+    
 }
