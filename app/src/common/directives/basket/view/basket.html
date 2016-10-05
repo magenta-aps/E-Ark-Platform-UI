@@ -1,22 +1,24 @@
 <form ng-controller="BasketController as bdc"
     name="bdc.orderForm"
     novalidate
-    layout="column"
+    layout-gt-sm="column"
     layout-fill>
 
-    <div layout="row"
-        id="basket-content"
+    <div id="basket-content"
+        layout-gt-sm="row"
         flex>
         
-        <div layout="column"
-            flex="50"
+        <div class="basket__items__content"
+            layout-gt-sm="column"
+            flex-gt-sm="60"
             layout-padding>
             <h2 class="md-title">{{ 'BASKET.ITEMS' | translate }}:</h2>
             <md-card>
-                <md-card-content style="overflow: auto;">
+                <md-card-content>
                     <div class="simple-list" ng-show="bdc.basket">
                         <md-list class="simple-list__body md-dense">
                             <md-list-item ng-repeat="document in bdc.basket"
+                                ng-click="bdc.fileInfoDiag($event, document)"
                                 class="simple-list__body__item"
                                 layout="row"
                                 layout-align="space-between center">
@@ -33,10 +35,11 @@
             </md-card>
         </div>
         
-        <div layout="column"
-            flex="50"
-            layout-padding
-            style="background-color: #fff; overflow: auto;">
+        <div class="basket__info__content"
+            layout="column"
+            layout-gt-sm="column"
+            flex-gt-sm="40"
+            layout-padding>
             <h2 class="md-title">{{ 'BASKET.DATA' | translate }}</h2>
             <md-input-container>
                 <label>{{ 'COMMON.TITLE' | translate }}</label>

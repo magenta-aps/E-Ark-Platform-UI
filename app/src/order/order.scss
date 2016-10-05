@@ -85,6 +85,14 @@ a.search__item__link:visited {
  * Order details page
  */
 
+.order-details {
+    overflow: auto;
+}
+
+.order-details__items {
+
+}
+
 .order-details__data {
     background-color: #fff;
 }
@@ -179,6 +187,14 @@ a.search__item__link:visited {
     
     .adv-search__secondary-input {
         width: 9em;
+    }
+    
+    .order-details__items md-card-content {
+        overflow: auto;
+    }
+    
+    .order-details__data {
+        overflow: auto;
     }
     
 }

@@ -10,12 +10,13 @@ angular
  * @constructor
  */
 
-function BasketController($scope, $state, basketService, sessionService){
+function BasketController($scope, $state, basketService, sessionService, $mdDialog){
 
     var bdc = this;
     var order;
 
     bdc.basket = basketService.basket;
+    bdc.fileInfoDiag = fileInfoDiag;
     
     $scope.removeItem = function(item) {
         basketService.removeFromBasket(item).then(function(response){
@@ -102,6 +103,32 @@ function BasketController($scope, $state, basketService, sessionService){
                 $state.go('orderBrowse');
             }
         });
+    };
+    
+    function fileInfoDiag(ev, doc) {
+        $mdDialog.show({
+          controller: fileInfoDialogController,
+          templateUrl: 'app/src/order/view/fileInfoDiag.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          locals: { document: doc },
+          clickOutsideToClose: true,
+          fullscreen: true
+        });
+    };
+    
+    function fileInfoDialogController($scope, $mdDialog, document) {
+        var fidc = this;
+        
+        $scope.doc = document;
+        
+        $scope.hide = function() {
+          $mdDialog.hide();
+        };
+    
+        $scope.cancel = function() {
+          $mdDialog.cancel();
+        };
     };
     
 }

@@ -6,7 +6,9 @@
         layout="column">
         <div class="simple-list__header">
             <div layout="row">
-                <div flex="20">
+                <div flex="60"
+                    flex-gt-xs="40"
+                    flex-gt-md="30">
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="ordCtrl.sortThis($event, 'title')">
@@ -15,7 +17,11 @@
                         <i ng-show="ordCtrl.orderBy === 'title'" class="material-icons">arrow_drop_down</i>
                     </md-button>
                 </div>
-                <div flex="20">
+                <div flex="40"
+                    flex-sm="30"
+                    flex-md="20"
+                    flex-gt-md="10"
+                    style="text-align: center;">
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="ordCtrl.sortThis($event, 'orderStatus')">
@@ -24,7 +30,9 @@
                         <i ng-show="ordCtrl.orderBy === 'orderStatus'" class="material-icons">arrow_drop_down</i>
                     </md-button>
                 </div>
-                <div flex="20">
+                <div hide
+                    show-gt-sm
+                    flex="20">
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="ordCtrl.sortThis($event, 'orderId')">
@@ -33,7 +41,10 @@
                         <i ng-show="ordCtrl.orderBy === 'orderId'" class="material-icons">arrow_drop_down</i>
                     </md-button>
                 </div>
-                <div flex="20">
+                <div hide
+                    show-gt-xs
+                    flex="30"
+                    flex-gt-sm="20">
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="ordCtrl.sortThis($event, 'orderDate')">
@@ -42,7 +53,9 @@
                         <i ng-show="ordCtrl.orderBy === 'orderDate'" class="material-icons">arrow_drop_down</i>
                     </md-button>
                 </div>
-                <div flex="20">
+                <div hide
+                    show-gt-md
+                    flex="20">
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="ordCtrl.sortThis($event, 'plannedDate')">
@@ -58,21 +71,39 @@
                 layout="row"
                 class="simple-list__body__item"
                 ng-click="ordCtrl.goToOrder(order.orderId)">
-                <div flex="20" class="simple-list__cell">
+                <div flex="60"
+                    flex-gt-xs="40"
+                    flex-gt-md="30"
+                    class="simple-list__cell">
                     {{ order.title }}
                 </div>
-                <div flex="20" class="simple-list__cell">
+                <div flex="40"
+                    flex-sm="30"
+                    flex-md="20"
+                    flex-gt-md="10"
+                    class="simple-list__cell"
+                    style="text-align: center;">
                     <span class="status-{{ order.orderStatus }}">
                         {{ 'ORDER.ORDERS.STATUS-' + order.orderStatus | translate }}
                     </span>
                 </div>
-                <div flex="20" class="simple-list__cell muted">
+                <div hide
+                    show-gt-sm
+                    flex="20"
+                    class="simple-list__cell muted">
                     {{ order.orderId }}
                 </div>
-                <div flex="20"  class="simple-list__cell muted">
+                <div hide
+                    show-gt-xs
+                    flex="30"
+                    flex-gt-sm="20"
+                    class="simple-list__cell muted">
                     {{ order.orderDate }}
                 </div>
-                <div flex="20"  class="simple-list__cell muted">
+                <div hide
+                    show-gt-md
+                    flex="20"
+                    class="simple-list__cell muted">
                     {{ order.plannedDate }}
                 </div>
                     

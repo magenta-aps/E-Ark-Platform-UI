@@ -17,21 +17,6 @@
     margin: $u 0;
 }
 
-.order-details {
-    display: flex;
-    flex-flow: row nowrap;
-}
-
-.order-details--data {
-    flex: 1;
-    border-left: solid 1px #eee;
-    padding: $u $u*2;
-}
-
-.order-details--items {
-    flex: 2;
-}
-
 .status-new,
 .status-open,
 .status-closed {
