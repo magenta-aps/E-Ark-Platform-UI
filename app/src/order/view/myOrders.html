@@ -10,7 +10,7 @@
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="ordCtrl.sortThis($event, 'title')">
-                        Title
+                        {{ 'COMMON.TITLE' | translate }}
                         <i ng-show="ordCtrl.orderBy === '-title'" class="material-icons">arrow_drop_up</i>
                         <i ng-show="ordCtrl.orderBy === 'title'" class="material-icons">arrow_drop_down</i>
                     </md-button>
@@ -19,7 +19,7 @@
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="ordCtrl.sortThis($event, 'orderStatus')">
-                        Order status
+                        {{ 'ORDER.ORDERS.STATUS' | translate }}
                         <i ng-show="ordCtrl.orderBy === '-orderStatus'" class="material-icons">arrow_drop_up</i>
                         <i ng-show="ordCtrl.orderBy === 'orderStatus'" class="material-icons">arrow_drop_down</i>
                     </md-button>
@@ -28,7 +28,7 @@
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="ordCtrl.sortThis($event, 'orderId')">
-                        Order Reference Id
+                        {{ 'ORDER.ORDERS.REF_ID' | translate }}
                         <i ng-show="ordCtrl.orderBy === '-orderId'" class="material-icons">arrow_drop_up</i>
                         <i ng-show="ordCtrl.orderBy === 'orderId'" class="material-icons">arrow_drop_down</i>
                     </md-button>
@@ -37,7 +37,7 @@
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="ordCtrl.sortThis($event, 'orderDate')">
-                        Ordered date
+                        {{ 'ORDER.ORDERS.ORDER_DATE' | translate }}
                         <i ng-show="ordCtrl.orderBy === '-orderDate'" class="material-icons">arrow_drop_up</i>
                         <i ng-show="ordCtrl.orderBy === 'orderDate'" class="material-icons">arrow_drop_down</i>
                     </md-button>
@@ -46,7 +46,7 @@
                     <md-button
                         class="md-text-icon-button md-primary"
                         ng-click="ordCtrl.sortThis($event, 'plannedDate')">
-                        Planned delivery date
+                        {{ 'ORDER.ORDERS.PLAN_DELIVER_DATE' | translate }}
                         <i ng-show="ordCtrl.orderBy === '-plannedDate'" class="material-icons">arrow_drop_up</i>
                         <i ng-show="ordCtrl.orderBy === 'plannedDate'" class="material-icons">arrow_drop_down</i>
                     </md-button>
@@ -63,7 +63,7 @@
                 </div>
                 <div flex="20" class="simple-list__cell">
                     <span class="status-{{ order.orderStatus }}">
-                        {{ order.orderStatus }}
+                        {{ 'ORDER.ORDERS.STATUS-' + order.orderStatus | translate }}
                     </span>
                 </div>
                 <div flex="20" class="simple-list__cell muted">

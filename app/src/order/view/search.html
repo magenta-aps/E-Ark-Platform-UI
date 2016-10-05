@@ -6,7 +6,7 @@
     <a ui-sref="orderBasket"
         class="md-button md-text-icon-button md-raised md-primary">
         <i class="material-icons">shopping_basket</i>
-        {{ 'ORDER.TITLE.BASKET' | translate }}
+        {{ 'ORDER.SEARCH.BASKET' | translate }}
     </a>
 </div>
 
@@ -27,7 +27,7 @@
             
             <p class="muted"
                 style="text-align: center;">
-                Search documents
+                {{ 'ORDER.SEARCH.SEARCH_DOCS' | translate }}
             </p>
             
             <div layout="row" layout-align="center center">
@@ -35,7 +35,7 @@
                 <input type="text"
                     class="adv-search__primary-input"
                     ng-model="ordCtrl.initialTerm"
-                    placeholder="Search keyword"
+                    placeholder="{{ 'ORDER.SEARCH.SEARCH_KEYWD' | translate }}"
                     required>
                 <md-button id="adv-search-help"
                     class="md-icon-button"
@@ -47,13 +47,13 @@
             <div ng-repeat="input in ordCtrl.searchInputs"
                 style="text-align: center;">
                 <select ng-model="input.operator">
-                    <option>OR</option>
-                    <option>AND</option>
-                    <option>NOT</option>
+                    <option value="OR">{{ 'ORDER.SEARCH.OR' | translate }}</option>
+                    <option value="AND">{{ 'ORDER.SEARCH.AND' | translate }}</option>
+                    <option value="NOT">{{ 'ORDER.SEARCH.NOT' | translate }}</option>
                 </select>
                 <input type="text"
                     ng-model="input.term"
-                    placeholder="Keyword"
+                    placeholder="{{ 'ORDER.SEARCH.KEYWD' | translate }}"
                     class="adv-search__secondary-input"
                     required>
                 <md-button ng-click="ordCtrl.removeInput(input)"
@@ -65,17 +65,17 @@
                 <md-button class="md-text-icon-button"
                     ng-click="ordCtrl.addInput()">
                     <i class="material-icons">add</i>
-                    Add keyword
+                    {{ 'COMMON.ADD' | translate }} {{ 'ORDER.SEARCH.KEYWD' | translate }}
                 </md-button>
             </div>
             <div style="text-align: center;">
-                <input type="submit" class="md-button md-primary md-raised" value="Search">
+                <input type="submit" class="md-button md-primary md-raised" value="{{ 'ORDER.SEARCH.SEARCH' | translate }}">
             </div>
         </form>
         <div ng-hide="ordCtrl.searchStr === ''"
             class="muted"
             style="padding: 8px;">
-            Searching for: {{ ordCtrl.searchStr }}
+            {{ 'ORDER.SEARCH.SEARCHING_FOR' | translate }}: {{ ordCtrl.searchStr }}
         </div>
     </div>
     
@@ -93,7 +93,7 @@
                         <md-button
                             class="md-text-icon-button md-primary"
                             ng-click="ordCtrl.sortThis($event, 'thumbnail')">
-                            {{ "COMMON.TYPE" | translate }}
+                            {{ 'COMMON.TYPE' | translate }}
                             <i ng-show="ordCtrl.orderBy === '-thumbnail'" class="material-icons">arrow_drop_up</i>
                             <i ng-show="ordCtrl.orderBy === 'thumbnail'" class="material-icons">arrow_drop_down</i>
                         </md-button>
@@ -102,7 +102,7 @@
                         <md-button
                             class="md-text-icon-button md-primary"
                             ng-click="ordCtrl.sortThis($event, 'title')">
-                            {{ "COMMON.TITLE" | translate }}
+                            {{ 'COMMON.TITLE' | translate }}
                             <i ng-show="ordCtrl.orderBy === '-title'" class="material-icons">arrow_drop_up</i>
                             <i ng-show="ordCtrl.orderBy === 'title'" class="material-icons">arrow_drop_down</i>
                         </md-button>
@@ -110,7 +110,7 @@
                             <input
                                 ng-model="ordCtrl.filterBy.title"
                                 type="text"
-                                placeholder="Filter by title"
+                                placeholder="{{ 'ORDER.SEARCH.FILTER_BY' | translate }} {{ 'COMMON.TITLE' | translate }}"
                                 class="adv-search__filter-form__filter">
                         </form>
                     </div>
@@ -122,7 +122,7 @@
                         <md-button
                             class="md-text-icon-button md-primary"
                             ng-click="ordCtrl.sortThis($event, 'packageId')">
-                            {{ "COMMON.PACKAGE_ID" | translate }}
+                            {{ 'COMMON.PACKAGE_ID' | translate }}
                             <i ng-show="ordCtrl.orderBy === '-packageId'" class="material-icons">arrow_drop_up</i>
                             <i ng-show="ordCtrl.orderBy === 'packageId'" class="material-icons">arrow_drop_down</i>
                         </md-button>
@@ -130,7 +130,7 @@
                             <input
                                 ng-model="ordCtrl.filterBy.packageId"
                                 type="text"
-                                placeholder="Filter by package ID"
+                                placeholder="{{ 'ORDER.SEARCH.FILTER_BY' | translate }} {{ 'COMMON.PACKAGE_ID' | translate }}"
                                 class="adv-search__filter-form__filter">
                         </form>
                     </div>
@@ -141,7 +141,7 @@
                         layout-align="end center"
                         layout-padding
                         style="text-align: center;">
-                        <span>Add to basket</span>
+                        <span>{{ 'COMMON.ADD_TO' | translate }} {{ 'ORDER.SEARCH.BASKET' | translate }}</span>
                     </div>
                 </div>
             </div>
@@ -177,7 +177,7 @@
                             ng-true-value="'add'"
                             ng-false-value="'delete'"
                             ng-model="item.baskOp"
-                            aria-label="Add {{ item.title }} to basket">
+                            aria-label="{{ 'COMMON.ADD' | translate }} {{ item.title }} {{ 'ORDER.SEARCH.TO_BASKET' | translate }}">
                     </div>
                 </md-list-item>
             </md-list>

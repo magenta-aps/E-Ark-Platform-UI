@@ -5,14 +5,14 @@
             class="md-button md-text-icon-button"
             ng-class="{ active: ordCtrl.state.is('orderSearch') || sctrl.state.is('advSearch') }">
             <i class="material-icons">search</i>
-            Search & order
+            {{ 'ORDER.SEARCH.LABEL' | translate }}
         </a>
         
         <a ui-sref="orderBrowse"
             class="md-button md-text-icon-button"
             ng-class="{ active: ordCtrl.state.is('orderBrowse') }">
             <i class="material-icons">file_download</i>
-            {{ 'USER.MENU.MY_ORDERS' | translate }}
+            {{ 'ORDER.ORDERS.MY_ORDERS' | translate }}
         </a>
 
     </div>

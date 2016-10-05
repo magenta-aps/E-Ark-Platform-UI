@@ -1,9 +1,12 @@
 <md-toolbar>
     <div class="md-toolbar-tools">
         
-        <span>E-Ark tools</span>
+        <span>{{ 'HEADER.TITLE' | translate }}</span>
         
-        <nav class="menu-items" ng-controller="ModulesMenuController as menu" layout="row" layout-align="flex-start center">
+        <nav class="menu-items"
+            ng-controller="ModulesMenuController as menu"
+            layout="row"
+            layout-align="flex-start center">
             <div ng-repeat="item in menu.items | orderBy: 'order'">
                 <ng-include src="item.templateUrl"></ng-include>
             </div>
@@ -12,7 +15,7 @@
         <span flex></span>
 
         <md-menu ng-controller="AuthController as vm" md-position-mode="target-right target">
-            <md-button class="md-icon-button" aria-label="{{ 'MENU.OPEN_MENU' | translate }}"
+            <md-button class="md-icon-button" aria-label="{{ 'HEADER.SHOW_MENU' | translate }}"
                        ng-click="$mdOpenMenu($event)">
                 <i class="material-icons">person</i>
             </md-button>
@@ -25,9 +28,11 @@
                 </md-menu-item>
                 <md-menu-divider></md-menu-divider>
                 <md-menu-item>
-                    <md-button class="md-text-icon-button" id="logout" ng-click="vm.logout()">
+                    <md-button class="md-text-icon-button"
+                        id="logout"
+                        ng-click="vm.logout()">
                         <i class="material-icons">exit_to_app</i>
-                        {{ 'MENU.LOGOUT' | translate }}
+                        {{ 'HEADER.LOGOUT' | translate }}
                     </md-button>
                 </md-menu-item>
             </md-menu-content>

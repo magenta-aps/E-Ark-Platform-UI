@@ -1,6 +1,8 @@
 angular.module('eArkPlatform.ordermanagement', [ 'ngMaterial', 'pascalprecht.translate']).config(config);
 
-function config(modulesMenuServiceProvider, $stateProvider, USER_ROLES) {
+function config(modulesMenuServiceProvider, $stateProvider, USER_ROLES, languageFilesProvider) {
+    
+    languageFilesProvider.addFile('app/src/order_management/i18n/', '-orderman.json');
     
     modulesMenuServiceProvider.addItem({
         templateUrl: 'app/src/order_management/view/menuItem.html',

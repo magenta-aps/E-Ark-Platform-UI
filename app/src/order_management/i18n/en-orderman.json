@@ -1,0 +1,15 @@
+{
+    "ORDERMAN": {
+        "LABEL": "Order management",
+        "LIST_LABEL": "List of orders",
+        "CONFIDENTIAL": "Confidential",
+        "ORIGIN": "Origin",
+        "ASSIGNEE": "Assignee",
+        "PLANNED_DATE": "Planned date",
+        "ACCESS_DATE": "Access date",
+        "ACCESS_END_DATE": "Access end date",
+        "ACCESS_DATE_COMMENTS": "Access date comments",
+        "VALIDATION_DATE": "Validation date",
+        "FROM_USER": "From user"
+    }
+}
