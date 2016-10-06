@@ -72,7 +72,7 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
             q: ordCtrl.searchStr + ' AND path:*/representations/*/data/* AND NOT path:*_mig-*',
             rows: 25,
             start: 0,
-            fl: 'package,stream_size,path,confidential,contentType,textCategory,_version_,title,packageId,author,' +
+            fl: 'package,stream_size,path,confidential,content_type,textCategory,_version_,title,packageId,author,' +
             'eadtitle_t, eaddate_dt', //fields
             //filter: 'package,size,path,confidential,contentType,textCategory', //fields
             sort :'package asc',
@@ -170,7 +170,7 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
         cleanedItem.confidential =  item.confidential;
         cleanedItem.path = item.path;
         cleanedItem.contentType = item.contentType;
-        cleanedItem.size = item.size;
+        cleanedItem.size = item.stream_size;
         return cleanedItem;
     }
 
