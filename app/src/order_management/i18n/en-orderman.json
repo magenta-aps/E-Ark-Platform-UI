@@ -10,6 +10,7 @@
         "ACCESS_END_DATE": "Access end date",
         "ACCESS_DATE_COMMENTS": "Access date comments",
         "VALIDATION_DATE": "Validation date",
-        "FROM_USER": "From user"
+        "FROM_USER": "From user",
+        "PROCESS_ORDER": "Process order"
     }
 }

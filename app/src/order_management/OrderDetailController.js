@@ -10,6 +10,7 @@ function OrderDetailController($stateParams, ordermanagementService, $mdDialog) 
     odCtrl.archivists = [];
     odCtrl.assigneeSelector = 'none';
     odCtrl.fileInfoDiag = fileInfoDiag;
+    odCtrl.executeOrder = executeOrder;
     
     ordermanagementService.getOrder(odCtrl.orderId).then(function(response) {
         odCtrl.data = response;
@@ -39,6 +40,12 @@ function OrderDetailController($stateParams, ordermanagementService, $mdDialog) 
             console.log('order updated');
         });
     };
+    
+    function executeOrder(oid) {
+        var order = { orderId: oid };
+        console.log('Processing order')
+        ordermanagementService.processOrder(order);
+    }
     
     function fileInfoDiag(ev, doc) {
         $mdDialog.show({

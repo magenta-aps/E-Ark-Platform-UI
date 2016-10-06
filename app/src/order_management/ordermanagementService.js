@@ -7,7 +7,8 @@ function ordermanagementService($http, $filter) {
         getOrders: getOrders,
         getOrder: getOrder,
         getArchivists: getArchivists,
-        updateOrder: updateOrder
+        updateOrder: updateOrder,
+        processOrder: processOrder
     };
 
     return service;
@@ -53,5 +54,17 @@ function ordermanagementService($http, $filter) {
             }
         );
     };
+    
+    function processOrder(order) {
+        return $http.post('/earkweb/submitOrder').then(
+            function (response) {
+                console.log('Post order for execute: Great success');
+                console.log(response.data);
+                return response.data;
+            }, function (response) {
+                console.log('Post order for execute: Nasty error');
+            }
+        );
+    }
 
 }
