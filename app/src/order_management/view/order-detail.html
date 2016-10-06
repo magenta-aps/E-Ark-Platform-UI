@@ -136,6 +136,10 @@
     <div class="order-details__data"
         layout-padding
         flex-gt-sm="30">
+        <md-button class="md-primary md-text-icon-button md-raised" ng-click="odCtrl.executeOrder(odCtrl.orderId);">
+            <i class="material-icons ng-scope">send</i>
+            {{ 'ORDERMAN.PROCESS_ORDER' | translate }}
+        </md-button>
         <dl>
             <dt>{{ 'ORDER.TITLE.ORDER' | translate }}</dt>
             <dd>{{ odCtrl.data.title }}</dd>

@@ -10,6 +10,7 @@
         "ACCESS_END_DATE": "Tilgængelig til dato",
         "ACCESS_DATE_COMMENTS": "Kommentar til tilgængelig dato",
         "VALIDATION_DATE": "Valideringsdato",
-        "FROM_USER": "Fra bruger"
+        "FROM_USER": "Fra bruger",
+        "PROCESS_ORDER": "Send ordre til behandling"
     }
 }
