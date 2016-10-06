@@ -72,8 +72,9 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
             q: ordCtrl.searchStr + ' AND path:*/representations/*/data/* AND NOT path:*_mig-*',
             rows: 25,
             start: 0,
-            fl: 'package,size,path,confidential,contentType,textCategory,_version_,title,packageId,displaySize', //fields
-            filter: 'package,size,path,confidential,contentType,textCategory', //fields
+            fl: 'package,stream_size,path,confidential,contentType,textCategory,_version_,title,packageId,author,' +
+            'eadtitle_t, eaddate_dt', //fields
+            //filter: 'package,size,path,confidential,contentType,textCategory', //fields
             sort :'package asc',
             wt: 'json'
         };
