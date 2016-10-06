@@ -13,7 +13,7 @@ function ordermanagementService($http, $filter) {
     return service;
 
     function getOrders() {
-        return $http.get('http://eark.magenta.dk:5000/getOrders').then(
+        return $http.get('/api/getOrders').then(
             function (response) {
                 return response.data;
             }, function (response) {
