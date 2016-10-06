@@ -1,6 +1,6 @@
 <md-toolbar class="md-hue-2">
     <div class="md-toolbar-tools">
-        
+
         <a ui-sref="orderManageList" class="md-button md-icon-button md-raised">
             <i class="material-icons">arrow_back</i>
         </a>
@@ -9,133 +9,133 @@
             <span class="muted">{{ 'ORDER.ORDERS.DETAILS' | translate }}:</span>
             {{ odCtrl.data.title }}
         </span>
-        
+
         <span flex></span>
 
     </div>
 </md-toolbar>
 
 <section class="order-details"
-    layout-gt-sm="row"
-    flex>
-        
+         layout-gt-sm="row"
+         flex>
+
     <div class="order-details__items"
-        layout="column"
-        layout-padding
-        flex
-        flex-gt-sm="70">
-        
+         layout="column"
+         layout-padding
+         flex
+         flex-gt-sm="70">
+
         <h3 class="md-subhead">{{ 'ORDER.ORDERS.ITEMS' | translate }}:</h3>
-        
+
         <md-card>
             <md-card-content>
                 <div class="simple-list">
                     <div class="simple-list__header">
                         <div layout="row">
                             <div flex="60"
-                                flex-sm="40"
-                                flex-md="30"
-                                flex-lg="20"
-                                flex-gt-lg="30"
-                                class="muted"
-                                layout-padding>
+                                 flex-sm="40"
+                                 flex-md="30"
+                                 flex-lg="20"
+                                 flex-gt-lg="30"
+                                 class="muted"
+                                 layout-padding>
                                 {{ 'COMMON.TITLE' | translate }}
                             </div>
-                            <div  hide
-                                show-gt-md
-                                flex="10"
-                                class="muted"
-                                layout-padding>
+                            <div hide
+                                 show-gt-md
+                                 flex="10"
+                                 class="muted"
+                                 layout-padding>
                                 {{ 'COMMON.SIZE' | translate }}
                             </div>
                             <div flex="40"
-                                flex-gt-xs="30"
-                                flex-lg="20"
-                                class="muted"
-                                layout-padding>
+                                 flex-gt-xs="30"
+                                 flex-lg="20"
+                                 class="muted"
+                                 layout-padding>
                                 {{ 'ORDER.ORDERS.REF_CODE' | translate }}
                             </div>
                             <div hide
-                                show-gt-xs
-                                flex="30"
-                                flex-lg="20"
-                                flex-gt-lg="10"
-                                class="muted"
-                                layout-padding>
+                                 show-gt-xs
+                                 flex="30"
+                                 flex-lg="20"
+                                 flex-gt-lg="10"
+                                 class="muted"
+                                 layout-padding>
                                 {{ 'ORDER.ORDERS.CONTENT_TYPE' | translate }}
                             </div>
                             <div hide
-                                show-gt-sm
-                                flex="10"
-                                class="muted"
-                                layout-padding>
+                                 show-gt-sm
+                                 flex="10"
+                                 class="muted"
+                                 layout-padding>
                                 {{ 'ORDERMAN.CONFIDENTIAL' | translate }}
                             </div>
                             <div hide
-                                show-gt-md
-                                flex="20"
-                                class="muted"
-                                layout-padding>
+                                 show-gt-md
+                                 flex="20"
+                                 class="muted"
+                                 layout-padding>
                                 {{ 'ORDER.ORDERS.PACK_ID' | translate }}
                             </div>
                         </div>
                     </div>
                     <md-list class="simple-list__body md-dense">
                         <md-list-item ng-repeat="item in odCtrl.data.items"
-                            ng-click="odCtrl.fileInfoDiag($event, item)"
-                            layout="row"
-                            class="simple-list__body__item">
-                                <div flex="60"
-                                    flex-sm="40"
-                                    flex-md="30"
-                                    flex-lg="20"
-                                    flex-gt-lg="30"
-                                    class="simple-list__cell">
-                                    {{ item.title }}
-                                </div>
-                                <div hide
-                                    show-gt-md
-                                    flex="10"
-                                    class="simple-list__cell muted">
-                                    {{ item.size }}
-                                </div>
-                                <div flex="40"
-                                    flex-gt-xs="30"
-                                    flex-lg="20"
-                                    class="simple-list__cell">
-                                    {{ item.refCode }}
-                                </div>
-                                <div hide
-                                    show-gt-xs
-                                    flex="30"
-                                    flex-lg="20"
-                                    flex-gt-lg="10"
-                                    class="simple-list__cell muted">
-                                    {{ item.contentType }}
-                                </div>
-                                <div hide
-                                    show-gt-sm
-                                    flex="10"
-                                    class="simple-list__cell muted">
-                                    {{ item.confidential }}
-                                </div>
-                                <div hide
-                                    show-gt-md
-                                    flex="20"
-                                    class="simple-list__cell muted">
-                                    {{ item.packageId }}
-                                </div>
+                                      ng-click="odCtrl.fileInfoDiag($event, item)"
+                                      layout="row"
+                                      class="simple-list__body__item">
+                            <div flex="60"
+                                 flex-sm="40"
+                                 flex-md="30"
+                                 flex-lg="20"
+                                 flex-gt-lg="30"
+                                 class="simple-list__cell">
+                                {{ item.title }}
+                            </div>
+                            <div hide
+                                 show-gt-md
+                                 flex="10"
+                                 class="simple-list__cell muted">
+                                {{ item.size }}
+                            </div>
+                            <div flex="40"
+                                 flex-gt-xs="30"
+                                 flex-lg="20"
+                                 class="simple-list__cell">
+                                {{ item.refCode }}
+                            </div>
+                            <div hide
+                                 show-gt-xs
+                                 flex="30"
+                                 flex-lg="20"
+                                 flex-gt-lg="10"
+                                 class="simple-list__cell muted">
+                                {{ item.contentType }}
+                            </div>
+                            <div hide
+                                 show-gt-sm
+                                 flex="10"
+                                 class="simple-list__cell muted">
+                                {{ item.confidential }}
+                            </div>
+                            <div hide
+                                 show-gt-md
+                                 flex="20"
+                                 class="simple-list__cell muted">
+                                {{ item.packageId }}
+                            </div>
                         </md-list-item>
                     </md-list>
                 </div>
             </md-card-content>
         </md-card>
-                    
+
     </div>
-    
+
     <div class="order-details__data"
-        layout-padding
-        flex-gt-sm="30">
+         layout-padding
+         flex-gt-sm="30">
         <md-button class="md-primary md-text-icon-button md-raised" ng-click="odCtrl.executeOrder(odCtrl.orderId);">
             <i class="material-icons ng-scope">send</i>
             {{ 'ORDERMAN.PROCESS_ORDER' | translate }}
@@ -164,10 +164,14 @@
             <dd>
                 {{ odCtrl.assignee }}
                 <select ng-model="odCtrl.assigneeSelector" ng-change="odCtrl.updateOrderAssignee()">
-                    <option ng-if="odCtrl.assigneeSelector !== 'none'" value="{{ odCtrl.data.assignee.uid }}">{{ odCtrl.data.assignee.firstname }} {{ odCtrl.data.assignee.lastname }}</option>
+                    <option ng-if="odCtrl.assigneeSelector !== 'none'" value="{{ odCtrl.data.assignee.uid }}">{{
+                        odCtrl.data.assignee.firstname }} {{ odCtrl.data.assignee.lastname }}
+                    </option>
                     <option disabled>──────────</option>
                     <option value="none">{{ 'COMMON.NONE' | translate }}</option>
-                    <option ng-repeat="archivist in odCtrl.archivists" value="{{ archivist.userName }}">{{ archivist.firstname }} {{ archivist.lastname }}</option>
+                    <option ng-repeat="archivist in odCtrl.archivists" value="{{ archivist.userName }}">{{
+                        archivist.firstname }} {{ archivist.lastname }}
+                    </option>
                 </select>
             </dd>
             <dt>{{ 'ORDER.ORDERS.ORDER_DATE' | translate }}</dt>
@@ -180,7 +184,7 @@
                 <a href="mailto:{{ odCtrl.data.endUser.email }}">{{ odCtrl.data.endUser.email }}</a>
             </dd>
             <dt>{{ 'ORDER.LABEL.PREFERRED_DELIVERY_METHOD' | translate }}</dt>
-            <dd>{{ odCtrl.data.preferredDeliveryMethod }}</dd>
+            <dd>{{ odCtrl.data.deliveryFormat }}</dd>
             <dt>{{ 'ORDERMAN.ACCESS_DATE' | translate }}</dt>
             <dd>{{ odCtrl.data.accessDate }}</dd>
             <dt>{{ 'ORDERMAN.ACCESS_END_DATE' | translate }}</dt>
@@ -191,5 +195,5 @@
             <dd>{{ odCtrl.data.validationDate }}</dd>
         </dl>
     </div>
-    
+
 </section>
