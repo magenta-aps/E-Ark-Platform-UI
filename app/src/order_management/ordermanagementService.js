@@ -18,7 +18,7 @@ function ordermanagementService($http, $filter) {
             function (response) {
                 return response.data;
             }, function (response) {
-                console.log('nasty error');
+                console.log('Error getting orders');
             }
         );
     };
@@ -28,19 +28,18 @@ function ordermanagementService($http, $filter) {
             function (response) {
                 return response.data;
             }, function (response) {
-                console.log('nasty error');
+                console.log('Error getting order');
             }
         );
     };
     
     function updateOrder(queryObj) {
-        
         console.log($filter('json')(queryObj));
         return $http.put('/api/updateOrder', $filter('json')(queryObj)).then(
             function (response) {
                 return response.data;
             }, function (response) {
-                console.log('nasty error');
+                console.log('Error updating order');
             }
         );
     };
@@ -50,7 +49,7 @@ function ordermanagementService($http, $filter) {
             function (response) {
                 return response.data;
             }, function (response) {
-                console.log('nasty error');
+                console.log('Error getting archivists');
             }
         );
     };
@@ -59,10 +58,10 @@ function ordermanagementService($http, $filter) {
     function processOrder(order) {
         return $http.post('/earkweb/submitOrder', order).then(
             function (response) {
-                console.log('Post order for execute: Success');
+                console.log('Successfully posted the order for processing');
                 return response.data;
             }, function (response) {
-                console.log('Post order for execute: Error');
+                console.log('There was an error posting the order for processing');
                 return false;
             }
         );

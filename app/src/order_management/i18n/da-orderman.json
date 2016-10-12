@@ -11,6 +11,10 @@
         "ACCESS_DATE_COMMENTS": "Kommentar til tilgængelig dato",
         "VALIDATION_DATE": "Valideringsdato",
         "FROM_USER": "Fra bruger",
-        "PROCESS_ORDER": "Send ordre til behandling"
+        "PROCESS_ORDER": "Send ordre til behandling",
+        "MSG": {
+            "PROCESS_SUBMIT_SUCCESS": "Ordren er sendt til behandling",
+            "PROCESS_SUBMIT_ERROR": "Ordren kunne ikke sendes til behandling"
+        }
     }
 }

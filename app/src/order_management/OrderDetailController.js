@@ -3,7 +3,7 @@ angular.module('eArkPlatform.ordermanagement').controller('OrderDetailController
 /**
  * Main controller for the order management module
  */
-function OrderDetailController($stateParams, ordermanagementService, $mdDialog) {
+function OrderDetailController($stateParams, ordermanagementService, $mdDialog, $mdToast, errorService, $translate) {
     var odCtrl = this;
     odCtrl.orderId = $stateParams.orderid;
     odCtrl.data = [];
@@ -11,13 +11,9 @@ function OrderDetailController($stateParams, ordermanagementService, $mdDialog) 
     odCtrl.assigneeSelector = 'none';
     odCtrl.fileInfoDiag = fileInfoDiag;
     odCtrl.executeOrder = executeOrder;
+    odCtrl.refreshOrderDetails = refreshOrderDetails;
     
-    ordermanagementService.getOrder(odCtrl.orderId).then(function(response) {
-        odCtrl.data = response;
-        if ( odCtrl.data.assignee !== 'none' ) {
-            odCtrl.assigneeSelector = odCtrl.data.assignee.userName;
-        };
-    });
+    odCtrl.refreshOrderDetails(odCtrl.orderId);
     
     ordermanagementService.getArchivists().then(function(response) {
         odCtrl.archivists = response.archivists;
@@ -41,22 +37,32 @@ function OrderDetailController($stateParams, ordermanagementService, $mdDialog) 
         });
     };
     
-    function executeOrder(oid) {
+    function refreshOrderDetails( oid ) {
+        ordermanagementService.getOrder( oid ).then(function(response) {
+            odCtrl.data = response;
+            if ( odCtrl.data.assignee !== 'none' ) {
+                odCtrl.assigneeSelector = odCtrl.data.assignee.userName;
+            };
+        });
+    }
+    
+    function executeOrder( oid ) {
         var order = { orderId: oid };
         console.log('Processing order')
         ordermanagementService.processOrder(order).then(function (response) {
             if (response) {
                 console.log('That went well. Let\'s update the status.');
-                var updateObj = { 'orderId': oid, 'status': 'submitted'};
+                var updateObj = { 'orderId': oid, 'orderStatus': 'submitted'};
                 ordermanagementService.updateOrder(updateObj).then(function(response) {
                     if (response) {
-                        console.log('Order status updated');
+                        $mdToast.showSimple( $translate.instant('ORDERMAN.MSG.PROCESS_SUBMIT_SUCCESS') );
+                        odCtrl.refreshOrderDetails( oid );
                     } else {
-                        console.log('Status not updated');
+                        errorService.displayErrorMsg( $translate.instant('ORDERMAN.MSG.PROCESS_SUBMIT_ERROR') );
                     };
                 });
             } else {
-                console.log('That gave an error');
+                errorService.displayErrorMsg( $translate.instant('ORDERMAN.MSG.PROCESS_SUBMIT_ERROR') );
             };        
         });
     }
