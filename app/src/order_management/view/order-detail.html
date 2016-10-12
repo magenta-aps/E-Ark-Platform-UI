@@ -145,13 +145,19 @@
             <dd>{{ odCtrl.data.title }}</dd>
             <dt>{{ 'ORDER.ORDERS.STATUS' | translate }}</dt>
             <dd>
-                <select ng-model="odCtrl.data.orderStatus" ng-change="odCtrl.updateOrderStatus()">
+                
+                <span ng-if="odCtrl.data.orderStatus === 'submitted'">Submitted</span>
+                
+                <select ng-if="odCtrl.data.orderStatus !== 'submitted'"
+                    ng-model="odCtrl.data.orderStatus"
+                    ng-change="odCtrl.updateOrderStatus()">
                     <option value="{{ odCtrl.data.orderStatus }}">{{ odCtrl.data.orderStatus }}</option>
                     <option disabled>──────────</option>
                     <option value="new">{{ 'ORDER.ORDERS.STATUS-new' | translate }}</option>
                     <option value="open">{{ 'ORDER.ORDERS.STATUS-open' | translate }}</option>
                     <option value="closed">{{ 'ORDER.ORDERS.STATUS-closed' | translate }}</option>
                 </select>
+                
             </dd>
             <dt>{{ 'ORDER.ORDERS.ORDER_ID' | translate }}</dt>
             <dd>{{ odCtrl.data.orderId }}</dd>

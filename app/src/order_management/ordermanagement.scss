@@ -19,7 +19,8 @@
 
 .status-new,
 .status-open,
-.status-closed {
+.status-closed,
+.status-submitted {
     padding: $u*0.25 $u*0.5;
     color: #fff;
     border-radius: $u*0.1;
@@ -34,4 +35,7 @@
 .status-closed {
     color: $muted-color;
     background-color: #eee;
+}
+.status-submitted {
+    background-color: #609;
 }

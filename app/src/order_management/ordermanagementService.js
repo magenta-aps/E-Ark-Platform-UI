@@ -57,13 +57,13 @@ function ordermanagementService($http, $filter) {
 
     //TODO: resolve this interface call
     function processOrder(order) {
-        return $http.post('/earkweb/submitOrder').then(
+        return $http.post('/earkweb/submitOrder', order).then(
             function (response) {
-                console.log('Post order for execute: Great success');
-                console.log(response.data);
+                console.log('Post order for execute: Success');
                 return response.data;
             }, function (response) {
-                console.log('Post order for execute: Nasty error');
+                console.log('Post order for execute: Error');
+                return false;
             }
         );
     }

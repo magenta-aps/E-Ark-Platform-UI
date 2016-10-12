@@ -44,7 +44,21 @@ function OrderDetailController($stateParams, ordermanagementService, $mdDialog) 
     function executeOrder(oid) {
         var order = { orderId: oid };
         console.log('Processing order')
-        ordermanagementService.processOrder(order);
+        ordermanagementService.processOrder(order).then(function (response) {
+            if (response) {
+                console.log('That went well. Let\'s update the status.');
+                var updateObj = { 'orderId': oid, 'status': 'submitted'};
+                ordermanagementService.updateOrder(updateObj).then(function(response) {
+                    if (response) {
+                        console.log('Order status updated');
+                    } else {
+                        console.log('Status not updated');
+                    };
+                });
+            } else {
+                console.log('That gave an error');
+            };        
+        });
     }
     
     function fileInfoDiag(ev, doc) {
