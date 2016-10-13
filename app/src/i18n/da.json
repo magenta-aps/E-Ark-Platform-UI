@@ -6,6 +6,8 @@
         }
     },
     "COMMON": {
+        "NONE": "ingen",
+        "SIZE": "Størrelse",
         "PACKAGE_ID": "Pakke Id",
         "CONFIRM": "Bekræft",
         "WARNING": "Advarsel!",
@@ -22,6 +24,7 @@
         "NEW": "Ny",
         "ADD_NEW": "Tilføj ny",
         "ADD": "Tilføj",
+        "ADD_TO": "Tilføj til",
         "SEND": "Send",
         "NAME": "Navn",
         "INFORMATION": "Information",
@@ -505,7 +508,7 @@
         "CAN_NOT_DELETE_ADMIN_USER": "Sletning af admin brugeren er ikke tilladt",
         "EMAIL_FEED_ENABLED": "E-mail-feed aktiveret",
         "MENU":{
-            "MY_ORDERS": "Min Ordrer"
+            "MY_ORDERS": "Mine ordrer"
         }
     },
     "GROUP": {
@@ -524,15 +527,6 @@
         "UPLOAD_GROUPS": "Upload grupper (csv)",
         "UPLOAD_GROUPS_NOTE": "Upload grupper. Kun CSV-filer",
         "UPLOAD_GROUPS_SUCCESS": "Grupper CSV uploadet"
-    },
-    "ORDER":{
-        "TITLE":{
-            "BASKET":"Kurv"
-        },
-        "LABEL":{
-            "PLANNED_DATE":"Forventet dato",
-            "USER_NOTES":"Ekstra bemærkning"
-        }
     },
     "ORG": {
         "ORGANIZATIONS": "Organisationer",

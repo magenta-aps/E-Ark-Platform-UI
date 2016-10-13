@@ -6,6 +6,8 @@
         }
     },
     "COMMON": {
+        "NONE": "none",
+        "SIZE": "Size",
         "PACKAGE_ID": "Package Id",
         "CONFIRM": "Confirm",
         "WARNING": "Warning!",
@@ -22,6 +24,7 @@
         "NEW": "New",
         "ADD_NEW": "Add new",
         "ADD": "Add",
+        "ADD_TO": "Add to",
         "SEND": "Send",
         "NAME": "Name",
         "INFORMATION": "Information",
@@ -567,15 +570,6 @@
         "ARE_YOU_SURE_YOU_WANT_TO_DELETE_ORG": "Are you sure you want to delete \"{{organizationName}}\" organization?",
         "ORG_SAVED_SUCCESSFULLY": "Organization \"{{organizationName}}\" saved successfully",
         "ORG_DELETED_SUCCESSFULLY": "Organization \"{{organizationName}}\" deleted successfully"
-    },
-    "ORDER":{
-      "TITLE":{
-        "BASKET":"Basket"
-      },
-      "LABEL":{
-          "PLANNED_DATE":"Expected date",
-          "USER_NOTES":"Additional note"
-      }
     },
     "CONTACT": {
         "CONTACTS": "Contacts",

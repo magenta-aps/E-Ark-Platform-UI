@@ -1,6 +1,24 @@
 /*
+ * Header styles
+ */
+
+.order-header {
+    
+    a.md-button,
+    a.md-button:link,
+    a.md-button:visited {
+        color: #fff;
+    }
+    .active {
+        background-color: rgba(255,255,255,0.2);
+    }
+}
+
+
+/*
  * Search styles
  */
+
 
 .search__header {
     margin: 8px 16px;
@@ -62,37 +80,27 @@ a.search__item__link:visited {
     font-size: 0.8em;
 }
 
+
 /*
- * View search results as table list
+ * Order details page
  */
- 
-.list-search {
-    table {
-        max-width: 100%;
-    }
-    th {
-        border-top: solid 1px #ddd;
-    }
-    td {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    td:first-child {
-        padding-left: 24px;
-    }
-    td:last-child {
-        padding-right: 24px;
-    }
+
+.order-details {
+    overflow: auto;
+}
+
+.order-details__items {
+
+}
+
+.order-details__data {
+    background-color: #fff;
 }
 
 
 /*
  * Search filter menu styles
  */
-
-.menu {
-    background-color: #eee;
-}
 
 .filters {
     
@@ -130,4 +138,63 @@ a.search__item__link:visited {
     md-checkbox {
         display: block;
     }
+}
+
+#adv-search {
+    overflow: auto;
+}
+
+.adv-search__primary-input {
+    padding: 8px; margin: 0 0 0 8px;
+}
+
+.adv-search__filter-form {
+    margin: 0 8px 8px;
+}
+
+.adv-search__filter-form__filter {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/*
+ * Media queries for bigger screens
+ */ 
+
+@media screen and (min-width: 960px) {
+    
+    #adv-search {
+        overflow: initial;
+    }
+    
+    .adv-search__form {
+        flex: 1 0 auto;
+        padding: 0 8px;
+        
+        &.minimize {
+            flex: 0 1 auto;
+        }
+    }
+    
+    .adv-search__list {
+        justify-content: flex-start;
+        
+        .simple-list__body {
+            overflow: auto !important;
+        }
+    }
+    
+    .adv-search__secondary-input {
+        width: 9em;
+    }
+    
+    .order-details__items md-card-content {
+        overflow: auto;
+    }
+    
+    .order-details__data {
+        overflow: auto;
+    }
+    
 }

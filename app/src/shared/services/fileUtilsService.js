@@ -7,7 +7,8 @@ function fileUtilsService() {
         getFileIconByMimetype: getFileIconByMimetype,
         getFileExtension: getFileExtension,
         getMsProtocolForFileExtension: getMsProtocolForFileExtension,
-        getMsProtocolForFile: getMsProtocolForFile
+        getMsProtocolForFile: getMsProtocolForFile,
+        getFileSize : formatBytes
     };
 
     /**
@@ -260,6 +261,21 @@ function fileUtilsService() {
     function getMsProtocolForFile(filePath) {
         var ext = getFileExtension(filePath);
         return getMsProtocolForFileExtension(ext);
+    }
+
+    /**
+     * Formats the file size and returns a human readable string i.e. 2.5Mb for example
+     * @param bytes
+     * @param decimals
+     * @returns {*}
+     */
+    function formatBytes(bytes, decimals) {
+        if (bytes == 0) return '0 Byte';
+        var k = 1000;
+        var dm = decimals + 1 || 3;
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        var i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
 
 }

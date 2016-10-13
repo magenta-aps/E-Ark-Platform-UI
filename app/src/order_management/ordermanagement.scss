@@ -1,6 +1,6 @@
 .section-header {
     background-color: #eee;
-    padding: $u*0.5 $u;
+    padding: $u;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -13,36 +13,29 @@
     }
 }
 
-.extra-padding {
-    padding: $u;
+.order-list {
+    margin: $u 0;
 }
 
-.order-list,
-.order-details--list {
-    border-collapse: collapse;
-    width: 100%;
-    
-    th {
-        padding: $u*0.5 $u;
-        text-align: left;
-    }
-    td {
-        border-top: solid 1px #eee;
-        padding: $u*0.5 $u;
-    }
+.status-new,
+.status-open,
+.status-closed,
+.status-submitted {
+    padding: $u*0.25 $u*0.5;
+    color: #fff;
+    border-radius: $u*0.1;
+    font-size: 0.9em;
 }
-
-.order-details {
-    display: flex;
-    flex-flow: row nowrap;
+.status-new {
+    background-color: #3c3;
 }
-
-.order-details--data {
-    flex: 1;
-    border-left: solid 1px #eee;
-    padding: $u $u*2;
+.status-open {
+    background-color: #690;
 }
-
-.order-details--items {
-    flex: 2;
+.status-closed {
+    color: $muted-color;
+    background-color: #eee;
+}
+.status-submitted {
+    background-color: #609;
 }

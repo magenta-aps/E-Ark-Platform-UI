@@ -1,0 +1,46 @@
+{
+    "ORDER":{
+        "TITLE": {
+            "ORDER": "Ordre",
+            "BASKET":"Kurv"
+        },
+        "LABEL":{
+            "PLANNED_DATE":"Forventet dato",
+            "USER_NOTES":"Ekstra bemærkning",
+            "PREFERRED_DELIVERY_METHOD": "Foretrukket format til modtagelse"
+        },
+        "SEARCH": {
+            "SEARCH": "Søg",
+            "LABEL": "Søg & bestil",
+            "BASKET": "Kurv",
+            "SEARCH_DOCS": "Søg i dokumenter",
+            "SEARCH_KEYWD": "Søgeord",
+            "AND": "og",
+            "OR": "eller",
+            "NOT": "ikke",
+            "KEYWD": "Søgeord",
+            "SEARCHING_FOR": "Søger efter",
+            "FILTER_BY": "Filtrér efter",
+            "TO_BASKET": "til kurv"
+        },
+        "ORDERS": {
+            "MY_ORDERS": "Mine ordrer",
+            "REVIEW_AND_SEND": "Gennemse og send ordre",
+            "STATUS": "Ordrestatus",
+            "REF_ID": "Ordrereference-ID",
+            "ORDER_DATE": "Ordredato",
+            "PLAN_DELIVER_DATE": "Planlagt modtagedato",
+            "STATUS-new": "Ny",
+            "STATUS-open": "Åben",
+            "STATUS-closed": "Lukket",
+            "DETAILS": "Ordredetaljer",
+            "ITEMS": "Dokumenter i ordren",
+            "PACK_ID": "Pakke-ID",
+            "REF_CODE": "Referencekode",
+            "CONTENT_TYPE": "Indholdstype",
+            "ORDER_ID": "Ordre-ID",
+            "ARCH_ASSIGNED": "Tilknyttet arkivist",
+            "ISSUED_BY_USER": "Bruger, der har afgivet ordren"
+        }
+    }
+}
