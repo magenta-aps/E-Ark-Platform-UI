@@ -2,8 +2,12 @@
  * Global values
  */
 
-$main-color: #2196F3;
-$muted-color: rgba(0,0,0,0.53);
+$main-color: #AD2624;
+$base-text-color: #333; 
+$header-color: #6e6e6e;
+$negative-text-color: #bdbdbd;
+$background-color: #f2f2f2;
+
 $u: 16px;
 
 
@@ -12,7 +16,7 @@ $u: 16px;
  */
 
 body {
-    background-color: #eee;
+    background-color: $background-color;
 }
 
 dt {
@@ -60,7 +64,7 @@ md-content {
     
 .simple-list__header {
     padding: 0 16px;
-    border-bottom: solid 1px #eee;
+    border-bottom: solid 1px $background-color;
     background-color: #fff;
 }
 
@@ -70,7 +74,7 @@ md-content {
 }
 
 .simple-list__body__item:nth-child(even) {
-    background-color: #eee;
+    background-color: $background-color;
 }
 
 .simple-list__cell {
@@ -93,7 +97,7 @@ md-content {
   height: 100%;
   width: 100%;
   z-index: 99;
-  background: rgba(255, 255, 255, 0.66);
+  background: rgba(255, 255, 255, 0.5);
   
   md-progress-circular {
     margin: $u*4 auto;

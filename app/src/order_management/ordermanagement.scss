@@ -1,5 +1,5 @@
 .section-header {
-    background-color: #eee;
+    background-color: $background-color;
     padding: $u;
     display: flex;
     flex-flow: row nowrap;
@@ -27,15 +27,15 @@
     font-size: 0.9em;
 }
 .status-new {
-    background-color: #3c3;
+    background-color: #E0BF18;
 }
 .status-open {
-    background-color: #690;
+    background-color: #5FAD24;
 }
 .status-closed {
-    color: $muted-color;
-    background-color: #eee;
+    @extend .muted;
+    background-color: #7A7A7A;
 }
 .status-submitted {
-    background-color: #609;
+    background-color: #247FAD;
 }
