@@ -25,6 +25,6 @@ angular
         phone: /^[+]?[0-9\- ]+$/
     })
     .constant('APP_CONFIG', {
-        appName: 'E-Ark',
+        appName: 'E-Ark search/order tools',
         logoSrc: './app/assets/images/logo.gif'
     });
