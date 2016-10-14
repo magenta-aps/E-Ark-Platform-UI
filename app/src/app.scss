@@ -16,7 +16,8 @@ $u: 16px;
  */
 
 body {
-    background-color: $background-color;
+    background: url(../app/assets/images/logos/e-ark-ship_watermark.svg) no-repeat center center $background-color;
+    background-size: 50% auto;
 }
 
 dt {
