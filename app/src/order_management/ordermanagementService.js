@@ -56,7 +56,7 @@ function ordermanagementService($http, $filter) {
 
     //TODO: resolve this interface call
     function processOrder(order) {
-        return $http.post('/earkweb/submitOrder', order).then(
+        return $http.post('/api/earkweb/submitOrder', order).then(
             function (response) {
                 console.log('Successfully posted the order for processing');
                 return response.data;
