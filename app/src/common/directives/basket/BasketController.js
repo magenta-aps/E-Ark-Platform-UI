@@ -85,7 +85,7 @@ function BasketController($scope, $state, basketService, sessionService, $mdDial
         cleanedItem.packageId = item.packageId;
         cleanedItem.confidential =  item.confidential ? item.confidential : false ;
         cleanedItem.path = item.path;
-        cleanedItem.contentType = item.contentType;
+        cleanedItem.contentType = item.content_type ? item.content_type :"";
         cleanedItem.size = item.stream_size;
         return cleanedItem;
     };
