@@ -7,7 +7,7 @@ angular.module('eArkPlatform.order').controller('OrderController', OrderControll
  * @param basketService
  * @constructor
  */
-function OrderController($scope, searchService, fileUtilsService, basketService, sessionService, orderService, $state, $mdDialog) {
+function OrderController($scope, searchService, fileUtilsService, basketService, sessionService, orderService, $state, $mdDialog, $translate) {
     
     var ordCtrl = this;
     ordCtrl.searchStr = '';
@@ -198,10 +198,10 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
           $mdDialog.alert()
             //.parent(angular.element(document.querySelector('#adv-search-help')))
             .clickOutsideToClose(true)
-            .title('Advanced search help')
-            .textContent('You can use * and "" to enhance your search. Try "Albert Einstein" or Einst*')
-            .ariaLabel('Advanced search help')
-            .ok('Got it!')
+            .title( $translate.instant( 'ORDER.SEARCH.ADV_SEARCH_HELP' ) )
+            .textContent( $translate.instant( 'ORDER.SEARCH.ADV_SEARCH_TXT' ) )
+            .ariaLabel( $translate.instant( 'ORDER.SEARCH.ADV_SEARCH_HELP' ) )
+            .ok( $translate.instant( 'COMMON.UNDERSTOOD' ) )
             .targetEvent(ev)
         );
     }

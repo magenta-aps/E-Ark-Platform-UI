@@ -76,7 +76,8 @@
         "GRID_VIEW": "Gittervisning",
         "DOWNLOAD_TEMPLATE_CSV": "Hent CSV skabelon",
         "LOCKED_BY": "Låst af {{locked_by}}",
-        "CONGRATULATIONS": "Tillykke!"
+        "CONGRATULATIONS": "Tillykke!",
+        "UNDERSTOOD": "Forstået!"
     },
     "DOCUMENT": {
         "STATUS_CHANGED_SUCCESS": "Status er ændret",
