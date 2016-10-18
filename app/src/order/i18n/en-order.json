@@ -33,6 +33,7 @@
             "STATUS-new": "New",
             "STATUS-open": "Open",
             "STATUS-closed": "Closed",
+            "STATUS-submitted": "Submitted",
             "DETAILS": "Order details",
             "ITEMS": "Order items",
             "PACK_ID": "Package ID",
