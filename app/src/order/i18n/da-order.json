@@ -33,6 +33,7 @@
             "STATUS-new": "Ny",
             "STATUS-open": "Åben",
             "STATUS-closed": "Lukket",
+            "STATUS-submitted": "Behandles",
             "DETAILS": "Ordredetaljer",
             "ITEMS": "Dokumenter i ordren",
             "PACK_ID": "Pakke-ID",
