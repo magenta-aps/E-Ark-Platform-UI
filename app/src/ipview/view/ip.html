@@ -6,7 +6,7 @@
         </a>
         
         <span>
-            IP title 1
+            <span class="muted">DIP:</span> {{ ipc.name }}
         </span>
         
         <span flex></span>
@@ -14,17 +14,27 @@
     </div>
 </md-toolbar>
 
-<section class="ipview-ip"
-    layout-gt-sm="row"
+<section layout-gt-sm="row"
     flex>
+    
+    <div layout="row" layout-padding>
+        <nav class="od-filebrowser-breadcrumb">
+            <a ui-sref="ipview.ip({name: ipc.name, path: '/'})">root</a>
+            <span class="active">{{ ipc.path }}</span>
+            <!-- <a ng-repeat="" ng-click=""></a> -->
+            <!-- <span ng-if="$last" class="active"></span> -->
+        </nav>
+    </div>
 
-    <md-list>
+    <md-list class="ip__dirlist">
         <md-list-item ng-repeat="child in ipc.children" ng-click="ipc.viewContent(child)">
-            <span>{{ child.name }}</span>
-            <span>{{ child.path }}</span>
-            <span>{{ child.date }}</span>
-            <span>{{ child.size }}</span>
-            <span>{{ child.type }}</span>
+            <span>
+                <i class="material-icons" ng-if="child.type === 'directory'">folder</i>
+                <i class="material-icons muted" ng-if="child.type !== 'directory'">insert_drive_file</i>
+            </span>
+            <span> {{ child.name }} </span>
+            <span class="muted"> {{ child.date }} </span>
+            <span class="muted"> {{ child.size }} </span>
         </md-menu-item>
     </md-list>
     

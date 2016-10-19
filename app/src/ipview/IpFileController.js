@@ -2,13 +2,15 @@ angular
     .module('eArkPlatform.ipview')
     .controller('IpFileController', IpFileController);
 
-function IpFileController(ipViewService) {
+function IpFileController($stateParams, ipViewService) {
     
     var ipfc = this;
     
     ipfc.data = {};
+    ipfc.filePath = $stateParams.path;
+    ipfc.ipName = $stateParams.name;
     
-    ipViewService.getcontent(filepath).then(
+    ipViewService.getcontent(ipfc.filePath).then(
         function(response) {
             if (!response) {
                 console.log('No response');

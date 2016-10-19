@@ -1,7 +1,40 @@
-.ip-list {
+.ip__iplist {
     
     md-card-title {
-        background-color: #5FAD24;
+        background-color: #333;
         color: #fff;
+    }
+}
+
+.ip__dirlist {
+    background-color: #fff;
+}
+
+.od-filebrowser-breadcrumb {
+    margin: 0;
+    background-color: $background-color;
+    font-size: $u*0.9;
+    padding: 0 $u*0.25;
+  
+    a,
+    a:link,
+    a:visited {
+        display: inline-block;
+        padding: $u*0.5 0 $u*0.5 $u*0.25;
+        cursor: pointer;
+        color: $main-color;
+    }
+    a:hover,
+    a:active {
+        color: darken($main-color, 20%);
+    }
+    a:before {
+        display: inline-block;
+        content: '/';
+        padding-right: $u*0.125;
+    }
+    a:last-child {
+        cursor: default;
+        color: #000;
     }
 }

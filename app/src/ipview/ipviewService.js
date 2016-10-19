@@ -5,13 +5,26 @@ angular
 function ipViewService($http) {
 
     var service = {
-        list: list
+        listIps: listIps,
+        listDir: listDir,
+        getcontent: getcontent
     };
     
     return service;
 
-    function list() {
-        return $http.post('/someapi', { mode: 'list', path: '/' }).then(
+    function listIps(user) {
+        // List DIPs available to a user
+        // Returns fake data for now
+        return [
+                { ipName: 'Some DIP', ipId: 374578 },
+                { ipName: 'Title of DIP', ipId: 48479837 },
+                { ipName: 'Another IP', ipId: 587892 },
+                { ipName: 'XYZÆØÅ-124451', ipId: 908327839 }  
+        ];
+    }
+
+    function listDir(path) {
+        return $http.post('/someapi', { mode: 'list', path: path }).then(
             function(response) {
                 // Success    
             },
