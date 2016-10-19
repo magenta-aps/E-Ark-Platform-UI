@@ -74,8 +74,8 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
             rows: 25,
             start: 0,
             fl: 'package,stream_size,path,confidential,content_type,textCategory,_version_,title,packageId,author,' +
-            'eadtitle_t,eaddate_dt,eadtitle_s,eadabstract_t,eadaccessrestrict_s,eadorigination_s,eadclevel_s', //fields
-            //filter: 'package,size,path,confidential,contentType,textCategory', //fields
+            'eadid_s,eadtitle_s,eaddate_s,eaddatestructuredfrom_dt,eaddatestructuredto_dt,eaddatestructuredfrom_dt,' +
+            'eaddatestructuredto_dt,eadorigination_s,eadabstract_t,eadaccessrestrict_s,eadclevel_s', //fields
             sort :'package asc',
             wt: 'json'
         };
