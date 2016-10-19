@@ -36,6 +36,7 @@
             "STATUS-open": "Open",
             "STATUS-closed": "Closed",
             "STATUS-submitted": "Submitted",
+            "STATUS-ready": "Ready",
             "DETAILS": "Order details",
             "ITEMS": "Order items",
             "PACK_ID": "Package ID",

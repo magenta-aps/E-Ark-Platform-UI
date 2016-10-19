@@ -36,6 +36,7 @@
             "STATUS-open": "Åben",
             "STATUS-closed": "Lukket",
             "STATUS-submitted": "Behandles",
+            "STATUS-ready": "Klar",
             "DETAILS": "Ordredetaljer",
             "ITEMS": "Dokumenter i ordren",
             "PACK_ID": "Pakke-ID",

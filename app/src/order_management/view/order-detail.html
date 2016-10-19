@@ -153,8 +153,8 @@
                     ng-change="odCtrl.updateOrderStatus()">
                     <option value="{{ odCtrl.data.orderStatus }}">{{ odCtrl.data.orderStatus }}</option>
                     <option disabled>──────────</option>
-                    <option value="new">{{ 'ORDER.ORDERS.STATUS-new' | translate }}</option>
-                    <option value="open">{{ 'ORDER.ORDERS.STATUS-open' | translate }}</option>
+                    <option value="new" ng-if="odCtrl.data.orderStatus !== 'ready'">{{ 'ORDER.ORDERS.STATUS-new' | translate }}</option>
+                    <option value="open" ng-if="odCtrl.data.orderStatus !== 'ready'">{{ 'ORDER.ORDERS.STATUS-open' | translate }}</option>
                     <option value="closed">{{ 'ORDER.ORDERS.STATUS-closed' | translate }}</option>
                 </select>
                 
