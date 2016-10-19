@@ -3,6 +3,7 @@ angular
     .factory('orderService', orderService);
 
 function orderService($http) {
+    
     var service = {
         getUserOrderHistory: getOrderHistory,
         getOrderDetail: getOrderDetail,
@@ -41,5 +42,6 @@ function orderService($http) {
                 console.log('Error getting statuses');
             }
         );
-    };
+    }
+    
 }
