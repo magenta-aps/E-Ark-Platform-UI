@@ -1,0 +1,31 @@
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+        
+        <a ui-sref="ipview" class="md-button md-icon-button md-raised">
+            <i class="material-icons">arrow_back</i>
+        </a>
+        
+        <span>
+            IP title 1
+        </span>
+        
+        <span flex></span>
+
+    </div>
+</md-toolbar>
+
+<section class="ipview-ip"
+    layout-gt-sm="row"
+    flex>
+
+    <md-list>
+        <md-list-item ng-repeat="child in ipc.children" ng-click="ipc.viewContent(child)">
+            <span>{{ child.name }}</span>
+            <span>{{ child.path }}</span>
+            <span>{{ child.date }}</span>
+            <span>{{ child.size }}</span>
+            <span>{{ child.type }}</span>
+        </md-menu-item>
+    </md-list>
+    
+</section>

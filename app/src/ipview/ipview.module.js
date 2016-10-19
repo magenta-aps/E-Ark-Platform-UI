@@ -15,9 +15,9 @@ function config($stateProvider, languageFilesProvider, USER_ROLES, modulesMenuSe
         url: '/ipviewer',
         views: {
             'content@': {
-                templateUrl : 'app/src/ipview/view/ipview.html',
-                controller : 'IpviewController',
-                controllerAs: 'ipvc'
+                templateUrl : 'app/src/ipview/view/ips.html',
+                controller : 'IpsController',
+                controllerAs: 'ipsc'
             }
         },
         data: {
@@ -28,9 +28,22 @@ function config($stateProvider, languageFilesProvider, USER_ROLES, modulesMenuSe
         url: '/ipviewer/ip',
         views: {
             'content@': {
-                templateUrl : 'app/src/ipview/view/ipview_ip.html',
-                controller : 'IpviewController',
-                controllerAs: 'ipvc'
+                templateUrl : 'app/src/ipview/view/ip.html',
+                controller : 'IpController',
+                controllerAs: 'ipc'
+            }
+        },
+        data: {
+            authorizedRoles: [USER_ROLES.enduser]
+        }
+    }).state('ipview.file', {
+        parent: 'site',
+        url: '/ipviewer/ip',
+        views: {
+            'content@': {
+                templateUrl : 'app/src/ipview/view/ip_file.html',
+                controller : 'IpFileController',
+                controllerAs: 'ipfc'
             }
         },
         data: {
