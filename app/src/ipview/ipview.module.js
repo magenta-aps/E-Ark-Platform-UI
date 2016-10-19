@@ -2,13 +2,7 @@ angular
     .module('eArkPlatform.ipview', ['ngMaterial', 'pascalprecht.translate'])
     .config(config);
 
-function config($stateProvider, languageFilesProvider, USER_ROLES, modulesMenuServiceProvider){
-    
-    modulesMenuServiceProvider.addItem({
-        templateUrl: 'app/src/ipview/view/moduleMenuItem.html',
-        order: 2,
-        authorizedRole: USER_ROLES.enduser
-    });
+function config($stateProvider, languageFilesProvider, USER_ROLES){
 
     $stateProvider.state('ipview', {
         parent: 'site',
