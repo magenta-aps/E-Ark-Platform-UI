@@ -29,6 +29,7 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
     ordCtrl.helpfulSearchHints = helpfulSearchHints;
     ordCtrl.fileInfoDiag = fileInfoDiag;
     ordCtrl.addToBasket = basketCheck;
+    ordCtrl.updateList = updateList;
 
     var user = sessionService.getUserInfo().user;
     
@@ -231,5 +232,9 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
           $mdDialog.cancel();
         };
     };
+    
+    function updateList() {
+        orderService.getAllOrdersStatus();
+    }
 
 }

@@ -28,4 +28,8 @@ function OrdersListController($state, ordermanagementService) {
         $state.go('orderManageDetail', {orderid: orderId});
     };
     
+    olCtrl.updateList = function() {
+        ordermanagementService.getAllOrdersStatus();
+    }
+    
 }

@@ -12,6 +12,7 @@
         "VALIDATION_DATE": "Valideringsdato",
         "FROM_USER": "Fra bruger",
         "PROCESS_ORDER": "Send ordre til behandling",
+        "UPDATE_LIST": "Opdatér liste",
         "MSG": {
             "PROCESS_SUBMIT_SUCCESS": "Ordren er sendt til behandling",
             "PROCESS_SUBMIT_ERROR": "Ordren kunne ikke sendes til behandling"

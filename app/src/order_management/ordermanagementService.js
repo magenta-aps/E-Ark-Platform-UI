@@ -8,7 +8,8 @@ function ordermanagementService($http, $filter) {
         getOrder: getOrder,
         getArchivists: getArchivists,
         updateOrder: updateOrder,
-        processOrder: processOrder
+        processOrder: processOrder,
+        getAllOrdersStatus: getAllOrdersStatus
     };
 
     return service;
@@ -40,6 +41,17 @@ function ordermanagementService($http, $filter) {
                 return response.data;
             }, function (response) {
                 console.log('Error updating order');
+            }
+        );
+    };
+    
+    function getAllOrdersStatus() {
+        return $http.get('/api/earkweb/updateAllOrderStatus').then(
+            function (response) {
+                console.log(response);
+                return response;
+            }, function (response) {
+                console.log('Error getting statuses');
             }
         );
     };

@@ -15,5 +15,15 @@
             {{ 'ORDER.ORDERS.MY_ORDERS' | translate }}
         </a>
 
+        <span flex></span>
+        
+        <md-button ng-if="ordCtrl.state.is('orderBrowse')"
+            ng-click="ordCtrl.updateList()"
+            aria-label="{{ 'ORDERMAN.UPDATE_LIST' | translate }}"
+            title="{{ 'ORDERMAN.UPDATE_LIST' | translate }}"
+            class="md-icon-button">
+            <i class="material-icons">refresh</i>
+        </md-button>
+
     </div>
 </md-toolbar>
