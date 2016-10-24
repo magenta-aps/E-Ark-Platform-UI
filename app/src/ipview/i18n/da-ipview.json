@@ -1,5 +1,11 @@
 ﻿{
-    "IPVIEW": {
-        "TITLE": "Gennemse IP"
+  "IPVIEW": {
+    "TITLE": "Gennemse IP",
+    "MESSAGES": {},
+    "ERROR": {
+      "MESSAGE": {
+        "DIR_LISTING_ERROR": "Fejl notering indhold bibliotek. Kontakt systemadministratoren for at løse problemet"
+      }
     }
+  }
 }

@@ -3,36 +3,31 @@ angular
     .controller('IpController', IpController);
 
 function IpController($state, ipViewService, $stateParams) {
-    
     var ipc = this;
-    
-    ipc.name = $stateParams.name;
     ipc.path = $stateParams.path;
     ipc.children = {};
-    
     ipc.viewContent = viewContent;
-    
-    ipViewService.listDir(ipc.path).then(
-        function(response) {
-            if (!response) {
-                console.log('no response');
-            } else {
-                console.log('got response');
+    listDir();
+
+    function listDir() {
+        var action = ipViewService.serializeObj({mode: 'list', path: ipc.path});
+        ipViewService.executeAction(action).then(
+            function (response) {
                 ipc.children = response.children;
-            };
-        },
-        function(response) {
-            console.log('no response at all');
-        }
-    );
-    
+            },
+            function (err) {
+                //Error response
+                console.log('Error listing directory contents' + err.message);
+                errorService.displayErrorMsg($translate.instant('IPVIEW.ERROR.MESSAGE.DIR_LISTING_ERROR'));
+            })
+    }
+
     function viewContent(file) {
         console.log(file.type);
         if (file.type === 'directory') {
-            $state.go('ipview.ip', { path: file.path, name: ipc.name });
+            $state.go('ipview.ip', {path: file.path});
         } else {
-            $state.go('ipview.file', { path: file.path, name: ipc.name });
-        };
+            $state.go('ipview.file', { path: file.path, name: file.name });
+        }
     }
-    
 }
