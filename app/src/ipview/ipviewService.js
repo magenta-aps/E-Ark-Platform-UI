@@ -35,6 +35,7 @@ function ipViewService($http) {
             return response.data.children;
         });
     }
+    
     /**
      * This method lists all the Ips in the root dir. Only meant for admin purposes but for now required.
      * @returns {*}

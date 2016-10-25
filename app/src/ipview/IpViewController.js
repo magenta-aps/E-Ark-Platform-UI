@@ -10,11 +10,20 @@ function IpsController(ipViewService) {
     ipViewService.registerObserverCallback(initDirRoot);
 
     function getIpRootDir() {
-        ipViewService.listIpRoot();
+        ipViewService.listIpRoot().then(
+            function(response) {
+                console.log(ipsc.ips);
+            },
+            function() {
+                console.log('Something went wrong');
+            }
+        );
+        
     }
     
     function initDirRoot() {
         ipsc.ips = ipViewService.dirItems;
+        
     }
 
     getIpRootDir();
