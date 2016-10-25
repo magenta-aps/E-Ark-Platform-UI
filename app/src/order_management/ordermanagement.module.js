@@ -6,7 +6,7 @@ function config(modulesMenuServiceProvider, $stateProvider, USER_ROLES, language
     
     modulesMenuServiceProvider.addItem({
         templateUrl: 'app/src/order_management/view/menuItem.html',
-        order: 3,
+        order: 2,
         authorizedRole: USER_ROLES.archivist  //For now only one role is considered
     });
     

@@ -19,13 +19,16 @@ function config($stateProvider, languageFilesProvider, USER_ROLES){
         }
     }).state('ipview.ip', {
         parent: 'site',
-        url: '/ipviewer/:name/:path',
+        url: '/ipviewer/:id/:path',
         views: {
             'content@': {
                 templateUrl : 'app/src/ipview/view/ip.html',
                 controller : 'IpController',
                 controllerAs: 'ipc'
             }
+        },
+        params: {
+            manageorder: false
         },
         data: {
             authorizedRoles: [USER_ROLES.enduser]

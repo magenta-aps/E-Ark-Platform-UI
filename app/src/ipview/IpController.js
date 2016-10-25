@@ -6,8 +6,11 @@ function IpController($state, ipViewService, $stateParams) {
     
     var ipc = this;
     
-    ipc.name = $stateParams.name;
+    console.log($stateParams);
+    
+    ipc.id = $stateParams.id;
     ipc.path = $stateParams.path;
+    ipc.manageorder = $stateParams.manageorder;
     ipc.children = {};
     
     ipc.viewContent = viewContent;
@@ -29,9 +32,9 @@ function IpController($state, ipViewService, $stateParams) {
     function viewContent(file) {
         console.log(file.type);
         if (file.type === 'directory') {
-            $state.go('ipview.ip', { path: file.path, name: ipc.name });
+            $state.go('ipview.ip', { path: file.path, id: ipc.id });
         } else {
-            $state.go('ipview.file', { path: file.path, name: ipc.name });
+            $state.go('ipview.file', { path: file.path, id: ipc.id });
         };
     }
     
