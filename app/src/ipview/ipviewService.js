@@ -4,104 +4,173 @@ angular
 
 function ipViewService($http) {
 
-    var service = {
-        listIps: listIps,
-        listDir: listDir,
-        getcontent: getcontent
-    };
-    
-    return service;
+    var observerCallbacks = [];
+    var ipSvc = this;
+    ipSvc.dirItems = [];
+    //ipSvc.listIps = listIps;
+    ipSvc.listDir = listDir;
+    ipSvc.listIpRoot = listIpRoot;
+    ipSvc.getcontent = getcontent;
+    ipSvc.executeAction = executeAction;
+    ipSvc.serializeObj = serializeObj;
+    ipSvc.registerObserverCallback = registerObserverCallback;
 
-    function listIps(user) {
+
+    /**
+     * This method lists all the Ips in the root dir. Only meant for admin purposes but for now required.
+     * @returns {*}
+     */
+    function listIpRoot() {
+        return $http({
+            method: 'POST',
+            url: '/ip_viewer?',
+            data: serializeObj({mode: "list", path: "/"}),
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        }).then(function (response) {
+            ipSvc.dirItems = response.data.children;
+            notifyObservers();
+            return response.data.children;
+        });
+    }
+    /**
+     * This method lists all the Ips in the root dir. Only meant for admin purposes but for now required.
+     * @returns {*}
+     */
+    function getObject() {
+        return $http({
+            method: 'POST',
+            url: '/ip_viewer?',
+            data: serializeObj({mode: "list", path: "/"}),
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        }).then(function (response) {
+            ipSvc.dirItems = response.data.children;
+            notifyObservers();
+            return response.data.children;
+        });
+    }
+
+    function executeAction(command){
+        return $http({
+            method: 'POST',
+            url: '/ip_viewer?',
+            data: command,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        }).then(function (response) {
+            ipSvc.dirItems = response.data;
+            notifyObservers();
+            return response.data;
+        });
+
+    }
+
+    /**
+     * Will list a collection of IPs that the user hass access to view.
+     * @param user
+     */
+    function getUserIPRootDir(user) {
         // List DIPs available to a user
-        // Returns fake data for now
-        return [
-                { ipName: 'Some DIP', ipId: 374578 },
-                { ipName: 'Title of DIP', ipId: 48479837 },
-                { ipName: 'Another IP', ipId: 587892 },
-                { ipName: 'XYZÆØÅ-124451', ipId: 908327839 }  
-        ];
+        //For now we'll just use the IP root
+
     }
 
     function listDir(path) {
-        return $http.post('/someapi', { mode: 'list', path: path }).then(
-            function(response) {
-                // Success    
+        return $http({
+            method: 'POST',
+            url: '/ip_viewer?',
+            data: serializeObj({mode: "list", path: path}),
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        }).then(
+            function (response) {
+                // Success
+                return response.data.children;
             },
-            function() {
+            function (response) {
                 // Error
-                // Returning fake data for now
-                return {
-                    "children": [
-                        {
-                          "date": "2016-10-04T13:39:49.499874", 
-                          "name": "foo.txt", 
-                          "path": "/foo.txt", 
-                          "size": 67, 
-                          "type": "file"
-                        }, 
-                        {
-                          "date": "2016-07-15T21:39:06.363138", 
-                          "name": "dir", 
-                          "path": "/dir", 
-                          "size": 4096, 
-                          "type": "directory"
-                        }, 
-                        {
-                          "date": "2016-09-12T14:24:24.897041", 
-                          "name": "infobox.png", 
-                          "path": "/infobox.png", 
-                          "size": 8790, 
-                          "type": "file"
-                        }, 
-                        {
-                          "date": "2016-10-06T09:51:56.540393", 
-                          "name": "Hypertext Transfer Protocol.pdf", 
-                          "path": "/Hypertext Transfer Protocol.pdf", 
-                          "size": 295893, 
-                          "type": "file"
-                        }, 
-                        {
-                          "date": "2016-07-05T15:26:20.412549", 
-                          "name": "bar.txt", 
-                          "path": "/bar.txt", 
-                          "size": 137, 
-                          "type": "file"
-                        }, 
-                        {
-                          "date": "2016-10-06T10:03:51.960360", 
-                          "name": "foobar.txt", 
-                          "path": "/foobar.txt", 
-                          "size": 957, 
-                          "type": "file"
-                        }, 
-                        {
-                          "date": "2016-09-09T14:46:06.119101", 
-                          "name": "foo.pdf", 
-                          "path": "/foo.pdf", 
-                          "size": 8863, 
-                          "type": "file"
-                        }
-                    ]
-                };
+                return response.data;
             }
         );
     }
-    
+
     function getcontent(filepath) {
-        return $http.post('/someapi', { mode: 'getcontent', path: filepath }).then(
-            function(response) {
-                // Success    
+        return $http({
+            method: 'POST',
+            url: '/ip_viewer?',
+            data: serializeObj({mode: "getcontent", path: filepath}),
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        }).then(
+            function (response) {
+                // Success
+                return response.data;
             },
-            function() {
+            function (response) {
                 // Error
-                // Returning fake data for now
-                return {
-                    "download_url": "http://localhost:8889/foo.txt", 
-                    "preview_url": "http://localhost:8889/preview/9f3cc873982623e10718f688753ecf78475b35fa7e48326aa688fc5ecfc82f2e"
-                };
+                return response.data;
             }
         );
     }
-    
-};
+
+    /**
+     * The workhorse; converts an object to x-www-form-urlencoded serialization.
+     * @param {Object} obj
+     * @return {String}
+     */
+    function serializeObj(obj) {
+        var query = '', name, value, fullSubName, subName, subValue, innerObj, i;
+
+        for (name in obj) {
+            value = obj[name];
+
+            if (value instanceof Array) {
+                for (i = 0; i < value.length; ++i) {
+                    subValue = value[i];
+                    fullSubName = name + '[' + i + ']';
+                    innerObj = {};
+                    innerObj[fullSubName] = subValue;
+                    query += param(innerObj) + '&';
+                }
+            }
+            else if (value instanceof Object) {
+                for (subName in value) {
+                    subValue = value[subName];
+                    fullSubName = name + '[' + subName + ']';
+                    innerObj = {};
+                    innerObj[fullSubName] = subValue;
+                    query += param(innerObj) + '&';
+                }
+            }
+            else if (value !== undefined && value !== null)
+                query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
+        }
+
+        return query.length ? query.substr(0, query.length - 1) : query;
+    }
+
+
+    //register an observer
+    function registerObserverCallback(callback) {
+        observerCallbacks.push(callback);
+    }
+
+    //call this when repoItems has been changed
+    function notifyObservers() {
+        angular.forEach(observerCallbacks, function (callback) {
+            callback();
+        });
+    };
+
+}

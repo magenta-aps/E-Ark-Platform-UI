@@ -1,7 +1,7 @@
 <md-toolbar class="md-hue-2">
     <div class="md-toolbar-tools">
         
-        <a ui-sref="ipview.ip({ name: ipfc.ipName, path: '/'})" class="md-button md-icon-button md-raised">
+        <a ui-sref="ipview.ip({path:ipfc.parentPath })" class="md-button md-icon-button md-raised">
             <i class="material-icons">arrow_back</i>
         </a>
         
@@ -19,8 +19,9 @@
     layout-padding
     flex>
     
-    <h1>Some file stuff</h1>
-    {{ ipfc.data.download_url }}
-    {{ ipfc.data.preview_url }}
-    
+    <h1>ipfc.ipName</h1>
+    <iframe ng-src="{{ipfc.preview_url }}" align="middle" width="1000" height="800" frameborder="0">
+    </iframe>
+    {{ ipfc.download_url }}
+
 </section>
