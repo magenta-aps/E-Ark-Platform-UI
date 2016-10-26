@@ -1,44 +1,40 @@
 <md-toolbar class="md-hue-2">
     <div class="md-toolbar-tools">
-        
-        <a ng-if="ipc.manageorder" ui-sref="orderManageDetail({ orderid: ipc.id })" class="md-icon-button md-raised">
+
+        <a ui-sref="ipview" class="md-icon-button md-raised">
             <i class="material-icons">arrow_back</i>
         </a>
-        
-        <a ng-if="!ipc.manageorder" ui-sref="orderDetail({ orderid: ipc.id })" class="md-icon-button md-raised">
-            <i class="material-icons">arrow_back</i>
-        </a>
-        
+
         <span>
-            {{ ipc.id }}
+            <span class="muted">IP:</span>
+            {{ ipc.bcpath[0].title }}
         </span>
-        
+
         <span flex></span>
 
     </div>
 </md-toolbar>
 
 <section layout="column" flex>
-    
+
     <div layout="row" layout-padding>
-        <nav class="od-filebrowser-breadcrumb">
-            <a ui-sref="ipview.ip({name: ipc.name, path: '/'})">root</a>
-            <span class="active">{{ ipc.path }}</span>
-            <!-- <a ng-repeat="" ng-click=""></a> -->
-            <!-- <span ng-if="$last" class="active"></span> -->
+        <nav class="od-filebrowser-breadcrumb_ipviewer">
+            <a ng-repeat="link in ipc.bcpath" ui-sref="ipview.ip({ path: link.path })">{{ link.title }}</a>
         </nav>
     </div>
 
-    <md-list class="ip__dirlist">
-        <md-list-item ng-repeat="child in ipc.children" ng-click="ipc.viewContent(child)">
-            <span>
-                <i class="material-icons" ng-if="child.type === 'directory'">folder</i>
-                <i class="material-icons muted" ng-if="child.type !== 'directory'">insert_drive_file</i>
-            </span>
-            <span> {{ child.name }} </span>
-            <span class="muted"> {{ child.date }} </span>
-            <span class="muted"> {{ child.size }} </span>
-        </md-menu-item>
-    </md-list>
+    <div ui-view="ip-content">
+        <md-list class="ip__dirlist">
+            <md-list-item ng-repeat="child in ipc.children" ng-click="ipc.viewContent(child)">
+                <span>
+                    <i class="material-icons" ng-if="child.type === 'directory'">folder</i>
+                    <i class="material-icons muted" ng-if="child.type !== 'directory'">insert_drive_file</i>
+                </span>
+                <span> {{ child.name }} </span>
+                <span class="muted"> {{ child.date }} </span>
+                <span class="muted"> {{ child.size }} </span>
+            </md-menu-item>
+        </md-list>
+    </div>
     
 </section>

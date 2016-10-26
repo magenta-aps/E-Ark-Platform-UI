@@ -23,7 +23,6 @@ function IpsController(ipViewService) {
     
     function initDirRoot() {
         ipsc.ips = ipViewService.dirItems;
-        
     }
 
     getIpRootDir();

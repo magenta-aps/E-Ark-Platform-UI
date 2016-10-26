@@ -6,8 +6,9 @@ function ipViewService($http) {
 
     var observerCallbacks = [];
     var ipSvc = this;
+    
     ipSvc.dirItems = [];
-    //ipSvc.listIps = listIps;
+    
     ipSvc.listDir = listDir;
     ipSvc.listIpRoot = listIpRoot;
     ipSvc.getcontent = getcontent;
@@ -66,6 +67,7 @@ function ipViewService($http) {
                 "X-Requested-With": "XMLHttpRequest"
             }
         }).then(function (response) {
+            console.log(response.data);
             ipSvc.dirItems = response.data;
             notifyObservers();
             return response.data;

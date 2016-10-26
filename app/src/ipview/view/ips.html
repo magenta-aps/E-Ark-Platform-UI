@@ -11,11 +11,11 @@
                 <md-card-title>
                     <md-card-title-text>
                         <span class="md-headline">{{ ip.name }}</span>
-                        <span class="md-subhead muted">ID: {{ ip.path }}</span>
+                        <span class="md-subhead muted">path: {{ ip.path }}</span>
                     </md-card-title-text>
                 </md-card-title>
                 <md-card-actions layout="row" layout-align="end center">
-                    <md-button ui-sref="ipview.ip({path: ip.path })">Browse</md-button>
+                    <md-button ui-sref="ipview.ip({ path: ip.path })">Browse</md-button>
                 </md-card-actions>
             </md-card>
 

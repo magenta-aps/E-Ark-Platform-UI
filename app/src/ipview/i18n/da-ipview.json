@@ -4,7 +4,8 @@
     "MESSAGES": {},
     "ERROR": {
       "MESSAGE": {
-        "DIR_LISTING_ERROR": "Fejl notering indhold bibliotek. Kontakt systemadministratoren for at løse problemet"
+        "DIR_LISTING_ERROR": "Kunne ikke finde data. Kontakt systemadministratoren for at løse problemet",
+        "GET_CONTENT_ERROR": "Kunne ikke finde fil-data."
       }
     }
   }
