@@ -8,13 +8,14 @@ function IpController($state, ipViewService, $stateParams) {
 
     ipc.path = $stateParams.path;
     ipc.children = {};
+    
     ipc.bcpath = pathToBreadCrumb(ipc.path);
     ipc.viewContent = viewContent;
     
     listDir();
 
     function listDir() {
-        var action = ipViewService.serializeObj({mode: 'list', path: ipc.path});
+        var action = ipViewService.serializeObj({action: 'list', path: ipc.path});
         ipViewService.executeAction(action).then(
             function (response) {
                 ipc.children = response.children;
@@ -22,16 +23,30 @@ function IpController($state, ipViewService, $stateParams) {
             function (err) {
                 console.log('Error listing directory contents' + err.message);
                 errorService.displayErrorMsg($translate.instant('IPVIEW.ERROR.MESSAGE.DIR_LISTING_ERROR'));
-            })
+            }
+        );
     }
 
     function viewContent(item) {
-        console.log(item.type);
+        getItemInfo(item.path);
         if (item.type === 'directory') {
             $state.go('ipview.ip', { path: item.path });
         } else {
             $state.go('ipview.file', { path: item.path });
         };
+    }
+    
+    function getItemInfo(path) {
+        var action = ipViewService.serializeObj({ action: 'getinfo', path: path });
+        ipViewService.executeAction(action).then(
+            function (response) {
+                console.log('get item info');
+                console.log(response);
+            },
+            function (err) {
+                console.log('Error: ' + err.message);
+            }
+        );
     }
     
     function pathToBreadCrumb(path) {
@@ -49,4 +64,5 @@ function IpController($state, ipViewService, $stateParams) {
         };
         return bc;
     }
+    
 }

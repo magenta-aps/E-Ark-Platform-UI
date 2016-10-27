@@ -11,7 +11,7 @@ function IpFileController($stateParams, ipViewService) {
     //ipfc.parentPath = ipfc.filePath.substring(0, ipfc.filePath.lastIndexOf("/"));
     
     function getFileContent() {
-        var action = ipViewService.serializeObj({ mode: 'getcontent', path: ipfc.filePath });
+        var action = ipViewService.serializeObj({ action: 'getcontent', path: ipfc.filePath });
         ipViewService.executeAction(action).then(
             function (response) {
                 ipfc.data = response;

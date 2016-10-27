@@ -22,19 +22,38 @@
             <a ng-repeat="link in ipc.bcpath" ui-sref="ipview.ip({ path: link.path })">{{ link.title }}</a>
         </nav>
     </div>
-
-    <div ui-view="ip-content">
-        <md-list class="ip__dirlist">
-            <md-list-item ng-repeat="child in ipc.children" ng-click="ipc.viewContent(child)">
-                <span>
-                    <i class="material-icons" ng-if="child.type === 'directory'">folder</i>
-                    <i class="material-icons muted" ng-if="child.type !== 'directory'">insert_drive_file</i>
-                </span>
-                <span> {{ child.name }} </span>
-                <span class="muted"> {{ child.date }} </span>
-                <span class="muted"> {{ child.size }} </span>
-            </md-menu-item>
-        </md-list>
+    
+    <div layout="row">
+        <!--
+        <nav class="filetree" ng-controller="IpFileTreeController as ftc" flex="20">
+            <ul class="filetree__list">
+                <li ng-repeat="child in ftc.tree"
+                    class="filetree__list__item"
+                    ng-include="'app/src/ipview/filetree/view/filetree_item.html'">
+                </li>
+            </ul>            
+        </nav>
+    -->
+        <div ui-view="ip-content" flex layout="row">
+            
+            <md-list class="ip__dirlist" flex>
+                <md-list-item ng-repeat="child in ipc.children" ng-click="ipc.viewContent(child)">
+                    <span>
+                        <i class="material-icons" ng-if="child.type === 'directory'">folder</i>
+                        <i class="material-icons muted" ng-if="child.type !== 'directory'">insert_drive_file</i>
+                    </span>
+                    <span> {{ child.name }} </span>
+                    <span class="muted"> {{ child.date }} </span>
+                    <span class="muted"> {{ child.size }} </span>
+                </md-menu-item>
+            </md-list>
+            
+            <div layout-padding flex="25">
+                <h2>Meta:</h2>
+            </div>
+            
+        </div>
+        
     </div>
     
 </section>

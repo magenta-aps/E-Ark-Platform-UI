@@ -25,7 +25,7 @@ function ipViewService($http) {
         return $http({
             method: 'POST',
             url: '/ip_viewer?',
-            data: serializeObj({mode: "list", path: "/"}),
+            data: serializeObj({action: "list", path: "/"}),
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
                 "X-Requested-With": "XMLHttpRequest"
@@ -45,7 +45,7 @@ function ipViewService($http) {
         return $http({
             method: 'POST',
             url: '/ip_viewer?',
-            data: serializeObj({mode: "list", path: "/"}),
+            data: serializeObj({action: "list", path: "/"}),
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
                 "X-Requested-With": "XMLHttpRequest"
@@ -66,12 +66,16 @@ function ipViewService($http) {
                 "Content-Type": "application/x-www-form-urlencoded",
                 "X-Requested-With": "XMLHttpRequest"
             }
-        }).then(function (response) {
-            console.log(response.data);
-            ipSvc.dirItems = response.data;
-            notifyObservers();
-            return response.data;
-        });
+        }).then(
+            function (response) {
+                ipSvc.dirItems = response.data;
+                notifyObservers();
+                return response.data;
+            },
+            function (err) {
+                console.log('no response ' + err);    
+            }
+        );
 
     }
 
@@ -89,7 +93,7 @@ function ipViewService($http) {
         return $http({
             method: 'POST',
             url: '/ip_viewer?',
-            data: serializeObj({mode: "list", path: path}),
+            data: serializeObj({action: "list", path: path}),
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
                 "X-Requested-With": "XMLHttpRequest"
@@ -110,7 +114,7 @@ function ipViewService($http) {
         return $http({
             method: 'POST',
             url: '/ip_viewer?',
-            data: serializeObj({mode: "getcontent", path: filepath}),
+            data: serializeObj({action: "getcontent", path: filepath}),
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
                 "X-Requested-With": "XMLHttpRequest"

@@ -6,10 +6,10 @@
     <h1>{{ ipfc.filePath }}</h1>
     
     <dl>
-        <dt>Download URL</dt>
-        <dd>{{ ipfc.data.download_url }}</dd>
-        <dt>Preview URL</dt>
-        <dd>{{ ipfc.data.preview_url }}</dd>
+        <ng-repeat ng-repeat="(key, value) in ipfc.data">
+            <dt>{{ key }}</dt>
+            <dd>{{ value }}</dd>
+        </ng-repeat>
     </dl>
 
 </section>
