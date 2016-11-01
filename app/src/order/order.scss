@@ -95,6 +95,12 @@
 
 .adv-search__primary-input {
     padding: 8px; margin: 0 0 0 8px;
+    width: $u*20;
+    max-width: 75%;
+}
+
+.adv-search__primary-input_results {
+    width: $u*12;
 }
 
 .adv-search__filter-form {

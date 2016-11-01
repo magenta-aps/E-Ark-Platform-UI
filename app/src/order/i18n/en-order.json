@@ -21,7 +21,9 @@
             "KEYWD": "Keyword",
             "SEARCHING_FOR": "Searching for",
             "FILTER_BY": "Filter by",
-            "TO_BASKET": "to basket"
+            "TO_BASKET": "to basket",
+            "ADV_SEARCH_HELP": "Advanced search help",
+            "ADV_SEARCH_TXT": "You can use * and \"\" to enhance your search. Try \"Albert Einstein\" or Einst*"
         },
         "ORDERS": {
             "MY_ORDERS": "My orders",
@@ -34,6 +36,7 @@
             "STATUS-open": "Open",
             "STATUS-closed": "Closed",
             "STATUS-submitted": "Submitted",
+            "STATUS-ready": "Ready",
             "DETAILS": "Order details",
             "ITEMS": "Order items",
             "PACK_ID": "Package ID",

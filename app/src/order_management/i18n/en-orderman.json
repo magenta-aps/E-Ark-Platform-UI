@@ -12,6 +12,7 @@
         "VALIDATION_DATE": "Validation date",
         "FROM_USER": "From user",
         "PROCESS_ORDER": "Process order",
+        "UPDATE_LIST": "Update list",
         "MSG": {
             "PROCESS_SUBMIT_SUCCESS": "Your order has been submitted for processing",
             "PROCESS_SUBMIT_ERROR": "There was an error submitting your order"

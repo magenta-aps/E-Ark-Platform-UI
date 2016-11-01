@@ -1,0 +1,48 @@
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+
+        <span>
+            <span class="muted">Browsing</span>
+            {{ ipc.bcpath[0].title }}
+        </span>
+
+        <span flex></span>
+
+    </div>
+</md-toolbar>
+
+<section layout="column" flex>
+
+    <div layout="row">
+        <nav class="od-filebrowser-breadcrumb_ipviewer" flex>
+            <a ng-repeat="link in ipc.bcpath" ui-sref="ipview.ip({ path: link.path })">{{ link.title }}</a>
+        </nav>
+    </div>
+    
+    <div layout="row" flex>
+        
+        <file-tree flex="20"></file-tree>
+        
+        <div ui-view="ip-content" flex layout="row">
+            
+            <md-list class="ip__dirlist" flex>
+                <md-list-item ng-repeat="child in ipc.children" ng-click="ipc.viewContent(child)">
+                    <span>
+                        <i class="material-icons" ng-if="child.type === 'directory'">folder</i>
+                        <i class="material-icons muted" ng-if="child.type !== 'directory'">insert_drive_file</i>
+                    </span>
+                    <span> {{ child.name }} </span>
+                    <span class="muted"> {{ child.date }} </span>
+                    <span class="muted"> {{ child.size }} </span>
+                </md-menu-item>
+            </md-list>
+            
+            <div layout-padding flex="25">
+                <h2>Meta:</h2>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</section>

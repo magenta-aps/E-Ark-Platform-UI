@@ -51,16 +51,8 @@ function OrderDetailController($stateParams, ordermanagementService, $mdDialog, 
         console.log('Processing order')
         ordermanagementService.processOrder(order).then(function (response) {
             if (response) {
-                console.log('That went well. Let\'s update the status.');
-                var updateObj = { 'orderId': oid, 'orderStatus': 'submitted'};
-                ordermanagementService.updateOrder(updateObj).then(function(response) {
-                    if (response) {
-                        $mdToast.showSimple( $translate.instant('ORDERMAN.MSG.PROCESS_SUBMIT_SUCCESS') );
-                        odCtrl.refreshOrderDetails( oid );
-                    } else {
-                        errorService.displayErrorMsg( $translate.instant('ORDERMAN.MSG.PROCESS_SUBMIT_ERROR') );
-                    };
-                });
+                console.log('That went well.');
+                $mdToast.showSimple( $translate.instant('ORDERMAN.MSG.PROCESS_SUBMIT_SUCCESS') )
             } else {
                 errorService.displayErrorMsg( $translate.instant('ORDERMAN.MSG.PROCESS_SUBMIT_ERROR') );
             };        

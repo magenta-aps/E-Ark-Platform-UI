@@ -18,7 +18,7 @@
     
     <div class="adv-search__form"
         layout="column"
-        layout-align="start center"
+        layout-align="center center"
         ng-class="{minimize: ordCtrl.searchResults.documents}">
     
         <form ng-submit="ordCtrl.executeSearch()"
@@ -34,6 +34,7 @@
                 <i class="material-icons">search</i>
                 <input type="text"
                     class="adv-search__primary-input"
+                    ng-class="{ 'adv-search__primary-input_results': ordCtrl.searchResults.documents }"
                     ng-model="ordCtrl.initialTerm"
                     placeholder="{{ 'ORDER.SEARCH.SEARCH_KEYWD' | translate }}"
                     required>

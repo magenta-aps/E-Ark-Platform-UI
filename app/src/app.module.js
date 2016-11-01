@@ -21,6 +21,7 @@ angular
         'eArkPlatform.order',
         'eArkPlatform.ordermanagement',
         'eArkPlatform.errors',
+        'eArkPlatform.ipview',
         'eArkPlatform.common.directives',
         'eArkPlatform.common.directives.basket',
         'eArkPlatform.common.directives.filter',

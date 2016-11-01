@@ -1,0 +1,12 @@
+﻿{
+  "IPVIEW": {
+    "TITLE": "IP viewer",
+    "MESSAGES": {},
+    "ERROR": {
+      "MESSAGE" :{
+        "DIR_LISTING_ERROR": "Error listing directory contents. Please contact the systems administrator to resolve the issue",
+        "GET_CONTENT_ERROR": "Error getting file contents"
+      }
+    }
+  }
+}

@@ -28,4 +28,22 @@ function OrdersListController($state, ordermanagementService) {
         $state.go('orderManageDetail', {orderid: orderId});
     };
     
+    olCtrl.updateList = function() {
+        ordermanagementService.getAllOrdersStatus().then(
+            function(response) {
+                if (!response) {
+                    console.log('somehting went wrong');
+                } else {
+                    console.log('We have status updates');
+                    ordermanagementService.getOrders().then(function(response) {
+                        olCtrl.data = response.orders;
+                    });
+                };
+            },
+            function(response) {
+                console.log('No statuses were updated');
+            }
+        );
+    }
+    
 }

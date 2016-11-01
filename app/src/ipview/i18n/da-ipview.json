@@ -1,0 +1,12 @@
+﻿{
+  "IPVIEW": {
+    "TITLE": "Gennemse IP",
+    "MESSAGES": {},
+    "ERROR": {
+      "MESSAGE": {
+        "DIR_LISTING_ERROR": "Kunne ikke finde data. Kontakt systemadministratoren for at løse problemet",
+        "GET_CONTENT_ERROR": "Kunne ikke finde fil-data."
+      }
+    }
+  }
+}

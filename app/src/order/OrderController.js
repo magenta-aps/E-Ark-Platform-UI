@@ -7,7 +7,7 @@ angular.module('eArkPlatform.order').controller('OrderController', OrderControll
  * @param basketService
  * @constructor
  */
-function OrderController($scope, searchService, fileUtilsService, basketService, sessionService, orderService, $state, $mdDialog) {
+function OrderController($scope, searchService, fileUtilsService, basketService, sessionService, orderService, $state, $mdDialog, $translate) {
     
     var ordCtrl = this;
     ordCtrl.searchStr = '';
@@ -29,6 +29,7 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
     ordCtrl.helpfulSearchHints = helpfulSearchHints;
     ordCtrl.fileInfoDiag = fileInfoDiag;
     ordCtrl.addToBasket = basketCheck;
+    ordCtrl.updateList = updateList;
 
     var user = sessionService.getUserInfo().user;
     
@@ -73,8 +74,8 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
             rows: 25,
             start: 0,
             fl: 'package,stream_size,path,confidential,content_type,textCategory,_version_,title,packageId,author,' +
-            'eadtitle_t,eaddate_dt,eadtitle_s,eadabstract_t,eadaccessrestrict_s,eadorigination_s,eadclevel_s', //fields
-            //filter: 'package,size,path,confidential,contentType,textCategory', //fields
+            'eadid_s,eadtitle_s,eaddate_s,eaddatestructuredfrom_dt,eaddatestructuredto_dt,eaddatestructuredfrom_dt,' +
+            'eaddatestructuredto_dt,eadorigination_s,eadabstract_t,eadaccessrestrict_s,eadclevel_s', //fields
             sort :'package asc',
             wt: 'json'
         };
@@ -198,10 +199,10 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
           $mdDialog.alert()
             //.parent(angular.element(document.querySelector('#adv-search-help')))
             .clickOutsideToClose(true)
-            .title('Advanced search help')
-            .textContent('You can use * and "" to enhance your search. Try "Albert Einstein" or Einst*')
-            .ariaLabel('Advanced search help')
-            .ok('Got it!')
+            .title( $translate.instant( 'ORDER.SEARCH.ADV_SEARCH_HELP' ) )
+            .textContent( $translate.instant( 'ORDER.SEARCH.ADV_SEARCH_TXT' ) )
+            .ariaLabel( $translate.instant( 'ORDER.SEARCH.ADV_SEARCH_HELP' ) )
+            .ok( $translate.instant( 'COMMON.UNDERSTOOD' ) )
             .targetEvent(ev)
         );
     }
@@ -231,5 +232,23 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
           $mdDialog.cancel();
         };
     };
+    
+    function updateList() {
+        orderService.getAllOrdersStatus().then(
+            function(response) {
+                if (!response) {
+                    console.log('somehting went wrong');
+                } else {
+                    console.log('We have status updates');
+                    ordermanagementService.getOrders().then(function(response) {
+                        olCtrl.data = response.orders;
+                    });
+                };
+            },
+            function(response) {
+                console.log('No statuses were updated');
+            }
+        );
+    }
 
 }

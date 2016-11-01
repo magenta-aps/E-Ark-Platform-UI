@@ -1,0 +1,14 @@
+<a ui-sref="ipview"
+    hide show-gt-sm
+    ng-class="{ active: menu.state.is('ipview') }"
+    class="md-button md-text-icon-button">
+    <i class="material-icons">pageview</i>
+    {{ 'IPVIEW.TITLE' | translate }}
+</a>
+
+<a ui-sref="ipview"
+    hide-gt-sm
+    ng-class="{ active: menu.state.is('ipview') }"
+    class="md-button md-icon-button">
+    <i class="material-icons">pageview</i>
+</a>

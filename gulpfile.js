@@ -35,6 +35,10 @@ function createWebserver(config) {
                     {
                         source:'/oms/api',
                         target: env.oms_service.proxy
+                    },
+                    {
+                        source:'/ip_viewer',
+                        target: env.ipViewer_service.proxy
                     }
                 ]
             }));

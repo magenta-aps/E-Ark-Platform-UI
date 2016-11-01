@@ -37,7 +37,7 @@ function BasketController($scope, $state, basketService, sessionService, $mdDial
         orderData.orderDate = new Date().toISOString();
         if (orderData.plannedDate) {
             orderData.plannedDate = orderData.plannedDate.toISOString();
-        };
+        }
         orderData.user = {
             userName: userInfo.user.userName,
             firstname: userInfo.user.firstname,
@@ -115,7 +115,7 @@ function BasketController($scope, $state, basketService, sessionService, $mdDial
           clickOutsideToClose: true,
           fullscreen: true
         });
-    };
+    }
     
     function fileInfoDialogController($scope, $mdDialog, document) {
         var fidc = this;
@@ -129,19 +129,16 @@ function BasketController($scope, $state, basketService, sessionService, $mdDial
         $scope.cancel = function() {
           $mdDialog.cancel();
         };
-    };
-    
+    }
 }
-
 
 /*
  * Basket directive
  */
-
-function basketDirective(basketService) {
+function basketDirective() {
     return {
         restrict:'E',
         templateUrl : 'app/src/common/directives/basket/view/basket.html',
         scope: {}
     };
-};
+}

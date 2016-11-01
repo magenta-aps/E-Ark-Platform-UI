@@ -1,4 +1,4 @@
-angular.module('eArkPlatform.order', [ 'ngMaterial', 'pascalprecht.translate']).config(config);
+angular.module('eArkPlatform.order', [ 'ngMaterial', 'pascalprecht.translate' ]).config(config);
 
 function config(modulesMenuServiceProvider, $stateProvider, USER_ROLES, languageFilesProvider) {
     

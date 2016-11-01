@@ -1,0 +1,15 @@
+<section class="ipview-file"
+    layout-gt-sm="row"
+    layout-padding
+    flex>
+    
+    <h1>{{ ipfc.filePath }}</h1>
+    
+    <dl>
+        <ng-repeat ng-repeat="(key, value) in ipfc.data">
+            <dt>{{ key }}</dt>
+            <dd>{{ value }}</dd>
+        </ng-repeat>
+    </dl>
+
+</section>
