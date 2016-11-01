@@ -79,6 +79,7 @@ function ipViewService($http) {
 
     }
 
+    
     /**
      * Will list a collection of IPs that the user hass access to view.
      * @param user
@@ -89,6 +90,7 @@ function ipViewService($http) {
 
     }
 
+    
     function listDir(path) {
         return $http({
             method: 'POST',
@@ -110,6 +112,7 @@ function ipViewService($http) {
         );
     }
 
+    
     function getcontent(filepath) {
         return $http({
             method: 'POST',

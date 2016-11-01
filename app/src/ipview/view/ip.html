@@ -14,22 +14,15 @@
 <section layout="column" flex>
 
     <div layout="row">
-        <nav class="od-filebrowser-breadcrumb_ipviewer" layout-padding>
+        <nav class="od-filebrowser-breadcrumb_ipviewer" flex>
             <a ng-repeat="link in ipc.bcpath" ui-sref="ipview.ip({ path: link.path })">{{ link.title }}</a>
         </nav>
     </div>
     
-    <div layout="row">
-        <!--
-        <nav class="filetree" ng-controller="IpFileTreeController as ftc" flex="20">
-            <ul class="filetree__list">
-                <li ng-repeat="child in ftc.tree"
-                    class="filetree__list__item"
-                    ng-include="'app/src/ipview/filetree/view/filetree_item.html'">
-                </li>
-            </ul>            
-        </nav>
-    -->
+    <div layout="row" flex>
+        
+        <file-tree flex="20"></file-tree>
+        
         <div ui-view="ip-content" flex layout="row">
             
             <md-list class="ip__dirlist" flex>
