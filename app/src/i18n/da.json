@@ -584,15 +584,15 @@
         "ORGANIZATION": "Organisation"
     },
     "ERROR": {
-        "REQUIRED": "Obligatoriske felt",
+        "REQUIRED": "Obligatorisk felt",
         "TOO_SHORT": "Indhold for kort",
         "TOO_LONG": "Indhold for langt",
-        "INVALID_EMAIL": "Invalid e-mail adresse",
+        "INVALID_EMAIL": "Ugyldig e-mail adresse",
         "PASSWORD_NOMATCH": "Kodeord matcher ikke",
         "EMAIL_NOT_EXISTS": "Email findes ikke",
         "EMAIL_EXISTS": "Email findes allerede",
         "USERNAME_EXISTS": "Brugernavn findes allerede",
-        "AUTH_FAILURE": "Forkert loginoplysninger",
+        "AUTH_FAILURE": "Forkerte loginoplysninger",
         "AUTH_ERROR": "Fejl",
         "NOT_EQUAL_PATTERN": "Forkert format"
     },
@@ -603,7 +603,7 @@
         "FORGOT_PASSWORD": "Glemt kodeord",
         "VERIFY_PASSWORD": "Gentag kodeord",
         "SESSION_TIMEOUT": "Din session er udløbet",
-        "FORGOT_PASSWORD_SUCCESS": "Instruktioner er blevet sendt til den email forudsat. Tjek din e-mail og følg vejledningen.",
+        "FORGOT_PASSWORD_SUCCESS": "Instruktioner er blevet sendt til den angivne email. Tjek din e-mail og følg vejledningen.",
         "FORGOT_PASSWORD_PROMPT": "Indtast din e-mailadresse og vi sender dig oplysninger om, hvordan du nulstiller din adgangskode."
     },
     "MEMBER": {

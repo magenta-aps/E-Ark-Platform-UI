@@ -1,12 +1,8 @@
 <md-toolbar class="md-hue-2">
     <div class="md-toolbar-tools">
 
-        <a ui-sref="ipview" class="md-icon-button md-raised">
-            <i class="material-icons">arrow_back</i>
-        </a>
-
         <span>
-            <span class="muted">IP:</span>
+            <span class="muted">Browsing</span>
             {{ ipc.bcpath[0].title }}
         </span>
 
@@ -17,8 +13,8 @@
 
 <section layout="column" flex>
 
-    <div layout="row" layout-padding>
-        <nav class="od-filebrowser-breadcrumb_ipviewer">
+    <div layout="row">
+        <nav class="od-filebrowser-breadcrumb_ipviewer" layout-padding>
             <a ng-repeat="link in ipc.bcpath" ui-sref="ipview.ip({ path: link.path })">{{ link.title }}</a>
         </nav>
     </div>
