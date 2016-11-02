@@ -6,6 +6,7 @@
         }
     },
     "COMMON": {
+        "DATE": "Dato",
         "NONE": "ingen",
         "SIZE": "Størrelse",
         "PACKAGE_ID": "Pakke Id",

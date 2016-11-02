@@ -90,15 +90,16 @@ md-content {
 #loader {
   display: none;
   position: absolute;
-  top: $u*8;
+  top: 0;
   bottom: 0;
   right: 0;
   left: 0;
   text-align: center;
+  vertical-align: center;
   height: 100%;
   width: 100%;
   z-index: 99;
-  background: rgba(255, 255, 255, 0.5);
+  background-color: rgba($background-color, 0.75);
   
   md-progress-circular {
     margin: $u*4 auto;
