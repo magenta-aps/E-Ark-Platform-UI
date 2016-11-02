@@ -26,9 +26,7 @@ function ipFileTreeService(ipViewService) {
             function getNodes(nodePath, insertNode) {
                 ipViewService.listDir(nodePath).then(
                     function (response) {
-                        if (newPathIndex === lvls.length) {
-                            insertNode.current = true;
-                        };
+                        
                         insertNode.nodes = response;
                         traverseTree(insertNode.nodes, lvls, newPathIndex);
                     },
@@ -43,6 +41,9 @@ function ipFileTreeService(ipViewService) {
             };
             for (var node in nodes) {
                 if (nodes[node].path === fullPath) {
+                    if (newPathIndex === lvls.length) {
+                        nodes[node].current = true;
+                    };
                     if (!nodes[node].nodes) {
                         getNodes(nodes[node].path, nodes[node]);
                     } else {

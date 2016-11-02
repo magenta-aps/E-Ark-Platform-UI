@@ -8,9 +8,11 @@ function IpController($state, ipViewService, $stateParams) {
 
     ipc.path = $stateParams.path;
     ipc.children = [];
+    ipc.orderBy = '-name';
     
     ipc.bcpath = pathToBreadCrumb(ipc.path);
     ipc.viewContent = viewContent;
+    ipc.sortThis = sortThis;
     
     listDir();
 
@@ -64,6 +66,16 @@ function IpController($state, ipViewService, $stateParams) {
             };
         };
         return bc;
+    }
+    
+    function sortThis( $event, sortParameter ) {
+        if (ipc.orderBy === sortParameter) {
+            ipc.orderBy = '-' + sortParameter;
+        } else if (ipc.orderBy === '-' + sortParameter) {
+            ipc.orderBy = '';
+        } else {
+            ipc.orderBy = sortParameter;
+        }
     }
     
 }

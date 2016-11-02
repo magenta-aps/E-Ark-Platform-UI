@@ -6,6 +6,7 @@
         }
     },
     "COMMON": {
+        "DATE": "Date",
         "NONE": "none",
         "SIZE": "Size",
         "PACKAGE_ID": "Package Id",
