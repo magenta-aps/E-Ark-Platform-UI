@@ -19,18 +19,27 @@ function ipFileTreeService(ipViewService) {
         var lvls = path.split('/');
         
         function traverseTree(nodes, paths, pathIndex) {
+            
             var fullPath = '';
             var newPathIndex = pathIndex + 1;
+            
             function getNodes(nodePath, insertNode) {
                 ipViewService.listDir(nodePath).then(
                     function (response) {
+                        if (newPathIndex === lvls.length) {
+                            insertNode.current = true;
+                        };
                         insertNode.nodes = response;
                         traverseTree(insertNode.nodes, lvls, newPathIndex);
+                    },
+                    function (err) {
+                        console.log(err);
                     }
                 );
             };
-            for (var pi = pathIndex; pi > 0; pi--) {
-                fullPath = '/' + paths[pi] + fullPath;
+            
+            for (var p = pathIndex; p > 0; p--) {
+                fullPath = '/' + paths[p] + fullPath;
             };
             for (var node in nodes) {
                 if (nodes[node].path === fullPath) {
@@ -41,6 +50,7 @@ function ipFileTreeService(ipViewService) {
                     };
                 };
             };
+            
         };
         
         ipViewService.listDir('/' + lvls[1]).then(

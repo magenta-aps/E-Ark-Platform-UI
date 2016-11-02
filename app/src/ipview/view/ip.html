@@ -27,7 +27,7 @@
             
             <md-list class="ip__dirlist" flex>
                 <md-list-item ng-repeat="child in ipc.children" ng-click="ipc.viewContent(child)" layout="row" layout-align="start center">
-                    <span flex="10" style="text-align: center;">
+                    <span flex="10" layout="row" layout-align="center">
                         <i class="material-icons" ng-if="child.type === 'directory'">folder</i>
                         <i class="material-icons muted" ng-if="child.type !== 'directory'">insert_drive_file</i>
                     </span>
