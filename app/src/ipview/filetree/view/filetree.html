@@ -4,12 +4,22 @@
         <span>{{ node.name }}</span>
     </a>
     <ol class="iptree__nodes">
-        <li ng-repeat="node in node.nodes" ng-include="'nodes_renderer.html'" class="iptree__node" ng-if="node.type === 'directory'"></li>
+        <li ng-repeat="node in node.nodes"
+            ng-include="'nodes_renderer.html'"
+            class="iptree__node"
+            ng-if="node.type === 'directory'"
+            ng-class="{ 'active': node.current }">
+        </li>
     </ol>
 </script>
 
 <div ng-controller="IpFileTreeController as ftc" class="iptree">
     <ol class="iptree__nodes iptree__nodes_root">
-        <li ng-repeat="node in ftc.tree.nodes" ng-include="'nodes_renderer.html'" class="iptree__node" ng-if="node.type === 'directory'"></li>
+        <li ng-repeat="node in ftc.tree.nodes"
+            ng-include="'nodes_renderer.html'"
+            class="iptree__node"
+            ng-if="node.type === 'directory'"
+            ng-class="{ 'active': node.current }">
+        </li>
     </ol>
 </div>

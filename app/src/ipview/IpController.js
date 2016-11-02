@@ -38,7 +38,7 @@ function IpController($state, ipViewService, $stateParams) {
     
     function getItemInfo(path) {
         console.log('getting item info');
-        var action = ipViewService.serializeObj({ action: 'getinfo', path: 'path' });
+        var action = ipViewService.serializeObj({ action: 'getinfo', path: path });
         ipViewService.executeAction(action).then(
             function (response) {
                 console.log('get item info');
