@@ -8,6 +8,12 @@
 
 .ip__dirlist {
     background-color: #fff;
+    
+    span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 .od-filebrowser-breadcrumb_ipviewer {
@@ -54,4 +60,10 @@
             content: none;
         }
     }
+}
+
+.ipview-file {
+    background-color: #fff;
+    padding: $u;
+    overflow: hidden;
 }

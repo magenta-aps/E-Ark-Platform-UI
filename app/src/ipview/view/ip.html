@@ -21,26 +21,26 @@
     
     <div layout="row" flex>
         
-        <file-tree flex="20"></file-tree>
+        <file-tree flex="25"></file-tree>
         
         <div ui-view="ip-content" flex layout="row">
             
             <md-list class="ip__dirlist" flex>
-                <md-list-item ng-repeat="child in ipc.children" ng-click="ipc.viewContent(child)">
-                    <span>
+                <md-list-item ng-repeat="child in ipc.children" ng-click="ipc.viewContent(child)" layout="row" layout-align="start center">
+                    <span flex="10" style="text-align: center;">
                         <i class="material-icons" ng-if="child.type === 'directory'">folder</i>
                         <i class="material-icons muted" ng-if="child.type !== 'directory'">insert_drive_file</i>
                     </span>
-                    <span> {{ child.name }} </span>
-                    <span class="muted"> {{ child.date }} </span>
-                    <span class="muted"> {{ child.size }} </span>
+                    <span flex>{{ child.name }}</span>
+                    <span class="muted" flex>{{ child.date }}</span>
+                    <span class="muted" flex>{{ child.size }}</span>
                 </md-menu-item>
             </md-list>
             
-            <div layout-padding flex="25">
-                <h2>Meta:</h2>
-            </div>
-            
+        </div>
+        
+        <div layout-padding flex="25">
+            <h2>Meta:</h2>
         </div>
         
     </div>
