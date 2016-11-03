@@ -1,6 +1,9 @@
 ﻿{
   "IPVIEW": {
     "TITLE": "IP viewer",
+    "DESC": "Browse IPs available to you",
+    "BROWSE": "Browse",
+    "PATH": "Path",
     "MESSAGES": {},
     "ERROR": {
       "MESSAGE" :{

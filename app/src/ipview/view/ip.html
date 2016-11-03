@@ -90,6 +90,9 @@
                             {{ child.size }}
                         </div>    
                     </md-list-item>
+                    <md-list-item ng-if="ipc.children.length === 0">
+                        <span class="muted">{{ 'COMMON.EMPTY' | translate }}</span>
+                    </md-list-item>
                 </md-list>
             </div>
             

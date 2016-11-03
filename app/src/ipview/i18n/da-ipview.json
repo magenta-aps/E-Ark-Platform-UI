@@ -1,6 +1,9 @@
 ﻿{
   "IPVIEW": {
     "TITLE": "Gennemse IP",
+    "DESC": "Gennemse de informationspakker, du har adgang til",
+    "BROWSE": "Gennemse",
+    "PATH": "Sti",
     "MESSAGES": {},
     "ERROR": {
       "MESSAGE": {

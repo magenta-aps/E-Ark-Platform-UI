@@ -6,6 +6,7 @@
         }
     },
     "COMMON": {
+        "EMPTY": "Here is nothing here",
         "DATE": "Date",
         "NONE": "none",
         "SIZE": "Size",
