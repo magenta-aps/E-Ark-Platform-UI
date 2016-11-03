@@ -13,6 +13,7 @@ function IpController($state, ipViewService, $stateParams) {
     ipc.bcpath = pathToBreadCrumb(ipc.path);
     ipc.viewContent = viewContent;
     ipc.sortThis = sortThis;
+    ipc.searchIP = searchIp;
     
     listDir();
 
@@ -52,6 +53,7 @@ function IpController($state, ipViewService, $stateParams) {
         );
     }
     
+    
     function pathToBreadCrumb(path) {
         var bc = [];
         var pathParts = path.split('/');
@@ -68,6 +70,7 @@ function IpController($state, ipViewService, $stateParams) {
         return bc;
     }
     
+    
     function sortThis( $event, sortParameter ) {
         if (ipc.orderBy === sortParameter) {
             ipc.orderBy = '-' + sortParameter;
@@ -76,6 +79,11 @@ function IpController($state, ipViewService, $stateParams) {
         } else {
             ipc.orderBy = sortParameter;
         }
+    }
+    
+    
+    function searchIp(term) {
+        $state.go('ipview.search', { path: ipc.bcpath[0].path, term: term });
     }
     
 }

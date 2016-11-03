@@ -7,6 +7,14 @@
         </span>
 
         <span flex></span>
+        
+        <span>
+            <form ng-model="searchForm" ng-submit="ipc.searchIP(searchForm.term);">
+                <i class="material-icons">search</i>
+                <input type="search" name="term">
+                <input type="submit" value="Search">
+            </form>
+        </span>
 
     </div>
 </md-toolbar>
