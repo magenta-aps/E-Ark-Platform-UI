@@ -8,11 +8,12 @@
 
         <span flex></span>
         
-        <span>
-            <form ng-model="searchForm" ng-submit="ipc.searchIP(searchForm.term);">
-                <i class="material-icons">search</i>
-                <input type="search" name="term">
-                <input type="submit" value="Search">
+        <span class="ipsearchfield">
+            <form ng-model="ipc.searchForm" ng-submit="ipc.searchIP(ipc.searchForm.term);" layout="row" layout="end center">
+                <label title="{{ 'SEARCH.SEARCH' | translate }}" for="ipsearchfield">
+                    <i class="material-icons">search</i>
+                </label>
+                <input id="ipsearchfield" flex ng-model="ipc.searchForm.term" type="search">
             </form>
         </span>
 

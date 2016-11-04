@@ -9,11 +9,13 @@ function IpController($state, ipViewService, $stateParams) {
     ipc.path = $stateParams.path;
     ipc.children = [];
     ipc.orderBy = '-name';
+    ipc.searchForm = {};
     
     ipc.bcpath = pathToBreadCrumb(ipc.path);
     ipc.viewContent = viewContent;
     ipc.sortThis = sortThis;
     ipc.searchIP = searchIp;
+    ipc.toggleSearchField = toggleSearchField;
     
     listDir();
 
@@ -84,6 +86,11 @@ function IpController($state, ipViewService, $stateParams) {
     
     function searchIp(term) {
         $state.go('ipview.search', { path: ipc.bcpath[0].path, term: term });
+    }
+    
+    
+    function toggleSearchField() {
+        !ipc.searchForm.visible ? ipc.searchForm.visible = true : ipc.searchForm.visible = false;
     }
     
 }

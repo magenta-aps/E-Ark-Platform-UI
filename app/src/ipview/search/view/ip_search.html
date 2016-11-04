@@ -2,8 +2,14 @@
     <div class="md-toolbar-tools">
 
         <span>
-            <span class="muted">{{ 'SEARCH.SEARCH.LABEL' | translate }}</span>
-            {{ sc.bcpath[0].title }}
+            <a ui-sref="ipview.ip({ path: sc.path })" class="md-button md-icon-button md-raised">
+                <i class="material-icons">arrow_back</i>
+            </a>
+        </span>
+
+        <span>
+            <span class="muted">{{ 'SEARCH.SEARCH' | translate }}</span>
+            {{ sc.path }}
         </span>
 
         <span flex></span>

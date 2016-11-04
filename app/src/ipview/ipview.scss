@@ -71,3 +71,20 @@
     padding: $u;
     overflow: hidden;
 }
+
+#ipsearchfield {
+    transition: all ease-out 0.3s;
+    background-color: transparent;
+    color: $background-color;
+    font-size: 0.8em;
+    padding: $u*0.25 0;
+    border: none;
+    border-bottom: solid $u*0.125 $main-color;
+    width: 0;
+}
+#ipsearchfield:focus {
+    transition: all ease-out 0.3s;
+    width: 10em;
+    outline: none;
+    margin-left: $u*0.5;
+}

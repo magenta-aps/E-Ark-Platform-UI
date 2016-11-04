@@ -2,10 +2,13 @@ angular
     .module('eArkPlatform.ipview')
     .controller('IpSearchController', IpSearchController);
 
-function IpSearchController($scope, searchService, fileUtilsService, basketService, sessionService, orderService, $state, $mdDialog, $translate) {
+function IpSearchController($scope, $stateParams, searchService, fileUtilsService, basketService, sessionService, orderService, $state, $mdDialog, $translate) {
     
     var sc = this;
-    sc.searchStr = '';
+    var user = sessionService.getUserInfo().user;
+    
+    sc.path = $stateParams.path;
+    sc.searchStr = $stateParams.term;
     sc.initialTerm = '';
     sc.searchInputs = [];
     sc.searchResults = basketService.currentSearch;
@@ -20,7 +23,7 @@ function IpSearchController($scope, searchService, fileUtilsService, basketServi
     sc.helpfulSearchHints = helpfulSearchHints;
     sc.fileInfoDiag = fileInfoDiag;
 
-    var user = sessionService.getUserInfo().user;
+    sc.executeSearch();
 
     
     function sortThis( $event, sortParameter ) {

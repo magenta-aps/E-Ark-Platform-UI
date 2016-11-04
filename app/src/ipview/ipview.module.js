@@ -49,8 +49,12 @@ function config($stateProvider, languageFilesProvider, USER_ROLES, modulesMenuSe
             authorizedRoles: [USER_ROLES.enduser]
         }
     }).state('ipview.search', {
-        url: '/ipsearcher:path:term',
+        url: '/ipsearcher',
         parent: 'site',
+        params: {
+            path: '/none',
+            term: 'none'
+        },
         views: {
             'content@': {
                 templateUrl : 'app/src/ipview/search/view/ip_search.html',
