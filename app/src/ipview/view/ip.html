@@ -7,6 +7,15 @@
         </span>
 
         <span flex></span>
+        
+        <span class="ipsearchfield">
+            <form ng-model="ipc.searchForm" ng-submit="ipc.searchIP(ipc.searchForm.term);" layout="row" layout="end center">
+                <label title="{{ 'SEARCH.SEARCH' | translate }}" for="ipsearchfield">
+                    <i class="material-icons">search</i>
+                </label>
+                <input id="ipsearchfield" flex ng-model="ipc.searchForm.term" type="search">
+            </form>
+        </span>
 
     </div>
 </md-toolbar>
@@ -90,14 +99,28 @@
                             {{ child.size }}
                         </div>    
                     </md-list-item>
+                    <md-list-item ng-if="ipc.children.length === 0">
+                        <span class="muted">{{ 'COMMON.EMPTY' | translate }}</span>
+                    </md-list-item>
                 </md-list>
             </div>
             
         </div>
         
         <div class="metapane" layout-padding flex="40" flex-sm="33" flex-md="25" flex-gt-md="20">
-            <h2>Meta:</h2>
-            <p>Coming soon ...</p>
+            
+            <div ng-if="ipc.itemInfo !== false">
+                <h2>{{ ipc.path }}</h2>
+                <dl ng-repeat="(key, value) in ipc.itemInfo">
+                    <dt>{{ key }}</dt>
+                    <dd>{{ value }}</dd>
+                </dl>
+            </div>
+
+            <p class="muted" ng-if="ipc.itemInfo === false">
+                {{ 'IPVIEW.ERROR.MESSAGE.NO_META' | translate }}
+            </p>
+            
         </div>
         
     </div>

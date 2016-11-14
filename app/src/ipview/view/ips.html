@@ -1,7 +1,7 @@
 <div layout="column">
    
     <div layout="row" layout-align="start center" layout-padding>
-        <h1 class="md-title muted">Browse DIPs available to you</h1>
+        <h1 class="md-title muted">{{ 'IPVIEW.DESC' | translate }}</h1>
     </div>
     
     <div layout="column" layout-padding>
@@ -11,11 +11,13 @@
                 <md-card-title>
                     <md-card-title-text>
                         <span class="md-headline">{{ ip.name }}</span>
-                        <span class="md-subhead muted">path: {{ ip.path }}</span>
+                        <span class="md-subhead muted">{{ 'IPVIEW.PATH' | translate }}: {{ ip.path }}</span>
                     </md-card-title-text>
                 </md-card-title>
                 <md-card-actions layout="row" layout-align="end center">
-                    <md-button ui-sref="ipview.ip({ path: ip.path })">Browse</md-button>
+                    <md-button ui-sref="ipview.ip({ path: ip.path })">
+                        {{ 'IPVIEW.BROWSE' | translate }}
+                    </md-button>
                 </md-card-actions>
             </md-card>
 

@@ -27,7 +27,7 @@
 
         <div layout="row" layout-align="space-between center">
             <h3 class="md-subhead">{{ 'ORDER.ORDERS.ITEMS' | translate }}:</h3>
-            <md-button class="md-primary md-raised" ui-sref="ipview.ip({ id: odCtrl.orderId, path: '/', manageorder: true })">
+            <md-button class="md-primary md-raised" ui-sref="ipview.ip({ id: odCtrl.orderId, path: odCtrl.data.processId, manageorder: true })">
                 Browse items
             </md-button>
         </div>

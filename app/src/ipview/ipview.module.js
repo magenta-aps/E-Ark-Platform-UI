@@ -48,6 +48,23 @@ function config($stateProvider, languageFilesProvider, USER_ROLES, modulesMenuSe
         data: {
             authorizedRoles: [USER_ROLES.enduser]
         }
+    }).state('ipview.search', {
+        url: '/ipsearcher',
+        parent: 'site',
+        params: {
+            path: '/none',
+            term: 'none'
+        },
+        views: {
+            'content@': {
+                templateUrl : 'app/src/ipview/search/view/ip_search.html',
+                controller : 'IpSearchController',
+                controllerAs: 'sc'
+            }
+        },
+        data: {
+            authorizedRoles: [USER_ROLES.enduser]
+        }
     });
 
     languageFilesProvider.addFile('app/src/ipview/i18n/','-ipview.json');

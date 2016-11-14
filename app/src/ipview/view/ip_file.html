@@ -1,19 +1,16 @@
 <section class="ipview-file" flex layout-fill>
-    
-    <h1>{{ ipfc.filePath }}</h1>
-    
-    <dl>
-        <ng-repeat ng-repeat="(key, value) in ipfc.data">
-            <dt>{{ key }}</dt>
-            <dd>{{ value }}</dd>
-        </ng-repeat>
-    </dl>
-    
-    <dl>
-        <ng-repeat ng-repeat="(key, value) in ipfc.info">
-            <dt>{{ key }}</dt>
-            <dd>{{ value }}</dd>
-        </ng-repeat>
-    </dl>
+
+    <div>
+        <md-button ng-click="ipfc.download()"
+                   class="md-text-icon-button"
+                   aria-label="{{ 'ERMS_REPOS.VIEW_META' | translate }}">
+            <i class="material-icons">file_download</i>
+            <span>{{ 'COMMON.DOWNLOAD' | translate }}</span>
+        </md-button>
+    </div>
+
+    <div>
+        <iframe name="preview_frame" class="ipview-file__iframe" ng-src="{{ ipfc.previewUrl }}"></iframe>
+    </div>
 
 </section>

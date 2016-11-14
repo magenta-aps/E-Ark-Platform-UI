@@ -6,6 +6,7 @@
         }
     },
     "COMMON": {
+        "EMPTY": "Der er intet her",
         "DATE": "Dato",
         "NONE": "ingen",
         "SIZE": "Størrelse",
