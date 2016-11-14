@@ -7,7 +7,7 @@ function config($stateProvider, languageFilesProvider, USER_ROLES, modulesMenuSe
     modulesMenuServiceProvider.addItem({
         templateUrl: 'app/src/ipview/view/moduleMenuItem.html',
         order: 2,
-        authorizedRole: USER_ROLES.enduser
+        authorizedRole: USER_ROLES.archivist
     });
 
     $stateProvider.state('ipview', {
