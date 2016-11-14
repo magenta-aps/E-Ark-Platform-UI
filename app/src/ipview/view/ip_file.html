@@ -2,14 +2,15 @@
 
     <div>
         <md-button ng-click="ipfc.download()"
-                   class="md-icon-button"
+                   class="md-text-icon-button"
                    aria-label="{{ 'ERMS_REPOS.VIEW_META' | translate }}">
-            <i class="material-icons">download</i>
+            <i class="material-icons">file_download</i>
+            <span>{{ 'COMMON.DOWNLOAD' | translate }}</span>
         </md-button>
     </div>
-<div>
-    <iframe name="preview_frame" width="1000" height="800" ng-src="{{previewUrl}}"></iframe>
-</div>
 
+    <div>
+        <iframe name="preview_frame" class="ipview-file__iframe" ng-src="{{ ipfc.previewUrl }}"></iframe>
+    </div>
 
 </section>

@@ -10,6 +10,7 @@ function IpController($state, ipViewService, $stateParams) {
     ipc.children = [];
     ipc.orderBy = '-name';
     ipc.searchForm = {};
+    ipc.itemInfo = false;
 
     ipc.bcpath = pathToBreadCrumb(ipc.path);
     ipc.viewContent = viewContent;
@@ -20,8 +21,10 @@ function IpController($state, ipViewService, $stateParams) {
     listDir();
 
     function listDir() {
-        if (ipc.path.charAt(0) != '/')
+        if (ipc.path.charAt(0) != '/') {
             ipc.path = '/' + ipc.path;
+        };
+        getItemInfo(ipc.path);
         var action = ipViewService.serializeObj({action: 'list', path: ipc.path});
         ipViewService.executeAction(action).then(
             function (response) {
@@ -35,7 +38,6 @@ function IpController($state, ipViewService, $stateParams) {
     }
 
     function viewContent(item) {
-        getItemInfo(item.path);
         if (item.type === 'directory') {
             $state.go('ipview.ip', {path: item.path});
         } else {
@@ -44,12 +46,14 @@ function IpController($state, ipViewService, $stateParams) {
     }
 
     function getItemInfo(path) {
-        console.log('getting item info');
+        console.log('getting item info for ' + path);
         var action = ipViewService.serializeObj({ action: 'getinfo', path: path });
         ipViewService.executeAction(action).then(
             function (response) {
-                console.log('get item info');
-                console.log(response);
+                if (response !== undefined && response.error !== 404) {
+                    console.log('There is a response');
+                    ipc.itemInfo = response;
+                };
             },
             function (err) {
                 console.log('Error: ' + err.message);

@@ -11,6 +11,7 @@ function IpFileController($sce, $scope, $stateParams, $window, ipViewService) {
     ipfc.previewUrl = '';
     ipfc.filePath = $stateParams.path;
     
+    
     function getFileContent() {
         var contentAction = ipViewService.serializeObj({ action: 'getcontent', path: ipfc.filePath });
         var infoAction = ipViewService.serializeObj({ action: 'getinfo', path: ipfc.filePath });
@@ -41,9 +42,9 @@ function IpFileController($sce, $scope, $stateParams, $window, ipViewService) {
             }
         );
     }
+
     
     getFileContent();
-
 
     ipfc.download = function(){
         $window.open(ipfc.data.download_url);
