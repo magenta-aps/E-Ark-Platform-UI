@@ -70,6 +70,12 @@
   overflow: hidden;
 }
 
+.ipview-file__iframe {
+  width: 100%;
+  height: 50vh;
+  border: none;
+}
+
 #ipsearchfield {
   transition: all ease-out 0.3s;
   background-color: transparent;
