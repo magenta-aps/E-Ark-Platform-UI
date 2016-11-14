@@ -78,7 +78,6 @@ function ipViewService($http) {
         );
 
     }
-
     
     /**
      * Will list a collection of IPs that the user hass access to view.
