@@ -12,7 +12,7 @@ function IpSearchController($scope, $stateParams, searchService, fileUtilsServic
     sc.initialTerm = '';
     sc.searchInputs = [];
     sc.searchResults = basketService.currentSearch;
-    sc.orderBy = '-orderStatus';
+    sc.orderBy = 'title';
     sc.filterBy = { title: '', packageId: '' };
     sc.state = $state;
     
@@ -39,7 +39,7 @@ function IpSearchController($scope, $stateParams, searchService, fileUtilsServic
     
     function executeSearch() {
         
-        sc.searchStr = 'content: ' + sc.initialTerm;
+        sc.searchStr = 'packagetype:DIP AND path:' + sc.path.slice(1) + '* AND content:' + sc.initialTerm;
         
         for (var i in sc.searchInputs) {
             if (sc.searchInputs[i].term !== '') {
@@ -49,13 +49,9 @@ function IpSearchController($scope, $stateParams, searchService, fileUtilsServic
     
         sc.searchResults = {};
         var queryObj = {
-            q: sc.searchStr + ' AND path:*/representations/*/data/* AND NOT path:*_mig-*',
+            q: sc.searchStr,
             rows: 25,
             start: 0,
-            fl: 'package,stream_size,path,confidential,content_type,textCategory,_version_,title,packageId,author,' +
-            'eadid_s,eadtitle_s,eaddate_s,eaddatestructuredfrom_dt,eaddatestructuredto_dt,eaddatestructuredfrom_dt,' +
-            'eaddatestructuredto_dt,eadorigination_s,eadabstract_t,eadaccessrestrict_s,eadclevel_s', //fields
-            sort :'package asc',
             wt: 'json'
         };
         var encTerm = searchService.objectToQueryString(queryObj);
