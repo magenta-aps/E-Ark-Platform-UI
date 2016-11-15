@@ -61,7 +61,8 @@
 }
 
 .metapane {
-  background-color: $background-color;
+    background-color: $background-color;
+    overflow: auto;
 }
 
 .ipview-file {

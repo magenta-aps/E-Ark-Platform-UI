@@ -108,22 +108,15 @@
         </div>
 
         <div class="metapane" ng-if="ipc.itemInfo !== false" layout-padding flex="40" flex-sm="33" flex-md="25" flex-gt-md="20">
-
             <div>
-                <h2>{{ ipc.path }}</h2>
+                <h3>{{ ipc.itemName }}</h3>
                 <dl>
-                    
-                    <ng-repeat ng-repeat="item in ipc.itemInfo | orderBy: 'label'">
+                    <ng-repeat ng-repeat="item in ipc.itemInfo">
                         <dt>{{ item.label }}</dt>
                         <dd>{{ item.value }}</dd>
                     </ng-repeat>
                 </dl>
             </div>
-
-            <p class="muted" ng-if="ipc.itemInfo === false">
-                {{ 'IPVIEW.ERROR.MESSAGE.NO_META' | translate }}
-            </p>
-
         </div>
 
     </div>
