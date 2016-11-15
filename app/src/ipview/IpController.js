@@ -37,6 +37,7 @@ function IpController($state, ipViewService, $stateParams) {
         );
     }
 
+    
     function viewContent(item) {
         if (item.type === 'directory') {
             $state.go('ipview.ip', {path: item.path});
@@ -45,14 +46,15 @@ function IpController($state, ipViewService, $stateParams) {
         }
     }
 
+    
     function getItemInfo(path) {
-        console.log('getting item info for ' + path);
         var action = ipViewService.serializeObj({ action: 'getinfo', path: path });
         ipViewService.executeAction(action).then(
             function (response) {
                 if (response !== undefined && response.error !== 404) {
                     console.log('There is a response');
-                    ipc.itemInfo = response;
+                    ipc.itemInfo = [];
+                    dataDigest(response);
                 };
             },
             function (err) {
@@ -60,6 +62,19 @@ function IpController($state, ipViewService, $stateParams) {
             }
         );
     }
+    
+    
+    // Clean up response data for UI itemInfo
+    function dataDigest(obj) {
+        Object.keys(obj).forEach(function (key) {
+            if(typeof obj[key] === 'object') {
+                dataDigest(obj[key]);
+            } else {
+                ipc.itemInfo.push({ label: key, value: obj[key] });
+            };
+        });
+    }
+    
 
     function pathToBreadCrumb(path) {
         var bc = [];
