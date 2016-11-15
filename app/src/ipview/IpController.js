@@ -13,6 +13,7 @@ function IpController($state, ipViewService, $stateParams) {
     ipc.itemInfo = false;
 
     ipc.bcpath = pathToBreadCrumb(ipc.path);
+    ipc.itemName = ipc.bcpath[ipc.bcpath.length - 1].title;
     ipc.viewContent = viewContent;
     ipc.sortThis = sortThis;
     ipc.searchIP = searchIp;
@@ -70,7 +71,8 @@ function IpController($state, ipViewService, $stateParams) {
             if(typeof obj[key] === 'object') {
                 dataDigest(obj[key]);
             } else {
-                ipc.itemInfo.push({ label: key, value: obj[key] });
+                var readableKey = key.replace(/[@#]/g, '');
+                ipc.itemInfo.push({ label: readableKey, value: obj[key] });
             };
         });
     }
