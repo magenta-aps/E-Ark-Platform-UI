@@ -3,7 +3,7 @@ angular.module('eArkPlatform.ordermanagement').controller('OrderDetailController
 /**
  * Main controller for the order management module
  */
-function OrderDetailController($stateParams, ordermanagementService, $mdDialog, $mdToast, errorService, $translate) {
+function OrderDetailController($stateParams, $mdDialog, $mdToast,  $translate, errorService, ordermanagementService, sessionService) {
     var odCtrl = this;
     odCtrl.orderId = $stateParams.orderid;
     odCtrl.data = [];
@@ -12,6 +12,15 @@ function OrderDetailController($stateParams, ordermanagementService, $mdDialog, 
     odCtrl.fileInfoDiag = fileInfoDiag;
     odCtrl.executeOrder = executeOrder;
     odCtrl.refreshOrderDetails = refreshOrderDetails;
+    odCtrl.browsable = false;
+    odCtrl.unProcessed = false;
+    odCtrl.statusEnum = {
+        new : 0,
+        submitted : 1,
+        editable : 2,
+        closed : 3
+    };
+
     
     odCtrl.refreshOrderDetails(odCtrl.orderId);
     
@@ -38,11 +47,16 @@ function OrderDetailController($stateParams, ordermanagementService, $mdDialog, 
     };
     
     function refreshOrderDetails( oid ) {
+        var userData = sessionService.getUserInfo().user;
         ordermanagementService.getOrder( oid ).then(function(response) {
             odCtrl.data = response;
+            console.log("User is: "+ userData.role);
             if ( odCtrl.data.assignee !== 'none' ) {
                 odCtrl.assigneeSelector = odCtrl.data.assignee.userName;
-            };
+            }
+            odCtrl.unProcessed = (odCtrl.data.orderStatus == 'new');
+            odCtrl.browsable = (odCtrl.data.orderStatus == 'closed' ||
+                               (userData.role =='archivist' && odCtrl.statusEnum[odCtrl.data.orderStatus] > 1) )
         });
     }
     
@@ -52,10 +66,11 @@ function OrderDetailController($stateParams, ordermanagementService, $mdDialog, 
         ordermanagementService.processOrder(order).then(function (response) {
             if (response) {
                 console.log('That went well.');
+                odCtrl.refreshOrderDetails(odCtrl.orderId);
                 $mdToast.showSimple( $translate.instant('ORDERMAN.MSG.PROCESS_SUBMIT_SUCCESS') )
             } else {
                 errorService.displayErrorMsg( $translate.instant('ORDERMAN.MSG.PROCESS_SUBMIT_ERROR') );
-            };        
+            }
         });
     }
     
