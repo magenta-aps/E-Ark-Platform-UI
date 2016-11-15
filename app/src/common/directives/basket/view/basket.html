@@ -1,27 +1,27 @@
 <form ng-controller="BasketController as bdc"
-    name="bdc.orderForm"
-    novalidate
-    layout-gt-sm="column"
-    layout-fill>
+      ng-submit="submitMethod(bdc.orderForm.order);"
+      name="bdc.orderForm"
+      layout-gt-sm="column"
+      layout-fill>
 
     <div id="basket-content"
-        layout-gt-sm="row"
-        flex>
+         layout-gt-sm="row"
+         flex>
         
         <div class="basket__items__content"
-            layout-gt-sm="column"
-            flex-gt-sm="60"
-            layout-padding>
+             layout-gt-sm="column"
+             flex-gt-sm="60"
+             layout-padding>
             <h2 class="md-title">{{ 'BASKET.ITEMS' | translate }}:</h2>
             <md-card>
                 <md-card-content>
                     <div class="simple-list" ng-show="bdc.basket">
                         <md-list class="simple-list__body md-dense">
                             <md-list-item ng-repeat="document in bdc.basket"
-                                ng-click="bdc.fileInfoDiag($event, document)"
-                                class="simple-list__body__item"
-                                layout="row"
-                                layout-align="space-between center">
+                                          ng-click="bdc.fileInfoDiag($event, document)"
+                                          class="simple-list__body__item"
+                                          layout="row"
+                                          layout-align="space-between center">
                                 <img ng-src="app/assets/images/filetypes/{{document.thumbnail}}" alt="">
                                 <span>{{ document.title}}</span>
                                 <span flex></span>
@@ -36,36 +36,33 @@
         </div>
         
         <div class="basket__info__content"
-            layout="column"
-            layout-gt-sm="column"
-            flex-gt-sm="40"
-            layout-padding>
+             layout="column"
+             layout-gt-sm="column"
+             flex-gt-sm="40"
+             layout-padding>
             <h2 class="md-title">{{ 'BASKET.DATA' | translate }}</h2>
             <md-input-container>
                 <label>{{ 'COMMON.TITLE' | translate }}</label>
-                <input type="text" name="orderTitle" ng-model="bdc.orderForm.order.title" required md-autofocus>
+                <input required type="text" name="orderTitle" ng-model="bdc.orderForm.order.title" md-autofocus>
             </md-input-container>
-            <md-datepicker
-                ng-model="bdc.orderForm.order.plannedDate"
-                md-placeholder="{{ 'ORDER.LABEL.PLANNED_DATE' | translate }}">
-            </md-datepicker>
+            <md-datepicker required name="plannedDate" ng-model="bdc.orderForm.order.plannedDate" md-placeholder="{{ 'ORDER.LABEL.PLANNED_DATE' | translate }}"></md-datepicker>
             <md-input-container flex>
                 <label>{{ 'ORDER.LABEL.USER_NOTES' | translate }}</label>
-                <textarea ng-model="bdc.orderForm.order.endUserOrderNote" rows="2" columns="3"></textarea>
+                <textarea required name="endUserOrderNote" ng-model="bdc.orderForm.order.endUserOrderNote" rows="2" columns="3"></textarea>
             </md-input-container>
             <md-input-container flex>
                 <label>{{ 'ORDER.LABEL.PREFERRED_DELIVERY_METHOD' | translate }}</label>
-                <input name="deliveryFormat" type="text" ng-model="bdc.orderForm.order.deliveryFormat">
+                <input required name="deliveryFormat" type="text" ng-model="bdc.orderForm.order.deliveryFormat">
             </md-input-container>
         </div>    
         
     </div>
 
     <div layout="row"
-        layout-align="end"
-        layout-padding
-        style="border-top: solid 1px #ddd;">
-        <md-button class="md-primary md-raised md-text-icon-button" type="submit" ng-click="submitMethod(bdc.orderForm.order);">
+         layout-align="end"
+         layout-padding
+         style="border-top: solid 1px #ddd;">
+        <md-button class="md-primary md-raised md-text-icon-button" type="submit">
             {{ 'BASKET.SEND' | translate }}
             <i class="material-icons ng-scope">send</i>
         </md-button>
