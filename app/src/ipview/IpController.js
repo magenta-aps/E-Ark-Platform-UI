@@ -54,8 +54,8 @@ function IpController($state, ipViewService, $stateParams) {
             function (response) {
                 if (response !== undefined && response.error !== 404) {
                     console.log('There is a response');
-                    ipc.itemInfo = [];
-                    dataDigest(response);
+                    console.log(response);
+                    ipc.itemInfo = response;
                 };
             },
             function (err) {
