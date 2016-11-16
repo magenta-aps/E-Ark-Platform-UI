@@ -27,7 +27,9 @@
         
         <div layout="row" layout-align="space-between center">
             <h3 class="md-subhead">{{ 'ORDER.ORDERS.ITEMS' | translate }}:</h3>
-            <md-button class="md-primary md-raised" ui-sref="ipview.ip({ id: oddCtrl.orderId, path: '/', manageorder: false })">
+            <md-button class="md-primary md-raised"
+                       ui-sref="ipview.ip({ id: oddCtrl.orderId, path: oddCtrl.data.processId, manageorder: false })"
+                       ng-disabled="oddCtrl.data.orderStatus !== 'ready'">
                 Browse items
             </md-button>
         </div>
@@ -127,7 +129,7 @@
             <dt>{{ 'ORDER.TITLE.ORDER' | translate }}</dt>
             <dd>{{ oddCtrl.data.title }}</dd>
             <dt>{{ 'ORDER.ORDERS.STATUS' | translate }}</dt>
-            <dd>{{oddCtrl.data.orderStatus}}</dd>
+            <dd>{{ oddCtrl.data.orderStatus }}</dd>
             <dt>{{ 'ORDER.ORDERS.ORDER_ID' | translate }}</dt>
             <dd>{{ oddCtrl.data.orderId }}</dd>
             <dt>{{ 'ORDER.ORDERS.ARCH_ASSIGNED' | translate }}</dt>
