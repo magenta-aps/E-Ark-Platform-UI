@@ -18,6 +18,12 @@ function BasketController($scope, $state, basketService, sessionService, $mdDial
     bdc.basket = basketService.basket;
     bdc.fileInfoDiag = fileInfoDiag;
     
+    bdc.orderForm = {
+        order: {
+            plannedDate: new Date(),
+        }
+    };
+    
     $scope.removeItem = function(item) {
         basketService.removeFromBasket(item).then(function(response){
             if (response) { // Updating current search list
