@@ -7,14 +7,13 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
     var ipc = this;
 
     ipc.orderId = $stateParams.orderId;
-    ipc.path = '/';
+    ipc.path = $stateParams.path;
     ipc.children = [];
     ipc.orderBy = '-name';
     ipc.searchForm = {};
     ipc.itemInfo = false;
 
     ipc.bcpath = pathToBreadCrumb(ipc.path);
-    ipc.itemName = ipc.bcpath[ipc.bcpath.length - 1].title;
     ipc.viewContent = viewContent;
     ipc.sortThis = sortThis;
     ipc.searchIP = searchIp;

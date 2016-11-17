@@ -4,13 +4,21 @@ angular
     .directive('fileTree', fileTree);
 
 
-function IpFileTreeController($stateParams, ipFileTreeService) {
+function IpFileTreeController($scope, ipFileTreeService) {
     
     var ftc = this;
-        
-    ftc.path = $stateParams.path;
-    ipFileTreeService.buildTree(ftc.path);
-    ftc.tree = ipFileTreeService.getTree();
+    ftc.tree = {};
+    
+    ipFileTreeService.getTree($scope.path).then(
+        function (response) {
+            ftc.tree = response.data;
+            console.log('Got tree data');
+            console.log(ftc.tree);
+        },
+        function (err) {
+            console.log('Error retrieving file tree data: ' + err);
+        }
+    );
     
 }
 
@@ -19,6 +27,8 @@ function fileTree() {
     return {
         restrict: 'E',
         templateUrl: './app/src/ipview/filetree/view/filetree.html',
-        scope: {}
+        scope: {
+            path: '=path'
+        }
     };
 }

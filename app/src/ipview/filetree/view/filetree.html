@@ -15,7 +15,7 @@
 
 <div ng-controller="IpFileTreeController as ftc" class="iptree">
     <ol class="iptree__nodes iptree__nodes_root">
-        <li ng-repeat="node in ftc.tree.nodes"
+        <li ng-repeat="node in ftc.tree"
             ng-include="'nodes_renderer.html'"
             class="iptree__node"
             ng-if="node.type === 'directory'"
