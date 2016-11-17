@@ -7,7 +7,7 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
     var ipc = this;
 
     ipc.orderId = $stateParams.orderId;
-    ipc.path = '/';
+    ipc.path = $stateParams.path ? $stateParams.path: '/';
     ipc.children = [];
     ipc.orderBy = '-name';
     ipc.searchForm = {};
@@ -28,25 +28,27 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
         if ($stateParams.orderId) {
             orderService.getOrderDetail(ipc.orderId).then(function (response) {
                 ipc.order = response;
-                ipc.path += response.processId;
                 listDir();
                 defer.resolve(true);
             });
         }
         else {
-            // The we need tnot do anything and end up browsing directory root
+            // The we need not do anything and end up browsing directory root
             defer.resolve(true);
             listDir();
         }
-
         return defer.promise;
     }
 
     function listDir() {
-        getItemInfo(ipc.path);
-        var action = ipViewService.serializeObj({action: 'list', path: ipc.path});
-        ipViewService.executeAction(action).then(
-            function (response) {
+        if(ipc.path)
+            getItemInfo(ipc.path);
+        var orderStatus  = '';
+        if(ipc.order && ipc.order.orderStatus)
+            orderStatus = ipc.order.orderStatus;
+
+        var action = ipViewService.serializeObj({action: 'list', path: ipc.path, orderStatus: orderStatus});
+        ipViewService.executeAction(action).then(function(response) {
                 ipc.children = response.children;
             },
             function (err) {

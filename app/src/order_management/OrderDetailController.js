@@ -17,8 +17,9 @@ function OrderDetailController($stateParams, $mdDialog, $mdToast,  $translate, e
     odCtrl.statusEnum = {
         new : 0,
         submitted : 1,
-        editable : 2,
-        closed : 3
+        open : 2,
+        ready : 3,
+        closed : 4
     };
 
     
