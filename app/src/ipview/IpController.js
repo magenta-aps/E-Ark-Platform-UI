@@ -14,6 +14,7 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
     ipc.itemInfo = false;
 
     ipc.bcpath = pathToBreadCrumb(ipc.path);
+    ipc.itemName = ipc.bcpath[ipc.bcpath.length - 1].title;
     ipc.viewContent = viewContent;
     ipc.sortThis = sortThis;
     ipc.searchIP = searchIp;
@@ -53,7 +54,6 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
                 errorService.displayErrorMsg($translate.instant('IPVIEW.ERROR.MESSAGE.DIR_LISTING_ERROR'));
             }
         );
-
     }
 
     function viewContent(item) {
@@ -65,12 +65,14 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
     }
 
     function getItemInfo(path) {
+        var action = ipViewService.serializeObj({ action: 'getinfo', path: path });
         console.log('getting item info for ' + path);
         var action = ipViewService.serializeObj({action: 'getinfo', path: path});
         ipViewService.executeAction(action).then(
             function (response) {
                 if (response !== undefined && response.error !== 404) {
                     console.log('There is a response');
+                    console.log(response);
                     ipc.itemInfo = response;
                 }
             },
@@ -79,6 +81,20 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
             }
         );
     }
+    
+    
+    // Clean up response data for UI itemInfo
+    function dataDigest(obj) {
+        Object.keys(obj).forEach(function (key) {
+            if(typeof obj[key] === 'object') {
+                dataDigest(obj[key]);
+            } else {
+                var readableKey = key.replace(/[@#]/g, '');
+                ipc.itemInfo.push({ label: readableKey, value: obj[key] });
+            };
+        });
+    }
+    
 
     function pathToBreadCrumb(path) {
         var bc = [];

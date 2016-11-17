@@ -8,6 +8,7 @@
 
         <span flex></span>
         
+        <!-- SEARCH WAITING ON BACKEND
         <span class="ipsearchfield">
             <form ng-model="ipc.searchForm" ng-submit="ipc.searchIP(ipc.searchForm.term);" layout="row" layout="end center">
                 <label title="{{ 'SEARCH.SEARCH' | translate }}" for="ipsearchfield">
@@ -16,6 +17,7 @@
                 <input id="ipsearchfield" flex ng-model="ipc.searchForm.term" type="search">
             </form>
         </span>
+        -->
 
     </div>
 </md-toolbar>
@@ -104,25 +106,27 @@
                     </md-list-item>
                 </md-list>
             </div>
-            
+
         </div>
-        
+
         <div class="metapane" layout-padding flex="40" flex-sm="33" flex-md="25" flex-gt-md="20">
-            
+            <div ng-if="!ipc.itemInfo">
+                <p class="muted">No metadata available</p>
+            </div>
             <div ng-if="ipc.itemInfo !== false">
-                <h2>{{ ipc.path }}</h2>
-                <dl ng-repeat="(key, value) in ipc.itemInfo">
-                    <dt>{{ key }}</dt>
-                    <dd>{{ value }}</dd>
+                <dl>
+                    <!-- BEGIN: Hardcoding display of project manager's favorite data -->
+                    <dt>{{ ipc.itemInfo['ns0:did']['ns0:unittitle']['@label'] }}</dt>
+                    <dd>{{ ipc.itemInfo['ns0:did']['ns0:unittitle']['#text'] }}</dd>
+                    <dt>{{ ipc.itemInfo['ns0:did']['ns0:unitdate']['@label'] }}</dt>
+                    <dd>{{ ipc.itemInfo['ns0:did']['ns0:unitdate']['#text'] }}</dd>
+                    <dt>{{ ipc.itemInfo['ns0:did']['ns0:abstract']['@label'] }}</dt>
+                    <dd>{{ ipc.itemInfo['ns0:did']['ns0:abstract']['#text'] }}</dd>
+                    <!-- END: Hardcoding display of project manager's favorite data -->
                 </dl>
             </div>
-
-            <p class="muted" ng-if="ipc.itemInfo === false">
-                {{ 'IPVIEW.ERROR.MESSAGE.NO_META' | translate }}
-            </p>
-            
         </div>
-        
+
     </div>
-    
+
 </section>

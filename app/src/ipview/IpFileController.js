@@ -6,47 +6,43 @@ function IpFileController($sce, $scope, $stateParams, $window, ipViewService) {
 
     var ipfc = this;
     
-    ipfc.data = {};
+    ipfc.data = false;
     ipfc.info = {};
-    ipfc.previewUrl = '';
     ipfc.filePath = $stateParams.path;
+    ipfc.fileName = getFileName(ipfc.filePath);
+    ipfc.download = download;
     
     
     function getFileContent() {
         var contentAction = ipViewService.serializeObj({ action: 'getcontent', path: ipfc.filePath });
         var infoAction = ipViewService.serializeObj({ action: 'getinfo', path: ipfc.filePath });
-
         ipViewService.executeAction(contentAction).then(
             function (response) {
-                ipfc.data = response;
+                if (response === undefined) {
+                    console.log('No content for this file: ' + ipfc.filePath);
+                } else {
+                    ipfc.data = response;
+                }
             },
             function (err) {
                 console.log('Error getting file content: ' + err.message);
                 errorService.displayErrorMsg( $translate.instant('IPVIEW.ERROR.MESSAGE.GET_CONTENT_ERROR') );
             }
         );
-        
-        ipViewService.executeAction(infoAction).then(
-            function (response) {
-                if(response) {
-                    ipfc.info = response;
-                    if(response.preview_url) {
-                        console.log( 'url: ' + response.preview_url);
-                        $scope.previewUrl = $sce.trustAsResourceUrl(response.preview_url);
-                    }
-                }
-            },
-            function (err) {
-                console.log('Error getting file info: ' + err.message);
-                errorService.displayErrorMsg( $translate.instant('IPVIEW.ERROR.MESSAGE.GET_CONTENT_ERROR') );
-            }
-        );
+    }
+    
+    
+    function getFileName(path) {
+        var paths = path.split('/');
+        return paths[paths.length - 1];
     }
 
     
-    getFileContent();
-
-    ipfc.download = function(){
+    function download() {
         $window.open(ipfc.data.download_url);
     }
+    
+    
+    getFileContent();
+
 }
