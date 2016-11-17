@@ -2,11 +2,12 @@ angular
     .module('eArkPlatform.ipview')
     .controller('IpController', IpController);
 
-function IpController($state, ipViewService, $stateParams) {
+function IpController($q, $state, $stateParams, ipViewService, orderService) {
 
     var ipc = this;
 
-    ipc.path = $stateParams.path;
+    ipc.orderId = $stateParams.orderId;
+    ipc.path = '/';
     ipc.children = [];
     ipc.orderBy = '-name';
     ipc.searchForm = {};
@@ -18,13 +19,30 @@ function IpController($state, ipViewService, $stateParams) {
     ipc.sortThis = sortThis;
     ipc.searchIP = searchIp;
     ipc.toggleSearchField = toggleSearchField;
+    ipc.order = '';
 
-    listDir();
+    resolvePath();
+
+    function resolvePath() {
+        var defer = $q.defer();
+        if ($stateParams.orderId) {
+            orderService.getOrderDetail(ipc.orderId).then(function (response) {
+                ipc.order = response;
+                ipc.path += response.processId;
+                listDir();
+                defer.resolve(true);
+            });
+        }
+        else {
+            // The we need tnot do anything and end up browsing directory root
+            defer.resolve(true);
+            listDir();
+        }
+
+        return defer.promise;
+    }
 
     function listDir() {
-        if (ipc.path.charAt(0) != '/') {
-            ipc.path = '/' + ipc.path;
-        };
         getItemInfo(ipc.path);
         var action = ipViewService.serializeObj({action: 'list', path: ipc.path});
         ipViewService.executeAction(action).then(
@@ -38,7 +56,6 @@ function IpController($state, ipViewService, $stateParams) {
         );
     }
 
-    
     function viewContent(item) {
         if (item.type === 'directory') {
             $state.go('ipview.ip', {path: item.path});
@@ -47,16 +64,17 @@ function IpController($state, ipViewService, $stateParams) {
         }
     }
 
-    
     function getItemInfo(path) {
         var action = ipViewService.serializeObj({ action: 'getinfo', path: path });
+        console.log('getting item info for ' + path);
+        var action = ipViewService.serializeObj({action: 'getinfo', path: path});
         ipViewService.executeAction(action).then(
             function (response) {
                 if (response !== undefined && response.error !== 404) {
                     console.log('There is a response');
                     console.log(response);
                     ipc.itemInfo = response;
-                };
+                }
             },
             function (err) {
                 console.log('Error: ' + err.message);

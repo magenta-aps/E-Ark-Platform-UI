@@ -62,7 +62,7 @@ function OrderDetailController($stateParams, $mdDialog, $mdToast,  $translate, e
     
     function executeOrder( oid ) {
         var order = { orderId: oid };
-        console.log('Processing order')
+        console.log('Processing order');
         ordermanagementService.processOrder(order).then(function (response) {
             if (response) {
                 console.log('That went well.');

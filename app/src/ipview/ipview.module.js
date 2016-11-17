@@ -25,7 +25,7 @@ function config($stateProvider, languageFilesProvider, USER_ROLES, modulesMenuSe
         }
     }).state('ipview.ip', {
         parent: 'site',
-        url: '/ipviewer:path',
+        url: '/ipviewer/:path/:orderId',
         views: {
             'content@': {
                 templateUrl : 'app/src/ipview/view/ip.html',
