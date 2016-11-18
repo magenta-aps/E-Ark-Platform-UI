@@ -20,6 +20,13 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
     ipc.searchIP = searchIp;
     ipc.toggleSearchField = toggleSearchField;
     ipc.order = '';
+    ipc.statusEnum = {
+        new : 0,
+        submitted : 1,
+        open : 2,
+        ready : 3,
+        closed : 4
+    };
 
     resolvePath();
 
@@ -44,8 +51,11 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
         if(ipc.path)
             getItemInfo(ipc.path);
         var orderStatus  = '';
-        if(ipc.order && ipc.order.orderStatus)
+        if(ipc.order && ipc.order.orderStatus){
             orderStatus = ipc.order.orderStatus;
+            if(ipc.statusEnum[ipc.order.orderStatus] > 2 && ipc.path.split("/").length < 2)
+                ipc.path = ipc.order.dipId
+        }
 
         var action = ipViewService.serializeObj({action: 'list', path: ipc.path, orderStatus: orderStatus});
         ipViewService.executeAction(action).then(function(response) {
