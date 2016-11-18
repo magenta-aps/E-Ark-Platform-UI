@@ -15,11 +15,12 @@ function OrderDetailController($stateParams, $mdDialog, $mdToast,  $translate, e
     odCtrl.browsable = false;
     odCtrl.unProcessed = false;
     odCtrl.statusEnum = {
-        new : 0,
-        submitted : 1,
+        error: 0,
+        new : 1,
         open : 2,
-        ready : 3,
-        closed : 4
+        submitted : 3,
+        processing : 4,
+        ready : 5
     };
 
     
@@ -56,8 +57,8 @@ function OrderDetailController($stateParams, $mdDialog, $mdToast,  $translate, e
                 odCtrl.assigneeSelector = odCtrl.data.assignee.userName;
             }
             odCtrl.unProcessed = (odCtrl.data.orderStatus == 'new');
-            odCtrl.browsable = (odCtrl.data.orderStatus == 'closed' ||
-                               (userData.role =='archivist' && odCtrl.statusEnum[odCtrl.data.orderStatus] > 1) )
+            odCtrl.browsable = (odCtrl.data.orderStatus == 'ready' ||
+                               (userData.role =='archivist' && odCtrl.statusEnum[odCtrl.data.orderStatus] > 3) )
         });
     }
     
