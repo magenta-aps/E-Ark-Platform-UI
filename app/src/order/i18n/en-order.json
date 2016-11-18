@@ -35,6 +35,7 @@
             "STATUS-new": "New",
             "STATUS-open": "Open",
             "STATUS-closed": "Closed",
+            "STATUS-editable": "Editable",
             "STATUS-submitted": "Submitted",
             "STATUS-ready": "Ready",
             "DETAILS": "Order details",

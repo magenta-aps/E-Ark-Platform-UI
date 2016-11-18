@@ -1,0 +1,10 @@
+
+var queryObj = {
+    q: ordCtrl.searchContext + ':' + ordCtrl.searchTerm+'*',
+    rows: 25,
+    start: 0,
+    fl: 'package,size,path,confidential,contentType,textCategory', //fields
+    sort :'package asc',
+    wt: 'json'
+};
+earkweb/earkcore/solrif/earkstorage/select?q=content%3AAdams%20Ayers*%20AND%20*%3A*&sort=size%20asc&start=0&rows=20&wt=json&json.wrf=callback

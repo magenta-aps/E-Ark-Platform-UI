@@ -32,8 +32,8 @@ function httpTicketInterceptor($injector, $translate, $window, $q, sessionServic
 
     function prefixAlfrescoServiceUrl(url) {
         if (url.indexOf("/api") == 0) {
-         return OMS_URI.serviceProxy + url;
-         }
+            return OMS_URI.serviceProxy + url;
+        }
         return url;
     }
 
@@ -69,7 +69,7 @@ function httpTicketInterceptor($injector, $translate, $window, $q, sessionServic
     }
 }
 
-function authService($http, $window, $state, sessionService, userService, $q) {
+function authService($http, $window, contextService, sessionService, userService, $q) {
     var service = {
         login: login,
         logout: logout,
@@ -99,25 +99,23 @@ function authService($http, $window, $state, sessionService, userService, $q) {
     }
 
     function login(username, password) {
-        var userInfo = {};
         return $http.post('/api/login', {userName: username, password: password}).then(function () {
-                //sessionService.setUserInfo(response.data);
-                return addUserAndParamsToSession(username);
-            }, function (reason) {
-                console.log(reason);
-                return reason;
-            });
+            //sessionService.setUserInfo(response.data);
+            return addUserAndParamsToSession(username);
+        }, function (reason) {
+            console.log(reason);
+            return reason;
+        });
     }
 
     function logout() {
         var userInfo = sessionService.getUserInfo();
-
-
         if (userInfo) {
             //return $http.post('/api/logout').then(function (response) {
-                sessionService.clearUserInfo();
-                sessionService.clearRetainedLocation();
-                //return response;
+            sessionService.clearUserInfo();
+            sessionService.clearRetainedLocation();
+            contextService.clearContext();
+            //return response;
             //});
 
         }
@@ -158,7 +156,7 @@ function authService($http, $window, $state, sessionService, userService, $q) {
     }
 
     function revalidateUser() {
-        return $http.get('/api/opendesk/currentUser').then(function (response) {
+        return $http.get('/api/currentUser/validate').then(function (response) {
             return addUserAndParamsToSession(response.data.userName);
         });
     }
@@ -169,6 +167,7 @@ function authService($http, $window, $state, sessionService, userService, $q) {
             var userInfo = sessionService.getUserInfo();
             userInfo['user'] = user;
             sessionService.setUserInfo(userInfo);
+            contextService.setUserContext();
             return user;
         });
     }

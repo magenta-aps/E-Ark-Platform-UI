@@ -81,7 +81,8 @@
                         <md-list-item ng-repeat="item in oddCtrl.data.items"
                             ng-click="oddCtrl.fileInfoDiag($event, item)"
                             layout="row"
-                            class="simple-list__body__item">
+                            class="simple-list__body__item"
+                            aria-label="item.title">
                                 <div hide
                                     show-gt-md
                                     flex="20"

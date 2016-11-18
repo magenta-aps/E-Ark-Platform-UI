@@ -15,10 +15,12 @@ function OrderDetailController($stateParams, $mdDialog, $mdToast,  $translate, e
     odCtrl.browsable = false;
     odCtrl.unProcessed = false;
     odCtrl.statusEnum = {
-        new : 0,
-        submitted : 1,
-        editable : 2,
-        closed : 3
+        error: 0,
+        new : 1,
+        open : 2,
+        submitted : 3,
+        processing : 4,
+        ready : 5
     };
 
     
@@ -55,14 +57,14 @@ function OrderDetailController($stateParams, $mdDialog, $mdToast,  $translate, e
                 odCtrl.assigneeSelector = odCtrl.data.assignee.userName;
             }
             odCtrl.unProcessed = (odCtrl.data.orderStatus == 'new');
-            odCtrl.browsable = (odCtrl.data.orderStatus == 'closed' ||
-                               (userData.role =='archivist' && odCtrl.statusEnum[odCtrl.data.orderStatus] > 1) )
+            odCtrl.browsable = (odCtrl.data.orderStatus == 'ready' ||
+                               (userData.role =='archivist' && odCtrl.statusEnum[odCtrl.data.orderStatus] > 3) )
         });
     }
     
     function executeOrder( oid ) {
         var order = { orderId: oid };
-        console.log('Processing order')
+        console.log('Processing order');
         ordermanagementService.processOrder(order).then(function (response) {
             if (response) {
                 console.log('That went well.');
@@ -84,7 +86,7 @@ function OrderDetailController($stateParams, $mdDialog, $mdToast,  $translate, e
           clickOutsideToClose: true,
           fullscreen: true
         });
-    };
+    }
     
     function fileInfoDialogController($scope, $mdDialog, document) {
         var fidc = this;
@@ -98,6 +100,6 @@ function OrderDetailController($stateParams, $mdDialog, $mdToast,  $translate, e
         $scope.cancel = function() {
           $mdDialog.cancel();
         };
-    };
+    }
     
-};
+}
