@@ -2,67 +2,46 @@ angular
     .module('eArkPlatform.ipview')
     .service('ipFileTreeService', ipFileTreeService);
 
-function ipFileTreeService(ipViewService) {
+function ipFileTreeService($http, ipViewService) {
 
     var ftSvc = this;
+    var tree = {};
     
-    ftSvc.tree = { name: 'root', path: '/', nodes: [] };
     ftSvc.getTree = getTree;
-    ftSvc.buildTree = buildTree;
     
-    function getTree() {
-        return ftSvc.tree;
-    }
     
-    function buildTree(path) {
-        
-        var lvls = path.split('/');
-        
-        function traverseTree(nodes, paths, pathIndex) {
-            
-            var fullPath = '';
-            var newPathIndex = pathIndex + 1;
-            
-            function getNodes(nodePath, insertNode) {
-                ipViewService.listDir(nodePath).then(
-                    function (response) {
-                        
-                        insertNode.nodes = response;
-                        traverseTree(insertNode.nodes, lvls, newPathIndex);
-                    },
-                    function (err) {
-                        console.log(err);
-                    }
-                );
-            };
-            
-            for (var p = pathIndex; p > 0; p--) {
-                fullPath = '/' + paths[p] + fullPath;
-            };
-            for (var node in nodes) {
-                if (nodes[node].path === fullPath) {
-                    if (newPathIndex === lvls.length) {
-                        nodes[node].current = true;
-                    };
-                    if (!nodes[node].nodes) {
-                        getNodes(nodes[node].path, nodes[node]);
-                    } else {
-                        traverseTree(nodes[node].nodes, lvls, newPathIndex);
-                    };
-                };
-            };
-            
-        };
-        
-        ipViewService.listDir('/' + lvls[1]).then(
+    function buildTree(path, orderStatus){
+        var action = ipViewService.serializeObj({ action: 'gettree', path: path, orderStatus: orderStatus });
+        return $http({
+            method: 'POST',
+            url: '/ip_viewer?',
+            data: action,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        }).then(
             function (response) {
-                ftSvc.tree.nodes = response;
-                traverseTree(ftSvc.tree.nodes, lvls, 2);
+                return response;
+            },
+            function (err) {
+                console.log('no gettree response ' + err);    
             }
         );
-        
     }
-        
-    return ftSvc;
     
+    
+    function getTree(path, orderStatus){
+        return buildTree(path, orderStatus).then(
+            function (response) {
+                return response;
+            },
+            function (err) {
+                console.log('Error getting tree data: ' + err);
+            }
+        );
+    }
+    
+    
+    return ftSvc;
 }

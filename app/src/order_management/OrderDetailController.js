@@ -85,7 +85,7 @@ function OrderDetailController($stateParams, $mdDialog, $mdToast,  $translate, e
           clickOutsideToClose: true,
           fullscreen: true
         });
-    };
+    }
     
     function fileInfoDialogController($scope, $mdDialog, document) {
         var fidc = this;
@@ -99,6 +99,6 @@ function OrderDetailController($stateParams, $mdDialog, $mdToast,  $translate, e
         $scope.cancel = function() {
           $mdDialog.cancel();
         };
-    };
+    }
     
-};
+}

@@ -70,7 +70,8 @@
             <md-list-item ng-repeat="order in ordCtrl.orderHistory | orderBy: ordCtrl.orderBy"
                 layout="row"
                 class="simple-list__body__item"
-                ng-click="ordCtrl.goToOrder(order.orderId)">
+                ng-click="ordCtrl.goToOrder(order.orderId)"
+                aria-label="order.title">
                 <div flex="60"
                     flex-gt-xs="40"
                     flex-gt-md="30"

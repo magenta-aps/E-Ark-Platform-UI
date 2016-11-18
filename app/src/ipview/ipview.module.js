@@ -25,7 +25,7 @@ function config($stateProvider, languageFilesProvider, USER_ROLES, modulesMenuSe
         }
     }).state('ipview.ip', {
         parent: 'site',
-        url: '/ipviewer/:path/:orderId',
+        url: '/ipviewer/:path/:orderId/:orderStatus',
         views: {
             'content@': {
                 templateUrl : 'app/src/ipview/view/ip.html',
@@ -71,7 +71,6 @@ function config($stateProvider, languageFilesProvider, USER_ROLES, modulesMenuSe
 
     //Change the default http behaviour because the service doesn't recognise json yet.
     //Also see http://victorblog.com/2012/12/20/make-angularjs-http-service-behave-like-jquery-ajax/
-    //$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
     /**
      * The workhorse; converts an object to x-www-form-urlencoded serialization.
@@ -109,9 +108,5 @@ function config($stateProvider, languageFilesProvider, USER_ROLES, modulesMenuSe
         return query.length ? query.substr(0, query.length - 1) : query;
     };
 
-    // Override $http service's default transformRequest
-   /* $httpProvider.defaults.transformRequest = [function(data) {
-        return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
-    }];*/
 
 }
