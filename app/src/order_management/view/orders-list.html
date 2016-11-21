@@ -111,7 +111,8 @@
             <md-list-item ng-repeat="order in olCtrl.data | orderBy: olCtrl.orderBy"
                 layout="row"
                 class="simple-list__body__item"
-                ng-click="olCtrl.orderDetailGo(order.orderId)">
+                ng-click="olCtrl.orderDetailGo(order.orderId)"
+                aria-label="order.title">
                 <div flex="60"
                     flex-sm="40"
                     flex-gt-sm="20"
