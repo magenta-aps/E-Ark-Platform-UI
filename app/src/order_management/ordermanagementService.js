@@ -9,6 +9,7 @@ function ordermanagementService($http, $filter) {
         getArchivists: getArchivists,
         updateOrder: updateOrder,
         processOrder: processOrder,
+        packageOrder: packageOrder,
         getAllOrdersStatus: getAllOrdersStatus
     };
 
@@ -74,6 +75,17 @@ function ordermanagementService($http, $filter) {
                 return response.data;
             }, function (response) {
                 console.log('There was an error posting the order for processing');
+                return false;
+            }
+        );
+    }
+    function packageOrder(order) {
+        return $http.post('/api/earkweb/createDIP', {"orderId":order}).then(
+            function (response) {
+                console.log('Successfully posted the order for packaging');
+                return response.data;
+            }, function (response) {
+                console.log('There was an error posting the order for packaging');
                 return false;
             }
         );

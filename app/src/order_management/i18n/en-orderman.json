@@ -11,6 +11,7 @@
         "ACCESS_DATE_COMMENTS": "Access date comments",
         "VALIDATION_DATE": "Validation date",
         "FROM_USER": "From user",
+        "PACKAGE_TO_DIP": "Package",
         "PROCESS_ORDER": "Process order",
         "UPDATE_LIST": "Update list",
         "MSG": {

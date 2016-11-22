@@ -207,6 +207,12 @@
             <dt>{{ 'ORDERMAN.VALIDATION_DATE' | translate }}</dt>
             <dd>{{ odCtrl.data.validationDate }}</dd>
         </dl>
+
+
+        <md-button ng-show="odCtrl.data.orderStatus === 'processing'" class="md-primary md-text-icon-button md-raised" ng-click="odCtrl.packageOrder(odCtrl.orderId);">
+            <i class="material-icons">archive</i>
+            {{ 'ORDERMAN.PACKAGE_TO_DIP' | translate }}
+        </md-button>
     </div>
 
 </section>
