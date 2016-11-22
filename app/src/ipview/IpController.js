@@ -26,7 +26,8 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
         open : 2,
         submitted : 3,
         processing : 4,
-        ready : 5
+        packaging : 5,
+        ready : 6
     };
 
     resolvePath();
