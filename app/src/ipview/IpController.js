@@ -54,7 +54,7 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
         var orderStatus  = '';
         if(ipc.order && ipc.order.orderStatus){
             orderStatus = ipc.order.orderStatus;
-            if(ipc.statusEnum[ipc.order.orderStatus] > 3 && ipc.path.split("/").length < 2)
+            if(ipc.statusEnum[ipc.order.orderStatus] > 4 && ipc.path.split("/").length < 2)
                 ipc.path = ipc.order.dipId
         }
 
