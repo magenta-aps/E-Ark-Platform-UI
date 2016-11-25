@@ -11,6 +11,7 @@ function OrderDetailController($stateParams, $mdDialog, $mdToast,  $translate, e
     odCtrl.assigneeSelector = 'none';
     odCtrl.fileInfoDiag = fileInfoDiag;
     odCtrl.executeOrder = executeOrder;
+    odCtrl.packageOrder = packageOrder;
     odCtrl.refreshOrderDetails = refreshOrderDetails;
     odCtrl.browsable = false;
     odCtrl.unProcessed = false;
@@ -74,6 +75,18 @@ function OrderDetailController($stateParams, $mdDialog, $mdToast,  $translate, e
                 errorService.displayErrorMsg( $translate.instant('ORDERMAN.MSG.PROCESS_SUBMIT_ERROR') );
             }
         });
+    }
+
+    function packageOrder(oid) {
+        console.log('Packaging order: '+ oid);
+        ordermanagementService.packageOrder(oid).then(function (response) {
+            if (response) {
+                odCtrl.refreshOrderDetails(odCtrl.orderId);
+                $mdToast.showSimple($translate.instant('ORDERMAN.MSG.PROCESS_SUBMIT_SUCCESS'))
+            } else {
+                errorService.displayErrorMsg($translate.instant('ORDERMAN.MSG.PROCESS_SUBMIT_ERROR'));
+            }
+        })
     }
     
     function fileInfoDiag(ev, doc) {
