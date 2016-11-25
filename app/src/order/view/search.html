@@ -150,7 +150,8 @@
                 <md-list-item ng-repeat="item in ordCtrl.searchResults.documents | filter: ordCtrl.filterBy | orderBy: ordCtrl.orderBy"
                     layout="row"
                     class="simple-list__body__item"
-                    ng-click="ordCtrl.fileInfoDiag($event, item)">
+                    ng-click="ordCtrl.fileInfoDiag($event, item)"
+                    aria-label="{{ item.title }}">
                     <div flex="20"
                         flex-gt-sm="10"
                         style="text-align: center"

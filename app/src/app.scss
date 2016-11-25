@@ -39,7 +39,7 @@ dd {
  */
 
 .muted {
-    opacity: 0.6;
+    color: lighten($base-text-color, 20%);
 }
 
 
