@@ -7,9 +7,10 @@ angular
 function IpFileTreeController($scope, ipFileTreeService) {
     
     var ftc = this;
+    var pathRoot = $scope.path.split('/')[1];
     ftc.tree = {};
     
-    ipFileTreeService.getTree($scope.path, $scope.orderstatus).then(
+    ipFileTreeService.getTree(pathRoot, $scope.orderstatus).then(
         function (response) {
             ftc.tree = response.data;
             console.log('Got tree data');
