@@ -15,6 +15,7 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
     ordCtrl.searchInputs = [];
     ordCtrl.searchResults = basketService.currentSearch;
     ordCtrl.basket = [];
+    ordCtrl.basketLength = basketService.basket.length;
     ordCtrl.orderHistory = [];
     ordCtrl.orderBy = '-orderStatus';
     ordCtrl.filterBy = { title: '', packageId: '' };
@@ -28,7 +29,6 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
     ordCtrl.removeInput = removeInput;
     ordCtrl.helpfulSearchHints = helpfulSearchHints;
     ordCtrl.fileInfoDiag = fileInfoDiag;
-    ordCtrl.addToBasket = basketCheck;
     ordCtrl.updateList = updateList;
 
     var user = sessionService.getUserInfo().user;
@@ -103,12 +103,13 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
     function basketCheck(item) {
         if (item.baskOp === 'add') {
             basketService.addToBasket(item);
-        }
+        };
         if (item.baskOp === 'delete') {
             basketService.removeFromBasket(item).then(function (result) {
                 console.log('Removal status: ' + result);
             });
-        }
+        };
+        ordCtrl.basketLength = basketService.basket.length;
     }
 
     function compileOrder(orderData) {

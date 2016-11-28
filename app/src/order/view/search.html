@@ -3,11 +3,12 @@
 <div layout="row"
     layout-align="end center"
     ng-show="ordCtrl.searchResults.documents">
-    <a ui-sref="orderBasket"
-        class="md-button md-text-icon-button md-raised md-primary">
+    <md-button ui-sref="orderBasket"
+        class="md-text-icon-button md-raised md-primary"
+        ng-disabled="ordCtrl.basketLength < 1">
         <i class="material-icons">shopping_basket</i>
         {{ 'ORDER.SEARCH.BASKET' | translate }}
-    </a>
+    </md-button>
 </div>
 
 <section id="adv-search"
