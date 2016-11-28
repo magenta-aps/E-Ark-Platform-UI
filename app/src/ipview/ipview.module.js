@@ -2,28 +2,9 @@ angular
     .module('eArkPlatform.ipview', ['ngMaterial', 'pascalprecht.translate'])
     .config(config);
 
-function config($stateProvider, languageFilesProvider, USER_ROLES, modulesMenuServiceProvider, $httpProvider){
-    
-    modulesMenuServiceProvider.addItem({
-        templateUrl: 'app/src/ipview/view/moduleMenuItem.html',
-        order: 2,
-        authorizedRole: USER_ROLES.archivist
-    });
+function config($stateProvider, languageFilesProvider, USER_ROLES, $httpProvider){
 
-    $stateProvider.state('ipview', {
-        parent: 'site',
-        url: '/ipviewer',
-        views: {
-            'content@': {
-                templateUrl : 'app/src/ipview/view/ips.html',
-                controller : 'IpsController',
-                controllerAs: 'ipsc'
-            }
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.enduser]
-        }
-    }).state('ipview.ip', {
+    $stateProvider.state('ipviewer', {
         parent: 'site',
         url: '/ipviewer/:path/:orderId/:orderStatus',
         views: {
@@ -36,8 +17,8 @@ function config($stateProvider, languageFilesProvider, USER_ROLES, modulesMenuSe
         data: {
             authorizedRoles: [USER_ROLES.enduser]
         }
-    }).state('ipview.file', {
-        parent: 'ipview.ip',
+    }).state('ipviewer.file', {
+        parent: 'ipviewer',
         views: {
             'ip-content': {
                 templateUrl : 'app/src/ipview/view/ip_file.html',
@@ -48,7 +29,7 @@ function config($stateProvider, languageFilesProvider, USER_ROLES, modulesMenuSe
         data: {
             authorizedRoles: [USER_ROLES.enduser]
         }
-    }).state('ipview.search', {
+    }).state('ipviewer.search', {
         url: '/ipsearcher',
         parent: 'site',
         params: {

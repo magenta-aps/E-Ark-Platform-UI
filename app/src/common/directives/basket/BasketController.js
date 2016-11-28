@@ -96,7 +96,7 @@ function BasketController($scope, $state, basketService, sessionService, $mdDial
         return cleanedItem;
     };
     
-    $scope.submitMethod = function(formData){
+    $scope.submitMethod = function(ev, formData){
         // Preprocssing order before POSTing
         var formDataCopy = angular.copy(formData);
         var finalOrder = { order: $scope.compileOrder(formDataCopy) };

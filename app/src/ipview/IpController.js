@@ -57,7 +57,7 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
             orderStatus = ipc.order.orderStatus;
             if(ipc.statusEnum[ipc.order.orderStatus] > 4 && ipc.path.split("/").length < 2)
                 ipc.path = ipc.order.dipId
-        }
+        };
 
         var action = ipViewService.serializeObj({action: 'list', path: ipc.path, orderStatus: orderStatus});
         ipViewService.executeAction(action).then(function(response) {
@@ -72,9 +72,9 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
 
     function viewContent(item) {
         if (item.type === 'directory') {
-            $state.go('ipview.ip', {path: item.path});
+            $state.go('ipviewer', {path: item.path});
         } else {
-            $state.go('ipview.file', {path: item.path});
+            $state.go('ipviewer.file', {path: item.path});
         }
     }
 
@@ -137,7 +137,7 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
     }
 
     function searchIp(term) {
-        $state.go('ipview.search', {path: ipc.bcpath[0].path, term: term});
+        $state.go('ipviewer.search', {path: ipc.bcpath[0].path, term: term});
     }
 
     function toggleSearchField() {

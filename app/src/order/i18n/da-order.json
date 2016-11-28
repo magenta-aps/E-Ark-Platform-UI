@@ -7,7 +7,8 @@
         "LABEL":{
             "PLANNED_DATE":"Forventet dato",
             "USER_NOTES":"Ekstra bemærkning",
-            "PREFERRED_DELIVERY_METHOD": "Foretrukket format til modtagelse"
+            "PREFERRED_DELIVERY_METHOD": "Foretrukket format til modtagelse",
+            "DELIVERY_DATE": "Foretrukket dato for levering"
         },
         "SEARCH": {
             "SEARCH": "Søg",

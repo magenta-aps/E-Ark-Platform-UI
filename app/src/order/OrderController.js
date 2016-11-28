@@ -90,7 +90,6 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
                 
                 //Let's clean up some of the properties. Temporary solution
                 basketService.currentSearch.documents.forEach(function (item) {
-                    item.title = item.path.substring(item.path.lastIndexOf('/') + 1, item.path.lastIndexOf('.'));
                     if(item.package)
                         item.packageId = item.package.substring(item.package.lastIndexOf(':') + 1);
                     item.thumbnail = fileUtilsService.getFileIconByMimetype(item.contentType, 24);

@@ -151,7 +151,7 @@
                     layout="row"
                     class="simple-list__body__item"
                     ng-click="ordCtrl.fileInfoDiag($event, item)"
-                    aria-label="{{ item.title }}">
+                    aria-label="{{ item.title[0] }}">
                     <div flex="20"
                         flex-gt-sm="10"
                         style="text-align: center"
@@ -159,7 +159,7 @@
                         <img ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="">
                     </div>
                     <div flex class="simple-list__cell">
-                        {{ item.title }} <small class="muted">{{item.displaySize}}</small>
+                        {{ item.title[0] }} <small class="muted">{{item.displaySize}}</small>
                     </div>
                     <div flex
                         flex-gt-sm="30"

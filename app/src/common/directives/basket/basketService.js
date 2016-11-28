@@ -2,7 +2,7 @@ angular
     .module('eArkPlatform.common.directives.basket')
     .service('basketService', basketService);
 
-function basketService($q, $http, OMS_URI, $filter) {
+function basketService($q, $http, OMS_URI, $filter, $mdToast, $translate) {
     
     var bService = this;
     bService.basket = [];
@@ -46,9 +46,15 @@ function basketService($q, $http, OMS_URI, $filter) {
     }
 
     function submitOrder(order){
-        console.log("Order received. It looks like this:");
-        console.log($filter('json')(order));
         return $http.post('/api/newOrder', $filter('json')(order)).then(function(response){
+            console.log("Order received. It looks like this:");
+            console.log(response);
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent($translate.instant('BASKET.YOUR_ORDER_IS_RECEIVED'))
+                    .position('top right')
+                    .hideDelay(4000)
+            );
             return response;
         })
     }

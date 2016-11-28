@@ -28,7 +28,7 @@
         <div layout="row" layout-align="space-between center">
             <h3 class="md-subhead">{{ 'ORDER.ORDERS.ITEMS' | translate }}:</h3>
             <md-button class="md-primary md-raised"
-                       ui-sref="ipview.ip({ id: oddCtrl.orderId, path: oddCtrl.data.processId, manageorder: false })"
+                       ui-sref="ipviewer({ id: oddCtrl.orderId, path: oddCtrl.data.processId, manageorder: false })"
                        ng-disabled="oddCtrl.data.orderStatus !== 'ready'">
                 Browse items
             </md-button>
