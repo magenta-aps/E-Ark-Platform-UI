@@ -2,7 +2,7 @@ angular
     .module('eArkPlatform.ipview')
     .controller('IpController', IpController);
 
-function IpController($q, $state, $stateParams, $mdDialog, $mdToast, ipViewService, orderService) {
+function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderService) {
 
     var ipc = this;
 
@@ -161,9 +161,6 @@ function IpController($q, $state, $stateParams, $mdDialog, $mdToast, ipViewServi
     function copy(path) {
         ipViewService.clipboard = path;
         ipc.clipboard = path;
-        $mdToast.show(
-            $mdToast.simple().textContent('Ready to paste ' + path)
-        );
     }
     
     function mkdir(ev, path) {

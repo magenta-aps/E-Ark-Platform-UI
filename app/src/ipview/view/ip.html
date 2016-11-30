@@ -116,7 +116,7 @@
                                     </md-menu-item>
                                     <md-menu-item ng-if="ipc.clipboard !== '' && child.type === 'directory'">
                                         <md-button ng-click="ipc.paste(child.path)">
-                                            <i class="material-icons">content_copy</i>
+                                            <i class="material-icons">content_paste</i>
                                             Paste here
                                         </md-button>
                                     </md-menu-item>
@@ -134,13 +134,18 @@
                         <span class="muted">{{ 'COMMON.EMPTY' | translate }}</span>
                     </md-list-item>
                     <md-list-item ng-if="ipc.can_edit">
-                        <md-button ng-click="ipc.mkdir($event, ipc.path)">
-                            + New folder
+                        <md-button class="md-text-icon-button" ng-click="ipc.mkdir($event, ipc.path)">
+                            <i class="material-icons">add</i>
+                            New folder
+                        </md-button>
+                        <md-button class="md-text-icon-button" ng-if="ipc.clipboard !== ''" ng-click="ipc.paste(ipc.path)">
+                            <i class="material-icons">content_paste</i>
+                            Paste here
                         </md-button>
                     </md-list-item>
                 </md-list>
                 <div class="clipboard" ng-if="ipc.clipboard !== ''">
-                    {{ ipc.clipboard }}
+                    <i class="material-icons">content_paste</i> {{ ipc.clipboard }}
                 </div>
             </div>
         </div>
