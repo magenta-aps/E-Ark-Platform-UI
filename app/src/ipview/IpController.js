@@ -29,6 +29,11 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
         packaging : 5,
         ready : 6
     };
+    if ($stateParams.linkBack) {
+        ipc.linkBack = $stateParams.linkBack;
+    } else {
+        ipc.linkBack = false;
+    };
     
     resolvePath();
 
@@ -40,12 +45,11 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
                 listDir();
                 defer.resolve(true);
             });
-        }
-        else {
+        } else {
             // The we need not do anything and end up browsing directory root
             defer.resolve(true);
             listDir();
-        }
+        };
         return defer.promise;
     }
 
