@@ -27,11 +27,19 @@
 
         <div layout="row" layout-align="space-between center">
             <h3 class="md-subhead">{{ 'ORDER.ORDERS.ITEMS' | translate }}:</h3>
-            <md-button ng-if="odCtrl.browsable"
-                       class="md-primary md-raised"
-                       ui-sref="ipviewer({ orderId: odCtrl.orderId, path: odCtrl.data.processId, manageorder: true, orderStatus: odCtrl.data.orderStatus })">
-                Browse items
-            </md-button>
+            <div>
+                <a class="md-button md-raised md-text-icon-button"
+                           href="{{ odCtrl.data.dipURI }}"
+                           ng-if="odCtrl.data.orderStatus === 'ready'">
+                    <i class="material-icons">file_download</i>
+                    {{ 'COMMON.DOWNLOAD' | translate }} DIP
+                </a>
+                <md-button ng-if="odCtrl.browsable"
+                           class="md-primary md-raised"
+                           ui-sref="ipviewer({ orderId: odCtrl.orderId, path: odCtrl.data.processId, manageorder: true, orderStatus: odCtrl.data.orderStatus })">
+                    Browse items
+                </md-button>
+            </div>
         </div>
 
         <md-card>
