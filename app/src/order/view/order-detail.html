@@ -47,15 +47,7 @@
                 <div class="simple-list">
                     <div class="simple-list__header">
                         <div layout="row">
-                            <div hide
-                                show-gt-md
-                                flex="20"
-                                class="muted"
-                                layout-padding>
-                                {{ 'ORDER.ORDERS.PACK_ID' | translate }}
-                            </div>
-                            <div flex="60"
-                                flex-gt-xs="40"
+                            <div flex
                                 class="muted"
                                 layout-padding>
                                 {{ 'COMMON.TITLE' | translate }}
@@ -91,14 +83,7 @@
                             layout="row"
                             class="simple-list__body__item"
                             aria-label="item.title">
-                                <div hide
-                                    show-gt-md
-                                    flex="20"
-                                    class="simple-list__cell muted">
-                                    {{ item.packageId }}
-                                </div>
-                                <div flex="60"
-                                    flex-gt-xs="40"
+                                <div flex
                                     class="simple-list__cell">
                                     {{ item.title }}
                                 </div>
@@ -114,8 +99,8 @@
                                     flex-lg="20"
                                     flex-gt-lg="10"
                                     class="simple-list__cell muted">
+                                    <img ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="" style="margin-right: 0.5em;">
                                     {{ item.contentType }}
-                                    <img ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="">
                                 </div>
                                 <div hide
                                     show-gt-lg
@@ -149,11 +134,6 @@
             <dd>{{ oddCtrl.data.plannedDate }}</dd>
             <dt>{{ 'ORDER.LABEL.PREFERRED_DELIVERY_METHOD' | translate }}</dt>
             <dd>{{ oddCtrl.data.deliveryFormat }}</dd>
-            <dt>{{ 'ORDER.ORDERS.ISSUED_BY_USER' | translate }}</dt>
-            <dd>
-                {{ oddCtrl.data.endUser.firstname }} {{ oddCtrl.data.endUser.lastname }}<br>
-                <a href="mailto:{{ oddCtrl.data.endUser.email }}">{{ oddCtrl.data.endUser.email }}</a>
-            </dd>
         </dl>
     </div>
     
