@@ -116,26 +116,6 @@
                                 class="adv-search__filter-form__filter">
                         </form>
                     </div>
-                    <div flex
-                        flex-gt-sm="30"
-                        style="vertical-align: top;"
-                        hide
-                        show-gt-sm>
-                        <md-button
-                            class="md-text-icon-button md-primary"
-                            ng-click="ordCtrl.sortThis($event, 'packageId')">
-                            {{ 'COMMON.PACKAGE_ID' | translate }}
-                            <i ng-show="ordCtrl.orderBy === '-packageId'" class="material-icons">arrow_drop_up</i>
-                            <i ng-show="ordCtrl.orderBy === 'packageId'" class="material-icons">arrow_drop_down</i>
-                        </md-button>
-                        <form class="adv-search__filter-form">
-                            <input
-                                ng-model="ordCtrl.filterBy.packageId"
-                                type="text"
-                                placeholder="{{ 'ORDER.SEARCH.FILTER_BY' | translate }} {{ 'COMMON.PACKAGE_ID' | translate }}"
-                                class="adv-search__filter-form__filter">
-                        </form>
-                    </div>
                     <div flex="20"
                         flex-gt-sm="10"
                         class="muted"
@@ -161,13 +141,6 @@
                     </div>
                     <div flex class="simple-list__cell">
                         {{ item.title[0] }} <small class="muted">{{item.displaySize}}</small>
-                    </div>
-                    <div flex
-                        flex-gt-sm="30"
-                        class="simple-list__cell"
-                        hide
-                        show-gt-sm>
-                        {{ item.packageId }}
                     </div>
                     <div flex="20"
                         flex-gt-sm="10"

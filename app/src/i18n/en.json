@@ -38,7 +38,7 @@
         "CREATE": "Create",
         "MODIFIED": "Modified",
         "DESCRIPTION": "Description",
-        "TYPE": "Type",
+        "TYPE": "File type",
         "CATEGORY": "Category",
         "PREVIEW": "Preview",
         "BY": "by",
