@@ -1,21 +1,21 @@
 <script type="text/ng-template" id="nodes_renderer.html">
-    <a ui-sref="ipviewer({ path: key, orderStatus: orderstatus })" class="iptree__node__handle">
-        <i class="material-icons">folder</i>
-        <span>{{ key }}</span>
-    </a>
-    <ol class="iptree__nodes">
-        <ng-repeat ng-repeat="item in value.children">
-            <li ng-repeat="(key, value) in item"
+    <div ng-if="node.type === 'folder'">
+        <a ui-sref="ipviewer({ path: node.path, orderStatus: orderstatus })" class="iptree__node__handle">
+            <i class="material-icons">folder</i>
+            <span>{{ node.name }}</span>
+        </a>
+        <ol class="iptree__nodes">
+            <li ng-repeat="node in node.children"
                 ng-include="'nodes_renderer.html'"
                 class="iptree__node">
             </li>
-        </ng-repeat>
-    </ol>
+        </ol>
+    </div>
 </script>
 
 <div ng-controller="IpFileTreeController as ftc" class="iptree">
     <ol class="iptree__nodes iptree__nodes_root">
-        <li ng-repeat="(key, value) in ftc.tree"
+        <li ng-repeat="node in ftc.tree.children"
             ng-include="'nodes_renderer.html'"
             class="iptree__node">
         </li>

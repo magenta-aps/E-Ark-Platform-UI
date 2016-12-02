@@ -7,8 +7,7 @@ function ipFileTreeService($http, ipViewService) {
     var ftSvc = this;
     var tree = {};
     
-    ftSvc.getTree = getTree;
-    
+    ftSvc.buildTree = buildTree;
     
     function buildTree(path, orderStatus){
         var action = ipViewService.serializeObj({ action: 'gettree', path: path, orderStatus: orderStatus });
@@ -29,19 +28,6 @@ function ipFileTreeService($http, ipViewService) {
             }
         );
     }
-    
-    
-    function getTree(path, orderStatus){
-        return buildTree(path, orderStatus).then(
-            function (response) {
-                return response;
-            },
-            function (err) {
-                console.log('Error getting tree data: ' + err);
-            }
-        );
-    }
-    
     
     return ftSvc;
 }
