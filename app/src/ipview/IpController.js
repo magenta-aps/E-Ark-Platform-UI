@@ -125,11 +125,12 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
                     title: pathParts[p],
                     path: currentPath
                 });
-            }
-        }
+            };
+        };
         return bc;
     }
 
+    
     function sortThis($event, sortParameter) {
         if (ipc.orderBy === sortParameter) {
             ipc.orderBy = '-' + sortParameter;
@@ -140,10 +141,12 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
         }
     }
 
+    
     function searchIp(term) {
         $state.go('ipviewer.search', {path: ipc.bcpath[0].path, term: term});
     }
 
+    
     function toggleSearchField() {
         !ipc.searchForm.visible ? ipc.searchForm.visible = true : ipc.searchForm.visible = false;
     }
