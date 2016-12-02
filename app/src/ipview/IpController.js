@@ -42,7 +42,6 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
             });
         }
         else {
-            // The we need not do anything and end up browsing directory root
             defer.resolve(true);
             listDir();
         }

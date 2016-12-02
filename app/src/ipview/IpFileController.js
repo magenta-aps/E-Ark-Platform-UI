@@ -11,10 +11,12 @@ function IpFileController($sce, $scope, $stateParams, $window, ipViewService) {
     ipfc.filePath = $stateParams.path;
     ipfc.fileName = getFileName(ipfc.filePath);
     ipfc.download = download;
+    ipfc.orderStatus = $stateParams.orderStatus ? $stateParams.orderStatus : '';
+
     
     
     function getFileContent() {
-        var contentAction = ipViewService.serializeObj({ action: 'getcontent', path: ipfc.filePath });
+        var contentAction = ipViewService.serializeObj({ action: 'getcontent', path: ipfc.filePath, orderStatus: ipfc.orderStatus});
         var infoAction = ipViewService.serializeObj({ action: 'getinfo', path: ipfc.filePath });
         ipViewService.executeAction(contentAction).then(
             function (response) {
@@ -22,6 +24,7 @@ function IpFileController($sce, $scope, $stateParams, $window, ipViewService) {
                     console.log('No content for this file: ' + ipfc.filePath);
                 } else {
                     ipfc.data = response;
+                    $scope.trustedResource = $sce.trustAsResourceUrl(response.preview_url);
                 }
             },
             function (err) {
