@@ -9,7 +9,7 @@ function IpSearchController($scope, $stateParams, searchService, fileUtilsServic
     
     sc.path = $stateParams.path;
     sc.searchStr = $stateParams.term;
-    sc.initialTerm = '';
+    sc.initialTerm = $stateParams.term;
     sc.searchInputs = [];
     sc.searchResults = basketService.currentSearch;
     sc.orderBy = 'title';
@@ -39,7 +39,7 @@ function IpSearchController($scope, $stateParams, searchService, fileUtilsServic
     
     function executeSearch() {
         
-        sc.searchStr = 'packagetype:DIP AND path:' + sc.path.slice(1) + '* AND content:' + sc.initialTerm;
+        sc.searchStr = 'path:' + sc.path.slice(1) + '* AND content:' + sc.initialTerm;
         
         for (var i in sc.searchInputs) {
             if (sc.searchInputs[i].term !== '') {
@@ -57,6 +57,8 @@ function IpSearchController($scope, $stateParams, searchService, fileUtilsServic
         var encTerm = searchService.objectToQueryString(queryObj);
 
         searchService.aipSearch(encTerm).then(function (response) {
+            console.log('got search result');
+            console.log(response);
             if (response.numFound > 0) {
                 basketService.currentSearch = {
                     documents: response.docs, //An array of objects

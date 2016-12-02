@@ -51,7 +51,11 @@ function AuthController($state, $stateParams, authService, userService, $mdDialo
     function restoreLocation() {
         var retainedLocation = sessionService.getRetainedLocation();
         if (!retainedLocation || retainedLocation === undefined) {
-            $state.go('orderSearch');
+            if (vm.user.role === 'archivist') {
+                $state.go('orderManageList');
+            } else {
+                $state.go('orderSearch');    
+            };
         } else {
             $window.location = retainedLocation;
         }

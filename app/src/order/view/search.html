@@ -3,11 +3,12 @@
 <div layout="row"
     layout-align="end center"
     ng-show="ordCtrl.searchResults.documents">
-    <a ui-sref="orderBasket"
-        class="md-button md-text-icon-button md-raised md-primary">
+    <md-button ui-sref="orderBasket"
+        class="md-text-icon-button md-raised md-primary"
+        ng-disabled="ordCtrl.basketLength < 1">
         <i class="material-icons">shopping_basket</i>
         {{ 'ORDER.SEARCH.BASKET' | translate }}
-    </a>
+    </md-button>
 </div>
 
 <section id="adv-search"
@@ -150,7 +151,8 @@
                 <md-list-item ng-repeat="item in ordCtrl.searchResults.documents | filter: ordCtrl.filterBy | orderBy: ordCtrl.orderBy"
                     layout="row"
                     class="simple-list__body__item"
-                    ng-click="ordCtrl.fileInfoDiag($event, item)">
+                    ng-click="ordCtrl.fileInfoDiag($event, item)"
+                    aria-label="{{ item.title[0] }}">
                     <div flex="20"
                         flex-gt-sm="10"
                         style="text-align: center"
@@ -158,7 +160,7 @@
                         <img ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="">
                     </div>
                     <div flex class="simple-list__cell">
-                        {{ item.title }} <small class="muted">{{item.displaySize}}</small>
+                        {{ item.title[0] }} <small class="muted">{{item.displaySize}}</small>
                     </div>
                     <div flex
                         flex-gt-sm="30"

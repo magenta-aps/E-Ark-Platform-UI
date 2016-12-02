@@ -2,7 +2,7 @@ angular
     .module('eArkPlatform.ipview')
     .controller('IpController', IpController);
 
-function IpController($q, $state, $stateParams, ipViewService, orderService) {
+function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderService) {
 
     var ipc = this;
 
@@ -29,7 +29,12 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
         packaging : 5,
         ready : 6
     };
-
+    if ($stateParams.linkBack) {
+        ipc.linkBack = $stateParams.linkBack;
+    } else {
+        ipc.linkBack = false;
+    };
+    
     resolvePath();
 
     function resolvePath() {
@@ -40,12 +45,11 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
                 listDir();
                 defer.resolve(true);
             });
-        }
-        else {
+        } else {
             // The we need not do anything and end up browsing directory root
             defer.resolve(true);
             listDir();
-        }
+        };
         return defer.promise;
     }
 
@@ -57,7 +61,7 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
             orderStatus = ipc.order.orderStatus;
             if(ipc.statusEnum[ipc.order.orderStatus] > 4 && ipc.path.split("/").length < 2)
                 ipc.path = ipc.order.dipId
-        }
+        };
 
         var action = ipViewService.serializeObj({action: 'list', path: ipc.path, orderStatus: orderStatus});
         ipViewService.executeAction(action).then(function(response) {
@@ -72,9 +76,9 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
 
     function viewContent(item) {
         if (item.type === 'directory') {
-            $state.go('ipview.ip', {path: item.path});
+            $state.go('ipviewer', {path: item.path});
         } else {
-            $state.go('ipview.file', {path: item.path});
+            $state.go('ipviewer.file', {path: item.path});
         }
     }
 
@@ -121,11 +125,12 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
                     title: pathParts[p],
                     path: currentPath
                 });
-            }
-        }
+            };
+        };
         return bc;
     }
 
+    
     function sortThis($event, sortParameter) {
         if (ipc.orderBy === sortParameter) {
             ipc.orderBy = '-' + sortParameter;
@@ -136,12 +141,102 @@ function IpController($q, $state, $stateParams, ipViewService, orderService) {
         }
     }
 
+    
     function searchIp(term) {
-        $state.go('ipview.search', {path: ipc.bcpath[0].path, term: term});
+        $state.go('ipviewer.search', {path: ipc.bcpath[0].path, term: term});
     }
 
+    
     function toggleSearchField() {
         !ipc.searchForm.visible ? ipc.searchForm.visible = true : ipc.searchForm.visible = false;
+    }
+    
+    
+    // Processing/editing features
+    
+    if ($stateParams.orderStatus === 'processing') {
+        ipc.can_edit = true;
+    } else {
+        ipc.can_edit = false;    
+    };
+    ipc.clipboard = ipViewService.clipboard;
+    ipc.copy = copy;
+    ipc.mkdir = mkdir;
+    ipc.paste = paste;
+    ipc.del = del;
+    
+    function copy(path) {
+        ipViewService.clipboard = path;
+        ipc.clipboard = path;
+    }
+    
+    function mkdir(ev, path) {
+        var parentEl = angular.element(document.body);
+        $mdDialog.show({
+            parent: parentEl,
+            targetEvent: ev,
+            templateUrl: 'app/src/ipview/view/mkdirDiag.html',
+            locals: {
+                
+            },
+            controller: DialogController
+        });
+        function DialogController($scope, $mdDialog) {
+            $scope.dirName = '';
+            $scope.closeDialog = function() {
+                $mdDialog.hide();
+            };
+            $scope.createDir = function() {
+                $mdDialog.hide();
+                var newPath = path + '/' + $scope.dirName;
+                var action = ipViewService.serializeObj({ action: 'mkdir', path: newPath });
+                ipViewService.executeAction(action).then(
+                    function (response) {
+                        console.log('Folder created');
+                        resolvePath();
+                    },
+                    function (err) {
+                        alert('Cannot create folder');
+                        console.log(err);
+                    }
+                );
+            };
+        };
+    }
+    
+    function paste(path) {
+        console.log('Copying:');
+        console.log(ipc.clipboard);
+        console.log(path);
+        var action = ipViewService.serializeObj({ action: 'copy', source: ipc.clipboard, destination: path });
+        ipViewService.executeAction(action).then(
+            function (response) {
+                console.log('Content copied');
+                console.log(response);
+                ipc.clipboard = '';
+                ipViewService.clipboard = '';
+                resolvePath();
+            },
+            function (err) {
+                alert('Cannot copy content');
+                console.log(err);
+            }
+        );
+    }
+    
+    function del(path) {
+        console.log('Deleting ' + path);
+        var action = ipViewService.serializeObj({ action: 'delete', path: path });
+        ipViewService.executeAction(action).then(
+            function (response) {
+                console.log('Content deleted');
+                resolvePath();
+            },
+            function (err) {
+                alert('Cannot delete content');
+                console.log(err);
+            }
+        );
     }
 
 }

@@ -2,13 +2,15 @@
     <div class="md-toolbar-tools">
 
         <span>
+            <a ng-href="{{ ipc.linkBack }}" class="md-button md-icon-button md-raised">
+                <i class="material-icons">arrow_back</i>
+            </a>
             <span class="muted">Browsing</span>
             {{ ipc.bcpath[0].title }}
         </span>
 
         <span flex></span>
         
-        <!-- SEARCH WAITING ON BACKEND
         <span class="ipsearchfield">
             <form ng-model="ipc.searchForm" ng-submit="ipc.searchIP(ipc.searchForm.term);" layout="row" layout="end center">
                 <label title="{{ 'SEARCH.SEARCH' | translate }}" for="ipsearchfield">
@@ -17,7 +19,6 @@
                 <input id="ipsearchfield" flex ng-model="ipc.searchForm.term" type="search">
             </form>
         </span>
-        -->
 
     </div>
 </md-toolbar>
@@ -26,7 +27,7 @@
 
     <div layout="row">
         <nav class="od-filebrowser-breadcrumb_ipviewer" flex>
-            <a ng-repeat="link in ipc.bcpath" ui-sref="ipview.ip({ path: link.path })">{{ link.title }}</a>
+            <a ng-repeat="link in ipc.bcpath" ui-sref="ipviewer({ path: link.path })">{{ link.title }}</a>
         </nav>
     </div>
     
@@ -70,6 +71,7 @@
                                 <i ng-show="ipc.orderBy === 'size'" class="material-icons">arrow_drop_down</i>
                             </md-button>
                         </div>
+                        <div flex="10"></div>
                     </div>
                 </div>
                 <md-list flex class="simple-list__body md-dense">
@@ -100,14 +102,55 @@
                              flex="20"
                              flex-gt-lg="10">
                             {{ child.size }}
-                        </div>    
+                        </div>
+                        <div class="simple-list__cell"
+                             flex="10">
+                            <md-menu md-position-mode="target-right target"
+                                     ng-if="ipc.can_edit">
+                                <md-button aria-label="Open menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                                    <i class="material-icons">arrow_drop_down</i>
+                                </md-button>
+                                <md-menu-content>
+                                    <md-menu-item>
+                                        <md-button ng-click="ipc.copy(child.path)">
+                                            <i class="material-icons">content_copy</i>
+                                            Copy
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item ng-if="ipc.clipboard !== '' && child.type === 'directory'">
+                                        <md-button ng-click="ipc.paste(child.path)">
+                                            <i class="material-icons">content_paste</i>
+                                            Paste here
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item ng-if="child.type !== 'directory'">
+                                        <md-button ng-click="ipc.del(child.path)">
+                                            <i class="material-icons">content_copy</i>
+                                            Delete
+                                        </md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                        </div>
                     </md-list-item>
                     <md-list-item ng-if="ipc.children.length === 0">
                         <span class="muted">{{ 'COMMON.EMPTY' | translate }}</span>
                     </md-list-item>
+                    <md-list-item ng-if="ipc.can_edit">
+                        <md-button class="md-text-icon-button" ng-click="ipc.mkdir($event, ipc.path)">
+                            <i class="material-icons">add</i>
+                            New folder
+                        </md-button>
+                        <md-button class="md-text-icon-button" ng-if="ipc.clipboard !== ''" ng-click="ipc.paste(ipc.path)">
+                            <i class="material-icons">content_paste</i>
+                            Paste here
+                        </md-button>
+                    </md-list-item>
                 </md-list>
+                <div class="clipboard" ng-if="ipc.clipboard !== ''">
+                    <i class="material-icons">content_paste</i> {{ ipc.clipboard }}
+                </div>
             </div>
-
         </div>
 
         <div class="metapane" layout-padding flex="40" flex-sm="33" flex-md="25" flex-gt-md="20">

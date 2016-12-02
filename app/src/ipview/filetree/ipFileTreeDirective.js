@@ -9,11 +9,9 @@ function IpFileTreeController($scope, ipFileTreeService) {
     var ftc = this;
     ftc.tree = {};
     
-    ipFileTreeService.getTree($scope.path, $scope.orderstatus).then(
+    ipFileTreeService.buildTree($scope.path, $scope.orderstatus).then(
         function (response) {
             ftc.tree = response.data;
-            console.log('Got tree data');
-            console.log(ftc.tree);
         },
         function (err) {
             console.log('Error retrieving file tree data: ' + err);

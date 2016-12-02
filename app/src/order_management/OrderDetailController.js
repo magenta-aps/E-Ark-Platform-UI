@@ -23,7 +23,6 @@ function OrderDetailController($stateParams, $mdDialog, $mdToast,  $translate, e
         processing : 4,
         ready : 5
     };
-
     
     odCtrl.refreshOrderDetails(odCtrl.orderId);
     

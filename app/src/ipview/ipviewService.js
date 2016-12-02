@@ -8,6 +8,7 @@ function ipViewService($http) {
     var ipSvc = this;
     
     ipSvc.dirItems = [];
+    ipSvc.clipboard = '';
     
     ipSvc.listDir = listDir;
     ipSvc.listIpRoot = listIpRoot;

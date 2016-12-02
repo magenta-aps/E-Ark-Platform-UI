@@ -1,0 +1,16 @@
+<md-dialog aria-label="Create folder dialog">
+    <form ng-submit="createDir();">
+        <md-dialog-content>
+            <label>Name for new folder:</label>
+            <input type="text" ng-model="dirName">
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button ng-click="closeDialog()">
+                Cancel
+            </md-button>
+            <md-button type="submit" class="md-primary">
+                Create
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
