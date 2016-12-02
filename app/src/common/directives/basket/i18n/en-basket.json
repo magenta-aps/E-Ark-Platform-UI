@@ -2,6 +2,7 @@
     "BASKET": {
         "ITEMS": "Basket items",
         "DATA": "Order information",
-        "SEND": "Send order"
+        "SEND": "Send order",
+        "YOUR_ORDER_IS_RECEIVED": "Your order has been recieved"
     }
 }

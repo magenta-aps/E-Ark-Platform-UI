@@ -39,7 +39,7 @@ function IpSearchController($scope, $stateParams, searchService, fileUtilsServic
     
     function executeSearch() {
         
-        sc.searchStr = 'packagetype:DIP AND path:' + sc.path.slice(1) + '* AND content:' + sc.initialTerm;
+        sc.searchStr = 'path:' + sc.path.slice(1) + '* AND content:' + sc.initialTerm;
         
         for (var i in sc.searchInputs) {
             if (sc.searchInputs[i].term !== '') {

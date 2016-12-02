@@ -27,11 +27,19 @@
         
         <div layout="row" layout-align="space-between center">
             <h3 class="md-subhead">{{ 'ORDER.ORDERS.ITEMS' | translate }}:</h3>
-            <md-button class="md-primary md-raised"
-                       ui-sref="ipview.ip({ id: oddCtrl.orderId, path: oddCtrl.data.processId, manageorder: false })"
-                       ng-disabled="oddCtrl.data.orderStatus !== 'ready'">
-                Browse items
-            </md-button>
+            <div>
+                <a class="md-button md-raised md-text-icon-button"
+                           href="{{ oddCtrl.data.dipURI }}"
+                           ng-if="oddCtrl.data.orderStatus === 'ready'">
+                    <i class="material-icons">file_download</i>
+                    {{ 'COMMON.DOWNLOAD' | translate }} DIP
+                </a>
+                <md-button class="md-primary md-raised"
+                           ui-sref="ipviewer({ id: oddCtrl.orderId, path: '/' + oddCtrl.data.dipId, manageorder: false, linkBack: '#/order/my-orders/order/' + oddCtrl.orderId, orderStatus: oddCtrl.data.orderStatus })"
+                           ng-disabled="oddCtrl.data.orderStatus !== 'ready'">
+                    Browse items
+                </md-button>
+            </div>
         </div>
         
         <md-card>
@@ -39,15 +47,7 @@
                 <div class="simple-list">
                     <div class="simple-list__header">
                         <div layout="row">
-                            <div hide
-                                show-gt-md
-                                flex="20"
-                                class="muted"
-                                layout-padding>
-                                {{ 'ORDER.ORDERS.PACK_ID' | translate }}
-                            </div>
-                            <div flex="60"
-                                flex-gt-xs="40"
+                            <div flex
                                 class="muted"
                                 layout-padding>
                                 {{ 'COMMON.TITLE' | translate }}
@@ -83,14 +83,7 @@
                             layout="row"
                             class="simple-list__body__item"
                             aria-label="item.title">
-                                <div hide
-                                    show-gt-md
-                                    flex="20"
-                                    class="simple-list__cell muted">
-                                    {{ item.packageId }}
-                                </div>
-                                <div flex="60"
-                                    flex-gt-xs="40"
+                                <div flex
                                     class="simple-list__cell">
                                     {{ item.title }}
                                 </div>
@@ -106,8 +99,8 @@
                                     flex-lg="20"
                                     flex-gt-lg="10"
                                     class="simple-list__cell muted">
+                                    <img ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="" style="margin-right: 0.5em;">
                                     {{ item.contentType }}
-                                    <img ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="">
                                 </div>
                                 <div hide
                                     show-gt-lg
@@ -130,7 +123,7 @@
             <dt>{{ 'ORDER.TITLE.ORDER' | translate }}</dt>
             <dd>{{ oddCtrl.data.title }}</dd>
             <dt>{{ 'ORDER.ORDERS.STATUS' | translate }}</dt>
-            <dd>{{ oddCtrl.data.orderStatus }}</dd>
+            <dd>{{ 'ORDER.ORDERS.STATUS-' + oddCtrl.data.orderStatus | translate }}</dd>
             <dt>{{ 'ORDER.ORDERS.ORDER_ID' | translate }}</dt>
             <dd>{{ oddCtrl.data.orderId }}</dd>
             <dt>{{ 'ORDER.ORDERS.ARCH_ASSIGNED' | translate }}</dt>
@@ -141,11 +134,6 @@
             <dd>{{ oddCtrl.data.plannedDate }}</dd>
             <dt>{{ 'ORDER.LABEL.PREFERRED_DELIVERY_METHOD' | translate }}</dt>
             <dd>{{ oddCtrl.data.deliveryFormat }}</dd>
-            <dt>{{ 'ORDER.ORDERS.ISSUED_BY_USER' | translate }}</dt>
-            <dd>
-                {{ oddCtrl.data.endUser.firstname }} {{ oddCtrl.data.endUser.lastname }}<br>
-                <a href="mailto:{{ oddCtrl.data.endUser.email }}">{{ oddCtrl.data.endUser.email }}</a>
-            </dd>
         </dl>
     </div>
     

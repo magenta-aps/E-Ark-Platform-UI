@@ -7,7 +7,8 @@
         "LABEL": {
             "PLANNED_DATE":"Expected date",
             "USER_NOTES":"Additional note",
-            "PREFERRED_DELIVERY_METHOD": "Preferred delivery method"
+            "PREFERRED_DELIVERY_METHOD": "Preferred delivery method",
+            "DELIVERY_DATE": "Your preferred date of delivery"
         },
         "SEARCH": {
             "SEARCH": "Search",
@@ -37,6 +38,8 @@
             "STATUS-error": "Error",
             "STATUS-processing": "Processing",
             "STATUS-packaging": "Packaging",
+            "STATUS-indexing": "Indexing",
+            "STATUS-untarring": "UnTARring",
             "STATUS-submitted": "Submitted",
             "STATUS-ready": "Ready",
             "DETAILS": "Order details",

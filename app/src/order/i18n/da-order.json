@@ -7,7 +7,8 @@
         "LABEL":{
             "PLANNED_DATE":"Forventet dato",
             "USER_NOTES":"Ekstra bemærkning",
-            "PREFERRED_DELIVERY_METHOD": "Foretrukket format til modtagelse"
+            "PREFERRED_DELIVERY_METHOD": "Foretrukket format til modtagelse",
+            "DELIVERY_DATE": "Foretrukket dato for levering"
         },
         "SEARCH": {
             "SEARCH": "Søg",
@@ -37,6 +38,8 @@
             "STATUS-error": "Fejl",
             "STATUS-processing": "Behandling",
             "STATUS-packaging": "Pakkes",
+            "STATUS-indexing": "Indekseres",
+            "STATUS-untarring": "TAR udpakkes",
             "STATUS-submitted": "Behandles",
             "STATUS-ready": "Klar",
             "DETAILS": "Ordredetaljer",
