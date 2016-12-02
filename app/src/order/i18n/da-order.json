@@ -38,6 +38,8 @@
             "STATUS-error": "Fejl",
             "STATUS-processing": "Behandling",
             "STATUS-packaging": "Pakkes",
+            "STATUS-indexing": "Indekseres",
+            "STATUS-untarring": "TAR udpakkes",
             "STATUS-submitted": "Behandles",
             "STATUS-ready": "Klar",
             "DETAILS": "Ordredetaljer",

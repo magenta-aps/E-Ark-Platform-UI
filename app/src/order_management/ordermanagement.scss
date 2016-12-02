@@ -23,6 +23,8 @@
 .status-submitted,
 .status-processing,
 .status-packaging,
+.status-indexing,
+.status-untarring,
 .status-ready {
     padding: $u*0.25 $u*0.5;
     color: #fff;
@@ -51,4 +53,10 @@
 }
 .status-ready {
     background-color: #30da1d;
+}
+.status-indexing {
+    background-color: #CC5719;
+}
+.status-untarring {
+    background-color: #994113;
 }
