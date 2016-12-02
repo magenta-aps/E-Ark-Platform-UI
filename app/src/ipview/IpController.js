@@ -14,6 +14,9 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
     ipc.path = $stateParams.path ? $stateParams.path : '/';
     ipc.orderStatus = $stateParams.orderStatus ? $stateParams.orderStatus : '';
 
+    console.log('ipc.path');
+    console.log(ipc.path);
+    
     ipc.bcpath = pathToBreadCrumb(ipc.path);
     ipc.viewContent = viewContent;
     ipc.sortThis = sortThis;
