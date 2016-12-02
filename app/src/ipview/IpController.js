@@ -13,7 +13,7 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
     ipc.itemInfo = false;
     ipc.path = $stateParams.path ? $stateParams.path : '/';
     ipc.orderStatus = $stateParams.orderStatus ? $stateParams.orderStatus : '';
-
+    
     ipc.bcpath = pathToBreadCrumb(ipc.path);
     ipc.viewContent = viewContent;
     ipc.sortThis = sortThis;

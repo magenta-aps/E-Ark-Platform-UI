@@ -35,7 +35,7 @@
                     {{ 'COMMON.DOWNLOAD' | translate }} DIP
                 </a>
                 <md-button class="md-primary md-raised"
-                           ui-sref="ipviewer({ id: oddCtrl.orderId, path: oddCtrl.data.processId, manageorder: false, linkBack: '#/order/my-orders/order/' + oddCtrl.orderId })"
+                           ui-sref="ipviewer({ id: oddCtrl.orderId, path: '/' + oddCtrl.data.dipId, manageorder: false, linkBack: '#/order/my-orders/order/' + oddCtrl.orderId, orderStatus: oddCtrl.data.orderStatus })"
                            ng-disabled="oddCtrl.data.orderStatus !== 'ready'">
                     Browse items
                 </md-button>
@@ -123,7 +123,7 @@
             <dt>{{ 'ORDER.TITLE.ORDER' | translate }}</dt>
             <dd>{{ oddCtrl.data.title }}</dd>
             <dt>{{ 'ORDER.ORDERS.STATUS' | translate }}</dt>
-            <dd>{{ oddCtrl.data.orderStatus }}</dd>
+            <dd>{{ 'ORDER.ORDERS.STATUS-' + oddCtrl.data.orderStatus | translate }}</dd>
             <dt>{{ 'ORDER.ORDERS.ORDER_ID' | translate }}</dt>
             <dd>{{ oddCtrl.data.orderId }}</dd>
             <dt>{{ 'ORDER.ORDERS.ARCH_ASSIGNED' | translate }}</dt>

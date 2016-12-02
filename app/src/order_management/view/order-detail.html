@@ -36,7 +36,7 @@
                 </a>
                 <md-button ng-if="odCtrl.browsable"
                            class="md-primary md-raised"
-                           ui-sref="ipviewer({ orderId: odCtrl.orderId, path: odCtrl.data.processId, manageorder: true, orderStatus: odCtrl.data.orderStatus, linkBack: '#/order-manage/order/' + odCtrl.orderId })">
+                           ui-sref="ipviewer({ orderId: odCtrl.orderId, path: '/' + odCtrl.data.dipId, manageorder: true, orderStatus: odCtrl.data.orderStatus, linkBack: '#/order-manage/order/' + odCtrl.orderId })">
                     Browse items
                 </md-button>
                 <md-button ng-show="odCtrl.data.orderStatus === 'processing'" class="md-primary md-text-icon-button md-raised" ng-click="odCtrl.packageOrder(odCtrl.orderId);">
@@ -164,21 +164,7 @@
             <dt>{{ 'ORDER.TITLE.ORDER' | translate }}</dt>
             <dd>{{ odCtrl.data.title }}</dd>
             <dt>{{ 'ORDER.ORDERS.STATUS' | translate }}</dt>
-            <dd>
-                
-                <span ng-if="odCtrl.data.orderStatus === 'submitted'">Submitted</span>
-                
-                <select ng-if="odCtrl.data.orderStatus !== 'submitted'"
-                    ng-model="odCtrl.data.orderStatus"
-                    ng-change="odCtrl.updateOrderStatus()">
-                    <option value="{{ odCtrl.data.orderStatus }}">{{ odCtrl.data.orderStatus }}</option>
-                    <option disabled>──────────</option>
-                    <option value="new" ng-if="odCtrl.data.orderStatus !== 'ready'">{{ 'ORDER.ORDERS.STATUS-new' | translate }}</option>
-                    <option value="open" ng-if="odCtrl.data.orderStatus !== 'ready'">{{ 'ORDER.ORDERS.STATUS-open' | translate }}</option>
-                    <option value="ready">{{ 'ORDER.ORDERS.STATUS-ready' | translate }}</option>
-                </select>
-                
-            </dd>
+            <dd>{{ 'ORDER.ORDERS.STATUS-' + odCtrl.data.orderStatus | translate }}</dd>
             <dt>{{ 'ORDER.ORDERS.ORDER_ID' | translate }}</dt>
             <dd>{{ odCtrl.data.orderId }}</dd>
             <dt>{{ 'ORDERMAN.ORIGIN' | translate }}</dt>

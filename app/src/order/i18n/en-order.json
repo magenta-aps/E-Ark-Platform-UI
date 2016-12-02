@@ -38,6 +38,8 @@
             "STATUS-error": "Error",
             "STATUS-processing": "Processing",
             "STATUS-packaging": "Packaging",
+            "STATUS-indexing": "Indexing",
+            "STATUS-untarring": "UnTARring",
             "STATUS-submitted": "Submitted",
             "STATUS-ready": "Ready",
             "DETAILS": "Order details",
