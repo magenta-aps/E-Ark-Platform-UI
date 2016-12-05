@@ -33,7 +33,7 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
         ipc.linkBack = $stateParams.linkBack;
     } else {
         ipc.linkBack = false;
-    };
+    }
     
     resolvePath();
 
@@ -46,10 +46,9 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
                 defer.resolve(true);
             });
         } else {
-            // The we need not do anything and end up browsing directory root
             defer.resolve(true);
             listDir();
-        };
+        }
         return defer.promise;
     }
 
@@ -61,7 +60,7 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
             orderStatus = ipc.order.orderStatus;
             if(ipc.statusEnum[ipc.order.orderStatus] > 4 && ipc.path.split("/").length < 2)
                 ipc.path = ipc.order.dipId
-        };
+        }
 
         var action = ipViewService.serializeObj({action: 'list', path: ipc.path, orderStatus: orderStatus});
         ipViewService.executeAction(action).then(function(response) {
@@ -83,7 +82,6 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
     }
 
     function getItemInfo(path) {
-        var action = ipViewService.serializeObj({ action: 'getinfo', path: path });
         console.log('getting item info for ' + path);
         var action = ipViewService.serializeObj({action: 'getinfo', path: path});
         ipViewService.executeAction(action).then(
@@ -99,8 +97,7 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
             }
         );
     }
-    
-    
+
     // Clean up response data for UI itemInfo
     function dataDigest(obj) {
         Object.keys(obj).forEach(function (key) {
@@ -109,10 +106,9 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
             } else {
                 var readableKey = key.replace(/[@#]/g, '');
                 ipc.itemInfo.push({ label: readableKey, value: obj[key] });
-            };
+            }
         });
     }
-    
 
     function pathToBreadCrumb(path) {
         var bc = [];
@@ -125,12 +121,11 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
                     title: pathParts[p],
                     path: currentPath
                 });
-            };
-        };
+            }
+        }
         return bc;
     }
 
-    
     function sortThis($event, sortParameter) {
         if (ipc.orderBy === sortParameter) {
             ipc.orderBy = '-' + sortParameter;
@@ -141,24 +136,16 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
         }
     }
 
-    
     function searchIp(term) {
         $state.go('ipviewer.search', {path: ipc.bcpath[0].path, term: term});
     }
 
-    
     function toggleSearchField() {
         !ipc.searchForm.visible ? ipc.searchForm.visible = true : ipc.searchForm.visible = false;
     }
-    
-    
+
     // Processing/editing features
-    
-    if ($stateParams.orderStatus === 'processing') {
-        ipc.can_edit = true;
-    } else {
-        ipc.can_edit = false;    
-    };
+    ipc.can_edit = $stateParams.orderStatus === 'processing';;
     ipc.clipboard = ipViewService.clipboard;
     ipc.copy = copy;
     ipc.mkdir = mkdir;

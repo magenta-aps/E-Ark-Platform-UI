@@ -36,7 +36,7 @@
                 </a>
                 <md-button ng-if="odCtrl.browsable"
                            class="md-primary md-raised"
-                           ui-sref="ipviewer({ orderId: odCtrl.orderId, path: '/' + odCtrl.data.dipId, manageorder: true, orderStatus: odCtrl.data.orderStatus, linkBack: '#/order-manage/order/' + odCtrl.orderId })">
+                           ui-sref="ipviewer({ orderId: odCtrl.orderId, path: odCtrl.data.processId, manageorder: true, orderStatus: odCtrl.data.orderStatus, linkBack: '#/order-manage/order/' + odCtrl.orderId })">
                     Browse items
                 </md-button>
                 <md-button ng-show="odCtrl.data.orderStatus === 'processing'" class="md-primary md-text-icon-button md-raised" ng-click="odCtrl.packageOrder(odCtrl.orderId);">
