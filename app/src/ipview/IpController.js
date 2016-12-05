@@ -143,10 +143,8 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
     function toggleSearchField() {
         !ipc.searchForm.visible ? ipc.searchForm.visible = true : ipc.searchForm.visible = false;
     }
-    
-    
+
     // Processing/editing features
-    
     ipc.can_edit = $stateParams.orderStatus === 'processing';;
     ipc.clipboard = ipViewService.clipboard;
     ipc.copy = copy;
