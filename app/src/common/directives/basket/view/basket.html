@@ -45,10 +45,10 @@
                 <label>{{ 'COMMON.TITLE' | translate }}</label>
                 <input required type="text" name="orderTitle" ng-model="bdc.orderForm.order.title" md-autofocus>
             </md-input-container>
-            <md-input-container>
-                <label>{{ 'ORDER.LABEL.DELIVERY_DATE' | translate }}</label>
+            <div>
+                <h4 style="color: rgba(0,0,0,0.26); font-size: 1em; font-weight: normal;">{{ 'ORDER.LABEL.DELIVERY_DATE' | translate }}</h4>
                 <md-datepicker required name="plannedDate" ng-model="bdc.orderForm.order.plannedDate" md-placeholder="{{ 'ORDER.LABEL.PLANNED_DATE' | translate }}"></md-datepicker>
-            </md-input-container>
+            </div>
             <md-input-container flex>
                 <label>{{ 'ORDER.LABEL.USER_NOTES' | translate }}</label>
                 <textarea required name="endUserOrderNote" ng-model="bdc.orderForm.order.endUserOrderNote" rows="2" columns="3"></textarea>
