@@ -27,7 +27,7 @@
         
         <div layout="row" layout-align="space-between center">
             <h3 class="md-subhead">{{ 'ORDER.ORDERS.ITEMS' | translate }}:</h3>
-            <div>
+            <div layout="row" layout-align="end start">
                 <a class="md-button md-raised md-text-icon-button"
                            href="{{ oddCtrl.data.dipURI }}"
                            ng-if="oddCtrl.data.orderStatus === 'ready'">
