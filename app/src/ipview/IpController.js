@@ -60,7 +60,7 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
             orderStatus = ipc.order.orderStatus;
             if (ipc.path[0] != '/')
                 ipc.path = '/'+ipc.path
-            if(ipc.statusEnum[ipc.order.orderStatus] > 4 && ipc.path.split("/").length < 2)
+            if(ipc.statusEnum[ipc.order.orderStatus] > 4 && ipc.path.split("/").length <= 2)
                 ipc.path = ipc.order.dipId
         }
 
