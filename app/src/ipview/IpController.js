@@ -59,10 +59,10 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
         var orderStatus  = '';
         if(ipc.order && ipc.order.orderStatus){
             orderStatus = ipc.order.orderStatus;
-            if (ipc.path[0] != '/')
-                ipc.path = '/'+ipc.path
             if(ipc.statusEnum[ipc.order.orderStatus] > 4 && ipc.path.split("/").length <= 2)
-                ipc.path = ipc.order.dipId
+                ipc.path = ipc.order.dipId;
+            if (ipc.path[0] != '/')
+                ipc.path = '/'+ipc.path;
         }
 
         var action = ipViewService.serializeObj({action: 'list', path: ipc.path, orderStatus: orderStatus});
