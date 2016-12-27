@@ -142,22 +142,14 @@
                                 class="adv-search__filter-form__filter">
                         </form>
                     </div>
-                    <div flex="20"
-                        flex-gt-sm="10"
-                        class="muted"
-                        layout="column"
-                        layout-align="end center"
-                        layout-padding
-                        style="text-align: center;">
-                        <span>{{ 'COMMON.ADD_TO' | translate }} {{ 'ORDER.SEARCH.BASKET' | translate }}</span>
-                    </div>
                 </div>
             </div>
             <md-list class="simple-list__body md-dense" style="overflow: initial;">
                 <md-list-item ng-repeat="item in sc.searchResults.documents | filter: sc.filterBy | orderBy: sc.orderBy"
                     layout="row"
                     class="simple-list__body__item"
-                    ng-click="sc.fileInfoDiag($event, item)">
+                    ng-click="sc.navigateToFile(item.path);"
+                    aria-label="item.title">
                     <div flex="20"
                         flex-gt-sm="10"
                         style="text-align: center"
@@ -173,19 +165,6 @@
                         hide
                         show-gt-sm>
                         {{ item.packageId }}
-                    </div>
-                    <div flex="20"
-                        flex-gt-sm="10"
-                        layout="column"
-                        layout-align="center center"
-                        class="simple-list__cell">
-                        <md-checkbox
-                            ng-click="$event.stopPropagation(); $event.preventDefault();"
-                            ng-change="sc.addToBasket(item);"
-                            ng-true-value="'add'"
-                            ng-false-value="'delete'"
-                            ng-model="item.baskOp"
-                            aria-label="{{ 'COMMON.ADD' | translate }} {{ item.title }} {{ 'ORDER.SEARCH.TO_BASKET' | translate }}">
                     </div>
                 </md-list-item>
             </md-list>
