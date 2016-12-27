@@ -6,7 +6,7 @@ function config($stateProvider, languageFilesProvider, USER_ROLES, $httpProvider
 
     $stateProvider.state('ipviewer', {
         parent: 'site',
-        url: '/ipviewer/:path/:orderId/:orderStatus/:linkBack',
+        url: '/ipviewer/:path/:orderId/:dipId/:orderStatus/:linkBack',
         views: {
             'content@': {
                 templateUrl : 'app/src/ipview/view/ip.html',
@@ -34,7 +34,8 @@ function config($stateProvider, languageFilesProvider, USER_ROLES, $httpProvider
         parent: 'site',
         params: {
             path: '/none',
-            term: 'none'
+            term: 'none',
+            dipId: 'none'
         },
         views: {
             'content@': {

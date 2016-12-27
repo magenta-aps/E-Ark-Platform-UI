@@ -13,6 +13,7 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
     ipc.itemInfo = false;
     ipc.path = $stateParams.path ? $stateParams.path : '/';
     ipc.orderStatus = $stateParams.orderStatus ? $stateParams.orderStatus : '';
+    ipc.dipId = $stateParams.dipId;
     
     ipc.bcpath = pathToBreadCrumb(ipc.path);
     ipc.viewContent = viewContent;
@@ -139,7 +140,7 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
     }
 
     function searchIp(term) {
-        $state.go('ipviewer.search', {path: ipc.bcpath[0].path, term: term});
+        $state.go('ipviewer.search', {path: ipc.bcpath[0].path, term: term, dipId: ipc.dipId});
     }
 
     function toggleSearchField() {
