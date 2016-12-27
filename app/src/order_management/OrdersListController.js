@@ -21,7 +21,7 @@ function OrdersListController($state, ordermanagementService) {
             olCtrl.orderBy = '';
         } else {
             olCtrl.orderBy = sortParameter;
-        };
+        }
     };
     
     olCtrl.orderDetailGo = function(orderId) {
@@ -38,7 +38,7 @@ function OrdersListController($state, ordermanagementService) {
                     ordermanagementService.getOrders().then(function(response) {
                         olCtrl.data = response.orders;
                     });
-                };
+                }
             },
             function(response) {
                 console.log('No statuses were updated');

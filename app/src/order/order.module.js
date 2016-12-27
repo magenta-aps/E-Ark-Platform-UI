@@ -63,7 +63,7 @@ function config(modulesMenuServiceProvider, $stateProvider, USER_ROLES, language
             authorizedRoles: [USER_ROLES.enduser]
         }
     });
-    
-};
+
+}
 
 

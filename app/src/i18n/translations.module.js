@@ -37,8 +37,7 @@ for (var l in defineLangs) {
             locale: defineLangs[l].locale
         }
     );
-};
-
+}
 function AvailableLanguages() {
     return availableLanguages;
 }

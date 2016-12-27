@@ -17,7 +17,7 @@ function tenantsService($http) {
         return $http.get('/api/tenants').then(function (response) {
             var tenants = response.data.tenants.map(function (item) {
                 return item.tenantDomain;
-            })
+            });
             return tenants;
         });
     }

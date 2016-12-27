@@ -18,4 +18,4 @@ function errorService() {
     
     return service;
 
-};
+}

@@ -6,8 +6,12 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
 
     var ipc = this;
 
+    ipc.checkAll = false;
+    ipc.workingDirectory = false;
+
     ipc.orderId = $stateParams.orderId;
     ipc.children = [];
+    ipc.selectedItems = [];
     ipc.orderBy = '-name';
     ipc.searchForm = {};
     ipc.itemInfo = false;
@@ -19,6 +23,10 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
     ipc.sortThis = sortThis;
     ipc.searchIP = searchIp;
     ipc.toggleSearchField = toggleSearchField;
+    ipc.selectItem = itemSelect;
+    ipc.selectAll = selectAll;
+    ipc.clearClipboard = clearClipboard;
+    ipc.toClipboard = toClipboard;
     ipc.order = '';
     ipc.statusEnum = {
         error: 0,
@@ -29,6 +37,7 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
         packaging : 5,
         ready : 6
     };
+
     if ($stateParams.linkBack) {
         ipc.linkBack = $stateParams.linkBack;
     } else {
@@ -58,8 +67,10 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
         var orderStatus  = '';
         if(ipc.order && ipc.order.orderStatus){
             orderStatus = ipc.order.orderStatus;
-            if(ipc.statusEnum[ipc.order.orderStatus] > 4 && ipc.path.split("/").length <= 2)
+            if(ipc.statusEnum[ipc.order.orderStatus] > 4 && ipc.path.split("/").length <= 2) {
                 ipc.path = ipc.order.dipId;
+                ipc.workingDirectory = true;
+            }
             if (ipc.path[0] != '/')
                 ipc.path = '/'+ipc.path;
         }
@@ -67,6 +78,8 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
         var action = ipViewService.serializeObj({action: 'list', path: ipc.path, orderStatus: orderStatus});
         ipViewService.executeAction(action).then(function(response) {
                 ipc.children = response.children;
+                //since we have new children, clear the selected items buffer
+                ipc.selectedItems =[];
             },
             function (err) {
                 console.log('Error listing directory contents' + err.message);
@@ -147,16 +160,74 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
     }
 
     // Processing/editing features
-    ipc.can_edit = $stateParams.orderStatus === 'processing';;
+    ipc.can_edit = $stateParams.orderStatus === 'processing';
     ipc.clipboard = ipViewService.clipboard;
     ipc.copy = copy;
     ipc.mkdir = mkdir;
     ipc.paste = paste;
     ipc.del = del;
+
+    /**
+     * Selects or deselects an item in view
+     * @param item
+     */
+    function itemSelect(item){
+        ipc.checkAll = false;
+        if(item.selected){
+            var pIndex = ipc.selectedItems.findIndex(function (selectedItem) {
+                return selectedItem.path == item.path;
+            });
+            if(pIndex != -1){
+                ipc.selectedItems.splice(pIndex, 1);
+                item.selected = false;
+            }
+        }
+        else{
+            item.selected = true;
+            ipc.selectedItems.push(item);
+        }
+        console.log('Selected(single) items: ',ipc.selectedItems);
+    }
+
+    /**
+     * Selects all elements in current view
+     */
+    function selectAll(){
+        ipc.selectedItems = [];
+        ipc.children.forEach(function(item){
+            item.selected = true;
+            ipc.selectedItems.push(item);
+        });
+        console.log('Selected(all) items: ',ipc.selectedItems);
+    }
     
-    function copy(path) {
-        ipViewService.clipboard = path;
-        ipc.clipboard = path;
+    function copy(item) {
+        if(ipViewService.clipboard.length == 0){
+            ipViewService.clipboard = [item];
+            ipc.clipboard = ipViewService.clipboard;
+        }
+        else {
+            ipViewService.clipboard.push(item);
+        }
+    }
+
+    /**
+     * Clears everything from the clip board
+     */
+    function clearClipboard() {
+        ipViewService.clipboard = [];
+        ipc.clipboard = [];
+    }
+    /**
+     * Clears everything from the clip board
+     */
+    function toClipboard() {
+        if (ipViewService.clipboard.length <= 0)
+            ipViewService.clipboard = ipc.selectedItems;
+        else
+            ipViewService.clipboard.push(ipc.selectedItems);
+
+        ipc.clipboard = ipViewService.clipboard;
     }
     
     function mkdir(ev, path) {
@@ -190,14 +261,19 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
                     }
                 );
             };
-        };
+        }
     }
     
     function paste(path) {
         console.log('Copying:');
         console.log(ipc.clipboard);
         console.log(path);
-        var action = ipViewService.serializeObj({ action: 'copy', source: ipc.clipboard, destination: path });
+        var items = [];
+        ipc.clipboard.forEach(function(item){
+            items.push(item.path);
+        });
+        var action = ipViewService.serializeObj({ action: 'copy', source: items, destination: path });
+        console.log("Action to be persisted: "+ action);
         ipViewService.executeAction(action).then(
             function (response) {
                 console.log('Content copied');
@@ -227,5 +303,7 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
             }
         );
     }
+
+
 
 }

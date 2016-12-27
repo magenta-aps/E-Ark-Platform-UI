@@ -33,8 +33,7 @@ function OrderDetailController($stateParams, orderService, fileUtilsService, $md
           clickOutsideToClose: true,
           fullscreen: true
         });
-    };
-    
+    }
     function fileInfoDialogController($scope, $mdDialog, document) {
         var fidc = this;
         
@@ -47,6 +46,5 @@ function OrderDetailController($stateParams, orderService, fileUtilsService, $md
         $scope.cancel = function() {
           $mdDialog.cancel();
         };
-    };
-
+    }
 }

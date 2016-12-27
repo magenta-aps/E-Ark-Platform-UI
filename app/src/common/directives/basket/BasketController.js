@@ -94,8 +94,7 @@ function BasketController($scope, $state, basketService, sessionService, $mdDial
         cleanedItem.contentType = item.content_type ? item.content_type :"";
         cleanedItem.size = item.stream_size;
         return cleanedItem;
-    };
-    
+    }
     $scope.submitMethod = function(ev, formData){
         // Preprocssing order before POSTing
         var formDataCopy = angular.copy(formData);

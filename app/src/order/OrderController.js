@@ -53,8 +53,7 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
         } else {
             ordCtrl.orderBy = sortParameter;
         }
-    };
-
+    }
     function goToOrder (orderId) {
         $state.go('orderDetail', {orderId: orderId});
     }
@@ -65,9 +64,8 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
         for (var i in ordCtrl.searchInputs) {
             if (ordCtrl.searchInputs[i].term !== '') {
                 ordCtrl.searchStr = ordCtrl.searchStr + ' ' + ordCtrl.searchInputs[i].operator + ' content: ' + ordCtrl.searchInputs[i].term + '';
-            };
-        };
-    
+            }
+        }
         ordCtrl.searchResults = {};
         var queryObj = {
             q: ordCtrl.searchStr + ' AND path:*/representations/*/data/* AND NOT path:*_mig-*',
@@ -103,12 +101,12 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
     function basketCheck(item) {
         if (item.baskOp === 'add') {
             basketService.addToBasket(item);
-        };
+        }
         if (item.baskOp === 'delete') {
             basketService.removeFromBasket(item).then(function (result) {
                 console.log('Removal status: ' + result);
             });
-        };
+        }
         ordCtrl.basketLength = basketService.basket.length;
     }
 
@@ -217,8 +215,7 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
           clickOutsideToClose: true,
           fullscreen: true
         });
-    };
-    
+    }
     function fileInfoDialogController($scope, $mdDialog, document) {
         var fidc = this;
         
@@ -231,8 +228,7 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
         $scope.cancel = function() {
           $mdDialog.cancel();
         };
-    };
-    
+    }
     function updateList() {
         orderService.getAllOrdersStatus().then(
             function(response) {
@@ -243,7 +239,7 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
                     ordermanagementService.getOrders().then(function(response) {
                         olCtrl.data = response.orders;
                     });
-                };
+                }
             },
             function(response) {
                 console.log('No statuses were updated');

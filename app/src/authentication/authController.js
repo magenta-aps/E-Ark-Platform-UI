@@ -54,8 +54,9 @@ function AuthController($state, $stateParams, authService, userService, $mdDialo
             if (vm.user.role === 'archivist') {
                 $state.go('orderManageList');
             } else {
-                $state.go('orderSearch');    
-            };
+                $state.go('orderSearch');
+
+            }
         } else {
             $window.location = retainedLocation;
         }
@@ -106,7 +107,7 @@ function AuthController($state, $stateParams, authService, userService, $mdDialo
                     }
             );
         };
-    };
+    }
 
     function showForgotDialog(ev) {
         $mdDialog.show({
