@@ -9,6 +9,7 @@ function IpSearchController($scope, $stateParams, searchService, fileUtilsServic
     
     sc.path = $stateParams.path;
     sc.searchStr = $stateParams.term;
+    sc.dipId = $stateParams.dipId;
     sc.initialTerm = $stateParams.term;
     sc.searchInputs = [];
     sc.searchResults = basketService.currentSearch;
@@ -21,6 +22,7 @@ function IpSearchController($scope, $stateParams, searchService, fileUtilsServic
     sc.addInput = addInput;
     sc.removeInput = removeInput;
     sc.helpfulSearchHints = helpfulSearchHints;
+    sc.navigateToFile = navigateToFile;
     sc.fileInfoDiag = fileInfoDiag;
 
     sc.executeSearch();
@@ -37,7 +39,7 @@ function IpSearchController($scope, $stateParams, searchService, fileUtilsServic
     }
     function executeSearch() {
         
-        sc.searchStr = 'path:' + sc.path.slice(1) + '* AND content:' + sc.initialTerm;
+        sc.searchStr = 'path:' + sc.dipId + '* AND content:' + sc.initialTerm;
         
         for (var i in sc.searchInputs) {
             if (sc.searchInputs[i].term !== '') {
@@ -127,6 +129,12 @@ function IpSearchController($scope, $stateParams, searchService, fileUtilsServic
             .ok( $translate.instant( 'COMMON.UNDERSTOOD' ) )
             .targetEvent(ev)
         );
+    }
+    
+    
+    function navigateToFile(path) {
+        console.log(path);
+        $state.go('ipviewer.file', { 'path': path, 'orderId': 1234, 'dipId': 124, 'orderStatus': 'ready', 'linkBack': '/' });
     }
     
     
