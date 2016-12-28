@@ -2,7 +2,7 @@ angular
     .module('eArkPlatform.common.directives.basket')
     .service('basketService', basketService);
 
-function basketService($q, $http, OMS_URI, $filter, $mdToast, $translate) {
+function basketService($q, $http, $filter, $mdToast, $translate) {
     
     var bService = this;
     bService.basket = [];
@@ -22,8 +22,7 @@ function basketService($q, $http, OMS_URI, $filter, $mdToast, $translate) {
         if (bService.findItemInBasket(item) == -1) {
             bService.basket.push(item);
         }
-    };
-
+    }
     function removeFromBasket(item) {
         var defer = $q.defer();
         try {

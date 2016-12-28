@@ -8,7 +8,7 @@ function ipViewService($http) {
     var ipSvc = this;
     
     ipSvc.dirItems = [];
-    ipSvc.clipboard = '';
+    ipSvc.clipboard = [];
     
     ipSvc.listDir = listDir;
     ipSvc.listIpRoot = listIpRoot;
@@ -89,7 +89,6 @@ function ipViewService($http) {
         //For now we'll just use the IP root
 
     }
-
     
     function listDir(path) {
         return $http({
@@ -112,7 +111,6 @@ function ipViewService($http) {
         );
     }
 
-    
     function getcontent(filepath) {
         return $http({
             method: 'POST',
@@ -151,7 +149,7 @@ function ipViewService($http) {
                     fullSubName = name + '[' + i + ']';
                     innerObj = {};
                     innerObj[fullSubName] = subValue;
-                    query += param(innerObj) + '&';
+                    query += serializeObj(innerObj) + '&';
                 }
             }
             else if (value instanceof Object) {
@@ -170,7 +168,6 @@ function ipViewService($http) {
         return query.length ? query.substr(0, query.length - 1) : query;
     }
 
-
     //register an observer
     function registerObserverCallback(callback) {
         observerCallbacks.push(callback);
@@ -181,6 +178,5 @@ function ipViewService($http) {
         angular.forEach(observerCallbacks, function (callback) {
             callback();
         });
-    };
-
+    }
 }

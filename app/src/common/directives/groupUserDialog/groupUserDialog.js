@@ -60,8 +60,7 @@ function openeGroupUserDialog($mdDialog, userService, groupService) {
                     }
                 });
             });
-        };
-
+        }
         function createUserSearchQuery(queryterm) {
             var query = "?filter=" + encodeURIComponent(queryterm);
             query += "&sortBy=" + scope.sortBy + '&dir=' + scope.sortOrder + '&maxResults=' + scope.maxResults;
@@ -81,10 +80,8 @@ function openeGroupUserDialog($mdDialog, userService, groupService) {
                     }
                 });
             });
-        };
-
-    };
-
+        }
+    }
     return {
         link: postlink,
         restrict: 'E',

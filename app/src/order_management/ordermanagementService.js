@@ -23,8 +23,7 @@ function ordermanagementService($http, $filter) {
                 console.log('Error getting orders');
             }
         );
-    };
-    
+    }
     function getOrder(orderId) {
         return $http.get('/api/getOrderData?orderId=' + orderId).then(
             function (response) {
@@ -33,8 +32,7 @@ function ordermanagementService($http, $filter) {
                 console.log('Error getting order');
             }
         );
-    };
-    
+    }
     function updateOrder(queryObj) {
         console.log($filter('json')(queryObj));
         return $http.put('/api/updateOrder', $filter('json')(queryObj)).then(
@@ -44,8 +42,7 @@ function ordermanagementService($http, $filter) {
                 console.log('Error updating order');
             }
         );
-    };
-    
+    }
     function getAllOrdersStatus() {
         return $http.get('/api/earkweb/updateAllOrderStatus').then(
             function (response) {
@@ -55,8 +52,7 @@ function ordermanagementService($http, $filter) {
                 console.log('Error getting statuses');
             }
         );
-    };
-    
+    }
     function getArchivists() {
         return $http.get('/api/getArchivists').then(
             function (response) {
@@ -65,8 +61,7 @@ function ordermanagementService($http, $filter) {
                 console.log('Error getting archivists');
             }
         );
-    };
-
+    }
     //TODO: resolve this interface call
     function processOrder(order) {
         return $http.post('/api/earkweb/submitOrder', order).then(

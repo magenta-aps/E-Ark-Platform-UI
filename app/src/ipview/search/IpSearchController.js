@@ -36,9 +36,7 @@ function IpSearchController($stateParams, searchService, fileUtilsService, baske
         } else {
             sc.orderBy = sortParameter;
         }
-    };
-
-    
+    }
     function executeSearch() {
         
         sc.searchStr = 'path:' + sc.dipId + '* AND content:' + sc.initialTerm;
@@ -46,9 +44,8 @@ function IpSearchController($stateParams, searchService, fileUtilsService, baske
         for (var i in sc.searchInputs) {
             if (sc.searchInputs[i].term !== '') {
                 sc.searchStr = sc.searchStr + ' ' + sc.searchInputs[i].operator + ' content: ' + sc.searchInputs[i].term + '';
-            };
-        };
-    
+            }
+        }
         sc.searchResults = {};
         var queryObj = {
             q: sc.searchStr,
@@ -152,8 +149,6 @@ function IpSearchController($stateParams, searchService, fileUtilsService, baske
           fullscreen: true
         });
     }
-    
-    
     function fileInfoDialogController($scope, $mdDialog, document) {
         var fidc = this;
         
@@ -166,6 +161,5 @@ function IpSearchController($stateParams, searchService, fileUtilsService, baske
         $scope.cancel = function() {
           $mdDialog.cancel();
         };
-    };
-
+    }
 }
