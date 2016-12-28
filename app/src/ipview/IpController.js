@@ -5,29 +5,38 @@ angular
 function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderService) {
 
     var ipc = this;
-
     ipc.checkAll = false;
     ipc.workingDirectory = false;
 
+    // Processing/editing features
+    ipc.del = del;
+    ipc.copy = copy;
+    ipc.mkdir = mkdir;
+    ipc.paste = paste;
+    ipc.clipboard = ipViewService.clipboard;
+    ipc.can_edit = $stateParams.orderStatus === 'processing';
+
+    ipc.dipId = $stateParams.dipId;
     ipc.orderId = $stateParams.orderId;
-    ipc.children = [];
-    ipc.selectedItems = [];
-    ipc.orderBy = '-name';
-    ipc.searchForm = {};
-    ipc.itemInfo = false;
     ipc.path = $stateParams.path ? $stateParams.path : '/';
     ipc.orderStatus = $stateParams.orderStatus ? $stateParams.orderStatus : '';
-    ipc.dipId = $stateParams.dipId;
-    
+
+    ipc.children = [];
+    ipc.searchForm = {};
+    ipc.itemInfo = false;
+    ipc.orderBy = '-name';
+    ipc.selectedItems = [];
+
     ipc.bcpath = pathToBreadCrumb(ipc.path);
-    ipc.viewContent = viewContent;
     ipc.sortThis = sortThis;
     ipc.searchIP = searchIp;
-    ipc.toggleSearchField = toggleSearchField;
-    ipc.selectItem = itemSelect;
     ipc.selectAll = selectAll;
-    ipc.clearClipboard = clearClipboard;
+    ipc.selectItem = itemSelect;
+    ipc.viewContent = viewContent;
     ipc.toClipboard = toClipboard;
+    ipc.clearClipboard = clearClipboard;
+    ipc.toggleSearchField = toggleSearchField;
+    ipc.removeFromClipboard = removeFromClipboard;
     ipc.order = '';
     ipc.statusEnum = {
         error: 0,
@@ -41,12 +50,19 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
 
     if ($stateParams.linkBack) {
         ipc.linkBack = $stateParams.linkBack;
-    } else {
+    }
+    else {
         ipc.linkBack = false;
     }
     
     resolvePath();
 
+    /**
+     * Gets the order based on the order ID.
+     * The reason for executing this first is to be able to get other details relating to the order such as the order
+     * state which would allow us to, for instance, be able to select the right path for browsing.
+     * @returns {*}
+     */
     function resolvePath() {
         var defer = $q.defer();
         if ($stateParams.orderId) {
@@ -160,14 +176,6 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
         !ipc.searchForm.visible ? ipc.searchForm.visible = true : ipc.searchForm.visible = false;
     }
 
-    // Processing/editing features
-    ipc.can_edit = $stateParams.orderStatus === 'processing';
-    ipc.clipboard = ipViewService.clipboard;
-    ipc.copy = copy;
-    ipc.mkdir = mkdir;
-    ipc.paste = paste;
-    ipc.del = del;
-
     /**
      * Selects or deselects an item in view
      * @param item
@@ -187,19 +195,26 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
             item.selected = true;
             ipc.selectedItems.push(item);
         }
-        console.log('Selected(single) items: ',ipc.selectedItems);
     }
 
     /**
      * Selects all elements in current view
      */
     function selectAll(){
-        ipc.selectedItems = [];
-        ipc.children.forEach(function(item){
-            item.selected = true;
-            ipc.selectedItems.push(item);
-        });
-        console.log('Selected(all) items: ',ipc.selectedItems);
+        if(ipc.selectedItems.length == ipc.children.length){
+            ipc.children.forEach(function(item){
+                item.selected = false;
+            });
+            ipc.selectedItems = [];
+        }
+        else {
+            ipc.selectedItems = [];
+            ipc.children.forEach(function (item) {
+                item.selected = true;
+                ipc.selectedItems.push(item);
+            });
+            console.log('Selected(all) items: ', ipc.selectedItems);
+        }
     }
     
     function copy(item) {
@@ -229,6 +244,23 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
             ipViewService.clipboard.push(ipc.selectedItems);
 
         ipc.clipboard = ipViewService.clipboard;
+    }
+    /**
+     * Removes a single item from the clipboard and consequently un-checks it in view.
+     * NOTE:
+     * Clearing the clipboard does not uncheck the remaining items but rather leaves them checked for another subsequent
+     * action
+     * @param item
+     */
+    function removeFromClipboard(item){
+        itemSelect(item);
+        var pIndex = ipViewService.clipboard.findIndex(function (selectedItem) {
+            return selectedItem.path == item.path;
+        });
+        if(pIndex != -1){
+            ipViewService.clipboard.splice(pIndex, 1);
+        }
+        console.log('Removing single item from clipboard: ',ipc.selectedItems);
     }
     
     function mkdir(ev, path) {

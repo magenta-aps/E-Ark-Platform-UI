@@ -43,7 +43,8 @@
                 <div class="simple-list__header">
                     <div layout="row">
                         <div ng-if="ipc.can_edit" flex="5" flex-lg="20">
-                            <md-checkbox ng-model="ipc.checkAll" ng-change="ipc.selectAll()"></md-checkbox>
+                            <md-checkbox ng-model="ipc.checkAll" ng-change="ipc.selectAll()"
+                                         aria-label="ipc.checkAll"></md-checkbox>
                         </div>
                         <div flex="10"></div>
                         <div flex>
@@ -86,7 +87,8 @@
                                   aria-label="child.name">
 
                         <div ng-if="ipc.can_edit" class="simple-list__cell" flex="5">
-                            <md-checkbox ng-checked="child.selected" ng-click="ipc.selectItem(child)"></md-checkbox>
+                            <md-checkbox ng-checked="child.selected" ng-click="ipc.selectItem(child)"
+                                         aria-label="child.name"></md-checkbox>
                         </div>
                         <div flex="10" layout="row" layout-align="center" class="simple-list__cell">
                             <i class="material-icons" ng-if="child.type === 'directory'">folder</i>
@@ -102,8 +104,7 @@
                             {{ child.size }}
                         </div>
                         <div class="simple-list__cell" flex="10">
-                            <md-menu md-position-mode="target-right target"
-                                     ng-if="ipc.can_edit">
+                            <md-menu md-position-mode="target-right target" ng-if="ipc.can_edit">
                                 <md-button aria-label="Open menu" class="md-icon-button"
                                            ng-click="$mdMenu.open($event)">
                                     <i class="material-icons">arrow_drop_down</i>
@@ -144,11 +145,13 @@
                             <i class="material-icons">content_paste</i>
                             Paste here
                         </md-button>
-                        <md-button class="md-text-icon-button" ng-if="ipc.selectedItems > 0" ng-click="ipc.toClipboard()">
+                        <md-button class="md-text-icon-button" ng-if="ipc.selectedItems.length > 0"
+                                   ng-click="ipc.toClipboard()">
                             <i class="material-icons">content_copy</i>
                             Copy
                         </md-button>
-                        <md-button class="md-text-icon-button" ng-if="ipc.selectedItems > 0" ng-click="ipc.toClipboard()">
+                        <md-button class="md-text-icon-button" ng-if="ipc.selectedItems.length > 0"
+                                   ng-click="ipc.toClipboard()">
                             <i class="material-icons">content_cut</i>
                             Move
                         </md-button>
@@ -163,8 +166,7 @@
                     <md-list flex class="simple-list__body md-dense">
                         <!--https://github.com/angular/angular.js/pull/2505#issuecomment-17012537-->
                         <md-list-item ng-repeat="item in ipc.clipboard track by $index" layout="row"
-                                      class="simple-list__body__item"
-                                      aria-label="">
+                                      class="simple-list__body__item" aria-label="">
                             <div class="simple-list__cell" flex>
                                 <i class="material-icons">content_paste</i>
                                 {{ item.path }}
