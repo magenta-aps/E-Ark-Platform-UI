@@ -2,7 +2,7 @@ angular
     .module('eArkPlatform.ipview')
     .controller('IpSearchController', IpSearchController);
 
-function IpSearchController($scope, $stateParams, searchService, fileUtilsService, basketService, sessionService, orderService, $state, $mdDialog, $translate) {
+function IpSearchController($stateParams, searchService, fileUtilsService, basketService, sessionService, $state, $mdDialog, $translate) {
     
     var sc = this;
     var user = sessionService.getUserInfo().user;
