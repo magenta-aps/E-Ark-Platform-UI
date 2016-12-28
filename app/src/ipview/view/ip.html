@@ -135,6 +135,7 @@
                     <md-list-item ng-if="ipc.children.length === 0">
                         <span class="muted">{{ 'COMMON.EMPTY' | translate }}</span>
                     </md-list-item>
+                    <!--TODO translate button texts-->
                     <md-list-item ng-if="ipc.can_edit">
                         <md-button class="md-text-icon-button" ng-click="ipc.mkdir($event, ipc.path)">
                             <i class="material-icons">add</i>
@@ -150,11 +151,12 @@
                             <i class="material-icons">content_copy</i>
                             Copy
                         </md-button>
-                        <md-button class="md-text-icon-button" ng-if="ipc.selectedItems.length > 0"
+                        <!--Do we actually need cut/move?-->
+                        <!--<md-button class="md-text-icon-button" ng-if="ipc.selectedItems.length > 0"
                                    ng-click="ipc.toClipboard()">
                             <i class="material-icons">content_cut</i>
-                            Move
-                        </md-button>
+                            Cut
+                        </md-button>-->
                     </md-list-item>
                 </md-list>
                 <!--clipboard-->
