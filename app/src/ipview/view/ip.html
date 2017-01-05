@@ -42,9 +42,11 @@
                 <!--header-->
                 <div class="simple-list__header">
                     <div layout="row">
-                        <div ng-if="ipc.can_edit" flex="5" flex-lg="20">
-                            <md-checkbox ng-model="ipc.checkAll" ng-change="ipc.selectAll()"
-                                         aria-label="ipc.checkAll"></md-checkbox>
+                        <div ng-if="ipc.can_edit"
+                             layout="row"
+                             layout-align="center end"
+                             flex="10">
+                            <md-checkbox ng-model="ipc.checkAll" ng-change="ipc.selectAll()" aria-label="ipc.checkAll"></md-checkbox>
                         </div>
                         <div flex="10"></div>
                         <div flex>
@@ -77,7 +79,6 @@
                                 <i ng-show="ipc.orderBy === 'size'" class="material-icons">arrow_drop_down</i>
                             </md-button>
                         </div>
-                        <div flex="10"></div>
                     </div>
                 </div>
                 <!--body-->
@@ -86,7 +87,10 @@
                                   class="simple-list__body__item" ng-click="ipc.viewContent(child)"
                                   aria-label="child.name">
 
-                        <div ng-if="ipc.can_edit" class="simple-list__cell" flex="5">
+                        <div ng-if="ipc.can_edit"
+                             layout="row"
+                             layout-align="center end"
+                             flex="10">
                             <md-checkbox ng-checked="child.selected" ng-click="ipc.selectItem(child)"
                                          aria-label="child.name"></md-checkbox>
                         </div>
@@ -102,35 +106,6 @@
                         </div>
                         <div class="simple-list__cell muted" hide show-gt-md flex="20" flex-gt-lg="10">
                             {{ child.size }}
-                        </div>
-                        <div class="simple-list__cell" flex="10">
-                            <md-menu md-position-mode="target-right target" ng-if="ipc.can_edit">
-                                <md-button aria-label="Open menu" class="md-icon-button"
-                                           ng-click="$mdMenu.open($event)">
-                                    <i class="material-icons">arrow_drop_down</i>
-                                </md-button>
-                                <md-menu-content>
-                                    <!--TODO translate button labels-->
-                                    <md-menu-item>
-                                        <md-button ng-click="ipc.copy(child)">
-                                            <i class="material-icons">content_copy</i>
-                                            Copy
-                                        </md-button>
-                                    </md-menu-item>
-                                    <md-menu-item>
-                                        <md-button ng-click="ipc.paste(child.path)">
-                                            <i class="material-icons">content_paste</i>
-                                            Paste here
-                                        </md-button>
-                                    </md-menu-item>
-                                    <md-menu-item>
-                                        <md-button ng-click="ipc.del(child.path)">
-                                            <i class="material-icons">delete_forever</i>
-                                            Delete
-                                        </md-button>
-                                    </md-menu-item>
-                                </md-menu-content>
-                            </md-menu>
                         </div>
                     </md-list-item>
                     <md-list-item ng-if="ipc.children.length === 0">
@@ -167,17 +142,14 @@
                 </md-list>
                 <!--clipboard-->
                 <div class="clipboard" ng-if="ipc.clipboard.length != 0">
-                    <md-button class="md-text-icon-button" ng-click="ipc.clearClipboard()">
-                        <i class="material-icons">delete_sweep</i>
-                    </md-button>
-
+                    <i class="material-icons" style="margin-right: 1em;">content_paste</i>
                     <md-list flex class="simple-list__body md-dense">
                         <!--https://github.com/angular/angular.js/pull/2505#issuecomment-17012537-->
                         <md-list-item ng-repeat="item in ipc.clipboard track by $index" layout="row"
                                       class="simple-list__body__item" aria-label="">
                             <div class="simple-list__cell" flex>
-                                <i class="material-icons">content_paste</i>
-                                {{ item.path }}
+                                
+                                {{ item.name }}
                             </div>
                             <div class="simple-list__cell" flex="5">
                                 <md-button class="md-text-icon-button" ng-click="ipc.removeFromClipboard(item)">
@@ -185,8 +157,10 @@
                                 </md-button>
                             </div>
                         </md-list-item>
-
-                        <md-list flex class="simple-list__body md-dense">
+                    </md-list>
+                    <md-button class="md-icon-button" ng-click="ipc.clearClipboard()">
+                        <i class="material-icons">delete_sweep</i>
+                    </md-button>
                 </div>
             </div>
         </div>
