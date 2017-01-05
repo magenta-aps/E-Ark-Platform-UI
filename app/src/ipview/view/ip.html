@@ -6,7 +6,7 @@
                 <i class="material-icons">arrow_back</i>
             </a>
             <span class="muted" style="padding: 0 0.5em;">Browsing</span>
-            <span>{{ ipc.bcpath[0].title }}</span>
+            <span>{{ ipc.orderName }}</span>
         </span>
 
         <span flex></span>
@@ -110,21 +110,22 @@
                                     <i class="material-icons">arrow_drop_down</i>
                                 </md-button>
                                 <md-menu-content>
+                                    <!--TODO translate button labels-->
                                     <md-menu-item>
                                         <md-button ng-click="ipc.copy(child)">
                                             <i class="material-icons">content_copy</i>
                                             Copy
                                         </md-button>
                                     </md-menu-item>
-                                    <md-menu-item ng-if="ipc.clipboard !== '' && child.type === 'directory'">
+                                    <md-menu-item>
                                         <md-button ng-click="ipc.paste(child.path)">
                                             <i class="material-icons">content_paste</i>
                                             Paste here
                                         </md-button>
                                     </md-menu-item>
-                                    <md-menu-item ng-if="child.type !== 'directory'">
+                                    <md-menu-item>
                                         <md-button ng-click="ipc.del(child.path)">
-                                            <i class="material-icons">content_copy</i>
+                                            <i class="material-icons">delete_forever</i>
                                             Delete
                                         </md-button>
                                     </md-menu-item>
@@ -150,6 +151,11 @@
                                    ng-click="ipc.toClipboard()">
                             <i class="material-icons">content_copy</i>
                             Copy
+                        </md-button>
+                        <md-button class="md-text-icon-button" ng-if="ipc.selectedItems.length > 0"
+                                   ng-click="ipc.delSelected()">
+                            <i class="material-icons">delete_forever</i>
+                            Delete
                         </md-button>
                         <!--Do we actually need cut/move?-->
                         <!--<md-button class="md-text-icon-button" ng-if="ipc.selectedItems.length > 0"

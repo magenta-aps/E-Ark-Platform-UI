@@ -16,10 +16,12 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
     ipc.clipboard = ipViewService.clipboard;
     ipc.can_edit = $stateParams.orderStatus === 'processing';
 
+
     ipc.dipId = $stateParams.dipId;
     ipc.orderId = $stateParams.orderId;
     ipc.path = $stateParams.path ? $stateParams.path : '/';
     ipc.orderStatus = $stateParams.orderStatus ? $stateParams.orderStatus : '';
+    ipc.orderName = '';
 
     ipc.children = [];
     ipc.searchForm = {};
@@ -32,6 +34,7 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
     ipc.searchIP = searchIp;
     ipc.selectAll = selectAll;
     ipc.selectItem = itemSelect;
+    ipc.delSelected = delSelected;
     ipc.viewContent = viewContent;
     ipc.toClipboard = toClipboard;
     ipc.clearClipboard = clearClipboard;
@@ -83,6 +86,7 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
             getItemInfo(ipc.path);
         var orderStatus  = '';
         if(ipc.order && ipc.order.orderStatus){
+            ipc.orderName = ipc.order.title;
             orderStatus = ipc.order.orderStatus;
             if(ipc.statusEnum[ipc.order.orderStatus] > 4 && ipc.path.split("/").length <= 2) {
                 ipc.path = ipc.order.dipId;
@@ -234,6 +238,7 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
         ipViewService.clipboard = [];
         ipc.clipboard = [];
     }
+
     /**
      * Clears everything from the clip board
      */
@@ -245,6 +250,7 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
 
         ipc.clipboard = ipViewService.clipboard;
     }
+
     /**
      * Removes a single item from the clipboard and consequently un-checks it in view.
      * NOTE:
@@ -321,10 +327,17 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
             }
         );
     }
-    
+
+    /**
+     * Deletes an item or multiple items.
+     * A single item is converted to an array of 1 before being serialised.
+     * @param path
+     */
     function del(path) {
         console.log('Deleting ' + path);
-        var action = ipViewService.serializeObj({ action: 'delete', path: path });
+        if(!angular.isArray(path))
+            path = [path];
+        var action = ipViewService.serializeObj({ action: 'delete', paths: path });
         ipViewService.executeAction(action).then(
             function (response) {
                 console.log('Content deleted');
@@ -335,6 +348,19 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
                 console.log(err);
             }
         );
+    }
+
+    /**
+     * Used when deleting multiple targets
+     */
+    function delSelected(){
+        console.log('Deleting:');
+        console.log(ipc.selectedItems);
+        var items = [];
+        ipc.selectedItems.forEach(function(item){
+            items.push(item.path);
+        });
+        del(items);
     }
 
 
