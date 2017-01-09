@@ -164,26 +164,25 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="metapane" layout-padding flex="40" flex-sm="33" flex-md="25" flex-gt-md="20">
-        <div ng-if="!ipc.itemInfo">
-            <p class="muted">No metadata available</p>
+        
+        <div class="metapane" layout-padding flex="40" flex-sm="33" flex-md="25" flex-gt-md="20">
+            <div ng-if="!ipc.itemInfo">
+                <p class="muted">No metadata available</p>
+            </div>
+            <div ng-if="ipc.itemInfo !== false">
+                <dl>
+                    <!-- BEGIN: Hardcoding display of project manager's favorite data -->
+                    <dt>{{ ipc.itemInfo['ns0:did']['ns0:unittitle']['@label'] }}</dt>
+                    <dd>{{ ipc.itemInfo['ns0:did']['ns0:unittitle']['#text'] }}</dd>
+                    <dt>{{ ipc.itemInfo['ns0:did']['ns0:unitdate']['@label'] }}</dt>
+                    <dd>{{ ipc.itemInfo['ns0:did']['ns0:unitdate']['#text'] }}</dd>
+                    <dt>{{ ipc.itemInfo['ns0:did']['ns0:abstract']['@label'] }}</dt>
+                    <dd>{{ ipc.itemInfo['ns0:did']['ns0:abstract']['#text'] }}</dd>
+                    <!-- END: Hardcoding display of project manager's favorite data -->
+                </dl>
+            </div>
         </div>
-        <div ng-if="ipc.itemInfo !== false">
-            <dl>
-                <!-- BEGIN: Hardcoding display of project manager's favorite data -->
-                <dt>{{ ipc.itemInfo['ns0:did']['ns0:unittitle']['@label'] }}</dt>
-                <dd>{{ ipc.itemInfo['ns0:did']['ns0:unittitle']['#text'] }}</dd>
-                <dt>{{ ipc.itemInfo['ns0:did']['ns0:unitdate']['@label'] }}</dt>
-                <dd>{{ ipc.itemInfo['ns0:did']['ns0:unitdate']['#text'] }}</dd>
-                <dt>{{ ipc.itemInfo['ns0:did']['ns0:abstract']['@label'] }}</dt>
-                <dd>{{ ipc.itemInfo['ns0:did']['ns0:abstract']['#text'] }}</dd>
-                <!-- END: Hardcoding display of project manager's favorite data -->
-            </dl>
-        </div>
-    </div>
-
+            
     </div>
 
 </section>
