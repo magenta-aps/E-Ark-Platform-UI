@@ -50,6 +50,7 @@
             "ORDER_ID": "Ordre-ID",
             "ARCH_ASSIGNED": "Tilknyttet arkivist",
             "ISSUED_BY_USER": "Bruger, der har afgivet ordren"
-        }
+        },
+        "BROWSE_ITEMS": "Gennemse filer"
     }
 }

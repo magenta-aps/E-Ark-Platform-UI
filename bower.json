@@ -30,7 +30,7 @@
         "angular-mocks": "^1.4.x"
     },
     "resolutions": {
-        "angular": "^1.4.9",
+        "angular": "^1.5.9",
         "angular-material": "master"
     }
 }

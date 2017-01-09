@@ -50,6 +50,7 @@
             "ORDER_ID": "Order ID",
             "ARCH_ASSIGNED": "Assignee Archivist",
             "ISSUED_BY_USER": "User to issue order"
-        }
+        },
+        "BROWSE_ITEMS": "Browse items"
     }
 }

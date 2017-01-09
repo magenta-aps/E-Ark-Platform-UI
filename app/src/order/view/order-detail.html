@@ -34,10 +34,11 @@
                     <i class="material-icons">file_download</i>
                     {{ 'COMMON.DOWNLOAD' | translate }} DIP
                 </a>
-                <md-button class="md-primary md-raised"
+                <md-button class="md-primary md-raised md-text-icon-button"
                            ui-sref="ipviewer({ orderId: oddCtrl.orderId, dipId: oddCtrl.data.dipId, path: '/' + oddCtrl.data.dipId, manageorder: false, linkBack: '#/order/my-orders/order/' + oddCtrl.orderId, orderStatus: oddCtrl.data.orderStatus })"
                            ng-disabled="oddCtrl.data.orderStatus !== 'ready'">
-                    Browse items
+                    <i class="material-icons">import_contacts</i>
+                    {{ 'ORDER.BROWSE_ITEMS' | translate }}
                 </md-button>
             </div>
         </div>
