@@ -20,12 +20,18 @@ We also assume you have [Node.js](https://nodejs.org/en/) and [NPM](https://www.
 $ git clone https://github.com/magenta-aps/E-Ark-Platform-UI.git
 ```
 
-2. Browse to the project folder and build the project using npm and [gulp](http://gulpjs.com/):
+2. Wire the EARK Platform UI to the backend.
+
+3. Browse to the project folder and build the project using npm and [gulp](http://gulpjs.com/):
 ```
 /E-Ark-Platform-UI/$ npm update
 /E-Ark-Platform-UI/$ npm install
 /E-Ark-Platform-UI/$ gulp build
 ```
+
+4. Set up hosting for your project files and point it to /E-Ark-Platform-UI/index.html
+
+5. Open a web browser and point it to the URL where your project is hosted. Consult your backend provider to get usernames and passwords for login.
 
 
 ## Learn more
