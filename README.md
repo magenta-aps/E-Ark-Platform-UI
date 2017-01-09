@@ -20,7 +20,7 @@ We also assume you have [Node.js](https://nodejs.org/en/) and [NPM](https://www.
 $ git clone https://github.com/magenta-aps/E-Ark-Platform-UI.git
 ```
 
-2. Wire the EARK Platform UI to the backend.
+2. Wire the EARK Platform UI to the backend by changing the proxy settings in the [gulpfile.js.](/gulpfile.js)
 
 3. Browse to the project folder and build the project using npm and [gulp](http://gulpjs.com/):
 ```
