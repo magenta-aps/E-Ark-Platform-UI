@@ -2,33 +2,38 @@ angular
     .module('eArkPlatform.header')
     .provider('modulesMenuService', modulesMenuServiceProvider);
 
-function modulesMenuServiceProvider() {
+function modulesMenuServiceProvider(USER_ROLES) {
+    var _items = [];
     var items = [];
-    var extUserItems = [];
     this.addItem = addItem;
-    this.addExtUserItem = addExtUserItem;
     this.$get = modulesMenuService;
 
     function addItem(item) {
-        items.push(item);
+        _items.push(item);
         return this;
     }
 
-    function addExtUserItem(item) {
-        extUserItems.push(item);
-        return this;
-    }
 
-    function modulesMenuService(sessionService) {
+    function modulesMenuService() {
         return {
-            getItems: getItems
+            getItems: getItems,
+            fixPerms: fixHeaderPerms
         };
 
         function getItems() {
-            if (sessionService.isExternalUser()) {
-                return extUserItems;
-            }
             return items;
+        }
+
+        function fixHeaderPerms(user){
+            items = [];
+            var userRole = user.role.toUpperCase();
+            if(!user)
+                return;
+            _items.forEach(function(item){
+               if(userRole == USER_ROLES.archivist.toUpperCase() || item.authorizedRole.toUpperCase() == userRole)
+                    items.push(item);
+            });
+
         }
     }
 }

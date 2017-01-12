@@ -1,50 +1,168 @@
-<section>
-    
-    <header class="section-header">
-        <h1>Orders</h1>
-    </header>
-    
-    <div>
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
         
-        <table class="order-list">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Order ID</th>
-                    <th>Origin</th>
-                    <th>Order date</th>
-                    <th>Planned date</th>
-                    <th>From user</th>
-                    <th>User order note</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="order in olCtrl.data">
-                    <td>
-                        <a ui-sref="orderDetail({ orderid: order.orderId })">{{ order.title }}</a>
-                    </td>
-                    <td>
-                        {{ order.orderId }}
-                    </td>
-                    <td>
-                        {{ order.orgin }}
-                    </td>
-                    <td>
-                        {{ order.orderDate }}
-                    </td>
-                    <td>
-                        {{ order.plannedDate }}
-                    </td>
-                    <td>
-                        {{ order.user.firstname }} {{ order.user.lastname }}
-                    </td>
-                    <td>
-                        {{ order.endUserOrderNote }}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <span>
+            {{ 'ORDERMAN.LIST_LABEL' | translate }}
+        </span>
         
+        <span flex></span>
+        
+        <md-button ng-click="olCtrl.updateList()"
+            aria-label="{{ 'ORDERMAN.UPDATE_LIST' | translate }}"
+            class="md-icon-button"
+            title="{{ 'ORDERMAN.UPDATE_LIST' | translate }}">
+            <i class="material-icons">refresh</i>
+        </md-button>
+
     </div>
-    
+</md-toolbar>
+
+
+<section layout="column" flex>
+
+    <div class="simple-list"
+        layout="column"
+        flex>
+        <div class="simple-list__header">
+            <div layout="row">
+                <div flex="60"
+                    flex-sm="40"
+                    flex-gt-sm="20">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="olCtrl.sortThis($event, 'title')">
+                        {{ 'COMMON.TITLE' | translate }}
+                        <i ng-show="olCtrl.orderBy === '-title'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="olCtrl.orderBy === 'title'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+                <div flex="40"
+                    flex-sm="30"
+                    flex-md="20"
+                    flex-gt-md="10"
+                    style="text-align: center;">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="olCtrl.sortThis($event, 'orderStatus')">
+                        {{ 'ORDER.ORDERS.STATUS' | translate }}
+                        <i ng-show="olCtrl.orderBy === '-orderStatus'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="olCtrl.orderBy === 'orderStatus'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+                <div hide
+                    show-gt-md
+                    flex="10">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="olCtrl.sortThis($event, 'origin')">
+                        {{ 'ORDERMAN.ORIGIN' | translate }}
+                        <i ng-show="olCtrl.orderBy === '-origin'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="olCtrl.orderBy === 'origin'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+                <div hide
+                    show-gt-sm
+                    flex="20">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="olCtrl.sortThis($event, 'orderDate')">
+                        {{ 'ORDER.ORDERS.ORDER_DATE' | translate }}
+                        <i ng-show="olCtrl.orderBy === '-orderDate'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="olCtrl.orderBy === 'orderDate'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+                <div hide
+                    show-gt-sm
+                    flex="20">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="olCtrl.sortThis($event, 'plannedDate')">
+                        {{ 'ORDERMAN.PLANNED_DATE' | translate }}
+                        <i ng-show="olCtrl.orderBy === '-plannedDate'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="olCtrl.orderBy === 'plannedDate'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+                <div hide
+                    show-gt-md
+                    flex="10">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="olCtrl.sortThis($event, 'endUser.firstname')">
+                        {{ 'ORDERMAN.FROM_USER' | translate }}
+                        <i ng-show="olCtrl.orderBy === '-endUser.firstname'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="olCtrl.orderBy === 'endUser.firstname'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+                <div hide-xs
+                    flex-sm="30"
+                    flex-md="20"
+                    flex-gt-md="10">
+                    <md-button
+                        class="md-text-icon-button md-primary"
+                        ng-click="olCtrl.sortThis($event, 'assignee')">
+                        {{ 'ORDERMAN.ASSIGNEE' | translate }}
+                        <i ng-show="olCtrl.orderBy === '-assignee'" class="material-icons">arrow_drop_up</i>
+                        <i ng-show="olCtrl.orderBy === 'assignee'" class="material-icons">arrow_drop_down</i>
+                    </md-button>
+                </div>
+            </div>
+        </div>
+        <md-list class="simple-list__body md-dense" style="overflow: auto;">
+            <md-list-item ng-repeat="order in olCtrl.data | orderBy: olCtrl.orderBy"
+                layout="row"
+                class="simple-list__body__item"
+                ng-click="olCtrl.orderDetailGo(order.orderId)"
+                aria-label="order.title">
+                <div flex="60"
+                    flex-sm="40"
+                    flex-gt-sm="20"
+                    class="simple-list__cell">
+                    {{ order.title }}
+                </div>
+                <div flex="40"
+                    flex-sm="30"
+                    flex-md="20"
+                    flex-gt-md="10"
+                    class="simple-list__cell"
+                    style="text-align: center;">
+                    <span class="status-{{ order.orderStatus }}">
+                        {{ 'ORDER.ORDERS.STATUS-' + order.orderStatus | translate }}
+                    </span>
+                </div>
+                <div hide
+                    show-gt-md
+                    flex="10"
+                    class="simple-list__cell muted">
+                    {{ order.orgin }}
+                </div>
+                <div hide
+                    show-gt-sm
+                    flex-gt-sm="20"
+                    class="simple-list__cell muted">
+                    {{ order.orderDate }}
+                </div>
+                <div hide
+                    show-gt-sm
+                    flex-gt-sm="20"
+                    class="simple-list__cell muted">
+                    {{ order.plannedDate }}
+                </div>
+                <div hide
+                    show-gt-md
+                    flex="10"
+                    class="simple-list__cell muted">
+                    {{ order.endUser.firstname }} {{ order.endUser.lastname }}
+                </div>
+                <div hide-xs
+                    flex-sm="30"
+                    flex-md="20"
+                    flex-gt-md="10"
+                    class="simple-list__cell muted">
+                    <span ng-if="order.assignee === 'none'">{{ order.assignee }}</span>
+                    <span ng-if="order.assignee !== 'none'">{{ order.assignee.firstname }} {{ order.assignee.lastname }}</span>
+                </div>
+            </md-list-item>
+        </md-list>
+    </div>
+
 </section>

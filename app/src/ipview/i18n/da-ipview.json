@@ -1,0 +1,16 @@
+﻿{
+  "IPVIEW": {
+    "TITLE": "Gennemse IP",
+    "DESC": "Gennemse de informationspakker, du har adgang til",
+    "BROWSE": "Gennemse",
+    "PATH": "Sti",
+    "MESSAGES": {},
+    "ERROR": {
+      "MESSAGE": {
+        "DIR_LISTING_ERROR": "Kunne ikke finde data. Kontakt systemadministratoren for at løse problemet",
+        "GET_CONTENT_ERROR": "Kunne ikke finde fil-data.",
+        "NO_META": "Der er ingen metadata for dette element"
+      }
+    }
+  }
+}

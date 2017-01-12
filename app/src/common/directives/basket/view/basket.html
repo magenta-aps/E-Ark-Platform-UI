@@ -1,0 +1,74 @@
+<form ng-controller="BasketController as bdc"
+      ng-submit="submitMethod($event, bdc.orderForm.order);"
+      name="orderForm"
+      layout-gt-sm="column"
+      layout-fill>
+
+    <div id="basket-content"
+         layout-gt-sm="row"
+         flex>
+        
+        <div class="basket__items__content"
+             layout-gt-sm="column"
+             flex-gt-sm="60"
+             layout-padding>
+            <h2 class="md-title">{{ 'BASKET.ITEMS' | translate }}:</h2>
+            <md-card>
+                <md-card-content>
+                    <div class="simple-list" ng-show="bdc.basket">
+                        <md-list class="simple-list__body md-dense">
+                            <md-list-item ng-repeat="document in bdc.basket"
+                                          ng-click="bdc.fileInfoDiag($event, document)"
+                                          class="simple-list__body__item"
+                                          layout="row"
+                                          layout-align="space-between center">
+                                <img ng-src="app/assets/images/filetypes/{{document.thumbnail}}" alt="">
+                                <span style="padding-left: 0.5em;">{{ document.title[0] }}</span>
+                                <span flex></span>
+                                <md-button ng-click="removeItem(document)">
+                                    {{ 'COMMON.REMOVE' | translate }}
+                                </md-button>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+        
+        <div class="basket__info__content"
+             layout="column"
+             layout-gt-sm="column"
+             flex-gt-sm="40"
+             layout-padding>
+            <h2 class="md-title">{{ 'BASKET.DATA' | translate }}</h2>
+            <md-input-container>
+                <label>{{ 'COMMON.TITLE' | translate }}</label>
+                <input required type="text" name="orderTitle" ng-model="bdc.orderForm.order.title" md-autofocus>
+            </md-input-container>
+            <div>
+                <h4 style="color: rgba(0,0,0,0.26); font-size: 1em; font-weight: normal;">{{ 'ORDER.LABEL.DELIVERY_DATE' | translate }}</h4>
+                <md-datepicker required name="plannedDate" ng-model="bdc.orderForm.order.plannedDate" md-placeholder="{{ 'ORDER.LABEL.PLANNED_DATE' | translate }}"></md-datepicker>
+            </div>
+            <md-input-container flex>
+                <label>{{ 'ORDER.LABEL.USER_NOTES' | translate }}</label>
+                <textarea required name="endUserOrderNote" ng-model="bdc.orderForm.order.endUserOrderNote" rows="2" columns="3"></textarea>
+            </md-input-container>
+            <md-input-container flex>
+                <label>{{ 'ORDER.LABEL.PREFERRED_DELIVERY_METHOD' | translate }}</label>
+                <input required name="deliveryFormat" type="text" ng-model="bdc.orderForm.order.deliveryFormat">
+            </md-input-container>
+        </div>    
+        
+    </div>
+
+    <div layout="row"
+         layout-align="end"
+         layout-padding
+         style="border-top: solid 1px #ddd;">
+        <md-button class="md-primary md-raised md-text-icon-button" type="submit" id="submitOrderBtn">
+            {{ 'BASKET.SEND' | translate }}
+            <i class="material-icons ng-scope">send</i>
+        </md-button>
+    </div>
+
+</form>

@@ -1,0 +1,188 @@
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+
+        <span layout="row" layout-align="start center">
+            <a ng-href="{{ ipc.linkBack }}" class="md-button md-icon-button md-raised">
+                <i class="material-icons">arrow_back</i>
+            </a>
+            <span class="muted" style="padding: 0 0.5em;">Browsing</span>
+            <span>{{ ipc.orderName }}</span>
+        </span>
+
+        <span flex></span>
+        
+        <span class="ipsearchfield">
+            <form ng-model="ipc.searchForm" ng-submit="ipc.searchIP(ipc.searchForm.term);" layout="row"
+                  layout="end center">
+                <label title="{{ 'SEARCH.SEARCH' | translate }}" for="ipsearchfield">
+                    <i class="material-icons">search</i>
+                </label>
+                <input id="ipsearchfield" flex ng-model="ipc.searchForm.term" type="search">
+            </form>
+        </span>
+
+    </div>
+</md-toolbar>
+
+<section layout="column" flex>
+
+    <div layout="row">
+        <nav class="od-filebrowser-breadcrumb_ipviewer" flex>
+            <a ng-repeat="link in ipc.bcpath" ui-sref="ipviewer({ path: link.path })">{{ link.title }}</a>
+        </nav>
+    </div>
+
+    <div layout="row" flex>
+
+        <file-tree path="ipc.path" orderstatus="ipc.orderStatus" hide show-gt-sm flex="25" flex-gt-md="20"></file-tree>
+
+        <div ui-view="ip-content" flex>
+
+            <div class="simple-list" layout="column" flex layout-fill>
+                <!--header-->
+                <div class="simple-list__header">
+                    <div layout="row">
+                        <div ng-if="ipc.can_edit"
+                             layout="row"
+                             layout-align="center end"
+                             flex="10">
+                            <md-checkbox ng-model="ipc.checkAll" ng-change="ipc.selectAll()" aria-label="ipc.checkAll"></md-checkbox>
+                        </div>
+                        <div flex="10"></div>
+                        <div flex>
+                            <md-button class="md-text-icon-button md-primary"
+                                       ng-click="ipc.sortThis($event, 'name')">
+                                {{ 'COMMON.NAME' | translate }}
+                                <i ng-show="ipc.orderBy === '-name'" class="material-icons">arrow_drop_up</i>
+                                <i ng-show="ipc.orderBy === 'name'" class="material-icons">arrow_drop_down</i>
+                            </md-button>
+                        </div>
+                        <div hide-xs
+                             flex="40"
+                             flex-lg="20"
+                             flex-gt-lg="10">
+                            <md-button class="md-text-icon-button md-primary"
+                                       ng-click="ipc.sortThis($event, 'date')">
+                                {{ 'COMMON.DATE' | translate }}
+                                <i ng-show="ipc.orderBy === '-date'" class="material-icons">arrow_drop_up</i>
+                                <i ng-show="ipc.orderBy === 'date'" class="material-icons">arrow_drop_down</i>
+                            </md-button>
+                        </div>
+                        <div hide
+                             show-gt-md
+                             flex="20"
+                             flex-gt-lg="10">
+                            <md-button class="md-text-icon-button md-primary"
+                                       ng-click="ipc.sortThis($event, 'size')">
+                                {{ 'COMMON.SIZE' | translate }}
+                                <i ng-show="ipc.orderBy === '-size'" class="material-icons">arrow_drop_up</i>
+                                <i ng-show="ipc.orderBy === 'size'" class="material-icons">arrow_drop_down</i>
+                            </md-button>
+                        </div>
+                    </div>
+                </div>
+                <!--body-->
+                <md-list flex class="simple-list__body md-dense">
+                    <md-list-item ng-repeat="child in ipc.children | orderBy: ipc.orderBy" layout="row"
+                                  class="simple-list__body__item" ng-click="ipc.viewContent(child)"
+                                  aria-label="child.name">
+
+                        <div ng-if="ipc.can_edit"
+                             layout="row"
+                             layout-align="center end"
+                             flex="10">
+                            <md-checkbox ng-checked="child.selected" ng-click="ipc.selectItem(child)"
+                                         aria-label="child.name"></md-checkbox>
+                        </div>
+                        <div flex="10" layout="row" layout-align="center" class="simple-list__cell">
+                            <i class="material-icons" ng-if="child.type === 'directory'">folder</i>
+                            <i class="material-icons muted" ng-if="child.type !== 'directory'">insert_drive_file</i>
+                        </div>
+                        <div class="simple-list__cell" flex>
+                            {{ child.name }}
+                        </div>
+                        <div class="simple-list__cell muted" hide-xs flex="40" flex-lg="20" flex-gt-lg="10">
+                            {{ child.date | date: 'd MMM yyyy, H:mm' }}
+                        </div>
+                        <div class="simple-list__cell muted" hide show-gt-md flex="20" flex-gt-lg="10">
+                            {{ child.size }}
+                        </div>
+                    </md-list-item>
+                    <md-list-item ng-if="ipc.children.length === 0">
+                        <span class="muted">{{ 'COMMON.EMPTY' | translate }}</span>
+                    </md-list-item>
+                    <!--TODO translate button texts-->
+                    <md-list-item ng-if="ipc.can_edit">
+                        <md-button class="md-text-icon-button" ng-click="ipc.mkdir($event, ipc.path)">
+                            <i class="material-icons">add</i>
+                            New folder
+                        </md-button>
+                        <md-button class="md-text-icon-button" ng-if="ipc.clipboard.length != 0"
+                                   ng-click="ipc.paste(ipc.path)">
+                            <i class="material-icons">content_paste</i>
+                            Paste here
+                        </md-button>
+                        <md-button class="md-text-icon-button" ng-if="ipc.selectedItems.length > 0"
+                                   ng-click="ipc.toClipboard()">
+                            <i class="material-icons">content_copy</i>
+                            Copy
+                        </md-button>
+                        <md-button class="md-text-icon-button" ng-if="ipc.selectedItems.length > 0"
+                                   ng-click="ipc.delSelected()">
+                            <i class="material-icons">delete_forever</i>
+                            Delete
+                        </md-button>
+                        <!--Do we actually need cut/move?-->
+                        <!--<md-button class="md-text-icon-button" ng-if="ipc.selectedItems.length > 0"
+                                   ng-click="ipc.toClipboard()">
+                            <i class="material-icons">content_cut</i>
+                            Cut
+                        </md-button>-->
+                    </md-list-item>
+                </md-list>
+                <!--clipboard-->
+                <div class="clipboard" ng-if="ipc.clipboard.length != 0">
+                    <i class="material-icons" style="margin-right: 1em;">content_paste</i>
+                    <md-list flex class="simple-list__body md-dense">
+                        <!--https://github.com/angular/angular.js/pull/2505#issuecomment-17012537-->
+                        <md-list-item ng-repeat="item in ipc.clipboard track by $index" layout="row"
+                                      class="simple-list__body__item" aria-label="">
+                            <div class="simple-list__cell" flex>
+                                
+                                {{ item.name }}
+                            </div>
+                            <div class="simple-list__cell" flex="5">
+                                <md-button class="md-text-icon-button" ng-click="ipc.removeFromClipboard(item)">
+                                    <i class="material-icons">close</i>
+                                </md-button>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                    <md-button class="md-icon-button" ng-click="ipc.clearClipboard()">
+                        <i class="material-icons">delete_sweep</i>
+                    </md-button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="metapane" layout-padding flex="40" flex-sm="33" flex-md="25" flex-gt-md="20">
+            <div ng-if="!ipc.itemInfo">
+                <p class="muted">No metadata available</p>
+            </div>
+            <div ng-if="ipc.itemInfo !== false">
+                <dl>
+                    <!-- BEGIN: Hardcoding display of project manager's favorite data -->
+                    <dt>{{ ipc.itemInfo['ns0:did']['ns0:unittitle']['@label'] }}</dt>
+                    <dd>{{ ipc.itemInfo['ns0:did']['ns0:unittitle']['#text'] }}</dd>
+                    <dt>{{ ipc.itemInfo['ns0:did']['ns0:unitdate']['@label'] }}</dt>
+                    <dd>{{ ipc.itemInfo['ns0:did']['ns0:unitdate']['#text'] }}</dd>
+                    <dt>{{ ipc.itemInfo['ns0:did']['ns0:abstract']['@label'] }}</dt>
+                    <dd>{{ ipc.itemInfo['ns0:did']['ns0:abstract']['#text'] }}</dd>
+                    <!-- END: Hardcoding display of project manager's favorite data -->
+                </dl>
+            </div>
+        </div>
+            
+    </div>
+
+</section>

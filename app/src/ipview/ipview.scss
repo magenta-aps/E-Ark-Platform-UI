@@ -1,0 +1,104 @@
+.ip__iplist {
+  md-card-title {
+    background-color: #333;
+    color: #fff;
+  }
+}
+
+.ip__dirlist {
+  background-color: #fff;
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.od-filebrowser-breadcrumb_ipviewer {
+  margin: 0;
+  background-color: $background-color;
+  font-size: $u*0.9;
+  padding: 0 $u*0.5;
+  border-bottom: solid 1px darken($background-color, 10%);
+  display: flex;
+  flex-flow: row wrap;
+
+  a:after {
+    content: '';
+    display: inline-block;
+    width: $u*2.5;
+    height: $u*2.5;
+    border: solid 1px transparent;
+    border-color: darken($background-color, 10%) darken($background-color, 10%) transparent transparent;
+    transform: rotate(45deg);
+    margin-left: -($u*1.5);
+  }
+
+  a, a:link, a:visited {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    padding: $u*0.5;
+    cursor: pointer;
+    color: $main-color;
+    text-decoration: none;
+    max-height: $u*2;
+    overflow: hidden;
+  }
+
+  a:hover,  a:active {
+    color: darken($main-color, 20%);
+  }
+
+  a:last-child {
+    cursor: default;
+    color: #000;
+
+    &:after {
+      content: none;
+    }
+  }
+}
+
+.metapane {
+    background-color: $background-color;
+    overflow: auto;
+}
+
+.ipview-file {
+    background-color: #fff;
+    padding: $u;
+    overflow: hidden;
+}
+
+.ipview-file__iframe {
+    width: 100%;
+    height: calc(100vh - 251px);
+    border: solid 1px darken($background-color, 10%);
+}
+
+#ipsearchfield {
+    transition: all ease-out 0.3s;
+    background-color: transparent;
+    color: $background-color;
+    font-size: 0.8em;
+    padding: $u*0.25 0;
+    border: none;
+    border-bottom: solid $u*0.125 $main-color;
+    width: 0;
+}
+
+#ipsearchfield:focus {
+  transition: all ease-out 0.3s;
+  width: 10em;
+  outline: none;
+  margin-left: $u*0.5;
+}
+
+.clipboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $u;
+    background-color: orange;
+}

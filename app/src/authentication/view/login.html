@@ -1,9 +1,17 @@
 <div class="login-form" layout="column" layout-align="center center">
     <md-card class="login-form__card" flex="initial">
-        <md-toolbar>
-            <h1 layout="row" layout-align="center center">
-                {{$root.appName}} {{'LOGIN.LOGIN' | translate}}
+        <md-toolbar layout="column" layout-align="start center" style="overflow: hidden;">
+            
+            <img class="login-logo"
+                src="./app/assets/images/logos/e-ark-ship.svg"
+                alt="{{$root.appName}} {{ 'LOGIN.LOGIN' | translate }}"
+                title="{{$root.appName}} {{ 'LOGIN.LOGIN' | translate }}"
+                style="width: 50%; background: #fff; padding: 16px; border-radius: 50%; margin: 36px 0 0;">
+            
+            <h1 class="md-title">
+                {{ 'HEADER.TITLE' | translate }}
             </h1>
+            
         </md-toolbar>
         <md-card-content>
 
@@ -17,9 +25,9 @@
                 </md-input-container>
 
                 <md-input-container flex="grow">
-                    <input type="password" ng-model="vm.credentials.password" name="password" required
-                           ng-change="vm.updateValidator()">
                     <label>{{ 'LOGIN.PASSWORD' | translate }}</label>
+                    <input type="password" ng-model="vm.credentials.password" name="password" required aria-label="{{ 'LOGIN.PASSWORD' | translate }}"
+                           ng-change="vm.updateValidator()">
                     <opene-error form="vm.form" field="vm.form.password"></opene-error>
                 </md-input-container>
 

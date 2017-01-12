@@ -1,0 +1,22 @@
+<section class="ipview-file" flex layout-fill>
+
+    <div ng-if="ipfc.data">
+        
+        <md-button ng-click="ipfc.download()"
+                   class="md-text-icon-button md-raised"
+                   aria-label="{{ 'ERMS_REPOS.VIEW_META' | translate }}">
+            <i class="material-icons">file_download</i>
+            <span>{{ 'COMMON.DOWNLOAD' | translate }}</span>
+        </md-button>
+        
+        <div>
+            <iframe name="preview_frame" class="ipview-file__iframe" ng-src="{{ trustedResource }}"></iframe>
+        </div>
+        
+    </div>
+    
+    <div ng-if="!ipfc.data" flex layout-fill layout="column" layout-align="center center">
+        <p class="muted">No preview available</p>
+    </div>
+
+</section>

@@ -1,0 +1,29 @@
+<md-toolbar class="md-hue-2 order-header">
+    <div class="md-toolbar-tools">
+        
+        <a ui-sref="orderSearch"
+            class="md-button md-text-icon-button"
+            ng-class="{ active: ordCtrl.state.is('orderSearch') || sctrl.state.is('advSearch') }">
+            <i class="material-icons">search</i>
+            {{ 'ORDER.SEARCH.LABEL' | translate }}
+        </a>
+        
+        <a ui-sref="orderBrowse"
+            class="md-button md-text-icon-button"
+            ng-class="{ active: ordCtrl.state.is('orderBrowse') }">
+            <i class="material-icons">file_download</i>
+            {{ 'ORDER.ORDERS.MY_ORDERS' | translate }}
+        </a>
+
+        <span flex></span>
+        
+        <md-button ng-if="ordCtrl.state.is('orderBrowse')"
+            ng-click="ordCtrl.updateList()"
+            aria-label="{{ 'ORDERMAN.UPDATE_LIST' | translate }}"
+            title="{{ 'ORDERMAN.UPDATE_LIST' | translate }}"
+            class="md-icon-button">
+            <i class="material-icons">refresh</i>
+        </md-button>
+
+    </div>
+</md-toolbar>

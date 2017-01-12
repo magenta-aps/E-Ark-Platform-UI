@@ -1,0 +1,27 @@
+<div layout="column">
+   
+    <div layout="row" layout-align="start center" layout-padding>
+        <h1 class="md-title muted">{{ 'IPVIEW.DESC' | translate }}</h1>
+    </div>
+    
+    <div layout="column" layout-padding>
+        <div class="ip__iplist" layout="row" layout-wrap>
+        
+            <md-card ng-repeat="ip in ipsc.ips">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{ ip.name }}</span>
+                        <span class="md-subhead muted">{{ 'IPVIEW.PATH' | translate }}: {{ ip.path }}</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ui-sref="ipviewer({ path: ip.path })">
+                        {{ 'IPVIEW.BROWSE' | translate }}
+                    </md-button>
+                </md-card-actions>
+            </md-card>
+
+        </div>
+    </div>
+
+</div>

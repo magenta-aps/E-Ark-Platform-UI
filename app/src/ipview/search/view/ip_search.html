@@ -1,0 +1,174 @@
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+
+        <span>
+            <a ui-sref="ipviewer({ path: sc.path })" class="md-button md-icon-button md-raised">
+                <i class="material-icons">arrow_back</i>
+            </a>
+        </span>
+
+        <span>
+            <span class="muted">{{ 'SEARCH.SEARCH' | translate }}</span>
+            {{ sc.path }}
+        </span>
+
+        <span flex></span>
+
+    </div>
+</md-toolbar>
+
+<section id="adv-search"
+    layout="column"
+    layout-gt-sm="row"
+    layout-align="start"
+    flex>
+    
+    <div class="adv-search__form"
+        layout="column"
+        layout-align="center center"
+        ng-class="{minimize: sc.searchResults.documents}">
+    
+        <form ng-submit="sc.executeSearch()"
+            layout="column"
+            layout="center center">
+            
+            <p class="muted"
+                style="text-align: center;">
+                {{ 'ORDER.SEARCH.SEARCH_DOCS' | translate }}
+            </p>
+            
+            <div layout="row" layout-align="center center">
+                <i class="material-icons">search</i>
+                <input type="text"
+                    class="adv-search__primary-input"
+                    ng-class="{ 'adv-search__primary-input_results': sc.searchResults.documents }"
+                    ng-model="sc.initialTerm"
+                    placeholder="{{ 'ORDER.SEARCH.SEARCH_KEYWD' | translate }}"
+                    required>
+                <md-button id="adv-search-help"
+                    class="md-icon-button"
+                    ng-click="sc.helpfulSearchHints($event)">
+                    <i class="material-icons">help</i> 
+                </md-button>
+            </div>
+            
+            <div ng-repeat="input in sc.searchInputs"
+                style="text-align: center;">
+                <select ng-model="input.operator">
+                    <option value="OR">{{ 'ORDER.SEARCH.OR' | translate }}</option>
+                    <option value="AND">{{ 'ORDER.SEARCH.AND' | translate }}</option>
+                    <option value="NOT">{{ 'ORDER.SEARCH.NOT' | translate }}</option>
+                </select>
+                <input type="text"
+                    ng-model="input.term"
+                    placeholder="{{ 'ORDER.SEARCH.KEYWD' | translate }}"
+                    class="adv-search__secondary-input"
+                    required>
+                <md-button ng-click="sc.removeInput(input)"
+                    class="md-icon-button">
+                    <i class="material-icons">remove_circle_outline</i>
+                </md-button>
+            </div>
+            <div style="text-align: center;">
+                <md-button class="md-text-icon-button"
+                    ng-click="sc.addInput()">
+                    <i class="material-icons">add</i>
+                    {{ 'COMMON.ADD' | translate }} {{ 'ORDER.SEARCH.KEYWD' | translate }}
+                </md-button>
+            </div>
+            <div style="text-align: center;">
+                <input type="submit" class="md-button md-primary md-raised" value="{{ 'ORDER.SEARCH.SEARCH' | translate }}">
+            </div>
+        </form>
+        <div ng-hide="sc.searchStr === ''"
+            class="muted"
+            style="padding: 8px;">
+            {{ 'ORDER.SEARCH.SEARCHING_FOR' | translate }}: {{ sc.searchStr }}
+        </div>
+    </div>
+    
+    <div class="search__list adv-search__list"
+        ng-show="sc.searchResults.documents"
+        layout="column"
+        flex>
+        <div class="simple-list"
+            layout="column">
+            <div class="simple-list__header">
+                <div layout="row">
+                    <div flex="20"
+                        flex-gt-sm="10"
+                         style="text-align: center; vertical-align: top;">
+                        <md-button
+                            class="md-text-icon-button md-primary"
+                            ng-click="sc.sortThis($event, 'thumbnail')">
+                            {{ 'COMMON.TYPE' | translate }}
+                            <i ng-show="sc.orderBy === '-thumbnail'" class="material-icons">arrow_drop_up</i>
+                            <i ng-show="sc.orderBy === 'thumbnail'" class="material-icons">arrow_drop_down</i>
+                        </md-button>
+                    </div>
+                    <div flex style="vertical-align: top;">
+                        <md-button
+                            class="md-text-icon-button md-primary"
+                            ng-click="sc.sortThis($event, 'title')">
+                            {{ 'COMMON.TITLE' | translate }}
+                            <i ng-show="sc.orderBy === '-title'" class="material-icons">arrow_drop_up</i>
+                            <i ng-show="sc.orderBy === 'title'" class="material-icons">arrow_drop_down</i>
+                        </md-button>
+                        <form class="adv-search__filter-form">
+                            <input
+                                ng-model="sc.filterBy.title"
+                                type="text"
+                                placeholder="{{ 'ORDER.SEARCH.FILTER_BY' | translate }} {{ 'COMMON.TITLE' | translate }}"
+                                class="adv-search__filter-form__filter">
+                        </form>
+                    </div>
+                    <div flex
+                        flex-gt-sm="30"
+                        style="vertical-align: top;"
+                        hide
+                        show-gt-sm>
+                        <md-button
+                            class="md-text-icon-button md-primary"
+                            ng-click="sc.sortThis($event, 'packageId')">
+                            {{ 'COMMON.PACKAGE_ID' | translate }}
+                            <i ng-show="sc.orderBy === '-packageId'" class="material-icons">arrow_drop_up</i>
+                            <i ng-show="sc.orderBy === 'packageId'" class="material-icons">arrow_drop_down</i>
+                        </md-button>
+                        <form class="adv-search__filter-form">
+                            <input
+                                ng-model="sc.filterBy.packageId"
+                                type="text"
+                                placeholder="{{ 'ORDER.SEARCH.FILTER_BY' | translate }} {{ 'COMMON.PACKAGE_ID' | translate }}"
+                                class="adv-search__filter-form__filter">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <md-list class="simple-list__body md-dense" style="overflow: initial;">
+                <md-list-item ng-repeat="item in sc.searchResults.documents | filter: sc.filterBy | orderBy: sc.orderBy"
+                    layout="row"
+                    class="simple-list__body__item"
+                    ng-click="sc.navigateToFile(item.path);"
+                    aria-label="item.title">
+                    <div flex="20"
+                        flex-gt-sm="10"
+                        style="text-align: center"
+                        class="simple-list__cell">
+                        <img ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="">
+                    </div>
+                    <div flex class="simple-list__cell">
+                        {{ item.title }} <small class="muted">{{item.displaySize}}</small>
+                    </div>
+                    <div flex
+                        flex-gt-sm="30"
+                        class="simple-list__cell"
+                        hide
+                        show-gt-sm>
+                        {{ item.packageId }}
+                    </div>
+                </md-list-item>
+            </md-list>
+        </div>
+    </div>
+
+</section>

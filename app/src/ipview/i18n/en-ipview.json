@@ -1,0 +1,16 @@
+﻿{
+  "IPVIEW": {
+    "TITLE": "IP viewer",
+    "DESC": "Browse IPs available to you",
+    "BROWSE": "Browse",
+    "PATH": "Path",
+    "MESSAGES": {},
+    "ERROR": {
+      "MESSAGE" :{
+        "DIR_LISTING_ERROR": "Error listing directory contents. Please contact the systems administrator to resolve the issue",
+        "GET_CONTENT_ERROR": "Error getting file contents",
+        "NO_META": "There is no metadata for this item"
+      }
+    }
+  }
+}

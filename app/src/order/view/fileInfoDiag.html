@@ -1,0 +1,28 @@
+<md-dialog aria-label="File information">
+    <form ng-cloak>
+        
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{ doc.title }}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <i class="material-icons">close</i>
+                </md-button>
+            </div>
+        </md-toolbar>
+    
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div layout="row">
+                    <dl>
+                        <ng-repeat ng-repeat="(key, value) in doc">
+                            <dt style="font-size: 0.7em;">{{ key }}</dt>
+                            <dd style="font-size: 0.8em;">{{ value }}</dd>
+                        </ng-repeat>
+                    </dl>
+                </div>
+            </div>
+        </md-dialog-content>
+        
+    </form>
+</md-dialog>

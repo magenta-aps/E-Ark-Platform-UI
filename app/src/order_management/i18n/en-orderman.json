@@ -1,0 +1,22 @@
+{
+    "ORDERMAN": {
+        "LABEL": "Order management",
+        "LIST_LABEL": "List of orders",
+        "CONFIDENTIAL": "Confidential",
+        "ORIGIN": "Origin",
+        "ASSIGNEE": "Assignee",
+        "PLANNED_DATE": "Planned date",
+        "ACCESS_DATE": "Access date",
+        "ACCESS_END_DATE": "Access end date",
+        "ACCESS_DATE_COMMENTS": "Access date comments",
+        "VALIDATION_DATE": "Validation date",
+        "FROM_USER": "From user",
+        "PACKAGE_TO_DIP": "Package DIP",
+        "PROCESS_ORDER": "Process order",
+        "UPDATE_LIST": "Update list",
+        "MSG": {
+            "PROCESS_SUBMIT_SUCCESS": "Your order has been submitted for processing",
+            "PROCESS_SUBMIT_ERROR": "There was an error submitting your order"
+        }
+    }
+}

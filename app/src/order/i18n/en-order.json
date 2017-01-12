@@ -1,0 +1,56 @@
+{
+    "ORDER": {
+        "TITLE": {
+            "ORDER": "Order",
+            "BASKET":"Basket"
+        },
+        "LABEL": {
+            "PLANNED_DATE":"Expected date",
+            "USER_NOTES":"Additional note",
+            "PREFERRED_DELIVERY_METHOD": "Preferred delivery method",
+            "DELIVERY_DATE": "Your preferred date of delivery"
+        },
+        "SEARCH": {
+            "SEARCH": "Search",
+            "LABEL": "Search & order",
+            "BASKET": "Basket",
+            "SEARCH_DOCS": "Search documents",
+            "SEARCH_KEYWD": "Search keyword",
+            "AND": "AND",
+            "OR": "OR",
+            "NOT": "NOT",
+            "KEYWD": "Keyword",
+            "SEARCHING_FOR": "Searching for",
+            "FILTER_BY": "Filter by",
+            "TO_BASKET": "to basket",
+            "ADV_SEARCH_HELP": "Advanced search help",
+            "ADV_SEARCH_TXT": "You can use * and \"\" to enhance your search. Try \"Albert Einstein\" or Einst*"
+        },
+        "ORDERS": {
+            "MY_ORDERS": "My orders",
+            "REVIEW_AND_SEND": "Review and send order",
+            "STATUS": "Order status",
+            "REF_ID": "Order Reference Id",
+            "ORDER_DATE": "Ordered date",
+            "PLAN_DELIVER_DATE": "Planned delivery date",
+            "STATUS-new": "New",
+            "STATUS-open": "Open",
+            "STATUS-error": "Error",
+            "STATUS-processing": "Processing",
+            "STATUS-packaging": "Packaging",
+            "STATUS-indexing": "Indexing",
+            "STATUS-untarring": "UnTARring",
+            "STATUS-submitted": "Submitted",
+            "STATUS-ready": "Ready",
+            "DETAILS": "Order details",
+            "ITEMS": "Order items",
+            "PACK_ID": "Package ID",
+            "REF_CODE": "Reference code",
+            "CONTENT_TYPE": "Content type",
+            "ORDER_ID": "Order ID",
+            "ARCH_ASSIGNED": "Assignee Archivist",
+            "ISSUED_BY_USER": "User to issue order"
+        },
+        "BROWSE_ITEMS": "Browse items"
+    }
+}

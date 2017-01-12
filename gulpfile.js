@@ -1,8 +1,8 @@
 var gulp = require('gulp'),
-        $ = require('gulp-load-plugins')(),
-        fs = require('fs'),
-        proxy = require('http-proxy-middleware'),
-        env = require('../environment.json');
+    $ = require('gulp-load-plugins')(),
+    fs = require('fs'),
+    proxy = require('http-proxy-middleware'),
+    env = require('../environment.json');
 
 var paths = {
     scripts: ['app/src/**/*.module.js', 'app/src/**/*.js', '!app/src/**/*Spec.js', '!app/src/modules/test/**/*.js', '!app/src/modules/**/tests/**/*.js'],
@@ -19,62 +19,71 @@ var dist = {
 // Setting up a local webserver
 function createWebserver(config) {
     return gulp.src('./')
-            .pipe($.webserver({
-                open: false, // Open up a browser automatically
-                host: '0.0.0.0', // hostname needed if you want to access the server from anywhere on your local network
-                middleware: [],
-                proxies: [
-                    {
-                        source: '/alfresco',
-                        target: config.proxy + '/alfresco'
-                    },
-                    {
-                        source:'/aip/repo/search',
-                        target: env.search.repository.uri + '/solr/eark1'
-                    }
-                ]
-            }));
+        .pipe($.webserver({
+            open: false, // Open up a browser automatically
+            port: 7000,
+            host: '0.0.0.0', // hostname needed if you want to access the server from anywhere on your local network
+            middleware: [],
+            proxies: [
+                {
+                    source: '/alfresco',
+                    target: config.proxy + '/alfresco'
+                },
+                {
+                    source: '/aip/repo/search',
+                    target: env.search.repository.proxy + '/solr/earkstorage'
+                },
+                {
+                    source: '/oms/api',
+                    target: env.oms_service.proxy
+                },
+                {
+                    source: '/ip_viewer',
+                    target: env.ipViewer_service.proxy
+                }
+            ]
+        }));
 }
 
 // Script tasks
-gulp.task('scripts', function() {
+gulp.task('scripts', function () {
     return gulp.src(paths.scripts)
-            .pipe($.wrap('(function(){\n"use strict";\n<%= contents %>\n})();'))
-            //.pipe($.jshint('.jshintrc'))
-            //.pipe($.jshint.reporter('jshint-stylish'))
-            .pipe($.concat(dist.name + '.js'))
-            .pipe($.change(includeAppConfigParams))
-            .pipe(gulp.dest(dist.folder))
-            .pipe($.rename({suffix: '.min'}))
-            .pipe($.stripDebug())
-            .pipe($.ngAnnotate())
-            .pipe($.uglify())
-            .pipe(gulp.dest(dist.folder))
-            .on('error', $.util.log);
+        .pipe($.wrap('(function(){\n"use strict";\n<%= contents %>\n})();'))
+        //.pipe($.jshint('.jshintrc'))
+        //.pipe($.jshint.reporter('jshint-stylish'))
+        .pipe($.concat(dist.name + '.js'))
+        .pipe($.change(includeAppConfigParams))
+        .pipe(gulp.dest(dist.folder))
+        .pipe($.rename({suffix: '.min'}))
+        .pipe($.stripDebug())
+        .pipe($.ngAnnotate())
+        .pipe($.uglify())
+        .pipe(gulp.dest(dist.folder))
+        .on('error', $.util.log);
 });
 
 // Css
-gulp.task('css', function() {
+gulp.task('css', function () {
     return gulp.src(paths.scss)
-            .pipe($.wrap('/** ---------------- \n * Filepath: <%= file.relative %>\n */\n<%= contents %>'))
-            .pipe($.concat(dist.name + '.scss'))
-            .pipe($.sass())
-            .pipe(gulp.dest(dist.folder))
-            .pipe($.rename({suffix: '.min'}))
-            .pipe($.minifyCss())
-            .pipe(gulp.dest(dist.folder))
-            .on('error', $.util.log);
+        .pipe($.wrap('/** ---------------- \n * Filepath: <%= file.relative %>\n */\n<%= contents %>'))
+        .pipe($.concat(dist.name + '.scss'))
+        .pipe($.sass())
+        .pipe(gulp.dest(dist.folder))
+        .pipe($.rename({suffix: '.min'}))
+        .pipe($.minifyCss())
+        .pipe(gulp.dest(dist.folder))
+        .on('error', $.util.log);
 });
 
 // UI-test
-gulp.task('e2e-tests', function() {
+gulp.task('e2e-tests', function () {
     gulp.src(paths.e2e_tests)
-            .pipe($.protractor.protractor({
-                configFile: paths.protractorConfigFile
-            }))
-            .on('error', function(e) {
-                throw e;
-            });
+        .pipe($.protractor.protractor({
+            configFile: paths.protractorConfigFile
+        }))
+        .on('error', function (e) {
+            throw e;
+        });
 });
 
 function includeAppConfigParams(content) {
@@ -89,7 +98,7 @@ function includeAppConfigParams(content) {
 }
 
 // Set up watchers
-gulp.task('watch', function() {
+gulp.task('watch', function () {
     gulp.watch(paths.scripts, ['scripts']);
     gulp.watch(paths.scss, ['css']);
 });
@@ -105,15 +114,15 @@ gulp.task('watch', function() {
  */
 gulp.task('build', ['scripts', 'css']);
 
-gulp.task('test', ['build', 'watch'], function() {
+gulp.task('test', ['build', 'watch'], function () {
     createWebserver(env.environment.test);
 });
 
-gulp.task('demo', ['build', 'watch'], function() {
+gulp.task('demo', ['build', 'watch'], function () {
     createWebserver(env.environment.demo);
 });
 
-gulp.task('local', ['build', 'watch'], function() {
+gulp.task('local', ['build', 'watch'], function () {
     createWebserver(env.environment.local);
 });
 

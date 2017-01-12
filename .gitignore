@@ -5,6 +5,7 @@ bower_components/
 target/
 tmp
 .DS_Store
+._.DS_Store
 .idea
 app/jspm_packages
 .project

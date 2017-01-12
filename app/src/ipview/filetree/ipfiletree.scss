@@ -1,0 +1,42 @@
+.iptree {
+    padding: $u 0;
+    overflow: auto;
+}
+
+.iptree__nodes {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 $u*1.5;
+}
+
+.iptree__nodes_root {
+    padding: 0;
+}
+
+.iptree__node__handle {
+    &,
+    &:link,
+    &:visited {
+        display: flex;
+        padding: $u*0.25 $u; 
+        text-decoration: none;
+        flex-flow: row nowrap;
+        align-items: center;
+        overflow: hidden;
+        
+        span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-left: $u*0.25;
+        }
+    }
+    &:hover,
+    &:active {
+        background-color: rgba(0,0,0,0.1);
+    }
+}
+
+.iptree__node.active > a {
+    color: $base-text-color;
+}

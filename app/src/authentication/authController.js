@@ -2,7 +2,7 @@ angular
     .module('eArkPlatform')
     .controller('AuthController', AuthController);
 
-function AuthController($state, $stateParams, authService, userService, $mdDialog, sessionService, $window) {
+function AuthController($state, $stateParams, authService, userService, $mdDialog, sessionService, $window, modulesMenuService) {
     var vm = this;
     var loginErrorMessage = angular.fromJson($stateParams.error);
 
@@ -19,8 +19,8 @@ function AuthController($state, $stateParams, authService, userService, $mdDialo
             if (response.status == 401) {
                 return;
             }
-            if (response.userName) {
-                userService.getPerson(response.userName).then(function (response) {
+            if (response.uid) {
+                userService.getPerson(response.uid).then(function (response) {
                     vm.user = response;
                     restoreLocation();
                 });
@@ -30,13 +30,12 @@ function AuthController($state, $stateParams, authService, userService, $mdDialo
 
     function login(credentials) {
         authService.login(credentials.username, credentials.password).then(function (response) {
+            modulesMenuService.fixPerms(sessionService.getUserInfo().user);
 
             // Logged in
-            if (response.userName) {
-                userService.getPerson(credentials.username).then(function (response) {
-                    vm.user = response;
+            if (sessionService.getUserInfo().user) {
+                    vm.user = sessionService.getUserInfo().user;
                     restoreLocation();
-                });
             }
 
             // If incorrect values            
@@ -52,16 +51,23 @@ function AuthController($state, $stateParams, authService, userService, $mdDialo
     function restoreLocation() {
         var retainedLocation = sessionService.getRetainedLocation();
         if (!retainedLocation || retainedLocation === undefined) {
-            $state.go('dashboard');
+            if (vm.user.role === 'archivist') {
+                $state.go('orderManageList');
+            } else {
+                $state.go('orderSearch');
+
+            }
         } else {
             $window.location = retainedLocation;
         }
     }
 
     function logout() {
-        authService.logout().then(function (response) {
+        //Fix when we have auth fixed
+        authService.logout().then(function () {
             delete vm.user;
             $state.go('login');
+
         });
     }
 
@@ -91,18 +97,17 @@ function AuthController($state, $stateParams, authService, userService, $mdDialo
             if (!dlg.email) return;
 
             authService.changePassword(dlg.email).then(
-                function success(response) {
-                    dlg.emailSent = true;
-                },
-
-                function onError(response) {
-                    // If email doesn't exist in system
-                    if (response.status !== 200)
-                        dlg.form.email.$setValidity("emailNotExists", false);
-                }
+                    function success(response) {
+                        dlg.emailSent = true;
+                   },
+                    function onError(response) {
+                        // If email doesn't exist in system
+                        if (response.status !== 200)
+                            dlg.form.email.$setValidity("emailNotExists", false);
+                    }
             );
         };
-    };
+    }
 
     function showForgotDialog(ev) {
         $mdDialog.show({

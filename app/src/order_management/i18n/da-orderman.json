@@ -1,0 +1,22 @@
+{
+    "ORDERMAN": {
+        "LABEL": "Ordrehåndtering",
+        "LIST_LABEL": "Ordreliste",
+        "CONFIDENTIAL": "Fortrolig",
+        "ORIGIN": "Oprindelse",
+        "ASSIGNEE": "Tildelt til",
+        "PLANNED_DATE": "Planlagt dato",
+        "ACCESS_DATE": "Tilgængelig fra dato",
+        "ACCESS_END_DATE": "Tilgængelig til dato",
+        "ACCESS_DATE_COMMENTS": "Kommentar til tilgængelig dato",
+        "VALIDATION_DATE": "Valideringsdato",
+        "FROM_USER": "Fra bruger",
+        "PACKAGE_TO_DIP": "Pak DIP",
+        "PROCESS_ORDER": "Send ordre til behandling",
+        "UPDATE_LIST": "Opdatér liste",
+        "MSG": {
+            "PROCESS_SUBMIT_SUCCESS": "Ordren er sendt til behandling",
+            "PROCESS_SUBMIT_ERROR": "Ordren kunne ikke sendes til behandling"
+        }
+    }
+}

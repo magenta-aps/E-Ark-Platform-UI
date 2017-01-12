@@ -20,6 +20,8 @@ angular
         'eArkPlatform.search',
         'eArkPlatform.order',
         'eArkPlatform.ordermanagement',
+        'eArkPlatform.errors',
+        'eArkPlatform.ipview',
         'eArkPlatform.common.directives',
         'eArkPlatform.common.directives.basket',
         'eArkPlatform.common.directives.filter',
@@ -53,13 +55,33 @@ angular
     });
 
 function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROLES) {
+    
+    $mdThemingProvider.definePalette('earkStyle', {
+        '50': 'FFB49F',
+        '100': 'FF9885',
+        '200': 'FF7C6B',
+        '300': 'ED6053',
+        '400': 'CD453B',
+        '500': 'AD2624',
+        '600': '7A3332',
+        '700': '472C2C',
+        '800': '333333',
+        '900': '000000',
+        'A100': 'FFC7B8',
+        'A200': 'FFAD9E',
+        'A400': 'FF9385',
+        'A700': 'AD3736',
+        'contrastDefaultColor': 'light', // whether, by default, text (contrast) on this palette should be dark or light
+        'contrastDarkColors': ['50', '100', '200', '300', '400', 'A100'] //hues which contrast should be 'dark' by default
+    });
+    
     $mdThemingProvider.theme('default')
-        .primaryPalette('blue')
-        .accentPalette('deep-orange')
-        .warnPalette('deep-orange');
-
+        .primaryPalette('earkStyle')
+        .accentPalette('grey')
+        .warnPalette('amber');
+    
     $urlRouterProvider
-        .otherwise('/orders');
+        .otherwise('/login');
 
     $stateProvider.state('site', {
         abstract: true,
@@ -91,30 +113,6 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, USER_ROL
         },
         data: {
             authorizedRoles: []
-        }
-    }).state('search', {
-        parent: 'site',
-        url: '/search/:searchTerm',
-        views: {
-            'content@': {
-                templateUrl: 'app/src/search/view/search.html'
-            }
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.user]
-        }
-    }).state('orders', {
-        parent: 'site',
-        url: '/orders',
-        views: {
-            'content@': {
-                templateUrl: 'app/src/order/view/order.html',
-                controller: 'OrderController',
-                controllerAs: 'ordCtrl'
-            }
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.user]
         }
     });
 }

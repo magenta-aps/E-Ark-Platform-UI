@@ -1,6 +1,6 @@
 .section-header {
-    background-color: #eee;
-    padding: $u*0.5 $u;
+    background-color: $background-color;
+    padding: $u;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -13,36 +13,50 @@
     }
 }
 
-.extra-padding {
-    padding: $u;
+.order-list {
+    margin: $u 0;
 }
 
-.order-list,
-.order-details--list {
-    border-collapse: collapse;
-    width: 100%;
-    
-    th {
-        padding: $u*0.5 $u;
-        text-align: left;
-    }
-    td {
-        border-top: solid 1px #eee;
-        padding: $u*0.5 $u;
-    }
+.status-error,
+.status-new,
+.status-open,
+.status-submitted,
+.status-processing,
+.status-packaging,
+.status-indexing,
+.status-untarring,
+.status-ready {
+    padding: $u*0.25 $u*0.5;
+    color: #fff;
+    border-radius: $u*0.1;
+    font-size: 0.9em;
 }
-
-.order-details {
-    display: flex;
-    flex-flow: row nowrap;
+.status-error {
+    background-color: #e00000;
 }
-
-.order-details--data {
-    flex: 1;
-    border-left: solid 1px #eee;
-    padding: $u $u*2;
+.status-new {
+    background-color: #E0BF18;
 }
-
-.order-details--items {
-    flex: 2;
+.status-open {
+    background-color: #247FAD;
+}
+.status-submitted {
+    background-color: #9D24AD;
+}
+.status-processing {
+    @extend .muted;
+    background-color: #ff6d1f;
+}
+.status-packaging {
+    @extend .muted;
+    background-color: #7e7e7e;
+}
+.status-ready {
+    background-color: #30da1d;
+}
+.status-indexing {
+    background-color: #CC5719;
+}
+.status-untarring {
+    background-color: #994113;
 }

@@ -1,0 +1,163 @@
+<ng-include src="'app/src/order/view/header.html'"></ng-include>
+
+<div layout="row"
+    layout-align="end center"
+    ng-show="ordCtrl.searchResults.documents">
+    <md-button ui-sref="orderBasket"
+        class="md-text-icon-button md-raised md-primary"
+        ng-disabled="ordCtrl.basketLength < 1">
+        <i class="material-icons">shopping_basket</i>
+        {{ 'ORDER.SEARCH.BASKET' | translate }}
+    </md-button>
+</div>
+
+<section id="adv-search"
+    layout="column"
+    layout-gt-sm="row"
+    layout-align="start"
+    flex>
+    
+    <div class="adv-search__form"
+        layout="column"
+        layout-align="center center"
+        ng-class="{minimize: ordCtrl.searchResults.documents}">
+    
+        <form ng-submit="ordCtrl.executeSearch()"
+            layout="column"
+            layout="center center">
+            
+            <p class="muted"
+                style="text-align: center;">
+                {{ 'ORDER.SEARCH.SEARCH_DOCS' | translate }}
+            </p>
+            
+            <div layout="row" layout-align="center center">
+                <i class="material-icons">search</i>
+                <input type="text"
+                    class="adv-search__primary-input"
+                    ng-class="{ 'adv-search__primary-input_results': ordCtrl.searchResults.documents }"
+                    ng-model="ordCtrl.initialTerm"
+                    placeholder="{{ 'ORDER.SEARCH.SEARCH_KEYWD' | translate }}"
+                    required>
+                <md-button id="adv-search-help"
+                    class="md-icon-button"
+                    ng-click="ordCtrl.helpfulSearchHints($event)">
+                    <i class="material-icons">help</i> 
+                </md-button>
+            </div>
+            
+            <div ng-repeat="input in ordCtrl.searchInputs"
+                style="text-align: center;">
+                <select ng-model="input.operator">
+                    <option value="OR">{{ 'ORDER.SEARCH.OR' | translate }}</option>
+                    <option value="AND">{{ 'ORDER.SEARCH.AND' | translate }}</option>
+                    <option value="NOT">{{ 'ORDER.SEARCH.NOT' | translate }}</option>
+                </select>
+                <input type="text"
+                    ng-model="input.term"
+                    placeholder="{{ 'ORDER.SEARCH.KEYWD' | translate }}"
+                    class="adv-search__secondary-input"
+                    required>
+                <md-button ng-click="ordCtrl.removeInput(input)"
+                    class="md-icon-button">
+                    <i class="material-icons">remove_circle_outline</i>
+                </md-button>
+            </div>
+            <div style="text-align: center;">
+                <md-button class="md-text-icon-button"
+                    ng-click="ordCtrl.addInput()">
+                    <i class="material-icons">add</i>
+                    {{ 'COMMON.ADD' | translate }} {{ 'ORDER.SEARCH.KEYWD' | translate }}
+                </md-button>
+            </div>
+            <div style="text-align: center;">
+                <input type="submit" class="md-button md-primary md-raised" value="{{ 'ORDER.SEARCH.SEARCH' | translate }}">
+            </div>
+        </form>
+        <div ng-hide="ordCtrl.searchStr === ''"
+            class="muted"
+            style="padding: 8px; max-width: 20em;">
+            {{ 'ORDER.SEARCH.SEARCHING_FOR' | translate }}: {{ ordCtrl.searchStr }}
+        </div>
+    </div>
+    
+    <div class="search__list adv-search__list"
+        ng-show="ordCtrl.searchResults.documents"
+        layout="column"
+        flex>
+        <div class="simple-list"
+            layout="column">
+            <div class="simple-list__header">
+                <div layout="row">
+                    <div flex="20"
+                        flex-gt-sm="10"
+                         style="text-align: center; vertical-align: top;">
+                        <md-button
+                            class="md-text-icon-button md-primary"
+                            ng-click="ordCtrl.sortThis($event, 'thumbnail')">
+                            {{ 'COMMON.TYPE' | translate }}
+                            <i ng-show="ordCtrl.orderBy === '-thumbnail'" class="material-icons">arrow_drop_up</i>
+                            <i ng-show="ordCtrl.orderBy === 'thumbnail'" class="material-icons">arrow_drop_down</i>
+                        </md-button>
+                    </div>
+                    <div flex style="vertical-align: top;">
+                        <md-button
+                            class="md-text-icon-button md-primary"
+                            ng-click="ordCtrl.sortThis($event, 'title')">
+                            {{ 'COMMON.TITLE' | translate }}
+                            <i ng-show="ordCtrl.orderBy === '-title'" class="material-icons">arrow_drop_up</i>
+                            <i ng-show="ordCtrl.orderBy === 'title'" class="material-icons">arrow_drop_down</i>
+                        </md-button>
+                        <form class="adv-search__filter-form">
+                            <input
+                                ng-model="ordCtrl.filterBy.title"
+                                type="text"
+                                placeholder="{{ 'ORDER.SEARCH.FILTER_BY' | translate }} {{ 'COMMON.TITLE' | translate }}"
+                                class="adv-search__filter-form__filter">
+                        </form>
+                    </div>
+                    <div flex="20"
+                        flex-gt-sm="10"
+                        class="muted"
+                        layout="column"
+                        layout-align="end center"
+                        layout-padding
+                        style="text-align: center;">
+                        <span>{{ 'COMMON.ADD_TO' | translate }} {{ 'ORDER.SEARCH.BASKET' | translate }}</span>
+                    </div>
+                </div>
+            </div>
+            <md-list class="simple-list__body md-dense" style="overflow: initial;">
+                <md-list-item ng-repeat="item in ordCtrl.searchResults.documents | filter: ordCtrl.filterBy | orderBy: ordCtrl.orderBy"
+                    layout="row"
+                    class="simple-list__body__item"
+                    ng-click="ordCtrl.fileInfoDiag($event, item)"
+                    aria-label="{{ item.title[0] }}">
+                    <div flex="20"
+                        flex-gt-sm="10"
+                        style="text-align: center"
+                        class="simple-list__cell">
+                        <img ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="">
+                    </div>
+                    <div flex class="simple-list__cell">
+                        {{ item.title[0] }} <small class="muted">{{item.displaySize}}</small>
+                    </div>
+                    <div flex="20"
+                        flex-gt-sm="10"
+                        layout="column"
+                        layout-align="center center"
+                        class="simple-list__cell">
+                        <md-checkbox
+                            ng-click="$event.stopPropagation(); $event.preventDefault();"
+                            ng-change="ordCtrl.addToBasket(item);"
+                            ng-true-value="'add'"
+                            ng-false-value="'delete'"
+                            ng-model="item.baskOp"
+                            aria-label="{{ 'COMMON.ADD' | translate }} {{ item.title }} {{ 'ORDER.SEARCH.TO_BASKET' | translate }}">
+                    </div>
+                </md-list-item>
+            </md-list>
+        </div>
+    </div>
+
+</section>

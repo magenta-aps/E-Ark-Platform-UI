@@ -10,7 +10,7 @@ function config($httpProvider) {
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 }
 
-function httpTicketInterceptor($injector, $translate, $window, $q, sessionService, ALFRESCO_URI) {
+function httpTicketInterceptor($injector, $translate, $window, $q, sessionService, OMS_URI) {
     return {
         request: request,
         response: response,
@@ -31,15 +31,14 @@ function httpTicketInterceptor($injector, $translate, $window, $q, sessionServic
     }
 
     function prefixAlfrescoServiceUrl(url) {
-        if (url.indexOf("/api/") == 0 || url.indexOf("/slingshot/") == 0
-            || url == "/touch") {
-            return ALFRESCO_URI.webClientServiceProxy + url;
+        if (url.indexOf("/api") == 0) {
+            return OMS_URI.serviceProxy + url;
         }
         return url;
     }
 
     function response(response) {
-        if (response.status == 401 && typeof $window._openDeskSessionExpired === 'undefined') {
+        if (response.status == 401 && typeof $window._omsSessionExpired === 'undefined') {
             sessionExpired();
         }
         return response || $q.when(response);
@@ -47,17 +46,18 @@ function httpTicketInterceptor($injector, $translate, $window, $q, sessionServic
 
     function responseError(rejection) {
         //Prevent from popping up the message on failed SSO attempt
-        if (rejection.status == 401 && rejection.config.url.indexOf("/touch") == -1) {
+        if (rejection.status == 401) {
+            console.log('==> Authentication failure ');
             sessionExpired();
         }
         return $q.reject(rejection);
     }
 
     function sessionExpired() {
-        if (typeof $window._openDeskSessionExpired !== 'undefined')
+        if (typeof $window._omsSessionExpired !== 'undefined')
             return;
 
-        $window._openDeskSessionExpired = true;
+        $window._omsSessionExpired = true;
         sessionService.setUserInfo(null);
         var $mdDialog = $injector.get('$mdDialog'),
             notificationUtilsService = $injector.get('notificationUtilsService');
@@ -65,11 +65,11 @@ function httpTicketInterceptor($injector, $translate, $window, $q, sessionServic
         sessionService.retainCurrentLocation();
         $window.location = "/#/login";
         notificationUtilsService.notify($translate.instant('LOGIN.SESSION_TIMEOUT'));
-        delete $window._openDeskSessionExpired;
+        delete $window._omsSessionExpired;
     }
 }
 
-function authService($http, $window, $state, sessionService, userService, oeParametersService) {
+function authService($http, $window, contextService, sessionService, userService, $q) {
     var service = {
         login: login,
         logout: logout,
@@ -98,17 +98,9 @@ function authService($http, $window, $state, sessionService, userService, oePara
         });
     }
 
-    function authFailedSafari(response) {
-        return response.data && response.data.indexOf('Safari') != -1;
-    }
-
     function login(username, password) {
-        var userInfo = {};
-        return $http.post("/api/login", {
-            username: username,
-            password: password
-        }).then(function (response) {
-            sessionService.setUserInfo(userInfo);
+        return $http.post('/api/login', {userName: username, password: password}).then(function () {
+            //sessionService.setUserInfo(response.data);
             return addUserAndParamsToSession(username);
         }, function (reason) {
             console.log(reason);
@@ -118,17 +110,16 @@ function authService($http, $window, $state, sessionService, userService, oePara
 
     function logout() {
         var userInfo = sessionService.getUserInfo();
-
-
         if (userInfo) {
-            return $http.post('/api/opendesk/logout').then(function (response) {
-                sessionService.setUserInfo(null);
-                sessionService.clearRetainedLocation();
-                oeParametersService.clearOEParameters();
-                return response;
-            });
-        }
+            //return $http.post('/api/logout').then(function (response) {
+            sessionService.clearUserInfo();
+            sessionService.clearRetainedLocation();
+            contextService.clearContext();
+            //return response;
+            //});
 
+        }
+        return $q.resolve(true);
     }
 
     function loggedin() {
@@ -142,7 +133,7 @@ function authService($http, $window, $state, sessionService, userService, oePara
      * @returns {*}
      */
     function changePassword(email) {
-        return $http.post("/api/opendesk/reset-user-password", {email: email}).then(function (response) {
+        return $http.post("/api/reset-user-password", {email: email}).then(function (response) {
             return response;
         });
     }
@@ -159,35 +150,24 @@ function authService($http, $window, $state, sessionService, userService, oePara
         if (!angular.isArray(authorizedRoles)) {
             authorizedRoles = [authorizedRoles];
         }
-        //TODO refactor when we have more role types
-        //We should loop through each authorized role and return true as soon as we detect a true value
-        //As we have only two roles we need only to return whether the user is an admin or return the inverse of
-        //user.isAdmin when the user role is set to user (i.e. return true if the user is not admin when the role is
-        //user
-//        for (var n = 0; n < authorizedRoles.length; n++) {
-//            //if admin we don't care return true immediately
-//            if (userInfo.user.capabilities.isAdmin)
-//                return true;
-//            if (authorizedRoles[n] === 'user')
-//                return !userInfo.user.capabilities.isAdmin;
-//        }
-        return userInfo.user.capabilities.isAdmin ||
-            (authorizedRoles.length > 0 && authorizedRoles.indexOf('user') > -1);
+        return userInfo.user.role == 'archivist' ||
+            (authorizedRoles.length > 0 && authorizedRoles.indexOf('enduser') > -1);
+        //return userInfo.user.role == 'archivist';
     }
 
     function revalidateUser() {
-        return $http.get('/api/opendesk/currentUser').then(function (response) {
+        return $http.get('/api/currentUser/validate').then(function (response) {
             return addUserAndParamsToSession(response.data.userName);
         });
     }
 
     function addUserAndParamsToSession(username) {
         return userService.getPerson(username).then(function (user) {
-            delete $window._openDeskSessionExpired;
+            delete $window._omsSessionExpired;
             var userInfo = sessionService.getUserInfo();
             userInfo['user'] = user;
             sessionService.setUserInfo(userInfo);
-            oeParametersService.loadParameters();
+            contextService.setUserContext();
             return user;
         });
     }

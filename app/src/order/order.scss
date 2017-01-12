@@ -1,6 +1,24 @@
 /*
+ * Header styles
+ */
+
+.order-header {
+    
+    a.md-button,
+    a.md-button:link,
+    a.md-button:visited {
+        color: #fff;
+    }
+    .active {
+        background-color: rgba(255,255,255,0.2);
+    }
+}
+
+
+/*
  * Search styles
  */
+
 
 .search__header {
     margin: 8px 16px;
@@ -18,7 +36,7 @@
     flex-flow: row nowrap;
     background-color: #fff;
     padding: 16px 24px;
-    border-top: solid 1px #eee;
+    border-top: solid 1px $background-color;
 }
 
 .search__item__info {
@@ -36,11 +54,6 @@
     font-weight: 400;
     margin: 0;
     font-size: 1.1em;
-}
-
-a.search__item__link:link,
-a.search__item__link:visited {
-    color: rgb(30,136,229);
 }
 
 .search__item__title .muted {
@@ -62,72 +75,81 @@ a.search__item__link:visited {
     font-size: 0.8em;
 }
 
+
 /*
- * View search results as table list
+ * Order details page
  */
- 
-.list-search {
-    table {
-        max-width: 100%;
-    }
-    th {
-        border-top: solid 1px #ddd;
-    }
-    td {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    td:first-child {
-        padding-left: 24px;
-    }
-    td:last-child {
-        padding-right: 24px;
-    }
+
+.order-details {
+    overflow: auto;
+}
+
+.order-details__data {
+    background-color: #fff;
+}
+
+
+#adv-search {
+    overflow: auto;
+}
+
+.adv-search__primary-input {
+    padding: 8px; margin: 0 0 0 8px;
+    width: $u*20;
+    max-width: 75%;
+}
+
+.adv-search__primary-input_results {
+    width: $u*12;
+}
+
+.adv-search__filter-form {
+    margin: 0 8px 8px;
+}
+
+.adv-search__filter-form__filter {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 
 /*
- * Search filter menu styles
- */
+ * Media queries for bigger screens
+ */ 
 
-.menu {
-    background-color: #eee;
-}
-
-.filters {
+@media screen and (min-width: 960px) {
     
-    .filter-title {
-        font-weight: 500;
-        font-size: 0.9em;
-        padding: 16px 24px;
-        display: block;
+    #adv-search {
+        overflow: initial;
     }
     
-    fieldset {
-        display: block;
-        margin: 0;
-        padding: 0;
-        border-top-color: #ccc;
-    }
-    
-    .toggle-btn {
-        display: block;
-        margin: 0;
-        padding: 8px 16px 8px 24px;
-        color: rgb(30,136,229);
+    .adv-search__form {
+        flex: 1 0 auto;
+        padding: 0 8px;
         
-        .material-icons {
-            float: right;
+        &.minimize {
+            flex: 0 1 auto;
         }
     }
     
-    .toggle-obj {
-        margin: 0;
-        padding: 16px 24px 8px;
-        border-top: dashed 1px #ccc;
+    .adv-search__list {
+        justify-content: flex-start;
+        
+        .simple-list__body {
+            overflow: auto !important;
+        }
     }
     
-    md-checkbox {
-        display: block;
+    .adv-search__secondary-input {
+        width: 9em;
     }
+    
+    .order-details__items md-card-content {
+        overflow: auto;
+    }
+    
+    .order-details__data {
+        overflow: auto;
+    }
+    
 }

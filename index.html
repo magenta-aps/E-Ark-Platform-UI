@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" >
   <head>
-    <title>Angular Stub UI</title>
+    <title>E-Ark platform</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic"> <!-- used by Angular Material Design -->
     <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css"> <!-- used by Angular Material Design -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- used for icons -->
-    <link rel="stylesheet" href="./bower_components/angular-ui-grid/ui-grid.min.css"> <!-- UI Grid is used by order_management module -->
     
     <!-- eArk styles -->
     <link rel="stylesheet" href="./dist/eArk-platform.min.css"> 
       
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="apple-touch-icon" href="./app/assets/images/logos/apple-touch-icon.png">
 
     <!-- Vendor scripts -->
     <script src="./bower_components/pdfjs-dist/build/pdf.combined.js"></script>
@@ -51,12 +51,12 @@
     
     <header ui-view="header"></header>
     
-    <md-content ui-view="content"></md-content>
+    <md-content ui-view="content" layout="column" flex></md-content>
     
     <footer ui-view="footer"></footer>
     
-    <div id="loader" layout="column" layout-align="center center">
-        <md-progress-circular md-diameter="200" flex="initial"></md-progress-circular>
+    <div id="loader">
+        <md-progress-circular md-diameter="200" md-mode='indeterminate' flex="initial"></md-progress-circular>
     </div>
     
   </body>

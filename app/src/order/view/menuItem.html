@@ -1,4 +1,14 @@
-<a class="md-button md-text-icon-button" ui-sref="orders" ng-click="vm.toggleMenu()">
+<a ui-sref="orderSearch"
+    hide show-gt-sm
+    ng-class="{ active: menu.state.is('orderSearch') || menu.state.is('orderBrowse') || menu.state.is('orderBasket') }"
+    class="md-button md-text-icon-button">
     <i class="material-icons">shopping_cart</i>
-    {{ 'APP.LABEL.ORDER' | translate }}
+    <span hide show-gt-sm>{{ 'APP.LABEL.ORDER' | translate }}</span>
+</a>
+
+<a ui-sref="orderSearch"
+    hide-gt-sm
+    ng-class="{ active: menu.state.is('orderSearch') || menu.state.is('orderBrowse') || menu.state.is('orderBasket') }"
+    class="md-button md-icon-button">
+    <i class="material-icons">shopping_cart</i>
 </a>
