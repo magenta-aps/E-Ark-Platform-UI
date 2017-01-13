@@ -114,9 +114,22 @@
         "FORGOT_PASSWORD_SUCCESS": "Instruktioner er blevet sendt til den angivne email. Tjek din e-mail og følg vejledningen.",
         "FORGOT_PASSWORD_PROMPT": "Indtast din e-mailadresse og vi sender dig oplysninger om, hvordan du nulstiller din adgangskode."
     },
+    "ERROR": {
+        "REQUIRED": "Dette felt skal udfyldes",
+        "TOO_SHORT": "Din indtastning er for kort",
+        "TOO_LONG": "Din indtastning er for lang",
+        "INVALID_EMAIL": "Email-adresse dur ikke",
+        "PASSWORD_NOMATCH": "Kodeord matcher ikke",
+        "EMAIL_NOT_EXISTS": "Denne email-adresse eksisterer ikke",
+        "EMAIL_EXISTS": "Denne email-adresse findes allerede",
+        "USERNAME_EXISTS": "Dette brugernavn findes allerede",
+        "AUTH_FAILURE": "Forkert brugernavn/kodeord",
+        "AUTH_ERROR": "Der opstod en fejl ved login",
+        "NOT_EQUAL_PATTERN": "Indtastningsformatet er forkert"
+    },
     "SEARCH": {
         "SEARCH": "Søg",
         "SEARCHING_FOR": "Søger efter",
-        "FILTER_SEARCH": "Filtrér søgning",
+        "FILTER_SEARCH": "Filtrér søgning"
     }
 }
