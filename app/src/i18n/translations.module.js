@@ -38,6 +38,7 @@ for (var l in defineLangs) {
         }
     );
 }
+
 function AvailableLanguages() {
     return availableLanguages;
 }

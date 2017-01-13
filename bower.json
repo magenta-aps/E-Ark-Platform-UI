@@ -6,7 +6,7 @@
     "license": "MIT",
     "private": true,
     "dependencies": {
-        "angular": "^1.4.x",
+        "angular": "^1.6.x",
         "angular-animate": "^1.4.x",
         "angular-aria": "^1.4.x",
         "angular-encode-uri": "",
@@ -30,7 +30,6 @@
         "angular-mocks": "^1.4.x"
     },
     "resolutions": {
-        "angular": "^1.5.9",
         "angular-material": "master"
     }
 }
