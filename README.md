@@ -16,18 +16,18 @@ We assume you already have EARK Python Bridge installed and running as a backend
 We also assume you have [Node.js](https://nodejs.org/en/) and [NPM](https://www.npmjs.com/) installed and running.
 
 1. Clone the GitHub project. You can do it with a terminal command:
-```
-$ git clone https://github.com/magenta-aps/E-Ark-Platform-UI.git
-```
+  ```
+  $ git clone https://github.com/magenta-aps/E-Ark-Platform-UI.git
+  ```
 
 2. Wire the EARK Platform UI to the backend by changing the proxy settings in the [gulpfile.js.](/gulpfile.js)
 
 3. Browse to the project folder and build the project using npm and [gulp](http://gulpjs.com/):
-```
-/E-Ark-Platform-UI/$ npm update
-/E-Ark-Platform-UI/$ npm install
-/E-Ark-Platform-UI/$ gulp build
-```
+  ```
+  /E-Ark-Platform-UI/$ npm update
+  /E-Ark-Platform-UI/$ npm install
+  /E-Ark-Platform-UI/$ gulp build
+  ```
 
 4. Set up hosting for your project files and point it to /E-Ark-Platform-UI/index.html
 
