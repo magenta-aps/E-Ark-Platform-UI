@@ -35,7 +35,7 @@
                     {{ 'COMMON.DOWNLOAD' | translate }} DIP
                 </a>
                 <md-button class="md-primary md-raised md-text-icon-button"
-                           ui-sref="ipviewer({ orderId: oddCtrl.orderId, dipId: oddCtrl.data.dipId, path: '/' + oddCtrl.data.dipId, manageorder: false, linkBack: '#/order/my-orders/order/' + oddCtrl.orderId, orderStatus: oddCtrl.data.orderStatus })"
+                           ui-sref="ipviewer({ orderId: oddCtrl.orderId, dipId: oddCtrl.data.dipId, path: '/' + oddCtrl.data.dipId, manageorder: false, linkBack: '#!/order/my-orders/order/' + oddCtrl.orderId, orderStatus: oddCtrl.data.orderStatus })"
                            ng-disabled="oddCtrl.data.orderStatus !== 'ready'">
                     <i class="material-icons">import_contacts</i>
                     {{ 'ORDER.BROWSE_ITEMS' | translate }}
@@ -53,29 +53,6 @@
                                 layout-padding>
                                 {{ 'COMMON.TITLE' | translate }}
                             </div>
-                            <div hide
-                                show-gt-xs
-                                flex="30"
-                                flex-gt-md="20"
-                                class="muted"
-                                layout-padding>
-                                {{ 'ORDER.ORDERS.REF_CODE' | translate }}
-                            </div>
-                            <div flex="40"
-                                flex-gt-xs="30"
-                                flex-lg="20"
-                                flex-gt-lg="10"
-                                class="muted"
-                                layout-padding>
-                                {{ 'ORDER.ORDERS.CONTENT_TYPE' | translate }}
-                            </div>
-                            <div hide
-                                show-gt-lg
-                                flex="10"
-                                class="muted"
-                                layout-padding>
-                                {{ 'COMMON.SIZE' | translate }}
-                            </div>
                         </div>
                     </div>
                     <md-list class="simple-list__body md-dense">
@@ -83,31 +60,10 @@
                             ng-click="oddCtrl.fileInfoDiag($event, item)"
                             layout="row"
                             class="simple-list__body__item"
-                            aria-label="item.title">
+                            aria-label="item.filename">
                                 <div flex
                                     class="simple-list__cell">
-                                    {{ item.title }}
-                                </div>
-                                <div hide
-                                    show-gt-xs
-                                    flex="30"
-                                    flex-gt-md="20"
-                                    class="simple-list__cell muted">
-                                    {{ item.refCode }}
-                                </div>
-                                <div flex="40"
-                                    flex-gt-xs="30"
-                                    flex-lg="20"
-                                    flex-gt-lg="10"
-                                    class="simple-list__cell muted">
-                                    <img ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="" style="margin-right: 0.5em;">
-                                    {{ item.contentType }}
-                                </div>
-                                <div hide
-                                    show-gt-lg
-                                    flex="10"
-                                    class="simple-list__cell muted">
-                                    {{ item.displaySize }}
+                                    {{ item.filename }}
                                 </div>
                         </md-list-item>
                     </md-list>

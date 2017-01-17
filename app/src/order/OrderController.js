@@ -18,7 +18,7 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
     ordCtrl.basketLength = basketService.basket.length;
     ordCtrl.orderHistory = [];
     ordCtrl.orderBy = '-orderStatus';
-    ordCtrl.filterBy = { title: '', packageId: '' };
+    ordCtrl.filterBy = { eadtitle_s: '' };
     ordCtrl.state = $state;
     
     ordCtrl.sortThis = sortThis;
@@ -88,10 +88,8 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
                 
                 //Let's clean up some of the properties. Temporary solution
                 basketService.currentSearch.documents.forEach(function (item) {
-                    if(item.package)
-                        item.packageId = item.package.substring(item.package.lastIndexOf(':') + 1);
-                    item.thumbnail = fileUtilsService.getFileIconByMimetype(item.contentType, 24);
-                    item.displaySize = formatBytes(item.stream_size);
+                   var patharr = item.path.split('/');
+                   item.filename = patharr[patharr.length - 1];
                 });
                 ordCtrl.searchResults = basketService.currentSearch;
             }

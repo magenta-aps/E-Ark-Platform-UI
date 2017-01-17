@@ -16,8 +16,12 @@ function OrderDetailController($stateParams, orderService, fileUtilsService, $md
     function refreshOrderDetails(oid) {
         orderService.getOrderDetail( oid ).then(function(response) {
             response.items.forEach(function (item) {
-                item.thumbnail = fileUtilsService.getFileIconByMimetype(item.contentType, 24);
-                item.displaySize = fileUtilsService.getFileSize(item.size);
+                var pathparts1 = item.path.split('/');
+                item.filename = pathparts1[pathparts1.length - 1];
+                var pathparts2 = item.packageId.split(':');
+                item.eadid_s = pathparts2[pathparts2.length - 1];
+                
+                item.eadaccessrestrict_s = item.confidential;
             });
             oddCtrl.data = response;
         });

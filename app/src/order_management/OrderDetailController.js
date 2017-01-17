@@ -51,6 +51,15 @@ function OrderDetailController($stateParams, $mdDialog, $mdToast,  $translate, e
     function refreshOrderDetails( oid ) {
         var userData = sessionService.getUserInfo().user;
         ordermanagementService.getOrder( oid ).then(function(response) {
+            
+            response.items.forEach(function (item) {
+                var pathparts1 = item.path.split('/');
+                item.filename = pathparts1[pathparts1.length - 1];
+                var pathparts2 = item.packageId.split(':');
+                item.eadid_s = pathparts2[pathparts2.length - 1];
+                item.eadaccessrestrict_s = item.confidential;
+            });
+            
             odCtrl.data = response;
             console.log("User is: "+ userData.role);
             if ( odCtrl.data.assignee !== 'none' ) {
