@@ -45,6 +45,9 @@ function basketService($q, $http, $filter, $mdToast, $translate) {
     }
 
     function submitOrder(order){
+        console.log('This is the order data being sent:');
+        console.log(order);
+        console.log('Now comes the response from the server:');
         return $http.post('/api/newOrder', $filter('json')(order)).then(
             function(response){
                 console.log("Order received. It looks like this:");

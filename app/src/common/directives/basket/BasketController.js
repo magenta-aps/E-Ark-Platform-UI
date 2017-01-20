@@ -59,19 +59,19 @@ function BasketController($scope, $state, basketService, sessionService, $mdDial
         basket.forEach(function (item) {
             if (tmp.length < 1)
                 tmp.push({
-                    packageId: item.eadid_s,
+                    packageId: item.package,
                     items: [cleanItem(item)]
                 });
             else {
                 var pIndex = tmp.findIndex(function (pack) {
-                    return pack.packageId == item.eadid_s;
+                    return pack.packageId == item.package;
                 });
                 if (pIndex != -1) {
                     tmp[pIndex].items.push(cleanItem(item));
                 }
                 else {
                     tmp.push({
-                        packageId: item.eadid_s,
+                        packageId: item.package,
                         items: [cleanItem(item)]
                     });
                 }
@@ -88,15 +88,15 @@ function BasketController($scope, $state, basketService, sessionService, $mdDial
         var cleanedItem = {};
 
         cleanedItem.title = item.filename;
-        cleanedItem.packageId = item.eadid_s;
+        cleanedItem.packageId = item.package;
         cleanedItem.confidential =  item.confidential ? item.confidential : false ;
         cleanedItem.path = item.path;
         cleanedItem.contentType = item.content_type ? item.content_type :"";
         cleanedItem.size = item.stream_size;
         return cleanedItem;
     }
-    
     $scope.submitMethod = function(ev, formData){
+        
         // Preprocssing order before POSTing
         var formDataCopy = angular.copy(formData);
         var finalOrder = { order: $scope.compileOrder(formDataCopy) };
