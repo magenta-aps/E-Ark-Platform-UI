@@ -22,8 +22,7 @@
                                           class="simple-list__body__item"
                                           layout="row"
                                           layout-align="space-between center">
-                                <img ng-src="app/assets/images/filetypes/{{document.thumbnail}}" alt="">
-                                <span style="padding-left: 0.5em;">{{ document.title[0] }}</span>
+                                <span style="padding-left: 0.5em;">{{ document.filename }}</span>
                                 <span flex></span>
                                 <md-button ng-click="removeItem(document)">
                                     {{ 'COMMON.REMOVE' | translate }}

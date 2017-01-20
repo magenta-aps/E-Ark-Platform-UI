@@ -89,17 +89,6 @@
             layout="column">
             <div class="simple-list__header">
                 <div layout="row">
-                    <div flex="20"
-                        flex-gt-sm="10"
-                         style="text-align: center; vertical-align: top;">
-                        <md-button
-                            class="md-text-icon-button md-primary"
-                            ng-click="ordCtrl.sortThis($event, 'thumbnail')">
-                            {{ 'COMMON.TYPE' | translate }}
-                            <i ng-show="ordCtrl.orderBy === '-thumbnail'" class="material-icons">arrow_drop_up</i>
-                            <i ng-show="ordCtrl.orderBy === 'thumbnail'" class="material-icons">arrow_drop_down</i>
-                        </md-button>
-                    </div>
                     <div flex style="vertical-align: top;">
                         <md-button
                             class="md-text-icon-button md-primary"
@@ -132,15 +121,12 @@
                     layout="row"
                     class="simple-list__body__item"
                     ng-click="ordCtrl.fileInfoDiag($event, item)"
-                    aria-label="{{ item.title[0] }}">
-                    <div flex="20"
-                        flex-gt-sm="10"
-                        style="text-align: center"
-                        class="simple-list__cell">
-                        <img ng-src="app/assets/images/filetypes/{{item.thumbnail}}" alt="">
-                    </div>
+                    aria-label="{{ item.eadtitle_s }}">
                     <div flex class="simple-list__cell">
-                        {{ item.title[0] }} <small class="muted">{{item.displaySize}}</small>
+                        {{ item.filename }}<br>
+                        <span class="muted" style="font-size: 0.9em;">
+                            {{ item.eadtitle_s }} / {{ item.eadid_s }}
+                        </span>
                     </div>
                     <div flex="20"
                         flex-gt-sm="10"
