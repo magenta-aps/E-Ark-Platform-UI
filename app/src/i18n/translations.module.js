@@ -10,7 +10,7 @@ angular.module('eArkPlatform.translations', ['pascalprecht.translate'])
  */
 var defineLangs = [
     {
-        title: 'English (US)',
+        title: 'English',
         code: 'en',
         locale: 'en_US'
     },

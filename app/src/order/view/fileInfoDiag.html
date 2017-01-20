@@ -3,7 +3,7 @@
         
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>{{ doc.title }}</h2>
+                <h2>{{ doc.filename }}</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                     <i class="material-icons">close</i>
@@ -13,7 +13,27 @@
     
         <md-dialog-content>
             <div class="md-dialog-content">
-                <div layout="row">
+                <div layout="column">
+                    <dl>
+                        <dt style="font-size: 0.7em;">Filename</dt>
+                        <dd style="font-size: 0.8em;">{{ doc.filename ? doc.filename : 'none' }}</dd>
+                        <dt style="font-size: 0.7em;">ID</dt>
+                        <dd style="font-size: 0.8em;">{{ doc.eadid_s ? doc.eadid_s : 'none' }}</dd>
+                        <dt style="font-size: 0.7em;">Title</dt>
+                        <dd style="font-size: 0.8em;">{{ doc.eadtitle_s ? doc.eadtitle_s : 'none' }}</dd>
+                        <dt style="font-size: 0.7em;">Abstract</dt>
+                        <dd style="font-size: 0.8em;">{{ doc.eadabstract_t ? doc.eadabstract_t[0] : 'none' }}</dd>
+                        <dt style="font-size: 0.7em;">Creator</dt>
+                        <dd style="font-size: 0.8em;">{{ doc.eadorigination_s ? doc.eadorigination_s : 'none' }}</dd>
+                        <dt style="font-size: 0.7em;">Date</dt>
+                        <dd style="font-size: 0.8em;">{{ doc.eaddate_s ? doc.eaddate_s : 'none' }}</dd>
+                        <dt style="font-size: 0.7em;">C-level</dt>
+                        <dd style="font-size: 0.8em;">{{ doc.eadclevel_s ? doc.eadclevel_s : 'none' }}</dd>
+                        <dt style="font-size: 0.7em;">Access restriction</dt>
+                        <dd style="font-size: 0.8em;">{{ doc.eadaccessrestrict_s ? doc.eadaccessrestrict_s : 'none' }}</dd>
+                    </dl>
+                    <md-divider></md-divider>
+                    <h3>Additional data:</h3>
                     <dl>
                         <ng-repeat ng-repeat="(key, value) in doc">
                             <dt style="font-size: 0.7em;">{{ key }}</dt>
