@@ -119,7 +119,7 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
 
     function getItemInfo(path) {
         console.log('getting item info for ' + path);
-        var action = ipViewService.serializeObj({action: 'getinfo', path: path});
+        var action = ipViewService.serializeObj({action: 'getinfo', path: path, orderStatus: ipc.orderStatus});
         ipViewService.executeAction(action).then(
             function (response) {
                 if (response !== undefined && response.error !== 404) {

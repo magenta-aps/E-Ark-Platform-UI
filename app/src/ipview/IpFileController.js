@@ -17,7 +17,7 @@ function IpFileController($sce, $scope, $stateParams, $window, ipViewService) {
     
     function getFileContent() {
         var contentAction = ipViewService.serializeObj({ action: 'getcontent', path: ipfc.filePath, orderStatus: ipfc.orderStatus});
-        var infoAction = ipViewService.serializeObj({ action: 'getinfo', path: ipfc.filePath });
+        var infoAction = ipViewService.serializeObj({ action: 'getinfo', path: ipfc.filePath, orderStatus: ipfc.orderStatus });
         ipViewService.executeAction(contentAction).then(
             function (response) {
                 if (response === undefined) {
