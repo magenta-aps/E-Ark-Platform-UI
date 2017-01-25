@@ -37,10 +37,9 @@ function IpSearchController($stateParams, searchService, fileUtilsService, baske
             sc.orderBy = sortParameter;
         }
     }
+
     function executeSearch() {
-        
         sc.searchStr = 'path:' + sc.dipId + '* AND content:' + sc.initialTerm;
-        
         for (var i in sc.searchInputs) {
             if (sc.searchInputs[i].term !== '') {
                 sc.searchStr = sc.searchStr + ' ' + sc.searchInputs[i].operator + ' content: ' + sc.searchInputs[i].term + '';
