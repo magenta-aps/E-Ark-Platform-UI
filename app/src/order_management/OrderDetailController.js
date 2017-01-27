@@ -61,6 +61,7 @@ function OrderDetailController($stateParams, $mdDialog, $mdToast,  $translate, e
             });
             
             odCtrl.data = response;
+            odCtrl.dipId = response.dipId;
             console.log("User is: "+ userData.role);
             if ( odCtrl.data.assignee !== 'none' ) {
                 odCtrl.assigneeSelector = odCtrl.data.assignee.userName;
