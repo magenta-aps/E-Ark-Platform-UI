@@ -58,7 +58,7 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
     }
 
     function executeSearch() {
-        ordCtrl.searchStr = '(packagetype:AIP AND content: ' + ordCtrl.initialTerm;
+        ordCtrl.searchStr = 'packagetype:AIP AND (content: ' + ordCtrl.initialTerm;
         
         for (var i in ordCtrl.searchInputs) {
             if (ordCtrl.searchInputs[i].term !== '') {
@@ -67,8 +67,8 @@ function OrderController($scope, searchService, fileUtilsService, basketService,
         }
         ordCtrl.searchResults = {};
         var queryObj = {
-            q: ordCtrl.searchStr + ' AND path:*/representations/*/data/* AND NOT path:*_mig-*) OR eadabstract_t:*'
-            + ordCtrl.initialTerm+'* OR eadtitle_s:*'+ ordCtrl.initialTerm+'*',
+            q: ordCtrl.searchStr + ' AND path:*/representations/*/data/* AND NOT path:*_mig-* OR eadabstract_t:'+ ordCtrl.initialTerm+'*'
+            + ordCtrl.initialTerm+'* OR eadtitle_s:*'+ ordCtrl.initialTerm+'*'+' OR eadorigination_s:*'+ ordCtrl.initialTerm+'*)',
             rows: 25,
             start: 0,
             fl: 'package,stream_size,path,confidential,content_type,textCategory,_version_,title,packageId,author,' +

@@ -39,7 +39,7 @@ function IpSearchController($stateParams, searchService, fileUtilsService, baske
     }
 
     function executeSearch() {
-        sc.searchStr = 'path:' + sc.dipId + '* AND content:' + sc.initialTerm;
+        sc.searchStr = 'packagetype:DIP AND (path:' + sc.dipId + '* AND content:' + sc.initialTerm;
         for (var i in sc.searchInputs) {
             if (sc.searchInputs[i].term !== '') {
                 sc.searchStr = sc.searchStr + ' ' + sc.searchInputs[i].operator + ' content: ' + sc.searchInputs[i].term + '';
@@ -47,7 +47,8 @@ function IpSearchController($stateParams, searchService, fileUtilsService, baske
         }
         sc.searchResults = {};
         var queryObj = {
-            q: sc.searchStr,
+            q: sc.searchStr+' OR eadabstract_t:'+ sc.initialTerm+'* OR eadtitle_s:'+ sc.initialTerm+'*'
+            +' OR eadorigination_s:*'+ sc.initialTerm+'*)',
             rows: 25,
             start: 0,
             wt: 'json'
