@@ -11,6 +11,9 @@ function IpSearchController($stateParams, searchService, fileUtilsService, baske
     sc.searchStr = $stateParams.term;
     sc.dipId = $stateParams.dipId;
     sc.initialTerm = $stateParams.term;
+    sc.linkBack = $stateParams.linkBack;
+    sc.orderId = $stateParams.orderId;
+    sc.orderStatus = $stateParams.orderStatus;
     sc.searchInputs = [];
     sc.searchResults = basketService.currentSearch;
     sc.orderBy = 'title';
@@ -47,8 +50,7 @@ function IpSearchController($stateParams, searchService, fileUtilsService, baske
         }
         sc.searchResults = {};
         var queryObj = {
-            q: sc.searchStr+' OR eadabstract_t:'+ sc.initialTerm+'* OR eadtitle_s:'+ sc.initialTerm+'*'
-            +' OR eadorigination_s:*'+ sc.initialTerm+'*)',
+            q: sc.searchStr + ' OR eadabstract_t:' + sc.initialTerm +'* OR eadtitle_s:' + sc.initialTerm+ '*' +' OR eadorigination_s:*' + sc.initialTerm + '*)',
             rows: 25,
             start: 0,
             wt: 'json'
@@ -56,8 +58,6 @@ function IpSearchController($stateParams, searchService, fileUtilsService, baske
         var encTerm = searchService.objectToQueryString(queryObj);
 
         searchService.aipSearch(encTerm).then(function (response) {
-            console.log('got search result');
-            console.log(response);
             if (response.numFound > 0) {
                 basketService.currentSearch = {
                     documents: response.docs, //An array of objects
@@ -133,8 +133,7 @@ function IpSearchController($stateParams, searchService, fileUtilsService, baske
     
     
     function navigateToFile(path) {
-        console.log(path);
-        $state.go('ipviewer.file', { 'path': path, 'orderId': 1234, 'dipId': 124, 'orderStatus': 'ready', 'linkBack': '/' });
+        $state.go('ipviewer.file', { 'path': path, 'orderId': sc.orderId, 'dipId': sc.dipId, 'orderStatus': sc.orderStatus, 'linkBack': sc.linkBack });
     }
     
     

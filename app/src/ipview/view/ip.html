@@ -10,8 +10,8 @@
         </span>
 
         <span flex></span>
-        
-        <span class="ipsearchfield">
+
+        <span class="ipsearchfield" ng-if="ipc.orderStatus === 'ready'">
             <form ng-model="ipc.searchForm" ng-submit="ipc.searchIP(ipc.searchForm.term);" layout="row"
                   layout="end center">
                 <label title="{{ 'SEARCH.SEARCH' | translate }}" for="ipsearchfield">

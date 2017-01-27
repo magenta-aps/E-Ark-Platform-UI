@@ -36,7 +36,7 @@
                 </a>
                 <md-button ng-if="odCtrl.browsable"
                            class="md-primary md-raised md-text-icon-button"
-                           ui-sref="ipviewer({ orderId: odCtrl.orderId, path: '/' + odCtrl.data.processId, manageorder: true, orderStatus: odCtrl.data.orderStatus, linkBack: '#!/order-manage/order/' + odCtrl.orderId })">
+                           ui-sref="ipviewer({ orderId: odCtrl.orderId, path: '/' + odCtrl.data.processId, manageorder: true, orderStatus: odCtrl.data.orderStatus, linkBack: '#!/order-manage/order/' + odCtrl.orderId, dipId: odCtrl.dipId })">
                     <i class="material-icons">import_contacts</i>
                     {{ 'ORDER.BROWSE_ITEMS' | translate }}
                 </md-button>

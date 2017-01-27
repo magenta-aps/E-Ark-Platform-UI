@@ -2,9 +2,9 @@
     <div class="md-toolbar-tools">
 
         <span>
-            <a ui-sref="ipviewer({ path: sc.path })" class="md-button md-icon-button md-raised">
+            <button class="md-button md-icon-button md-raised" onclick="window.history.back();">
                 <i class="material-icons">arrow_back</i>
-            </a>
+            </button>
         </span>
 
         <span>
@@ -26,7 +26,8 @@
     <div class="adv-search__form"
         layout="column"
         layout-align="center center"
-        ng-class="{minimize: sc.searchResults.documents}">
+        ng-class="{minimize: sc.searchResults.documents}"
+        style="max-width: 20em">
     
         <form ng-submit="sc.executeSearch()"
             layout="column"
@@ -122,26 +123,6 @@
                                 class="adv-search__filter-form__filter">
                         </form>
                     </div>
-                    <div flex
-                        flex-gt-sm="30"
-                        style="vertical-align: top;"
-                        hide
-                        show-gt-sm>
-                        <md-button
-                            class="md-text-icon-button md-primary"
-                            ng-click="sc.sortThis($event, 'packageId')">
-                            {{ 'COMMON.PACKAGE_ID' | translate }}
-                            <i ng-show="sc.orderBy === '-packageId'" class="material-icons">arrow_drop_up</i>
-                            <i ng-show="sc.orderBy === 'packageId'" class="material-icons">arrow_drop_down</i>
-                        </md-button>
-                        <form class="adv-search__filter-form">
-                            <input
-                                ng-model="sc.filterBy.packageId"
-                                type="text"
-                                placeholder="{{ 'ORDER.SEARCH.FILTER_BY' | translate }} {{ 'COMMON.PACKAGE_ID' | translate }}"
-                                class="adv-search__filter-form__filter">
-                        </form>
-                    </div>
                 </div>
             </div>
             <md-list class="simple-list__body md-dense" style="overflow: initial;">
@@ -158,13 +139,6 @@
                     </div>
                     <div flex class="simple-list__cell">
                         {{ item.title }} <small class="muted">{{item.displaySize}}</small>
-                    </div>
-                    <div flex
-                        flex-gt-sm="30"
-                        class="simple-list__cell"
-                        hide
-                        show-gt-sm>
-                        {{ item.packageId }}
                     </div>
                 </md-list-item>
             </md-list>

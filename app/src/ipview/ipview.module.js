@@ -35,7 +35,10 @@ function config($stateProvider, languageFilesProvider, USER_ROLES, $httpProvider
         params: {
             path: '/none',
             term: 'none',
-            dipId: 'none'
+            dipId: 'none',
+            orderId: 'none',
+            orderStatus: 'ready',
+            linkBack: '/none'
         },
         views: {
             'content@': {
