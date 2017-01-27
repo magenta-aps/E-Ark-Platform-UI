@@ -26,10 +26,6 @@ function createWebserver(config) {
             middleware: [],
             proxies: [
                 {
-                    source: '/alfresco',
-                    target: config.proxy + '/alfresco'
-                },
-                {
                     source: '/aip/repo/search',
                     target: env.search.repository.proxy + '/solr/earkstorage'
                 },

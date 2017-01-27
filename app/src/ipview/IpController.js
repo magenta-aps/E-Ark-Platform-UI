@@ -2,7 +2,7 @@ angular
     .module('eArkPlatform.ipview')
     .controller('IpController', IpController);
 
-function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderService) {
+function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderService, $location) {
 
     var ipc = this;
     ipc.checkAll = false;
@@ -119,7 +119,7 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
 
     function getItemInfo(path) {
         console.log('getting item info for ' + path);
-        var action = ipViewService.serializeObj({action: 'getinfo', path: path});
+        var action = ipViewService.serializeObj({action: 'getinfo', path: path, orderStatus: ipc.orderStatus});
         ipViewService.executeAction(action).then(
             function (response) {
                 if (response !== undefined && response.error !== 404) {
@@ -173,7 +173,7 @@ function IpController($q, $state, $stateParams, $mdDialog, ipViewService, orderS
     }
 
     function searchIp(term) {
-        $state.go('ipviewer.search', {path: ipc.bcpath[0].path, term: term, dipId: ipc.dipId});
+        $state.go('ipviewer.search', {path: ipc.bcpath[0].path, term: term, dipId: ipc.dipId, linkBack: ipc.linkBack, orderId: ipc.orderId, orderStatus: ipc.orderStatus });
     }
 
     function toggleSearchField() {

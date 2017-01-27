@@ -13,18 +13,6 @@ function searchService($http, AIP_REPOSITORY_URI) {
         })
     };
 
-    service.findPersons = function (searchTerm) {
-        var url = ALFRESCO_URI + '/people';
-        if(searchTerm && searchTerm.length > 0){
-            url += searchTerm;
-        }
-        url +="?sortBy=lastName&dir=asc&filter=*&maxResults=250";
-
-        return $http.get(url).then(function(result){
-            return result.data.people;
-        });
-    };
-
     /**
      * summary:
      *        takes a name/value mapping object and returns a string representing
